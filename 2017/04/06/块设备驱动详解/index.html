@@ -1,0 +1,1082 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next mist" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="块设备与字符设备的区别1、 从字面上理解，块设备和字符设备最大的区别在于读写数据的基本单元不同。块设备读写数据的基本单元为块，例如磁盘通常为一个sector，而字符设备的基本单元为字节。所以Linux中块设备驱动往往为磁盘设备的驱动，但是由于磁盘设备的IO性能与CPU相比很差，因此，块设备的数据流往往会引入文件系统的Cache机制。 2、 从实现角度来看，Linux为块设备和字符设备提供了两套机制">
+<meta property="og:type" content="article">
+<meta property="og:title" content="块设备驱动详解">
+<meta property="og:url" content="https://dearamaze.com/2017/04/06/块设备驱动详解/index.html">
+<meta property="og:site_name" content="DearAmaze-桀骜良">
+<meta property="og:description" content="块设备与字符设备的区别1、 从字面上理解，块设备和字符设备最大的区别在于读写数据的基本单元不同。块设备读写数据的基本单元为块，例如磁盘通常为一个sector，而字符设备的基本单元为字节。所以Linux中块设备驱动往往为磁盘设备的驱动，但是由于磁盘设备的IO性能与CPU相比很差，因此，块设备的数据流往往会引入文件系统的Cache机制。 2、 从实现角度来看，Linux为块设备和字符设备提供了两套机制">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-09-29T13:28:16.523Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="块设备驱动详解">
+<meta name="twitter:description" content="块设备与字符设备的区别1、 从字面上理解，块设备和字符设备最大的区别在于读写数据的基本单元不同。块设备读写数据的基本单元为块，例如磁盘通常为一个sector，而字符设备的基本单元为字节。所以Linux中块设备驱动往往为磁盘设备的驱动，但是由于磁盘设备的IO性能与CPU相比很差，因此，块设备的数据流往往会引入文件系统的Cache机制。 2、 从实现角度来看，Linux为块设备和字符设备提供了两套机制">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://dearamaze.com/2017/04/06/块设备驱动详解/"/>
+
+
+
+
+
+  <title> 块设备驱动详解 | DearAmaze-桀骜良 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?05e47eef3e87bfa03fe6dfcdad14b688";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <script type="text/javascript" color="0,191,255" opacity="0.7" zindex="-2" count="150" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">DearAmaze-桀骜良</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">test_subtitle</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://dearamaze.com/2017/04/06/块设备驱动详解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dear Amaze">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DearAmaze-桀骜良">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                块设备驱动详解
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-06T20:26:57+08:00">
+                2017-04-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/04/06/块设备驱动详解/" class="leancloud_visitors" data-flag-title="块设备驱动详解">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="块设备与字符设备的区别"><a href="#块设备与字符设备的区别" class="headerlink" title="块设备与字符设备的区别"></a>块设备与字符设备的区别</h1><p>1、 从字面上理解，块设备和字符设备最大的区别在于<code>读写数据的基本单元</code>不同。<br><code>块设备</code>读写数据的基本单元为块，例如磁盘通常为一个sector，而<code>字符设备</code>的基本单元为字节。<br>所以Linux中块设备驱动往往为磁盘设备的驱动，但是由于磁盘设备的IO性能与CPU相比很差，因此，块设备的数据流往往会引入文件系统的Cache机制。</p>
+<p>2、 从实现角度来看，Linux为块设备和字符设备提供了两套机制。</p>
+<p><code>字符设备</code>实现的比较简单，内核例程和用户态API一一对应，用户层的Read函数直接对应了内核中的Read例程，这种映射关系由字符设备的file_operations维护。<br><code>块设备</code>接口相对于字符设备复杂，read、write API没有直接到块设备层，而是直接到文件系统层，然后再由文件系统层发起读写请求。</p>
+<h1 id="块设备读写流程"><a href="#块设备读写流程" class="headerlink" title="块设备读写流程"></a>块设备读写流程</h1><p>在学习块设备原理的时候，我最关系块设备的数据流程，从应用程序调用Read或者Write开始，数据在内核中到底是如何流通、处理的呢？然后又如何抵达具体的物理设备的呢？下面对一个带Cache功能的块设备数据流程进行分析。</p>
+<p>1、 用户态程序通过open()打开指定的块设备，通过systemcall机制陷入内核，执行blkdev_open()函数，该函数注册到文件系统方法（file_operations）中的open上。在blkdev_open函数中调用bd_acquire()函数，bd_acquire函数完成文件系统inode到块设备bdev的转换，具体的转换方法通过hash查找实现。得到具体块设备的bdev之后，调用do_open()函数完成设备打开的操作。在do_open函数中会调用到块设备驱动注册的open方法，具体调用如下：gendisk-&gt;fops-&gt;open(bdev-&gt;bd_inode, file)。</p>
+<p>2、 用户程序通过read、write函数对设备进行读写，文件系统会调用相应的方法，通常会调用如下两个函数：generic_file_read和blkdev_file_write。在读写过程中采用了多种策略，首先分析读过程。</p>
+<p>3、 用户态调用了read函数，内核执行generic_file_read，如果不是direct io方式，那么直接调用do_generic_file_read-&gt;do_generic_mapping_read()函数，在do_generic_mapping_read（函数位于filemap.c）函数中，首先查找数据是否命中Cache，如果命中，那么直接将数据返回给用户态；否则通过address_space-&gt;a_ops-&gt;readpage函数发起一个真实的读请求。在readpage函数中，构造一个buffer_head，设置bh回调函数end_buffer_async_read，然后调用submit_bh发起请求。在submit_bh函数中，根据buffer_head构造bio，设置bio的回调函数end_bio_bh_io_sync，最后通过submit_bio将bio请求发送给指定的快设备。</p>
+<p>4、 如果用户态调用了一个write函数，内核执行blkdev_file_write函数，如果不是direct io操作方式，那么执行buffered write操作过程，直接调用generic_file_buffered_write函数。Buffered write操作方法会将数据直接写入Cache，并进行Cache的替换操作，在替换操作过程中需要对实际的快设备进行操作，address_space-&gt;a_ops提供了块设备操作的方法。当数据被写入到Cache之后，write函数就可以返回了，后继异步写入的任务绝大部分交给了pdflush daemon（有一部分在替换的时候做了）</p>
+<p>5、 数据流操作到这一步，我们已经很清楚用户的数据是如何到内核了。与用户最接近的方法是file_operations，每种设备类型都定义了这一方法（由于Linux将所有设备都看成是文件，所以为每类设备都定义了文件操作方法，例如，字符设备的操作方法为def_chr_fops，块设备为def_blk_fops，网络设备为bad_sock_fops）。每种设备类型底层操作方法是不一样的，但是通过file_operations方法将设备类型的差异化屏蔽了，这就是Linux能够将所有设备都理解为文件的缘由。到这里，又提出一个问题：既然这样，那设备的差异化又该如何体现呢？在文件系统层定义了文件系统访问设备的方法，该方法就是address_space_operations，文件系统通过该方法可以访问具体的设备。对于字符设备而言，没有实现address_space_operations方法，也没有必要，因为字符设备的接口与文件系统的接口是一样的，在字符设备open操作的过程中，将inode所指向的file_operations替换成cdev所指向的file_operations就可以了。这样用户层读写字符设备可以直接调用cdev中file_operations方法了。</p>
+<p>6、 截至到步骤（4），读操作在没有命中Cache的情况下通过address_space_operations方法中的readpage函数发起块设备读请求；写操作在替换Cache或者Pdflush唤醒时发起块设备请求。发起块设备请求的过程都一样，首先根据需求构建bio结构，bio结构中包含了读写地址、长度、目的设备、回调函数等信息。构造完bio之后，通过简单的submit_bio函数将请求转发给具体的块设备。从这里可以看出，块设备接口很简单，接口方法为submit_bio（更底层函数为generic_make_request），数据结构为struct bio。</p>
+<p>7、 submit_bio函数通过generic_make_request转发bio，generic_make_request是一个循环，其通过每个块设备下注册的q-&gt;make_request_fn函数与块设备进行交互。如果访问的块设备是一个有queue的设备，那么会将系统的__make_request函数注册到q-&gt;make_request_fn中；否则块设备会注册一个私有的方法。在私有的方法中，由于不存在queue队列，所以不会处理具体的请求，而是通过修改bio中的方法实现bio的转发，在私有make_request方法中，往往会返回1，告诉generic_make_request继续转发比bio。Generic_make_request的执行上下文可能有两种，一种是用户上下文，另一种为pdflush所在的内核线程上下文。</p>
+<p>8、 通过generic_make_request的不断转发，最后请求一定会到一个存在queue队列的块设备上，假设最终的那个块设备是某个scsi disk（/dev/sda）。generic_make_request将请求转发给sda时，调用<strong>make_request，该函数是Linux提供的块设备请求处理函数。在该函数中实现了极其重要的操作，通常所说的IO Schedule就在该函数中实现。在该函数中试图将转发过来的bio merge到一个已经存在的request中，如果可以合并，那么将新的bio请求挂载到一个已经存在request中。如果不能合并，那么分配一个新的request，然后将bio添加到其中。这一切搞定之后，说明通过generic_make_request转发的bio已经抵达了内核的一个站点——request，找到了一个临时归宿。此时，还没有真正启动物理设备的操作。在</strong>make_request退出之前，会判断一个bio中的sync标记，如果该标记有效，说明请求的bio是一个是实时性很强的操作，不能在内核中停留，因此调用了<strong>generic_unplug_device函数，该函数将触发下一阶段的操作；如果该标记无效的话，那么该请求就需要在queue队列中停留一段时间，等到queue队列触发闹钟响了之后，再触发下一阶段的操作。</strong>make_request函数返回0，告诉generic_make_request无需再转发bio了，bio转发结束。</p>
+<p>9、 到目前为止，文件系统（pdflush或者address_space_operations）发下来的bio已经merge到request queue中，如果为sync bio，那么直接调用__generic_unplug_device，否则需要在unplug timer的软中断上下文中执行q-&gt;unplug_fn。后继request的处理方法应该和具体的物理设备相关，但是在标准的块设备上如何体现不同物理设备的差异性呢？这种差异性就体现在queue队列的方法上，不同的物理设备，queue队列的方法是不一样的。举例中的sda是一个scsi设备，在scsi middle level将scsi_request_fn函数注册到了queue队列的request_fn方法上。在q-&gt;unplug_fn（具体方法为：generic_unplug_device）函数中会调用request队列的具体处理函数q-&gt;request_fn。Ok，到这一步实际上已经将块设备层与scsi总线驱动层联系在了一起，他们的接口方法为request_fn（具体函数为scsi_request_fn）。</p>
+<p>10、明白了第（9）点之后，接下来的过程实际上和具体的scsi总线操作相关了。在scsi_request_fn函数中会扫描request队列，通过elv_next_request函数从队列中获取一个request。在elv_next_request函数中通过scsi总线层注册的q-&gt;prep_rq_fn（scsi层注册为scsi_prep_fn）函数将具体的request转换成scsi驱动所能认识的scsi command。获取一个request之后，scsi_request_fn函数直接调用scsi_dispatch_cmd函数将scsi command发送给一个具体的scsi host。到这一步，有一个问题：scsi command具体转发给那个scsi host呢？秘密就在于q-&gt;queuedata中，在为sda设备分配queue队列时，已经指定了sda块设备与底层的scsi设备（scsi device）之间的关系，他们的关系是通过request queue维护的。</p>
+<p>11、 在scsi_dispatch_cmd函数中，通过scsi host的接口方法queuecommand将scsi command发送给scsi host。通常scsi host的queuecommand方法会将接收到的scsi command挂到自己维护的队列中，然后再启动DMA过程将scsi command中的数据发送给具体的磁盘。DMA完毕之后，DMA控制器中断CPU，告诉CPU DMA过程结束，并且在中断上下文中设置DMA结束的中断下半部。DMA中断服务程序返回之后触发软中断，执行SCSI中断下半部。</p>
+<p>12、 在SCSi中断下半部中，调用scsi command结束的回调函数，这个函数往往为scsi_done，在scsi_done函数调用blk_complete_request函数结束请求request，每个请求维护了一个bio链，所以在结束请求过程中回调每个请求中的bio回调函数，结束具体的bio。Bio又有文件系统的buffer head生成，所以在结束bio时，回调buffer_head的回调处理函数bio-&gt;bi_end_io（注册为end_bio_bh_io_sync）。自此，由中断引发的一系列回调过程结束，总结一下回调过程如下：scsi_done-&gt;end_request-&gt;end_bio-&gt;end_bufferhead。</p>
+<p>13、 回调结束之后，文件系统引发的读写操作过程结束。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/weixinpay.jpg" alt="Dear Amaze WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt="Dear Amaze Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/06/nginx学习/" rel="next" title="nginx学习">
+                <i class="fa fa-chevron-left"></i> nginx学习
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/04/07/内核内存池-mempool/" rel="prev" title="内核内存池-mempool">
+                内核内存池-mempool <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar2.jpg"
+               alt="Dear Amaze" />
+          <p class="site-author-name" itemprop="name">Dear Amaze</p>
+           
+              <p class="site-description motion-element" itemprop="description">最穷不过要饭丶不死总会出头</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">48</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">27</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/fdl66" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/qq_27803491" target="_blank" title="CSDN">
+                  
+                    <i class="fa fa-fw fa-desktop"></i>
+                  
+                  CSDN
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/ao-jie-88/answers" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-vimeo"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://hello-fh.com/" title="浩哥" target="_blank">浩哥</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://githubecho.github.io/" title="阿谦" target="_blank">阿谦</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#块设备与字符设备的区别"><span class="nav-number">1.</span> <span class="nav-text">块设备与字符设备的区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#块设备读写流程"><span class="nav-number">2.</span> <span class="nav-text">块设备读写流程</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Dear Amaze</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("fOpTd1WjHbULIjn8MszImyoU-gzGzoHsz", "BD6q7tNiA5K8GhdTkj9uEy0u");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
