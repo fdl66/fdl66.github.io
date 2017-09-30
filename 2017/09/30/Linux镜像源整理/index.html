@@ -81,7 +81,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="shell," />
+  <meta name="keywords" content="Linux,运维," />
 
 
 
@@ -97,18 +97,18 @@
 
 
 
-<meta name="description" content="比较与测试 if条件 else if 和 else">
-<meta name="keywords" content="shell">
+<meta name="description" content="各种Linux发行版源配置Linux国内常用源的介绍和使用Linux镜像源 国内列表">
+<meta name="keywords" content="Linux,运维">
 <meta property="og:type" content="article">
-<meta property="og:title" content="shell知识遗漏2">
-<meta property="og:url" content="https://dearamaze.com/2017/06/09/shell知识遗漏2/index.html">
+<meta property="og:title" content="Linux镜像源整理">
+<meta property="og:url" content="https://dearamaze.com/2017/09/30/Linux镜像源整理/index.html">
 <meta property="og:site_name" content="DearAmaze-桀骜良">
-<meta property="og:description" content="比较与测试 if条件 else if 和 else">
+<meta property="og:description" content="各种Linux发行版源配置Linux国内常用源的介绍和使用Linux镜像源 国内列表">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-09-29T13:28:16.531Z">
+<meta property="og:updated_time" content="2017-09-30T03:15:55.811Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="shell知识遗漏2">
-<meta name="twitter:description" content="比较与测试 if条件 else if 和 else">
+<meta name="twitter:title" content="Linux镜像源整理">
+<meta name="twitter:description" content="各种Linux发行版源配置Linux国内常用源的介绍和使用Linux镜像源 国内列表">
 
 
 
@@ -136,13 +136,13 @@
 
 
 
-  <link rel="canonical" href="https://dearamaze.com/2017/06/09/shell知识遗漏2/"/>
+  <link rel="canonical" href="https://dearamaze.com/2017/09/30/Linux镜像源整理/"/>
 
 
 
 
 
-  <title> shell知识遗漏2 | DearAmaze-桀骜良 </title>
+  <title> Linux镜像源整理 | DearAmaze-桀骜良 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -325,7 +325,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://dearamaze.com/2017/06/09/shell知识遗漏2/">
+    <link itemprop="mainEntityOfPage" href="https://dearamaze.com/2017/09/30/Linux镜像源整理/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Dear Amaze">
@@ -346,7 +346,7 @@
             
             
               
-                shell知识遗漏2
+                Linux镜像源整理
               
             
           </h1>
@@ -361,8 +361,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-09T10:48:47+08:00">
-                2017-06-09
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-30T00:00:00+08:00">
+                2017-09-30
               </time>
             
 
@@ -384,8 +384,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/shell/" itemprop="url" rel="index">
-                    <span itemprop="name">shell</span>
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
                   </a>
                 </span>
 
@@ -401,7 +401,7 @@
 
           
           
-             <span id="/2017/06/09/shell知识遗漏2/" class="leancloud_visitors" data-flag-title="shell知识遗漏2">
+             <span id="/2017/09/30/Linux镜像源整理/" class="leancloud_visitors" data-flag-title="Linux镜像源整理">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -430,28 +430,23 @@
       
 
       
-        <h2 id="比较与测试"><a href="#比较与测试" class="headerlink" title="比较与测试"></a>比较与测试</h2><ol>
-<li>if条件</li>
-<li>else if 和 else</li>
-</ol>
+        <p><a href="http://mirrors.ustc.edu.cn/help/" target="_blank" rel="external">各种Linux发行版源配置</a><br><a href="http://blog.csdn.net/bleachswh/article/details/51423585" target="_blank" rel="external">Linux国内常用源的介绍和使用</a><br><a href="http://blog.csdn.net/u013005025/article/details/60777128" target="_blank" rel="external">Linux镜像源 国内列表</a></p>
 <a id="more"></a>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span>!/bin/bash</div><div class="line">read i</div><div class="line">if [ $i -gt 10 ];then</div><div class="line">    echo "i&gt;=10"</div><div class="line">elif [ $i -le 10 ]&amp;&amp;[ $i -gt 0 ];then</div><div class="line">    echo "0&lt;i&lt;=10"</div><div class="line">else</div><div class="line">    echo "i&lt;=0"</div><div class="line">fi</div></pre></td></tr></table></figure>
-<p>3.小技巧</p>
-<blockquote>
-<p>if 和 else 语句可以进行嵌套。 if 的条件判断部分可能会变得很长,<br>但可以用逻辑运算符将它变得简洁一些:</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[ condition ] &amp;&amp; action; # 如果 condition 为真,则执行 action ;</div><div class="line">[ condition ] || action; # 如果 condition 为假,则执行 action 。</div><div class="line"></div><div class="line">&amp;&amp; 是逻辑与运算符, || 是逻辑或运算符。编写Bash脚本时,这是一</div><div class="line">个很有用的技巧。现在来了解一下条件和比较操作。</div></pre></td></tr></table></figure>
-<p>4.比较运算符</p>
-<p>算数运算符:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">-gt :大于。</div><div class="line">-lt :小于。</div><div class="line">-ge :大于或等于。</div><div class="line">-le :小于或等于。</div></pre></td></tr></table></figure></p>
-<p>文件系统相关测试:</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">我们可以使用不同的条件标志测试不同的文件系统相关的属性。</div><div class="line">[ -f $file_var ] :如果给定的变量包含正常的文件路径或文件名,则返回真。(判断给定的文件,是否存在!只能判断文件!)</div><div class="line">[ -x $var ] :如果给定的变量包含的文件可执行,则返回真。</div><div class="line">[ -d $var ] :如果给定的变量包含的是目录,则返回真。</div><div class="line">[ -e $var ] :如果给定的变量包含的文件(文件文件夹都可以)存在,则返回真。</div><div class="line">[ -c $var ] :如果给定的变量包含的是一个字符设备文件的路径,则返回真。</div><div class="line">[ -b $var ] :如果给定的变量包含的是一个块设备文件的路径,则返回真。</div><div class="line">[ -w $var ] :如果给定的变量包含的文件可写,则返回真。</div><div class="line">[ -r $var ] :如果给定的变量包含的文件可读,则返回真。</div><div class="line">[ -L $var ] :如果给定的变量包含的是一个符号链接,则返回真。</div><div class="line">使用方法如下:</div><div class="line">fpath="/etc/passwd"</div><div class="line">if [ -e $fpath ]; then</div><div class="line">	echo File exists;</div><div class="line">else</div><div class="line">	echo Does not exist;</div><div class="line">fi</div></pre></td></tr></table></figure>
-<p>字符串比较:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">使用字符串比较时,最好用双中括号,因为有时候采用单个中括号会产生错误,所以最</div><div class="line">好避开它们。</div><div class="line">可以用下面的方法检查两个字符串,看看它们是否相同。</div><div class="line">[[ $str1 = $str2 ]] :当 str1 等于 str2 时,返回真。也就是说, str1 和 str2 包含的文本是一模一样的。</div><div class="line">[[ $str1 == $str2 ]] :这是检查字符串是否相等的另一种写法。</div><div class="line">也可以检查两个字符串是否不同。</div><div class="line"></div><div class="line">[[ $str1 != $str2 ]] :如果 str1 和 str2 不相同,则返回真。</div><div class="line">我们还可以检查字符串的字母序情况,具体如下所示。</div><div class="line">[[ $str1 &gt; $str2 ]] :如果 str1 的字母序比 str2 大,则返回真。</div><div class="line">[[ $str1 &lt; $str2 ]] :如果 str1 的字母序比 str2 小,则返回真。</div><div class="line">[[ -z $str1 ]] :如果 str1 包含的是空字符串,则返回真。</div><div class="line">[[ -n $str1 ]] :如果 str1 包含的是非空字符串,则返回真。</div><div class="line"></div><div class="line">注意在 = 前后各有一个空格。如果忘记加空格,那就不是比较关系了,而变成了赋值语句。</div></pre></td></tr></table></figure>
-<p>多条件组合<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">使用逻辑运算符 &amp;&amp; 和 || 能够很容易地将多个条件组合起来:</div><div class="line">if [[ -n $str1 ]] &amp;&amp; [[ -z $str2 ]] ;</div><div class="line">then</div><div class="line">	commands;</div><div class="line">fi</div><div class="line">例如:</div><div class="line">str1=&quot;Not empty &quot;</div><div class="line">str2=&quot;&quot;</div><div class="line">if [[ -n $str1 ]] &amp;&amp; [[ -z $str2 ]];</div><div class="line">then</div><div class="line">	echo str1 is nonempty and str2 is empty string.</div><div class="line">fi</div><div class="line"></div><div class="line">输出如下:</div><div class="line">str1 is nonempty and str2 is empty string.</div></pre></td></tr></table></figure></p>
-<p>test命令</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">test 命令可以用来执行条件检测。用 test 可以避免使用过多的括号。之前讲过的 [] 中的测试条件同样可以用于 test 命令。</div><div class="line">例如:</div><div class="line">if  [ $var -eq 0 ]; then echo "True"; fi</div><div class="line">也可以写成:</div><div class="line">if  test $var -eq 0 ; then echo "True"; fi</div></pre></td></tr></table></figure>
-<h2 id="录制并回放终端回话"><a href="#录制并回放终端回话" class="headerlink" title="录制并回放终端回话"></a>录制并回放终端回话</h2><p>暂且跳过,用的不多</p>
-<p>## </p>
+<p><a href="http://wiki.ubuntu.org.cn/%E6%BA%90%E5%88%97%E8%A1%A8" target="_blank" rel="external">Ubuntu源配置</a></p>
+<h2 id="站点版"><a href="#站点版" class="headerlink" title="站点版"></a>站点版</h2><h3 id="企业站"><a href="#企业站" class="headerlink" title="企业站"></a>企业站</h3><p>1.搜狐：<a href="http://mirrors.sohu.com/" target="_blank" rel="external">http://mirrors.sohu.com/</a><br>2.网易：<a href="http://mirrors.163.com/" target="_blank" rel="external">http://mirrors.163.com/</a><br>3.阿里云：<a href="http://mirrors.aliyun.com/" target="_blank" rel="external">http://mirrors.aliyun.com/</a><br>4.腾讯：<a href="http://android-mirror.bugly.qq.com:8080/（仅针对APP开发的软件，限流，不推荐）" target="_blank" rel="external">http://android-mirror.bugly.qq.com:8080/（仅针对APP开发的软件，限流，不推荐）</a></p>
+<h3 id="教育站"><a href="#教育站" class="headerlink" title="教育站"></a>教育站</h3><p>1.上海交通大学：<a href="http://ftp.sjtu.edu.cn/html/resources.xml（部分移动运营商出口状况不佳，无法访问）" target="_blank" rel="external">http://ftp.sjtu.edu.cn/html/resources.xml（部分移动运营商出口状况不佳，无法访问）</a><br>2.华中科技大学：<a href="http://mirror.hust.edu.cn/（当前已用容量估计：4.83T）" target="_blank" rel="external">http://mirror.hust.edu.cn/（当前已用容量估计：4.83T）</a><br>3.清华大学：<a href="http://mirrors.tuna.tsinghua.edu.cn/（当前已用容量估计：9.8T）" target="_blank" rel="external">http://mirrors.tuna.tsinghua.edu.cn/（当前已用容量估计：9.8T）</a><br>4.北京理工大学：<a href="http://mirror.bit.edu.cn/web/" target="_blank" rel="external">http://mirror.bit.edu.cn/web/</a><br>5.兰州大学：<a href="http://mirror.lzu.edu.cn/" target="_blank" rel="external">http://mirror.lzu.edu.cn/</a><br>6.中国科技大学：<a href="http://mirrors.ustc.edu.cn/（当前已用容量估计：21.32T）" target="_blank" rel="external">http://mirrors.ustc.edu.cn/（当前已用容量估计：21.32T）</a><br>7.大连东软信息学院：<a href="http://mirrors.neusoft.edu.cn/（当前已用容量估计：2.5T）" target="_blank" rel="external">http://mirrors.neusoft.edu.cn/（当前已用容量估计：2.5T）</a><br>8.东北大学：<a href="http://mirror.neu.edu.cn/" target="_blank" rel="external">http://mirror.neu.edu.cn/</a><br>9.大连理工大学：<a href="http://mirror.dlut.edu.cn/" target="_blank" rel="external">http://mirror.dlut.edu.cn/</a><br>10.哈尔滨工业大学：<a href="http://run.hit.edu.cn/html/（部分联通运营商出口状况不佳，无法访问）" target="_blank" rel="external">http://run.hit.edu.cn/html/（部分联通运营商出口状况不佳，无法访问）</a><br>11.北京交通大学：<a href="http://mirror.bjtu.edu.cn/cn/" target="_blank" rel="external">http://mirror.bjtu.edu.cn/cn/</a><br>12.天津大学：<a href="http://mirror.tju.edu.cn（无法访问，ping超时）" target="_blank" rel="external">http://mirror.tju.edu.cn（无法访问，ping超时）</a><br>13.中国地质大学：<a href="http://mirrors.cug.edu.cn/（当前已用容量估计：2.3T）" target="_blank" rel="external">http://mirrors.cug.edu.cn/（当前已用容量估计：2.3T）</a><br>14.浙江大学：<a href="http://mirrors.zju.edu.cn/" target="_blank" rel="external">http://mirrors.zju.edu.cn/</a><br>15.厦门大学：<a href="http://mirrors.xmu.edu.cn/" target="_blank" rel="external">http://mirrors.xmu.edu.cn/</a><br>16.中山大学：<a href="http://mirror.sysu.edu.cn/" target="_blank" rel="external">http://mirror.sysu.edu.cn/</a><br>17.重庆大学：<a href="http://mirrors.cqu.edu.cn/（当前已用容量估计：3.93T）" target="_blank" rel="external">http://mirrors.cqu.edu.cn/（当前已用容量估计：3.93T）</a><br>18.北京化工大学：<a href="http://ubuntu.buct.edu.cn/（Android" target="_blank" rel="external">http://ubuntu.buct.edu.cn/（Android</a> SDK镜像仅供校内使用，当前已用容量估计：1.72T）<br>19.南阳理工学院：<a href="http://mirror.nyist.edu.cn/" target="_blank" rel="external">http://mirror.nyist.edu.cn/</a><br>20.中国科学院：<a href="http://www.opencas.org/mirrors/" target="_blank" rel="external">http://www.opencas.org/mirrors/</a><br>21.电子科技大学：<a href="http://ubuntu.uestc.edu.cn/（无法访问，ping超时）" target="_blank" rel="external">http://ubuntu.uestc.edu.cn/（无法访问，ping超时）</a><br>22.电子科技大学星辰工作室：<a href="http://mirrors.stuhome.net/（当前已用容量估计：1.08T）" target="_blank" rel="external">http://mirrors.stuhome.net/（当前已用容量估计：1.08T）</a><br>23.西北农林科技大学：<a href="http://mirrors.nwsuaf.edu.cn/（只做CentOS镜像，当前已用容量估计：140GB）" target="_blank" rel="external">http://mirrors.nwsuaf.edu.cn/（只做CentOS镜像，当前已用容量估计：140GB）</a></p>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>1.首都在线科技股份有限公司（英文名Capital Online Data Service）：<a href="http://mirrors.yun-idc.com/" target="_blank" rel="external">http://mirrors.yun-idc.com/</a><br>2.中国电信天翼云：<a href="http://mirrors.ctyun.cn/" target="_blank" rel="external">http://mirrors.ctyun.cn/</a><br>3.noc.im：<a href="http://mirrors.noc.im/（当前已用容量估计：3.74T）" target="_blank" rel="external">http://mirrors.noc.im/（当前已用容量估计：3.74T）</a><br>4.常州贝特康姆软件技术有限公司：<a href="http://centos.bitcomm.cn/（只做CentOS镜像，当前已用容量估计：140GB）" target="_blank" rel="external">http://centos.bitcomm.cn/（只做CentOS镜像，当前已用容量估计：140GB）</a><br>5.公云PubYun（母公司为贝特康姆）：<a href="http://mirrors.pubyun.com/" target="_blank" rel="external">http://mirrors.pubyun.com/</a><br>6.Linux运维派：<a href="http://mirrors.skyshe.cn/（使用阿里云服务器，界面使用浙江大学的模板，首页维护，内容可访问）" target="_blank" rel="external">http://mirrors.skyshe.cn/（使用阿里云服务器，界面使用浙江大学的模板，首页维护，内容可访问）</a><br>7.中国互联网络信息中心：<a href="http://mirrors.cnnic.cn/（只做Apache镜像，当前已用容量估计：120GB）" target="_blank" rel="external">http://mirrors.cnnic.cn/（只做Apache镜像，当前已用容量估计：120GB）</a><br>8.Fayea工作室：<a href="http://apache.fayea.com/（只做Apache镜像，当前已用容量估计：120GB）" target="_blank" rel="external">http://apache.fayea.com/（只做Apache镜像，当前已用容量估计：120GB）</a></p>
+<h2 id="软件版"><a href="#软件版" class="headerlink" title="软件版"></a>软件版</h2><h3 id="操作系统类"><a href="#操作系统类" class="headerlink" title="操作系统类"></a>操作系统类</h3><p>1.Ubuntu<br>阿里云：<a href="http://mirrors.aliyun.com/ubuntu-releases/" target="_blank" rel="external">http://mirrors.aliyun.com/ubuntu-releases/</a><br>网易：<a href="http://mirrors.163.com/ubuntu-releases/" target="_blank" rel="external">http://mirrors.163.com/ubuntu-releases/</a><br>搜狐：<a href="http://mirrors.sohu.com/ubuntu-releases/（搜狐在12年之后似乎不同步了）" target="_blank" rel="external">http://mirrors.sohu.com/ubuntu-releases/（搜狐在12年之后似乎不同步了）</a><br>首都在线科技股份有限公司：<a href="http://mirrors.yun-idc.com/ubuntu-releases/" target="_blank" rel="external">http://mirrors.yun-idc.com/ubuntu-releases/</a></p>
+<p>2.centos<br>网易：<a href="http://mirrors.163.com/centos/" target="_blank" rel="external">http://mirrors.163.com/centos/</a><br>搜狐：<a href="http://mirrors.sohu.com/centos/" target="_blank" rel="external">http://mirrors.sohu.com/centos/</a><br>阿里云：<a href="http://mirrors.aliyun.com/centos/" target="_blank" rel="external">http://mirrors.aliyun.com/centos/</a></p>
+<h3 id="服务器类"><a href="#服务器类" class="headerlink" title="服务器类"></a>服务器类</h3><p>1.tomcat、Apache<br>中国互联网络信息中心：<a href="http://mirrors.cnnic.cn/apache/" target="_blank" rel="external">http://mirrors.cnnic.cn/apache/</a><br>华中科技大学：<a href="http://mirrors.hust.edu.cn/apache/" target="_blank" rel="external">http://mirrors.hust.edu.cn/apache/</a><br>北京理工大学：<a href="http://mirror.bit.edu.cn/apache/" target="_blank" rel="external">http://mirror.bit.edu.cn/apache/</a></p>
+<p>2.MySQL<br>北京理工大学：<a href="http://mirror.bit.edu.cn/mysql/Downloads/" target="_blank" rel="external">http://mirror.bit.edu.cn/mysql/Downloads/</a><br>中国电信天翼云：<a href="http://mirrors.ctyun.cn/Mysql/" target="_blank" rel="external">http://mirrors.ctyun.cn/Mysql/</a></p>
+<p>3.PostgreSQL<br>浙江大学：<a href="http://mirrors.zju.edu.cn/postgresql/" target="_blank" rel="external">http://mirrors.zju.edu.cn/postgresql/</a></p>
+<p>4.MariaDB<br>中国电信天翼云：<a href="http://mirrors.ctyun.cn/MariaDB/" target="_blank" rel="external">http://mirrors.ctyun.cn/MariaDB/</a></p>
+<p>5.VideoLAN<br>大连东软信息学院：<a href="http://mirrors.neusoft.edu.cn/videolan/" target="_blank" rel="external">http://mirrors.neusoft.edu.cn/videolan/</a><br>中国科技大学：<a href="http://mirrors.ustc.edu.cn/videolan-ftp/" target="_blank" rel="external">http://mirrors.ustc.edu.cn/videolan-ftp/</a></p>
+<h3 id="开发工具类"><a href="#开发工具类" class="headerlink" title="开发工具类"></a>开发工具类</h3><p>1.eclipse<br>中国科技大学：<a href="http://mirrors.ustc.edu.cn/eclipse/" target="_blank" rel="external">http://mirrors.ustc.edu.cn/eclipse/</a><br>中国科学院：<a href="http://mirrors.opencas.cn/eclipse/" target="_blank" rel="external">http://mirrors.opencas.cn/eclipse/</a><br>东北大学：<a href="http://ftp.neu.edu.cn/mirrors/eclipse/，http://mirror.neu.edu.cn/eclipse/" target="_blank" rel="external">http://ftp.neu.edu.cn/mirrors/eclipse/，http://mirror.neu.edu.cn/eclipse/</a></p>
+<p>2.安卓SDK<br>中国科学院：<a href="http://mirrors.opencas.ac.cn/android/repository/" target="_blank" rel="external">http://mirrors.opencas.ac.cn/android/repository/</a><br>南洋理工学院：<a href="http://mirror.nyist.edu.cn/android/repository/" target="_blank" rel="external">http://mirror.nyist.edu.cn/android/repository/</a><br>中国科学院：<a href="http://mirrors.opencas.cn/android/repository/" target="_blank" rel="external">http://mirrors.opencas.cn/android/repository/</a><br>腾讯：<a href="http://android-mirror.bugly.qq.com:8080/android/repository/（限流，不推荐）" target="_blank" rel="external">http://android-mirror.bugly.qq.com:8080/android/repository/（限流，不推荐）</a><br>大连东软信息学院：<a href="http://mirrors.neusoft.edu.cn/android/repository/（同步效果不如中科院的镜像，不推荐）" target="_blank" rel="external">http://mirrors.neusoft.edu.cn/android/repository/（同步效果不如中科院的镜像，不推荐）</a></p>
+<p>3.Xcode<br>腾讯：<a href="http://android-mirror.bugly.qq.com:8080/Xcode/（从7.2之后不再更新，建议直接从官网下载）" target="_blank" rel="external">http://android-mirror.bugly.qq.com:8080/Xcode/（从7.2之后不再更新，建议直接从官网下载）</a></p>
+<h2 id="官方镜像列表状态地址"><a href="#官方镜像列表状态地址" class="headerlink" title="官方镜像列表状态地址"></a>官方镜像列表状态地址</h2><p>CentOS：<a href="http://mirror-status.centos.org/#cn" target="_blank" rel="external">http://mirror-status.centos.org/#cn</a><br>Archlinux：<a href="https://www.archlinux.org/mirrors/status/" target="_blank" rel="external">https://www.archlinux.org/mirrors/status/</a><br>Ubuntu：<a href="https://launchpad.net/ubuntu/+cdmirrors" target="_blank" rel="external">https://launchpad.net/ubuntu/+cdmirrors</a><br>Debian：<a href="http://mirror.debian.org/status.html" target="_blank" rel="external">http://mirror.debian.org/status.html</a><br>Fedora Linux/Fedora EPEL：<a href="https://admin.fedoraproject.org/mirrormanager/mirrors" target="_blank" rel="external">https://admin.fedoraproject.org/mirrormanager/mirrors</a><br>Apache：<a href="http://www.apache.org/mirrors/#cn" target="_blank" rel="external">http://www.apache.org/mirrors/#cn</a><br>Cygwin：<a href="https://www.cygwin.com/mirrors.html" target="_blank" rel="external">https://www.cygwin.com/mirrors.html</a></p>
 
       
     </div>
@@ -502,7 +497,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/shell/" rel="tag"># shell</a>
+            <a href="/tags/Linux-运维/" rel="tag"># Linux,运维</a>
           
         </div>
       
@@ -515,8 +510,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/06/07/py自动化运维第一章/" rel="next" title="py自动化运维第一章">
-                <i class="fa fa-chevron-left"></i> py自动化运维第一章
+              <a href="/2017/09/29/tcpdump学习笔记/" rel="next" title="tcpdump 学习笔记">
+                <i class="fa fa-chevron-left"></i> tcpdump 学习笔记
               </a>
             
           </div>
@@ -524,10 +519,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/06/09/vsftpd配置文件/" rel="prev" title="vsftpd配置文件">
-                vsftpd配置文件 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -703,7 +694,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#比较与测试"><span class="nav-number">1.</span> <span class="nav-text">比较与测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#录制并回放终端回话"><span class="nav-number">2.</span> <span class="nav-text">录制并回放终端回话</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#站点版"><span class="nav-number">1.</span> <span class="nav-text">站点版</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#企业站"><span class="nav-number">1.1.</span> <span class="nav-text">企业站</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#教育站"><span class="nav-number">1.2.</span> <span class="nav-text">教育站</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他"><span class="nav-number">1.3.</span> <span class="nav-text">其他</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#软件版"><span class="nav-number">2.</span> <span class="nav-text">软件版</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#操作系统类"><span class="nav-number">2.1.</span> <span class="nav-text">操作系统类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#服务器类"><span class="nav-number">2.2.</span> <span class="nav-text">服务器类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开发工具类"><span class="nav-number">2.3.</span> <span class="nav-text">开发工具类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#官方镜像列表状态地址"><span class="nav-number">3.</span> <span class="nav-text">官方镜像列表状态地址</span></a></li></ol></div>
             
 
           </div>

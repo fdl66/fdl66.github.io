@@ -325,6 +325,258 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://dearamaze.com/2016/11/19/Linux文件压缩及归档/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dear Amaze">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DearAmaze-桀骜良">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/11/19/Linux文件压缩及归档/" itemprop="url">
+                  [原]Linux文件压缩及归档
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-11-19T17:17:50+08:00">
+                2016-11-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2016/11/19/Linux文件压缩及归档/" class="leancloud_visitors" data-flag-title="[原]Linux文件压缩及归档">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="压缩-解压缩命令"><a href="#压缩-解压缩命令" class="headerlink" title="压缩  解压缩命令"></a>压缩  解压缩命令</h1><h2 id="压缩格式"><a href="#压缩格式" class="headerlink" title="压缩格式:"></a>压缩格式:</h2><pre><code>gz,bz2,xz,zip,
+压缩算法不同,压缩比也会不同;
+`
+
+## 压缩命令
+
+`*不支持压缩目录*
+`
+
+### 早期:compress:FILENAME.Z
+
+`    umcompress
+`
+
+### gzip: .gz
+
+`    gzip /PATH/TO/SOURCEFILE 压缩完成后会删除原文件
+        -d:解压
+        -#:(1-9)指定压缩比,默认为6;
+
+    gunzip:
+        gunzip /PATH/TO/SOMEFILE.gz :解压完成后会删除原文件
+        zcat /PATH/TO/SOMEFILE.gz 表示在不解压的情况下,查看文本文件的内容
+`
+
+### bzip2: .bz2
+
+`    比gzip有着更强大的压缩比的压缩工具,使用格式类似
+    -d:
+    -#:(1-9)
+    -k:压缩时保留原文件
+
+    bunzip2:解压
+
+    bzcat:同zcat
+`
+
+### xz: .xz
+
+`    压缩比更大,用法同bzip2
+
+    unxz:解压
+    xzdec,解压.xz压缩文件,
+    xzcat:
+`
+
+### zip:(压缩比较小)(归档而且压缩)
+
+`    $:zip FILENAME.zip file1 file2 ... : 压缩,且不删除原文件
+    unzip:
+        unzip FILENAME.zip
+`
+
+## archive:归档,归档本身并不意味着压缩
+
+### tar:(归档工具)
+
+`    -c :创建归档文件
+    -f FILE.tar : 操作的归档文件
+    -x :展开归档
+    --xattrs:归档时保留其扩展属性信息
+    $:tar -cf FILE.tar file1 file2 ... (归档命令)
+    $:tar -xf FILE.tar (展开归档命令)
+    $:tar -tf FILE.tar (不展开文件,查看归档了哪些文件)
+    -zcf:归档并调用gzip压缩
+    -zxf:调用gzip解压并展开压缩文件(解压时,z选项可省略,下面的解压,j,J都可省略)
+
+    -jcf:调用bzip2
+    -jxf:
+
+    -Jcf:调用xz
+    -Jxf:
+`
+
+### cpio:归档工具
+
+## 补充
+
+### read命令
+
+`read:
+    后面加上要输入的变量名
+    -p:打印内容,并输入
+        $:read -p &quot;打印的内容&quot; a b ...
+`
+
+### echo
+
+`echo:
+    -n:不换行
+`
+
+### 压缩文件的小脚本
+
+`#!/bin/bash
+
+read -p &quot;Please input files&apos; name,which you want to compress:&quot; FILENAME
+read -p &quot;Please input Destination:&quot; DEST 
+read -p &quot;Please input the compress type :&quot; TYPE 
+
+case $TYPE in 
+gzip)
+    tar -zcf ${DEST}.tar.gz ${FILENAME} 
+    ;;
+bzip2)
+    tar -jcf ${DEST}.tar.bz2 ${FILENAME}
+    ;;
+xz)
+    tar -Jcf ${DEST}.tar.xz ${FILENAME} 
+    ;;
+*)
+    echo &quot;Unknown TYPE!&quot;
+    exit 9
+    ;;
+esac
+
+
+            作者：qq_27803491 发表于2016/11/19 17:17:50 [原文链接](http://blog.csdn.net/qq_27803491/article/details/53232202)
+
+
+        阅读：132 评论：0 [查看评论](http://blog.csdn.net/qq_27803491/article/details/53232202#comments)
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://dearamaze.com/2016/11/16/2016-11-16周三/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1984,7 +2236,7 @@ int main()
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">48</span>
+                <span class="site-state-item-count">49</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1995,7 +2247,7 @@ int main()
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -2006,7 +2258,7 @@ int main()
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">28</span>
+                <span class="site-state-item-count">29</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

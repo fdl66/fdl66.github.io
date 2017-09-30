@@ -325,6 +325,166 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://dearamaze.com/2017/02/27/ubuntu16-04-安装shadowsocks-番羽土啬/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dear Amaze">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DearAmaze-桀骜良">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/02/27/ubuntu16-04-安装shadowsocks-番羽土啬/" itemprop="url">
+                  [原]ubuntu16.04 安装shadowsocks,番羽土啬
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-27T20:11:34+08:00">
+                2017-02-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/02/27/ubuntu16-04-安装shadowsocks-番羽土啬/" class="leancloud_visitors" data-flag-title="[原]ubuntu16.04 安装shadowsocks,番羽土啬">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h2><ol>
+<li>安装shadowsocks-qt5</li>
+</ol>
+<p><a href="https://github.com/shadowsocks/shadowsocks-qt5/wiki/%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97" target="_blank" rel="external">统一安装教程</a><br>        ubuntu16.04安装,执行如下命令:</p>
+<pre><code>sudo add-apt-repository ppa:hzwhuang/ss-qt5
+sudo apt-get update
+sudo apt-get install shadowsocks-qt5`
+`完成之后,在图形界面下找到shadowsocks-qt5的图标启动,或者命令行运行:/usr/bin/ss-qt5
+然后配置ss,connection--&amp;gt;add--&amp;gt;manually--&amp;gt;填写相关参数
+`
+</code></pre><ol>
+<li><p>配置chrome浏览器<br>下载chrome插件:<a href="https://github.com/FelisCatus/SwitchyOmega/releases/download/v2.3.21/SwitchyOmega.crx" target="_blank" rel="external">SwitchyOmega2.3.21下载地址</a>   ////分隔符/////     <a href="https://github.com/FelisCatus/SwitchyOmega/releases/" target="_blank" rel="external">SwitchyOmega最新版网址</a>    安装该插件(不会安装,百度crx插件安装办法)    然后配置该插件,参考:</p>
+<pre><code>1.  设置代理地址    安装好插件会自动跳到设置选项，有提示你可以跳过。左边新建情景模式-选择代理服务器-比如命名为SS（叫什么无所谓）其他默认之后创建，之后在代理协议选择SOCKS5，地址为127.0.0.1,端口默认1080 。然后保存即应用选项。![1](https://aitanlu.com/wp-content/uploads/2016/04/shadowsocks-0.png)![2](https://aitanlu.com/wp-content/uploads/2016/04/shadowsocks-1.png)
+</code></pre><ol>
+<li>设置自动切换    接着点击自动切换 ( Auto switch）上面的不用管，在按照规则列表匹配请求后面选择刚才新建的SS，默认情景模式选择直接连接。点击应用选项保存。再往下规则列表设置选择AutoProxy 然后将这个地址填进去，点击下面的立即更新情景模式，会有提示更新成功！<img src="https://aitanlu.com/wp-content/uploads/2016/04/shadowsocks-2.png" alt="3"> 图片中7填写的是:    <code>https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt</code><pre><code>1.  然后就可以成功打开 google.com 了![这里写图片描述](http://img.blog.csdn.net/20170227200806973?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjc4MDM0OTE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+</code></pre></li>
+</ol>
+</li>
+<li>开机启动<br>运行:<br>`gnome-session-properties</li>
+</ol>
+<p>打开这个,然后添加<br>    <img src="http://www.afox.cc/wp-content/uploads/2015/07/2015-07-11-171133%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" alt="4"><br>    如下填写后保存退出即可!<br>    <img src="http://www.afox.cc/wp-content/uploads/2015/07/2015-07-11-171220%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" alt="5"></p>
+<h2 id="参考教程"><a href="#参考教程" class="headerlink" title="参考教程"></a>参考教程</h2><ol>
+<li><a href="http://www.jianshu.com/p/9b7725d50f4c" target="_blank" rel="external">ubuntu16.04下载安装shadowsocks+配置chrome的过程记录</a></li>
+<li><a href="https://aitanlu.com/ubuntu-shadowsocks-ke-hu-duan-pei-zhi.html" target="_blank" rel="external">linux-ubuntu使用shadowsocks客户端配置</a></li>
+<li><p><a href="http://www.afox.cc/archives/83" target="_blank" rel="external">ubuntu 使用图形化配置 shadowsocks -qt5 开机自动启动（配置开机启动）</a></p>
+<pre><code>作者：qq_27803491 发表于2017/2/27 20:11:34 [原文链接](http://blog.csdn.net/qq_27803491/article/details/58233565)
+</code></pre></li>
+</ol>
+<pre><code>阅读：20 评论：0 [查看评论](http://blog.csdn.net/qq_27803491/article/details/58233565#comments)
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://dearamaze.com/2017/02/23/C申请内存函数/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1920,258 +2080,6 @@ print(&apos;{:d}&apos;.format(42))
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://dearamaze.com/2016/11/19/Linux文件压缩及归档/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Dear Amaze">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="DearAmaze-桀骜良">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/11/19/Linux文件压缩及归档/" itemprop="url">
-                  [原]Linux文件压缩及归档
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-11-19T17:17:50+08:00">
-                2016-11-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2016/11/19/Linux文件压缩及归档/" class="leancloud_visitors" data-flag-title="[原]Linux文件压缩及归档">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="压缩-解压缩命令"><a href="#压缩-解压缩命令" class="headerlink" title="压缩  解压缩命令"></a>压缩  解压缩命令</h1><h2 id="压缩格式"><a href="#压缩格式" class="headerlink" title="压缩格式:"></a>压缩格式:</h2><pre><code>gz,bz2,xz,zip,
-压缩算法不同,压缩比也会不同;
-`
-
-## 压缩命令
-
-`*不支持压缩目录*
-`
-
-### 早期:compress:FILENAME.Z
-
-`    umcompress
-`
-
-### gzip: .gz
-
-`    gzip /PATH/TO/SOURCEFILE 压缩完成后会删除原文件
-        -d:解压
-        -#:(1-9)指定压缩比,默认为6;
-
-    gunzip:
-        gunzip /PATH/TO/SOMEFILE.gz :解压完成后会删除原文件
-        zcat /PATH/TO/SOMEFILE.gz 表示在不解压的情况下,查看文本文件的内容
-`
-
-### bzip2: .bz2
-
-`    比gzip有着更强大的压缩比的压缩工具,使用格式类似
-    -d:
-    -#:(1-9)
-    -k:压缩时保留原文件
-
-    bunzip2:解压
-
-    bzcat:同zcat
-`
-
-### xz: .xz
-
-`    压缩比更大,用法同bzip2
-
-    unxz:解压
-    xzdec,解压.xz压缩文件,
-    xzcat:
-`
-
-### zip:(压缩比较小)(归档而且压缩)
-
-`    $:zip FILENAME.zip file1 file2 ... : 压缩,且不删除原文件
-    unzip:
-        unzip FILENAME.zip
-`
-
-## archive:归档,归档本身并不意味着压缩
-
-### tar:(归档工具)
-
-`    -c :创建归档文件
-    -f FILE.tar : 操作的归档文件
-    -x :展开归档
-    --xattrs:归档时保留其扩展属性信息
-    $:tar -cf FILE.tar file1 file2 ... (归档命令)
-    $:tar -xf FILE.tar (展开归档命令)
-    $:tar -tf FILE.tar (不展开文件,查看归档了哪些文件)
-    -zcf:归档并调用gzip压缩
-    -zxf:调用gzip解压并展开压缩文件(解压时,z选项可省略,下面的解压,j,J都可省略)
-
-    -jcf:调用bzip2
-    -jxf:
-
-    -Jcf:调用xz
-    -Jxf:
-`
-
-### cpio:归档工具
-
-## 补充
-
-### read命令
-
-`read:
-    后面加上要输入的变量名
-    -p:打印内容,并输入
-        $:read -p &quot;打印的内容&quot; a b ...
-`
-
-### echo
-
-`echo:
-    -n:不换行
-`
-
-### 压缩文件的小脚本
-
-`#!/bin/bash
-
-read -p &quot;Please input files&apos; name,which you want to compress:&quot; FILENAME
-read -p &quot;Please input Destination:&quot; DEST 
-read -p &quot;Please input the compress type :&quot; TYPE 
-
-case $TYPE in 
-gzip)
-    tar -zcf ${DEST}.tar.gz ${FILENAME} 
-    ;;
-bzip2)
-    tar -jcf ${DEST}.tar.bz2 ${FILENAME}
-    ;;
-xz)
-    tar -Jcf ${DEST}.tar.xz ${FILENAME} 
-    ;;
-*)
-    echo &quot;Unknown TYPE!&quot;
-    exit 9
-    ;;
-esac
-
-
-            作者：qq_27803491 发表于2016/11/19 17:17:50 [原文链接](http://blog.csdn.net/qq_27803491/article/details/53232202)
-
-
-        阅读：132 评论：0 [查看评论](http://blog.csdn.net/qq_27803491/article/details/53232202#comments)
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2221,7 +2129,7 @@ esac
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">48</span>
+                <span class="site-state-item-count">49</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2232,7 +2140,7 @@ esac
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -2243,7 +2151,7 @@ esac
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">28</span>
+                <span class="site-state-item-count">29</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
