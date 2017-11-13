@@ -1906,7 +1906,7 @@ img:hover {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ff9452;
+  background: #c232ff;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2995,5 +2995,5 @@ hr {
   }
 }
 body {
-  background: #8bc34a;
+  background: #f1f8e9;
 }
