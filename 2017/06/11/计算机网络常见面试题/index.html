@@ -1242,6 +1242,18 @@ ARP表。在今后的通讯中，发往该MAC地址的数据包将仅送往其�
   <script>
       // highlight
       hljs.initHighlightingOnLoad();
+      $('pre code').each(function(i, block) {
+        //hljs.highlightBlock(block);
+        var lines = $(this).text().split('\n').length - 1;
+        var $numbering = $('<ul/>').addClass('pre-numbering');
+        $(this)
+          .addClass('has-numbering')
+          .parent()
+          .append($numbering);
+        for(i=1;i<=lines;i++){
+          $numbering.append($('<li/>').text(i));
+        }
+      });
   </script>
 </body>
 </html>
