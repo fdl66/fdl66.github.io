@@ -144,7 +144,8 @@
 
   <title> Linux内核模块编程 | DearAmaze-桀骜良 </title>
   <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
-  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
 $('pre code').each(function(i, block) {
   //hljs.highlightBlock(block);
   var lines = $(this).text().split('\n').length - 1;
@@ -159,20 +160,12 @@ $('pre code').each(function(i, block) {
 });  
   </script>
   <style>
-code
-{
-overflow-x: auto;
-overflow-y: auto;
-word-break: keep-all;
-white-space: pre;
-
-.has-numbering {
+code .has-numbering {
   margin-left: 10px;
   word-wrap: normal;
   word-break: keep-all;
   white-space: pre;
 }
-
 .pre-numbering {
   position: absolute;
   top: 0;
@@ -187,7 +180,6 @@ white-space: pre;
   font-size: 1.0em;
   color: #AAA;
   list-style: none;
-}
 }
 @media (max-width: 767px) {
   .pre-numbering {
