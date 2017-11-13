@@ -325,6 +325,851 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://dearamaze.com/2016/11/15/邮件服务器/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dear Amaze">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DearAmaze-桀骜良">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/11/15/邮件服务器/" itemprop="url">
+                  [原]邮件服务器
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-11-15T21:38:12+08:00">
+                2016-11-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2016/11/15/邮件服务器/" class="leancloud_visitors" data-flag-title="[原]邮件服务器">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Mail-Server"><a href="#Mail-Server" class="headerlink" title="Mail Server"></a>Mail Server</h2><ol>
+<li>SMTP(监听tcp25号端口)：发邮件</li>
+<li>ESMTP</li>
+<li>POP3：收邮件</li>
+<li>IMAP4</li>
+<li>UUCP:Unix主机复制文件的协议</li>
+<li>C/S smtpd,smtp</li>
+<li>MUA：邮件用户代理，</li>
+</ol>
+<p>Outlook，Foxmail<br>    Thundbird<br>    evolution<br>    mutt</p>
+<ol>
+<li>MTA:邮件传输代理，smtp服务器，sendmail，uucp，</li>
+</ol>
+<p>qmail,<br>    postfix:模块化设计，安全，与sendmail兼容性好，投递效率<br>    exim：<br>    exchange：（windows，异步消息协作平台）</p>
+<ol>
+<li>MDA</li>
+</ol>
+<p>procmail：<br>    maildrop：</p>
+<ol>
+<li>MRA：邮件取回代理（pop3，IMAP4）</li>
+</ol>
+<p>cyrus-imap<br>    dovecot</p>
+<ol>
+<li><p>SASL：简单认证安全层<br>只是一个框架，需要依靠控件来完成认证<br>cyrus-sasl<br>courier-authlib</p>
+</li>
+<li><p>Webmail:</p>
+</li>
+</ol>
+<p>Openwebmail（perl）<br>    Squirrelmail    （php）<br>    Extmail（Extman）</p>
+<ol>
+<li><p>LDAP:Lightweight dirctory Access protocol:轻量级目录访问协议:读取速度快，写入速度慢（读快mysql一个数量级，写慢mysql一个数量级）</p>
+</li>
+<li><p>mysql：</p>
+</li>
+<li>虚拟用户：仅用于访问某服务的数字表示</li>
+<li>用户：字符串，凭证</li>
+</ol>
+<h2 id="搭建"><a href="#搭建" class="headerlink" title="搭建"></a>搭建</h2><ol>
+<li>Postfix+SASL(courier-authlib)+Mysql</li>
+<li>Dovecot+MySQL</li>
+<li>webmail：Extmail+Extman+httpd</li>
+<li><p>Postfix配置文件：<br>模块化：</p>
+<pre><code>master：/etc/postfix/master.cf
+mail：/etc/postfix/main.cf
+</code></pre><p>postconf：配置postfix<br>-d:显示默认的配置<br>-n:修改了的配置<br>-m:显示支持的查找表类型<br>-A:显示支持的sasl客户端插件类型<br>-e:PARMATER=VALUE :更改某参数配置信息，并保存到main.cf文件中</p>
+<pre><code>作者：qq_27803491 发表于2016/11/15 21:38:12 [原文链接](http://blog.csdn.net/qq_27803491/article/details/53177971)
+</code></pre></li>
+</ol>
+<pre><code>阅读：64 评论：0 [查看评论](http://blog.csdn.net/qq_27803491/article/details/53177971#comments)
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://dearamaze.com/2016/11/08/poj3169（差分约束系统）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dear Amaze">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DearAmaze-桀骜良">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/11/08/poj3169（差分约束系统）/" itemprop="url">
+                  [原]poj3169（差分约束系统）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-11-08T12:24:18+08:00">
+                2016-11-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2016/11/08/poj3169（差分约束系统）/" class="leancloud_visitors" data-flag-title="[原]poj3169（差分约束系统）">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><ol>
+<li>网址：<a href="http://poj.org/problem?id=3169" target="_blank" rel="external">http://poj.org/problem?id=3169</a></li>
+<li>大概题意：有N个点，其中有ml个限制条件：点a，点b，的最长距离为d，有md个限制条件，点a,点b，的最短距离为d；点按序号顺序排，求第一个点到最后一个点的最长距离。</li>
+<li>解题思路：差分约束，其实我也不太清楚什么是差分约束，大概就是将各种限制条件，逐个加入，先假设N个点间的距离都为无穷大，然后，按下列顺序，（循环）N（N，ml，md），依次加入限制条件，就可以了，加入第一种限制时，点b的原距离与a点距离加上d，比较，取最小值为b点的最新距离,,min(b(原)，a+d)。加入第二种限制时，已知b求a，min（a（原），b-d）;</li>
+</ol>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><pre><code>#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;string&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cmath&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#define INF 0x3f3f3f3f
+using namespace std;
+int d[1010];
+struct MLD{
+    int a,b,d;
+}ML[10010];
+struct MDD{
+    int a,b,d;
+}MD[10010];
+
+int main()
+{
+    memset(d,INF,sizeof(d));
+    memset(ML,0,sizeof(ML));
+    memset(MD,0,sizeof(MD));
+    int n,ml,md;
+    scanf(&quot;%d%d%d&quot;,&amp;amp;n,&amp;amp;ml,&amp;amp;md);
+    d[0]=0;
+    for(int i=0;i&amp;lt;ml;i++){
+        scanf(&quot;%d%d%d&quot;,&amp;amp;ML[i].a,&amp;amp;ML[i].b,&amp;amp;ML[i].d);
+    }
+    for(int i=0;i&amp;lt;md;i++){
+        scanf(&quot;%d%d%d&quot;,&amp;amp;MD[i].a,&amp;amp;MD[i].b,&amp;amp;MD[i].d);
+    }
+    for(int i=0;i&amp;lt;n;i++){
+        for(int j=0;j&amp;lt;n;j++){
+            if(d[j+1]&amp;lt;INF)d[j]=min(d[j],d[j+1]);
+        }
+        for(int j=0;j&amp;lt;ml;j++){
+            if(d[ML[j].a-1]&amp;lt;INF){
+                d[ML[j].b-1]=min(d[ML[j].a-1]+ML[j].d,d[ML[j].b-1]);
+            }
+        }
+        for(int j=0;j&amp;lt;md;j++){
+            if(d[MD[j].b-1]&amp;lt;INF){
+                d[MD[j].a-1]=min(d[MD[j].b-1]-MD[j].d,d[MD[j].a-1]);
+            }
+        }
+    }
+    if(d[0]&amp;lt;0)printf(&quot;-1\n&quot;);
+    else if(d[n-1]==INF)printf(&quot;-2\n&quot;);
+    else {
+        printf(&quot;%d\n&quot;,d[n-1]);
+    }
+
+    return 0;
+}
+
+
+            作者：qq_27803491 发表于2016/11/8 12:24:18 [原文链接](http://blog.csdn.net/qq_27803491/article/details/53080973)
+
+
+        阅读：61 评论：0 [查看评论](http://blog.csdn.net/qq_27803491/article/details/53080973#comments)
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://dearamaze.com/2016/11/04/细节（水）题codeforce-378C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dear Amaze">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DearAmaze-桀骜良">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/11/04/细节（水）题codeforce-378C/" itemprop="url">
+                  [原]细节（水）题codeforce#378C
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-11-04T01:17:06+08:00">
+                2016-11-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2016/11/04/细节（水）题codeforce-378C/" class="leancloud_visitors" data-flag-title="[原]细节（水）题codeforce#378C">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><h3 id="网址"><a href="#网址" class="headerlink" title="网址"></a>网址</h3><p><a href="http://codeforces.com/contest/733/problem/C" target="_blank" rel="external">http://codeforces.com/contest/733/problem/C</a></p>
+<h3 id="大概题意"><a href="#大概题意" class="headerlink" title="大概题意"></a>大概题意</h3><p>给你N个数，然后再给你经过合并操作后的K个数，求中间合并操作？</p>
+<h2 id="AC代码"><a href="#AC代码" class="headerlink" title="AC代码"></a>AC代码</h2><pre><code>#define _CRT_SECURE_NO_WARNINGS
+#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;cstdio&amp;gt;
+#include &amp;lt;cstring&amp;gt;
+#include &amp;lt;algorithm&amp;gt;
+#include &amp;lt;stack&amp;gt;
+#include &amp;lt;string&amp;gt;
+#include &amp;lt;set&amp;gt;
+#include &amp;lt;cmath&amp;gt;
+#include &amp;lt;map&amp;gt;
+#include &amp;lt;queue&amp;gt;
+#include &amp;lt;sstream&amp;gt;
+#include &amp;lt;vector&amp;gt;
+#include &amp;lt;iomanip&amp;gt;
+#define m0(a) memset(a,0,sizeof(a))
+#define mm(a) memset(a,0x3f,sizeof(a))
+#define m_1(a) memset(a,-1,sizeof(a))
+#define f(i,a,b) for(i = a;i&amp;lt;=b;i++)
+#define fi(i,a,b) for(i = a;i&amp;gt;=b;i--)
+#define lowbit(a) ((a)&amp;amp;(-a))
+#define FFR freopen(&quot;data.in&quot;,&quot;r&quot;,stdin)
+#define FFW freopen(&quot;data.out&quot;,&quot;w&quot;,stdout)
+#define INF 0x3f3f3f3f
+#define DEBUG printf
+typedef long long ll;
+typedef long double ld;
+
+const ld PI = acos(-1.0);
+
+using namespace std;
+#define SIZE 550
+
+int a[SIZE];
+int b[SIZE];
+
+struct Chuan{
+    int c_start;
+    int c_end;
+    int c_max;
+};
+struct Print{
+    int num;
+    char dire;
+};
+vector&amp;lt;Chuan&amp;gt; chuan;
+queue&amp;lt;Print&amp;gt; print;
+int main()
+{
+    int n,k;
+    scanf(&quot;%d&quot;,&amp;amp;n);
+    int i;
+    f(i,1,n){
+        scanf(&quot;%d&quot;,&amp;amp;a[i]);
+    }
+    scanf(&quot;%d&quot;,&amp;amp;k);
+    int site=1;
+    bool flag=0;
+    f(i,1,k){
+        scanf(&quot;%d&quot;,&amp;amp;b[i]);
+        if(flag)continue;
+        ll all=0;
+        Chuan onechuan;
+        onechuan.c_start=site;
+        onechuan.c_max=0;
+        int max_ele=0;
+        while(all&amp;lt;b[i]){
+            if(a[site]&amp;gt;max_ele){
+                max_ele=a[site];
+                onechuan.c_max=site;
+            }
+            else if(a[site]==max_ele){
+                if(site-1&amp;gt;=onechuan.c_start&amp;amp;&amp;amp;a[site]&amp;gt;a[site-1]){
+                    onechuan.c_max=site;
+                }
+                else if(site+1&amp;lt;=n&amp;amp;&amp;amp;all+a[site]+a[site+1]&amp;lt;=b[i]&amp;amp;&amp;amp;a[site]&amp;gt;a[site+1]){
+                    onechuan.c_max=site;
+                }
+            }
+            all+=a[site++];
+        }
+        onechuan.c_end=site-1;
+        if(all!=b[i])flag=1;
+        chuan.push_back(onechuan);
+        //DEBUG(&quot;%d %d %d \n&quot;,onechuan.c_start,onechuan.c_max,onechuan.c_end);
+    }
+    if(flag){
+        printf(&quot;NO\n&quot;);
+        return 0;
+    }
+    if(site!=n+1){
+        printf(&quot;NO\n&quot;);
+        return 0;
+    }
+    i=0;
+    while(!print.empty()){
+        print.pop();
+    }
+    for(vector&amp;lt;Chuan&amp;gt;::iterator it=chuan.begin();it&amp;lt;chuan.end();it++){
+        i++;
+        if(it-&amp;gt;c_start==it-&amp;gt;c_end)continue;
+        int pointer=it-&amp;gt;c_max;
+        if(pointer-1&amp;gt;=it-&amp;gt;c_start&amp;amp;&amp;amp;a[pointer]&amp;gt;a[pointer-1]){
+            while(pointer&amp;gt;it-&amp;gt;c_start){
+                Print oneprint;
+                oneprint.num=i+pointer-it-&amp;gt;c_start;
+                pointer--;
+                oneprint.dire=&apos;L&apos;;
+                print.push(oneprint);
+            }
+            pointer=it-&amp;gt;c_max;
+            while(pointer&amp;lt;it-&amp;gt;c_end){
+                Print oneprint;
+                oneprint.num=i;
+                pointer++;
+                oneprint.dire=&apos;R&apos;;
+                print.push(oneprint);
+            }
+
+        }
+        else if(pointer+1&amp;lt;=it-&amp;gt;c_end&amp;amp;&amp;amp;a[pointer]&amp;gt;a[pointer+1]){
+            while(pointer&amp;lt;it-&amp;gt;c_end){
+                Print oneprint;
+                oneprint.num=i+it-&amp;gt;c_max-it-&amp;gt;c_start;
+                //DEBUG(&quot;hello world!\n&quot;);
+                pointer++;
+                oneprint.dire=&apos;R&apos;;
+                print.push(oneprint);
+            }
+            pointer=it-&amp;gt;c_max;
+            while(pointer&amp;gt;it-&amp;gt;c_start){
+                Print oneprint;
+                oneprint.num=i+pointer-it-&amp;gt;c_start;
+                pointer--;
+                oneprint.dire=&apos;L&apos;;
+                print.push(oneprint);
+            }
+        }
+        else {
+            printf(&quot;NO\n&quot;);
+            while(!print.empty()){
+                print.pop();
+            }
+            return 0;
+        }
+        //DEBUG(&quot;%d %d %d\n&quot;,it-&amp;gt;c_start,it-&amp;gt;c_max,it-&amp;gt;c_end);
+    }
+    puts(&quot;YES&quot;);
+    while(!print.empty()){
+        Print oneprint=print.front();
+        print.pop();
+        printf(&quot;%d %c\n&quot;,oneprint.num,oneprint.dire);
+    }
+    return 0;
+}
+</code></pre><h2 id="经验教训"><a href="#经验教训" class="headerlink" title="经验教训"></a>经验教训</h2><ol>
+<li>你离AC还差N个细节！</li>
+<li>其实还是心不够静，思维跟不上，静下来后，你的智商会变高！</li>
+<li><p>仔细阅读题意，然后注意关掉DEBUG！</p>
+<pre><code>作者：qq_27803491 发表于2016/11/4 1:17:06 [原文链接](http://blog.csdn.net/qq_27803491/article/details/53029288)
+</code></pre></li>
+</ol>
+<pre><code>阅读：89 评论：0 [查看评论](http://blog.csdn.net/qq_27803491/article/details/53029288#comments)
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://dearamaze.com/2016/11/03/AC必备/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dear Amaze">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DearAmaze-桀骜良">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/11/03/AC必备/" itemprop="url">
+                  [原]AC必备
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-11-03T23:50:06+08:00">
+                2016-11-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2016/11/03/AC必备/" class="leancloud_visitors" data-flag-title="[原]AC必备">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <pre><code>#define _CRT_SECURE_NO_WARNINGS
+#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;cstdio&amp;gt;
+#include &amp;lt;cstring&amp;gt;
+#include &amp;lt;algorithm&amp;gt;
+#include &amp;lt;stack&amp;gt;
+#include &amp;lt;string&amp;gt;
+#include &amp;lt;set&amp;gt;
+#include &amp;lt;cmath&amp;gt;
+#include &amp;lt;map&amp;gt;
+#include &amp;lt;queue&amp;gt;
+#include &amp;lt;sstream&amp;gt;
+#include &amp;lt;vector&amp;gt;
+#include &amp;lt;iomanip&amp;gt;
+#define m0(a) memset(a,0,sizeof(a))
+#define mm(a) memset(a,0x3f,sizeof(a))
+#define m_1(a) memset(a,-1,sizeof(a))
+#define f(i,a,b) for(int i = a;i&amp;lt;=b;i++)
+#define fi(i,a,b) for(int i = a;i&amp;gt;=b;i--)
+#define lowbit(a) ((a)&amp;amp;(-a))
+#define FFR freopen(&quot;data.in&quot;,&quot;r&quot;,stdin)
+#define FFW freopen(&quot;data.out&quot;,&quot;w&quot;,stdout)
+#define INF 0x3f3f3f3f
+#define DEBUG //printf
+typedef long long ll;
+typedef long double ld;
+
+const ld PI = acos(-1.0);
+
+using namespace std;
+#define SIZE (1)
+
+int aa[SIZE];
+
+int main()
+{
+
+    return 0;
+}
+</code></pre><p>写每道题都会用到，把他们做成模版，每次就没必要都打一遍了，节省了时间。</p>
+<pre><code>    作者：qq_27803491 发表于2016/11/3 23:50:06 [原文链接](http://blog.csdn.net/qq_27803491/article/details/53028318)
+
+
+阅读：66 评论：0 [查看评论](http://blog.csdn.net/qq_27803491/article/details/53028318#comments)
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://dearamaze.com/2016/11/03/2016-11-3-周四/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -955,7 +1800,7 @@ int main()
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">53</span>
+                <span class="site-state-item-count">57</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -966,7 +1811,7 @@ int main()
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">21</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -977,7 +1822,7 @@ int main()
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-count">36</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

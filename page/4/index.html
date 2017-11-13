@@ -325,6 +325,671 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://dearamaze.com/2017/03/31/tr命令/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dear Amaze">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DearAmaze-桀骜良">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/03/31/tr命令/" itemprop="url">
+                  tr命令
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-31T21:21:06+08:00">
+                2017-03-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/shell/" itemprop="url" rel="index">
+                    <span itemprop="name">shell</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/03/31/tr命令/" class="leancloud_visitors" data-flag-title="tr命令">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><blockquote>
+<p>通过使用 tr，您可以非常容易地实现 sed 的许多最基本功能。您可以将 tr 看作为 sed 的（极其）简化的变体：它可以用一个字符来替换另一个字符，或者可以完全除去一些字符。您也可以用它来除去重复字符。这就是所有 tr 所能够做的。 </p>
+</blockquote>
+<p>tr用来从标准输入中通过替换或删除操作进行字符转换。tr主要用于删除文件中控制字符或进行字符转换。使用tr时要转换两个字符串：字符串1用于查询，字符串2用于处理各种转换。tr刚执行时，字符串1中的字符被映射到字符串2中的字符，然后转换操作开始。</p>
+<h2 id="带有最常用选项的tr命令格式为："><a href="#带有最常用选项的tr命令格式为：" class="headerlink" title="带有最常用选项的tr命令格式为："></a>带有最常用选项的tr命令格式为：</h2><p>tr -c -d -s [“string1_to_translate_from”] [“string2_to_translate_to”]  input-file</p>
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">-c 用字符串1中字符集的补集替换此字符集，要求字符集为ASCII。</div><div class="line">-d 删除字符串1中所有输入字符。</div><div class="line">-s 删除所有重复出现字符序列，只保留第一个；即将重复出现字符串压缩为一个字符串。</div><div class="line">input-file是转换文件名。虽然可以使用其他格式输入，但这种格式最常用。</div></pre></td></tr></table></figure>
+<h3 id="字符范围"><a href="#字符范围" class="headerlink" title="字符范围"></a>字符范围</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">指定字符串1或字符串2的内容时，只能使用单字符或字符串范围或列表。</div><div class="line">[a-z] a-z内的字符组成的字符串。</div><div class="line">[A-Z] A-Z内的字符组成的字符串。</div><div class="line">[0-9] 数字串。</div><div class="line">\octal 一个三位的八进制数，对应有效的ASCII字符。</div><div class="line">[O*n] 表示字符O重复出现指定次数n。因此[O*2]匹配OO的字符串。</div><div class="line">tr中特定控制字符的不同表达方式</div></pre></td></tr></table></figure>
+<h3 id="速记符含义八进制方式"><a href="#速记符含义八进制方式" class="headerlink" title="速记符含义八进制方式"></a>速记符含义八进制方式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">\a Ctrl-G  铃声\007</div><div class="line">\b Ctrl-H  退格符\010</div><div class="line">\f Ctrl-L  走行换页\014</div><div class="line">\n Ctrl-J  新行\012</div><div class="line">\r Ctrl-M  回车\015</div><div class="line">\t Ctrl-I  tab键\011</div><div class="line">\v Ctrl-X  \030</div></pre></td></tr></table></figure>
+<h2 id="实例："><a href="#实例：" class="headerlink" title="实例："></a>实例：</h2><p>1.将文件file中出现的”abc”替换为”xyz”</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat file | tr &quot;abc&quot; &quot;xyz&quot; &gt; new_file</div></pre></td></tr></table></figure>
+<p>【注意】这里，凡是在file中出现的”a”字母，都替换成”x”字母，”b”字母替换为”y”字母，”c”字母替换为”z”字母。而不是将字符串”abc”替换为字符串”xyz”。</p>
+<p>2.使用tr命令“统一”字母大小写</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">（小写 --&gt; 大写）</div><div class="line">cat file | tr [a-z] [A-Z] &gt; new_file</div><div class="line">（大写 --&gt; 小写）</div><div class="line">cat file | tr [A-Z] [a-z] &gt; new_file</div></pre></td></tr></table></figure>
+<p>3.把文件中的数字0-9替换为a-j<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat file | tr [0-9] [a-j] &gt; new_file</div></pre></td></tr></table></figure></p>
+<p>4、删除文件file中出现的”Snail”字符</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat file | tr -d "Snail" &gt; new_file</div></pre></td></tr></table></figure>
+<p>【注意】这里，凡是在file文件中出现的’S’,’n’,’a’,’i’,’l’字符都会被删除！而不是紧紧删除出现的”Snail”字符串。</p>
+<p>5、删除文件file中出现的换行’\n’、制表’\t’字符</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat file | tr -d "\n\t" &gt; new_file</div></pre></td></tr></table></figure>
+<p>不可见字符都得用转义字符来表示的，这个都是统一的。</p>
+<p>6、删除“连续着的”重复字母，只保留第一个</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat file | tr -s [a-zA-Z] &gt; new_file</div></pre></td></tr></table></figure>
+<p>7、删除空行<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">cat file | tr -s "\n" &gt; new_file</div></pre></td></tr></table></figure></p>
+<p>8、删除Windows文件“造成”的’^M’字符</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">cat file | tr -d "\r" &gt; new_file</div><div class="line">或者</div><div class="line">cat file | tr -s "\r" "\n" &gt; new_file</div></pre></td></tr></table></figure>
+<p>【注意】这里-s后面是两个参数”\r”和”\n”，用后者替换前者</p>
+<p>9、用空格符\040替换制表符\011</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat file | tr -s &quot;\011&quot; &quot;\040&quot; &gt; new_file</div></pre></td></tr></table></figure>
+<p>10、把路径变量中的冒号”:”，替换成换行符”\n”</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">echo $PATH | tr -s &quot;:&quot; &quot;\n&quot;</div></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://dearamaze.com/2017/03/31/常用apt命令参数/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dear Amaze">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DearAmaze-桀骜良">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/03/31/常用apt命令参数/" itemprop="url">
+                  常用apt命令参数
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-31T10:52:41+08:00">
+                2017-03-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/03/31/常用apt命令参数/" class="leancloud_visitors" data-flag-title="常用apt命令参数">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>常用的APT命令参数：</p>
+<p>apt-cache search package 搜索包</p>
+<p>apt-cache show package 获取包的相关信息，如说明、大小、版本等</p>
+<p>sudo apt-get install package 安装包</p>
+<p>sudo apt-get install package - - reinstall 重新安装包</p>
+<p>sudo apt-get -f install 修复安装”-f = ——fix-missing”</p>
+<p>sudo apt-get remove package 删除包</p>
+<p>sudo apt-get remove package - - purge 删除包，包括删除配置文件等</p>
+<p>sudo apt-get update 更新源</p>
+<p>sudo apt-get upgrade 更新已安装的包</p>
+<p>sudo apt-get dist-upgrade 升级系统</p>
+<p>sudo apt-get dselect-upgrade 使用 dselect 升级</p>
+<p>apt-cache depends package 了解使用依赖</p>
+<p>apt-cache rdepends package 是查看该包被哪些包依赖</p>
+<p>sudo apt-get build-dep package 安装相关的编译环境</p>
+<p>apt-get source package 下载该包的源代码</p>
+<p>sudo apt-get clean &amp;&amp; sudo apt-get autoclean 清理无用的包</p>
+<p>sudo apt-get check 检查是否有损坏的依赖</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://dearamaze.com/2017/03/30/解决Ubuntu-16-04-搜狗输入法-只有悬浮窗中文不能自动联想的问题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dear Amaze">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DearAmaze-桀骜良">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/03/30/解决Ubuntu-16-04-搜狗输入法-只有悬浮窗中文不能自动联想的问题/" itemprop="url">
+                  解决Ubuntu 16.04 搜狗输入法 只有悬浮窗中文不能自动联想的问题
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-30T13:29:59+08:00">
+                2017-03-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Ubuntu使用/" itemprop="url" rel="index">
+                    <span itemprop="name">Ubuntu使用</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/03/30/解决Ubuntu-16-04-搜狗输入法-只有悬浮窗中文不能自动联想的问题/" class="leancloud_visitors" data-flag-title="解决Ubuntu 16.04 搜狗输入法 只有悬浮窗中文不能自动联想的问题">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>一直用得好好的，不知道下载了什么更新导致搜狗输入法，在输入中文的时候，只显示一个悬浮窗。打字的时候什么反应都没有。中文也联想不出来。</p>
+<p>找了半天，重新安装fcitx/搜狗输入法N次无果，在网上论坛找到了答案，修复了这个问题，记录一下。</p>
+<p>直接删除其配置文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rm -rf ~/.config/SogouPY* ~/.config/sogou*</div></pre></td></tr></table></figure></p>
+<p>然后直接在右上角点fcitx图标，下拉列表里面重启fcitx输入法</p>
+<p><a href="https://fiture.me/share/linux-ubuntu/1246.html" target="_blank" rel="external">转载自</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://dearamaze.com/2017/03/28/TCP和UDP套接字C语言实现/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dear Amaze">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DearAmaze-桀骜良">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/03/28/TCP和UDP套接字C语言实现/" itemprop="url">
+                  TCP和UDP套接字C语言实现
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-28T12:03:47+08:00">
+                2017-03-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/网络/" itemprop="url" rel="index">
+                    <span itemprop="name">网络</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/03/28/TCP和UDP套接字C语言实现/" class="leancloud_visitors" data-flag-title="TCP和UDP套接字C语言实现">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="字符串传输"><a href="#字符串传输" class="headerlink" title="字符串传输"></a>字符串传输</h1><h2 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h2><h3 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line">#include </div><div class="line">#include </div><div class="line">#include </div><div class="line">#include </div><div class="line">#include </div><div class="line">#include </div><div class="line">#include </div><div class="line">#include </div><div class="line">#include </div><div class="line">#include </div><div class="line"></div><div class="line">#define MYPORT  8887</div><div class="line">#define BUFFER_SIZE 1024</div><div class="line"></div><div class="line">int main()</div><div class="line">&#123;</div><div class="line">    ///定义sockfd</div><div class="line">    int sock_cli = socket(AF_INET,SOCK_STREAM, 0);</div><div class="line"></div><div class="line">    ///定义sockaddr_in</div><div class="line">    struct sockaddr_in servaddr;</div><div class="line">    memset(&amp;servaddr, 0, sizeof(servaddr));</div><div class="line">    servaddr.sin_family = AF_INET;</div><div class="line">    servaddr.sin_port = htons(MYPORT);  ///服务器端口</div><div class="line">    servaddr.sin_addr.s_addr = inet_addr(&quot;127.0.0.1&quot;);  ///服务器ip</div><div class="line"></div><div class="line">    ///连接服务器，成功返回0，错误返回-1</div><div class="line">    if (connect(sock_cli, (struct sockaddr *)&amp;servaddr, sizeof(servaddr)) &lt; 0)</div><div class="line">    &#123;</div><div class="line">        perror(&quot;connect&quot;);</div><div class="line">        exit(1);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    char sendbuf[BUFFER_SIZE];</div><div class="line">    char recvbuf[BUFFER_SIZE];</div><div class="line">    while (fgets(sendbuf, sizeof(sendbuf), stdin) != NULL)</div><div class="line">    &#123;</div><div class="line">        send(sock_cli, sendbuf, strlen(sendbuf),0); ///发送</div><div class="line">        if(strcmp(sendbuf,&quot;exit\n&quot;)==0)</div><div class="line">            break;</div><div class="line">        recv(sock_cli, recvbuf, sizeof(recvbuf),0); ///接收</div><div class="line">        fputs(recvbuf, stdout);</div><div class="line"></div><div class="line">        memset(sendbuf, 0, sizeof(sendbuf));</div><div class="line">        memset(recvbuf, 0, sizeof(recvbuf));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    close(sock_cli);</div><div class="line">    return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div></pre></td><td class="code"><pre><div class="line">#include </div><div class="line">#include </div><div class="line">#include </div><div class="line">#include </div><div class="line">#include </div><div class="line">#include </div><div class="line">#include </div><div class="line">#include </div><div class="line">#include </div><div class="line">#include </div><div class="line"></div><div class="line">#define MYPORT  8887</div><div class="line">#define QUEUE   20</div><div class="line">#define BUFFER_SIZE 1024</div><div class="line"></div><div class="line">int main()</div><div class="line">&#123;</div><div class="line">    ///定义sockfd</div><div class="line">    int server_sockfd = socket(AF_INET,SOCK_STREAM, 0);</div><div class="line"></div><div class="line">    ///定义sockaddr_in</div><div class="line">    struct sockaddr_in server_sockaddr;</div><div class="line">    server_sockaddr.sin_family = AF_INET;</div><div class="line">    server_sockaddr.sin_port = htons(MYPORT);</div><div class="line">    server_sockaddr.sin_addr.s_addr = htonl(INADDR_ANY);</div><div class="line"></div><div class="line">    ///bind，成功返回0，出错返回-1</div><div class="line">    if(bind(server_sockfd,(struct sockaddr *)&amp;server_sockaddr,sizeof(server_sockaddr))==-1)</div><div class="line">    &#123;</div><div class="line">        perror(&quot;bind&quot;);</div><div class="line">        exit(1);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    ///listen，成功返回0，出错返回-1</div><div class="line">    if(listen(server_sockfd,QUEUE) == -1)</div><div class="line">    &#123;</div><div class="line">        perror(&quot;listen&quot;);</div><div class="line">        exit(1);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    ///客户端套接字</div><div class="line">    char buffer[BUFFER_SIZE];</div><div class="line">    struct sockaddr_in client_addr;</div><div class="line">    socklen_t length = sizeof(client_addr);</div><div class="line"></div><div class="line">    ///成功返回非负描述字，出错返回-1</div><div class="line">    int conn = accept(server_sockfd, (struct sockaddr*)&amp;client_addr, &amp;length);</div><div class="line">    if(conn&lt;0)</div><div class="line">    &#123;</div><div class="line">        perror(&quot;connect&quot;);</div><div class="line">        exit(1);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    while(1)</div><div class="line">    &#123;</div><div class="line">        memset(buffer,0,sizeof(buffer));</div><div class="line">        int len = recv(conn, buffer, sizeof(buffer),0);</div><div class="line">        if(strcmp(buffer,&quot;exit\n&quot;)==0)</div><div class="line">            break;</div><div class="line">        fputs(buffer, stdout);</div><div class="line">        for(int i=0;i&lt;len;i++)&#123;</div><div class="line">            if(buffer[i]&gt;=97&amp;&amp;buffer[i]&lt;=122)buffer[i]-=32;</div><div class="line">        &#125;</div><div class="line">        send(conn, buffer, len, 0);</div><div class="line">    &#125;</div><div class="line">    close(conn);</div><div class="line">    close(server_sockfd);</div><div class="line">    return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="运行截图"><a href="#运行截图" class="headerlink" title="运行截图"></a>运行截图</h3><p>tcp_client:</p>
+<p><img src="http://function.dearamaze.com/tcp_c.png" alt="client"></p>
+<p>tcp_server:</p>
+<p><img src="http://function.dearamaze.com/tcp_s.png" alt="server"></p>
+<h2 id="UDP"><a href="#UDP" class="headerlink" title="UDP"></a>UDP</h2><h3 id="客户端-1"><a href="#客户端-1" class="headerlink" title="客户端"></a>客户端</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div></pre></td><td class="code"><pre><div class="line">#include </div><div class="line">#include </div><div class="line">#include </div><div class="line">#include </div><div class="line">#include </div><div class="line"></div><div class="line">#define SERVER_PORT 8888</div><div class="line">#define BUFF_LEN 512</div><div class="line">#define SERVER_IP &quot;172.0.5.182&quot;</div><div class="line"></div><div class="line"></div><div class="line">void udp_msg_sender(int fd, struct sockaddr* dst)</div><div class="line">&#123;</div><div class="line"></div><div class="line">    socklen_t len;</div><div class="line">    char sendbuf[BUFF_LEN];</div><div class="line">    char recvbuf[BUFF_LEN];</div><div class="line">    struct sockaddr_in src;</div><div class="line">    while(fgets(sendbuf,sizeof(sendbuf),stdin)!=NULL)&#123;</div><div class="line">        len=sizeof(*dst);</div><div class="line">        sendto(fd,sendbuf,BUFF_LEN,0,dst,len);</div><div class="line">        if(strcmp(sendbuf,&quot;exit\n&quot;)==0)break;</div><div class="line">        recvfrom(fd,recvbuf,BUFF_LEN,0,(struct sockaddr*)&amp;src,&amp;len);</div><div class="line">        fputs(recvbuf,stdout);</div><div class="line"></div><div class="line">        memset(sendbuf,0,sizeof(sendbuf));</div><div class="line">        memset(recvbuf,0,sizeof(recvbuf));</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">/*</div><div class="line">    client:</div><div class="line">            socket--&gt;sendto--&gt;revcfrom--&gt;close</div><div class="line">*/</div><div class="line"></div><div class="line">int main(int argc, char* argv[])</div><div class="line">&#123;</div><div class="line">    int client_fd;</div><div class="line">    struct sockaddr_in ser_addr;</div><div class="line"></div><div class="line">    client_fd = socket(AF_INET, SOCK_DGRAM, 0);</div><div class="line">    if(client_fd &lt; 0)</div><div class="line">    &#123;</div><div class="line">        printf(&quot;create socket fail!\n&quot;);</div><div class="line">        return -1;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    memset(&amp;ser_addr, 0, sizeof(ser_addr));</div><div class="line">    ser_addr.sin_family = AF_INET;</div><div class="line">    //ser_addr.sin_addr.s_addr = inet_addr(SERVER_IP);</div><div class="line">    ser_addr.sin_addr.s_addr = htonl(INADDR_ANY);  //注意网络序转换</div><div class="line">    ser_addr.sin_port = htons(SERVER_PORT);  //注意网络序转换</div><div class="line"></div><div class="line">    udp_msg_sender(client_fd, (struct sockaddr*)&amp;ser_addr);</div><div class="line"></div><div class="line">    close(client_fd);</div><div class="line"></div><div class="line">    return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="服务端-1"><a href="#服务端-1" class="headerlink" title="服务端"></a>服务端</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div></pre></td><td class="code"><pre><div class="line">#include </div><div class="line">#include </div><div class="line">#include </div><div class="line">#include </div><div class="line">#include </div><div class="line"></div><div class="line">#define SERVER_PORT 8888</div><div class="line">#define BUFF_LEN 1024</div><div class="line"></div><div class="line">void handle_udp_msg(int fd)</div><div class="line">&#123;</div><div class="line">    char buf[BUFF_LEN];  //接收缓冲区，1024字节</div><div class="line">    socklen_t len;</div><div class="line">    int count;</div><div class="line">    struct sockaddr_in clent_addr;  //clent_addr用于记录发送方的地址信息</div><div class="line">    while(1)</div><div class="line">    &#123;</div><div class="line">        memset(buf, 0, BUFF_LEN);</div><div class="line">        len = sizeof(clent_addr);</div><div class="line">        count = recvfrom(fd, buf, BUFF_LEN, 0, (struct sockaddr*)&amp;clent_addr, &amp;len);  //recvfrom是拥塞函数，没有数据就一直拥塞</div><div class="line">        if(count == -1)</div><div class="line">        &#123;</div><div class="line">            printf(&quot;recieve data fail!\n&quot;);</div><div class="line">            return;</div><div class="line">        &#125;</div><div class="line">        if(strcmp(buf,&quot;exit\n&quot;)==0)break;</div><div class="line">        fputs(buf,stdout);</div><div class="line">        for(int i=0;i&lt;count;i++)&#123;</div><div class="line">            if(buf[i]&gt;=97&amp;&amp;buf[i]&lt;=122)buf[i]-=32;</div><div class="line">        &#125;</div><div class="line">        sendto(fd, buf, BUFF_LEN, 0, (struct sockaddr*)&amp;clent_addr, len);  //发送信息给client，注意使用了clent_addr结构体指针</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">/*</div><div class="line">    server:</div><div class="line">            socket--&gt;bind--&gt;recvfrom--&gt;sendto--&gt;close</div><div class="line">*/</div><div class="line"></div><div class="line">int main(int argc, char* argv[])</div><div class="line">&#123;</div><div class="line">    int server_fd, ret;</div><div class="line">    struct sockaddr_in ser_addr; </div><div class="line"></div><div class="line">    server_fd = socket(AF_INET, SOCK_DGRAM, 0); //AF_INET:IPV4;SOCK_DGRAM:UDP</div><div class="line">    if(server_fd &lt; 0)</div><div class="line">    &#123;</div><div class="line">        printf(&quot;create socket fail!\n&quot;);</div><div class="line">        return -1;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    memset(&amp;ser_addr, 0, sizeof(ser_addr));</div><div class="line">    ser_addr.sin_family = AF_INET;</div><div class="line">    ser_addr.sin_addr.s_addr = htonl(INADDR_ANY); //IP地址，需要进行网络序转换，INADDR_ANY：本地地址</div><div class="line">    ser_addr.sin_port = htons(SERVER_PORT);  //端口号，需要网络序转换</div><div class="line"></div><div class="line">    ret = bind(server_fd, (struct sockaddr*)&amp;ser_addr, sizeof(ser_addr));</div><div class="line">    if(ret &lt; 0)</div><div class="line">    &#123;</div><div class="line">        printf(&quot;socket bind fail!\n&quot;);</div><div class="line">        return -1;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    handle_udp_msg(server_fd);   //处理接收到的数据</div><div class="line"></div><div class="line">    close(server_fd);</div><div class="line">    return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="运行截图-1"><a href="#运行截图-1" class="headerlink" title="运行截图"></a>运行截图</h3><p>udp_client</p>
+<p><img src="http://function.dearamaze.com/udp_c.png" alt="client"></p>
+<p>udp_server<br><img src="http://function.dearamaze.com/udp_s.png" alt="server"></p>
+<h1 id="文件传输"><a href="#文件传输" class="headerlink" title="文件传输"></a>文件传输</h1><h2 id="TCP-1"><a href="#TCP-1" class="headerlink" title="TCP"></a>TCP</h2><h3 id="客户端-2"><a href="#客户端-2" class="headerlink" title="客户端"></a>客户端</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div></pre></td><td class="code"><pre><div class="line">#include  </div><div class="line">#include  </div><div class="line">#include  </div><div class="line">#include  </div><div class="line">#include  </div><div class="line">#include  </div><div class="line">#include  </div><div class="line">#include  </div><div class="line">#include  </div><div class="line">#include  </div><div class="line">  </div><div class="line">#define MAXLINE 1024 </div><div class="line">  </div><div class="line">void usage(char *command) </div><div class="line">&#123; </div><div class="line">    printf(&quot;usage :%s ipaddr portnum filename\n&quot;, command); </div><div class="line">    exit(0); </div><div class="line">&#125; </div><div class="line">int main(int argc,char **argv) </div><div class="line">&#123; </div><div class="line">    struct sockaddr_in serv_addr; </div><div class="line">    char buf[MAXLINE]; </div><div class="line">    int sock_id; </div><div class="line">    int read_len; </div><div class="line">    int send_len; </div><div class="line">    FILE *fp; </div><div class="line">    int i_ret; </div><div class="line">     </div><div class="line">    if (argc != 4) &#123; </div><div class="line">        usage(argv[0]); </div><div class="line">    &#125; </div><div class="line">      </div><div class="line">    /* open the file to be transported commented by guoqingbo*/ </div><div class="line">    if ((fp = fopen(argv[3],&quot;r&quot;)) == NULL) &#123; </div><div class="line">        perror(&quot;Open file failed\n&quot;); </div><div class="line">        exit(0); </div><div class="line">    &#125; </div><div class="line">      </div><div class="line">    /* create the socket commented by guoqingbo*/ </div><div class="line">    if ((sock_id = socket(AF_INET,SOCK_STREAM,0)) &lt; 0) &#123; </div><div class="line">        perror(&quot;Create socket failed\n&quot;); </div><div class="line">        exit(0); </div><div class="line">    &#125; </div><div class="line">      </div><div class="line">    memset(&amp;serv_addr, 0, sizeof(serv_addr)); </div><div class="line">    serv_addr.sin_family = AF_INET; </div><div class="line">    serv_addr.sin_port = htons(atoi(argv[2])); </div><div class="line">    inet_pton(AF_INET, argv[1], &amp;serv_addr.sin_addr); </div><div class="line">     </div><div class="line">    /* connect the server commented by guoqingbo*/ </div><div class="line">    i_ret = connect(sock_id, (struct sockaddr *)&amp;serv_addr, sizeof(struct sockaddr)); </div><div class="line">    if (-1 == i_ret) &#123; </div><div class="line">        printf(&quot;Connect socket failed\n&quot;); </div><div class="line">       return -1; </div><div class="line">    &#125; </div><div class="line">      </div><div class="line">    /* transported the file commented by guoqingbo*/ </div><div class="line">    bzero(buf, MAXLINE); </div><div class="line">    while ((read_len = fread(buf, sizeof(char), MAXLINE, fp)) &gt;0 ) &#123; </div><div class="line">        send_len = send(sock_id, buf, read_len, 0); </div><div class="line">        if ( send_len &lt; 0 ) &#123; </div><div class="line">            perror(&quot;Send file failed\n&quot;); </div><div class="line">            exit(0); </div><div class="line">        &#125; </div><div class="line">        bzero(buf, MAXLINE); </div><div class="line">    &#125; </div><div class="line">  </div><div class="line">    fclose(fp); </div><div class="line">    close(sock_id); </div><div class="line">    printf(&quot;Send Finish\n&quot;); </div><div class="line">    return 0; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="服务端-2"><a href="#服务端-2" class="headerlink" title="服务端"></a>服务端</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div></pre></td><td class="code"><pre><div class="line">#include  </div><div class="line">#include  </div><div class="line">#include  </div><div class="line">#include  </div><div class="line">#include  </div><div class="line">#include  </div><div class="line">#include  </div><div class="line">#include  </div><div class="line">#include  </div><div class="line">  </div><div class="line">#define MAXLINE 1024 </div><div class="line">  </div><div class="line">void usage(char *command) </div><div class="line">&#123; </div><div class="line">    printf(&quot;usage :%s portnum filename\n&quot;, command); </div><div class="line">    exit(0); </div><div class="line">&#125; </div><div class="line">int main(int argc,char **argv) </div><div class="line">&#123; </div><div class="line">    struct sockaddr_in serv_addr; </div><div class="line">    struct sockaddr_in clie_addr; </div><div class="line">    char buf[MAXLINE]; </div><div class="line">    int sock_id; </div><div class="line">    int link_id; </div><div class="line">    int recv_len; </div><div class="line">    int write_leng; </div><div class="line">    int clie_addr_len; </div><div class="line">    FILE *fp; </div><div class="line">  </div><div class="line">    if (argc != 3) &#123; </div><div class="line">        usage(argv[0]); </div><div class="line">    &#125; </div><div class="line">    if ((fp = fopen(argv[2], &quot;w&quot;)) == NULL) &#123; </div><div class="line">        perror(&quot;Open file failed\n&quot;); </div><div class="line">        exit(0); </div><div class="line">    &#125; </div><div class="line">    if ((sock_id = socket(AF_INET, SOCK_STREAM, 0)) &lt; 0) &#123; </div><div class="line">        perror(&quot;Create socket failed\n&quot;); </div><div class="line">        exit(0); </div><div class="line">    &#125; </div><div class="line">    /*fill the server sockaddr_in struct commented by guoqingbo*/ </div><div class="line">    memset(&amp;serv_addr, 0, sizeof(serv_addr)); </div><div class="line">    serv_addr.sin_family = AF_INET; </div><div class="line">    serv_addr.sin_port = htons(atoi(argv[1])); </div><div class="line">    serv_addr.sin_addr.s_addr = htonl(INADDR_ANY); </div><div class="line">  </div><div class="line">    if (bind(sock_id, (struct sockaddr *)&amp;serv_addr, sizeof(serv_addr)) &lt; 0 ) &#123; </div><div class="line">        perror(&quot;Bind socket failed\n&quot;); </div><div class="line">        exit(0); </div><div class="line">    &#125; </div><div class="line">  </div><div class="line">    if (-1 == listen(sock_id, 10)) &#123; </div><div class="line">        perror(&quot;Listen socket failed\n&quot;); </div><div class="line">        exit(0); </div><div class="line">    &#125; </div><div class="line">    /* server part commented by guoqingbo*/ </div><div class="line">    while (1) &#123; </div><div class="line">        clie_addr_len = sizeof(clie_addr); </div><div class="line">        link_id = accept(sock_id, (struct sockaddr *)&amp;clie_addr, &amp;clie_addr_len); </div><div class="line">        if (-1 == link_id) &#123; </div><div class="line">            perror(&quot;Accept socket failed\n&quot;); </div><div class="line">            exit(0); </div><div class="line">        &#125; </div><div class="line">        bzero(buf, MAXLINE); </div><div class="line">        while (recv_len = recv(link_id, buf, MAXLINE, 0)) &#123; </div><div class="line">            /* receiver data part commented by guoqingbo*/ </div><div class="line">            if(recv_len &lt; 0) &#123; </div><div class="line">                printf(&quot;Recieve Data From Server Failed!\n&quot;); </div><div class="line">                break; </div><div class="line">            &#125; </div><div class="line">            printf(&quot;#&quot;); </div><div class="line">            write_leng = fwrite(buf, sizeof(char), recv_len, fp); </div><div class="line">            if (write_leng &lt; recv_len) &#123; </div><div class="line">                printf(&quot;Write file failed\n&quot;); </div><div class="line">                break; </div><div class="line">            &#125; </div><div class="line">            bzero(buf,MAXLINE); </div><div class="line">        &#125; </div><div class="line">        printf(&quot;\nFinish Recieve\n&quot;); </div><div class="line">        fclose(fp); </div><div class="line">        close(link_id); </div><div class="line">    &#125; </div><div class="line">    close(sock_id); </div><div class="line">    return 0; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="截图"><a href="#截图" class="headerlink" title="截图"></a>截图</h3><p>tcp_file_client</p>
+<p><img src="http://function.dearamaze.com/tcp_file_client.png" alt="tcp_file_client"></p>
+<p>tcp_file_servier</p>
+<p><img src="http://function.dearamaze.com/tcp_file_server.png" alt="tcp_file_servier"></p>
+<h2 id="UDP-1"><a href="#UDP-1" class="headerlink" title="UDP"></a>UDP</h2><h3 id="客户端-3"><a href="#客户端-3" class="headerlink" title="客户端"></a>客户端</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div></pre></td><td class="code"><pre><div class="line">#include  </div><div class="line">#include  </div><div class="line">#include  </div><div class="line">#include  </div><div class="line">#include  </div><div class="line">#include  </div><div class="line">#include  </div><div class="line">#include  </div><div class="line">#include  </div><div class="line">#include  </div><div class="line">  </div><div class="line">#define FINISH_FLAG &quot;FILE_TRANSPORT_FINISH&quot; </div><div class="line">#define MAXLINE 1024 </div><div class="line">  </div><div class="line">void usage(char *command) </div><div class="line">&#123; </div><div class="line">    printf(&quot;usage :%s ipaddr portnum filename\n&quot;, command); </div><div class="line">    exit(0); </div><div class="line">&#125; </div><div class="line">int main(int argc,char **argv) </div><div class="line">&#123; </div><div class="line">    FILE *fp; </div><div class="line">    struct sockaddr_in serv_addr; </div><div class="line">    char buf[MAXLINE]; </div><div class="line">    int sock_id; </div><div class="line">    int read_len; </div><div class="line">    int send_len; </div><div class="line">    int serv_addr_len; </div><div class="line">    int i_ret; </div><div class="line">    int i; </div><div class="line">  </div><div class="line">    if (argc != 4) &#123; </div><div class="line">        usage(argv[0]); </div><div class="line">    &#125; </div><div class="line">    /* open the file to be transported commanted by guoqingbo*/ </div><div class="line">    if ((fp = fopen(argv[3],&quot;r&quot;)) == NULL) &#123; </div><div class="line">        perror(&quot;Open file failed\n&quot;); </div><div class="line">        exit(0); </div><div class="line">    &#125; </div><div class="line">    /* create the socket commanted by guoqingbo*/ </div><div class="line">    if ((sock_id = socket(AF_INET, SOCK_DGRAM, 0)) &lt; 0) &#123; </div><div class="line">        perror(&quot;Create socket failed&quot;); </div><div class="line">        exit(0); </div><div class="line">    &#125; </div><div class="line">    memset(&amp;serv_addr,0,sizeof(serv_addr)); </div><div class="line">    serv_addr.sin_family = AF_INET; </div><div class="line">    serv_addr.sin_port = htons(atoi(argv[2])); </div><div class="line">    inet_pton(AF_INET, argv[1], &amp;serv_addr.sin_addr); </div><div class="line">    serv_addr_len = sizeof(serv_addr); </div><div class="line">    /* connect the server commanted by guoqingbo*/ </div><div class="line">    i_ret = connect(sock_id, (struct sockaddr *)&amp;serv_addr, sizeof(struct sockaddr)); </div><div class="line">    if (-1 == i_ret) &#123; </div><div class="line">        perror(&quot;Connect socket failed!\n&quot;); </div><div class="line">        exit(0); </div><div class="line">    &#125; </div><div class="line">    /* transport the file commented by guoqingbo*/ </div><div class="line">    bzero(buf, MAXLINE); </div><div class="line">    while ( (read_len = fread(buf, sizeof(char), MAXLINE, fp)) &gt; 0 ) &#123; </div><div class="line">        send_len = send(sock_id, buf, read_len, 0); </div><div class="line">        if ( send_len &lt; 0 ) &#123; </div><div class="line">            perror(&quot;Send data failed\n&quot;); </div><div class="line">            exit(0); </div><div class="line">        &#125; </div><div class="line">        bzero(buf, MAXLINE); </div><div class="line">    &#125; </div><div class="line">    fclose(fp); </div><div class="line">    /* send the end_flag commented by guoqingbo*/ </div><div class="line">    bzero(buf, MAXLINE); </div><div class="line">    strcpy(buf, FINISH_FLAG); </div><div class="line">    buf[strlen(buf)] = &apos;\0&apos;; </div><div class="line">    for (i = 1000; i&gt;0; i--) &#123; </div><div class="line">        send_len = send(sock_id, buf, strlen(buf)+1, 0); </div><div class="line">        if ( send_len &lt; 0 ) &#123; </div><div class="line">            printf(&quot;Finish send the end string\n&quot;); </div><div class="line">            break; </div><div class="line">        &#125; </div><div class="line">    &#125; </div><div class="line">    close(sock_id); </div><div class="line">    printf(&quot;Send finish\n&quot;); </div><div class="line">    return 0; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="服务端-3"><a href="#服务端-3" class="headerlink" title="服务端"></a>服务端</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span>  </span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span>  </span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span>  </span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span>  </span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span>  </span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span>  </span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span>  </span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span>  </span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span>  </span></div><div class="line">  </div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> FINISH_FLAG <span class="meta-string">"FILE_TRANSPORT_FINISH"</span> </span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXLINE 1024 </span></div><div class="line">  </div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">usage</span><span class="params">(<span class="keyword">char</span> *command)</span> </span></div><div class="line"><span class="function"></span>&#123; </div><div class="line">    <span class="built_in">printf</span>(<span class="string">"usage :%s portnum filename\n"</span>, command); </div><div class="line">    <span class="built_in">exit</span>(<span class="number">0</span>); </div><div class="line">&#125; </div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc,<span class="keyword">char</span> **argv)</span> </span></div><div class="line"><span class="function"></span>&#123; </div><div class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_in</span> <span class="title">serv_addr</span>;</span> </div><div class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_in</span> <span class="title">clie_addr</span>;</span> </div><div class="line">    <span class="keyword">char</span> buf[MAXLINE]; </div><div class="line">    <span class="keyword">int</span> sock_id; </div><div class="line">    <span class="keyword">int</span> recv_len; </div><div class="line">    <span class="keyword">int</span> clie_addr_len; </div><div class="line">    FILE *fp; </div><div class="line">  </div><div class="line">    <span class="keyword">if</span> (argc != <span class="number">3</span>) &#123; </div><div class="line">        usage(argv[<span class="number">0</span>]); </div><div class="line">    &#125; </div><div class="line">    <span class="comment">/* Create the the file commented by guoqingbo*/</span> </div><div class="line">    <span class="keyword">if</span> ((fp = fopen(argv[<span class="number">2</span>], <span class="string">"w"</span>)) == <span class="literal">NULL</span>) &#123; </div><div class="line">        perror(<span class="string">"Creat file failed"</span>); </div><div class="line">        <span class="built_in">exit</span>(<span class="number">0</span>); </div><div class="line">    &#125; </div><div class="line">    <span class="keyword">if</span> ((sock_id = socket(AF_INET,SOCK_DGRAM,<span class="number">0</span>)) &lt; <span class="number">0</span>) &#123; </div><div class="line">        perror(<span class="string">"Create socket failed\n"</span>); </div><div class="line">        <span class="built_in">exit</span>(<span class="number">0</span>); </div><div class="line">    &#125; </div><div class="line">    <span class="comment">/*fill the server sockaddr_in struct commented by guoqingbo*/</span> </div><div class="line">    <span class="built_in">memset</span>(&amp;serv_addr,<span class="number">0</span>,<span class="keyword">sizeof</span>(serv_addr)); </div><div class="line">    serv_addr.sin_family = AF_INET; </div><div class="line">    serv_addr.sin_port = htons(atoi(argv[<span class="number">1</span>])); </div><div class="line">    serv_addr.sin_addr.s_addr = htonl(INADDR_ANY); </div><div class="line">  </div><div class="line">    <span class="keyword">if</span> (bind(sock_id,(struct sockaddr *)&amp;serv_addr,<span class="keyword">sizeof</span>(serv_addr)) &lt; <span class="number">0</span> ) &#123; </div><div class="line">        perror(<span class="string">"Bind socket faild\n"</span>); </div><div class="line">        <span class="built_in">exit</span>(<span class="number">0</span>); </div><div class="line">    &#125; </div><div class="line">    <span class="comment">/* server part commented by guoqingbo*/</span> </div><div class="line">    clie_addr_len = <span class="keyword">sizeof</span>(clie_addr); </div><div class="line">    bzero(buf, MAXLINE); </div><div class="line">    <span class="keyword">while</span> (recv_len = recvfrom(sock_id, buf, MAXLINE, <span class="number">0</span>,(struct sockaddr *)&amp;clie_addr, &amp;clie_addr_len)) &#123; </div><div class="line">        <span class="keyword">if</span>(recv_len &lt; <span class="number">0</span>) &#123; </div><div class="line">            <span class="built_in">printf</span>(<span class="string">"Recieve data from client failed!\n"</span>); </div><div class="line">            <span class="keyword">break</span>; </div><div class="line">        &#125; </div><div class="line">        <span class="built_in">printf</span>(<span class="string">"#"</span>); </div><div class="line">        <span class="keyword">if</span> ( <span class="built_in">strstr</span>(buf, FINISH_FLAG) != <span class="literal">NULL</span> ) &#123; </div><div class="line">            <span class="built_in">printf</span>(<span class="string">"\nFinish receiver finish_flag\n"</span>); </div><div class="line">            <span class="keyword">break</span>; </div><div class="line">        &#125; </div><div class="line">        <span class="keyword">int</span> write_length = fwrite(buf, <span class="keyword">sizeof</span>(<span class="keyword">char</span>), recv_len, fp); </div><div class="line">        <span class="keyword">if</span> (write_length &lt; recv_len) &#123; </div><div class="line">            <span class="built_in">printf</span>(<span class="string">"File write failed\n"</span>); </div><div class="line">            <span class="keyword">break</span>; </div><div class="line">        &#125; </div><div class="line">        bzero(buf, MAXLINE); </div><div class="line">    &#125; </div><div class="line">  </div><div class="line">    <span class="built_in">printf</span>(<span class="string">"Finish recieve\n"</span>); </div><div class="line">    fclose(fp); </div><div class="line">    close(sock_id); </div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="截图-1"><a href="#截图-1" class="headerlink" title="截图"></a>截图</h3><p>udp_file_client</p>
+<p><img src="http://function.dearamaze.com/udp_file_client.png" alt="udp_file_client"></p>
+<p>udp_file_server</p>
+<p><img src="http://function.dearamaze.com/udp_file_server.png" alt="udp_file_client"></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://dearamaze.com/2017/03/27/linux块设备的详解/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1381,795 +2046,6 @@ int main()
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://dearamaze.com/2017/02/08/markdown-语法/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Dear Amaze">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="DearAmaze-桀骜良">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/02/08/markdown-语法/" itemprop="url">
-                  [原]markdown 语法
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-08T22:19:58+08:00">
-                2017-02-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/02/08/markdown-语法/" class="leancloud_visitors" data-flag-title="[原]markdown 语法">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="欢迎使用Markdown编辑器写博客"><a href="#欢迎使用Markdown编辑器写博客" class="headerlink" title="欢迎使用Markdown编辑器写博客"></a>欢迎使用Markdown编辑器写博客</h1><p>本Markdown编辑器使用[StackEdit][6]修改而来，用它写博客，将会带来全新的体验哦：</p>
-<ul>
-<li><strong>Markdown和扩展Markdown简洁的语法</strong></li>
-<li><strong>代码块高亮</strong></li>
-<li><strong>图片链接和图片上传</strong></li>
-<li><strong><em>LaTex</em>数学公式</strong></li>
-<li><strong>UML序列图和流程图</strong></li>
-<li><strong>离线写博客</strong></li>
-<li><strong>导入导出Markdown文件</strong></li>
-<li><strong>丰富的快捷键</strong></li>
-</ul>
-<hr>
-<h2 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h2><ul>
-<li>加粗    <code>Ctrl + B</code><em>   斜体    <code>Ctrl + I</code></em>   引用    <code>Ctrl + Q</code></li>
-<li>插入链接    <code>Ctrl + L</code></li>
-<li>插入代码    <code>Ctrl + K</code></li>
-<li>插入图片    <code>Ctrl + G</code></li>
-<li>提升标题    <code>Ctrl + H</code></li>
-<li>有序列表    <code>Ctrl + O</code></li>
-<li>无序列表    <code>Ctrl + U</code></li>
-<li>横线    <code>Ctrl + R</code></li>
-<li>撤销    <code>Ctrl + Z</code></li>
-<li>重做    <code>Ctrl + Y</code></li>
-</ul>
-<h2 id="Markdown及扩展"><a href="#Markdown及扩展" class="headerlink" title="Markdown及扩展"></a>Markdown及扩展</h2><blockquote>
-<p>Markdown 是一种轻量级标记语言，它允许人们使用易读易写的纯文本格式编写文档，然后转换成格式丰富的HTML页面。    —— <a href="https://zh.wikipedia.org/wiki/Markdown" target="_blank" rel="external"> [ 维基百科 ]</a></p>
-</blockquote>
-<p>使用简单的符号标识不同的标题，将某些文字标记为<strong>粗体</strong>或者<em>斜体</em>，创建一个<a href="http://www.csdn.net" target="_blank" rel="external">链接</a>等，详细语法参考帮助？。</p>
-<p>本编辑器支持 <strong>Markdown Extra</strong> , 　扩展了很多好用的功能。具体请参考<a href="https://github.com/jmcmanus/pagedown-extra" title="Pagedown Extra" target="_blank" rel="external">Github</a>.  </p>
-<h3 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h3><p><strong>Markdown　Extra</strong>　表格语法：</p>
-<p>  项目<br>  价格</p>
-<p>  Computer<br>  $1600</p>
-<p>  Phone<br>  $12</p>
-<p>  Pipe<br>  $1</p>
-<p>可以使用冒号来定义对齐方式：</p>
-<p>  项目<br>  价格<br>  数量</p>
-<p>  Computer<br>  1600 元<br>  5</p>
-<p>  Phone<br>  12 元<br>  12</p>
-<p>  Pipe<br>  1 元<br>  234</p>
-<h3 id="定义列表"><a href="#定义列表" class="headerlink" title="定义列表"></a>定义列表</h3><p><strong>Markdown　Extra</strong>　定义列表语法：<br>项目１<br>项目２<br>定义 A</p>
-<p>定义 B</p>
-<p>项目３<br>定义 C</p>
-<p>定义 D</p>
-<blockquote>
-<p>定义D内容</p>
-</blockquote>
-<h3 id="代码块"><a href="#代码块" class="headerlink" title="代码块"></a>代码块</h3><p>代码块语法遵循标准markdown代码，例如：</p>
-<pre><code>@requires_authorization
-def somefunc(param1=&apos;&apos;, param2=0):
-    &apos;&apos;&apos;A docstring&apos;&apos;&apos;
-    if param1 &amp;gt; param2: # interesting
-        print &apos;Greater&apos;
-    return (param2 - param1 + 1) or None
-class SomeClass:
-    pass
-&amp;gt;&amp;gt;&amp;gt; message = &apos;&apos;&apos;interpreter
-... prompt&apos;&apos;&apos;
-</code></pre><h3 id="脚注"><a href="#脚注" class="headerlink" title="脚注"></a>脚注</h3><p>生成一个脚注<a href="#fn:footnote" title="See footnote">1</a>.</p>
-<ul>
-<li><p><a href="#欢迎使用markdown编辑器写博客">欢迎使用Markdown编辑器写博客</a></p>
-<pre><code>*   [快捷键](#快捷键)
-</code></pre><ul>
-<li><p><a href="#markdown及扩展">Markdown及扩展</a></p>
-<pre><code>*   [表格](#表格)
-</code></pre><ul>
-<li><a href="#定义列表">定义列表</a></li>
-<li><a href="#代码块">代码块</a></li>
-<li><a href="#脚注">脚注</a></li>
-<li><a href="#数学公式">数学公式</a></li>
-<li><p><a href="#uml-图">UML 图</a></p>
-</li>
-<li><p><a href="#离线写博客">离线写博客</a></p>
-</li>
-</ul>
-</li>
-<li><a href="#浏览器兼容">浏览器兼容</a></li>
-</ul>
-</li>
-</ul>
-<h3 id="数学公式"><a href="#数学公式" class="headerlink" title="数学公式"></a>数学公式</h3><p>使用MathJax渲染<em>LaTex</em> 数学公式，详见<a href="http://math.stackexchange.com/" target="_blank" rel="external">math.stackexchange.com</a>.</p>
-<ul>
-<li>行内公式，数学公式为：Γ(n)=(n−1)!∀n∈N\Gamma(n) = (n-1)!\quad\forall n\in\mathbb N。</li>
-<li>块级公式：</li>
-</ul>
-<p>x=−b±b2−4ac−−−−−−−√2a    x = \dfrac{-b \pm \sqrt{b^2 - 4ac}}{2a} </p>
-<p>更多LaTex语法请参考 <a href="http://meta.math.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference" target="_blank" rel="external">这儿</a>.</p>
-<h3 id="UML-图"><a href="#UML-图" class="headerlink" title="UML 图:"></a>UML 图:</h3><p>可以渲染序列图：</p>
-<p>Created with Raphaël 2.1.0张三张三李四李四嘿，小四儿, 写博客了没?李四愣了一下，说：忙得吐血，哪有时间写。</p>
-<p>或者流程图：</p>
-<p>Created with Raphaël 2.1.0开始我的操作确认？结束yesno</p>
-<ul>
-<li>关于 <strong>序列图</strong> 语法，参考 <a href="http://bramp.github.io/js-sequence-diagrams/" target="_blank" rel="external">这儿</a>,</li>
-<li>关于 <strong>流程图</strong> 语法，参考 <a href="http://adrai.github.io/flowchart.js/" target="_blank" rel="external">这儿</a>.</li>
-</ul>
-<h2 id="离线写博客"><a href="#离线写博客" class="headerlink" title="离线写博客"></a>离线写博客</h2><p>即使用户在没有网络的情况下，也可以通过本编辑器离线写博客（直接在曾经使用过的浏览器中输入<a href="http://write.blog.csdn.net/mdeditor" target="_blank" rel="external">write.blog.csdn.net/mdeditor</a>即可。<strong>Markdown编辑器</strong>使用浏览器离线存储将内容保存在本地。</p>
-<p>用户写博客的过程中，内容实时保存在浏览器缓存中，在用户关闭浏览器或者其它异常情况下，内容不会丢失。用户再次打开浏览器时，会显示上次用户正在编辑的没有发表的内容。</p>
-<p>博客发表后，本地缓存将被删除。　</p>
-<p>用户可以选择  把正在写的博客保存到服务器草稿箱，即使换浏览器或者清除缓存，内容也不会丢失。</p>
-<blockquote>
-<p><strong>注意：</strong>虽然浏览器存储大部分时候都比较可靠，但为了您的数据安全，在联网后，<strong>请务必及时发表或者保存到服务器草稿箱</strong>。</p>
-</blockquote>
-<h2 id="浏览器兼容"><a href="#浏览器兼容" class="headerlink" title="浏览器兼容"></a>浏览器兼容</h2><ol>
-<li>目前，本编辑器对Chrome浏览器支持最为完整。建议大家使用较新版本的Chrome。</li>
-<li>IE９以下不支持</li>
-<li><p>IE９，１０，１１存在以下问题</p>
-<pre><code>1.  不支持离线功能
-</code></pre><ol>
-<li>IE9不支持文件导入导出</li>
-<li>IE10不支持拖拽文件导入</li>
-</ol>
-</li>
-</ol>
-<hr>
-<hr>
-<ol>
-<li><p>这里是 <strong>脚注</strong> 的 <em>内容</em>.</p>
-<p>目录</p>
-<p>用 <code>[TOC]</code>来生成目录：<br>[6]: <a href="https://github.com/benweet/stackedit" target="_blank" rel="external">https://github.com/benweet/stackedit</a> <a href="#fnref:footnote" title="Return to article">↩</a></p>
-<pre><code>作者：qq_27803491 发表于2017/2/8 22:19:58 [原文链接](http://blog.csdn.net/qq_27803491/article/details/54933885)
-</code></pre></li>
-</ol>
-<pre><code>阅读：19 评论：0 [查看评论](http://blog.csdn.net/qq_27803491/article/details/54933885#comments)
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://dearamaze.com/2017/01/18/大三寒假-2017-1-18/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Dear Amaze">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="DearAmaze-桀骜良">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/01/18/大三寒假-2017-1-18/" itemprop="url">
-                  [原]大三寒假(2017.1.18)
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-01-18T13:59:53+08:00">
-                2017-01-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/01/18/大三寒假-2017-1-18/" class="leancloud_visitors" data-flag-title="[原]大三寒假(2017.1.18)">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="计划"><a href="#计划" class="headerlink" title="计划"></a>计划</h2><ol>
-<li>shell脚本精通,linux命令行与shell脚本编程大全,linux shell脚本攻略,awk&amp;sed,ABS(1h/day)</li>
-<li>linux环境编程(15*4h=60h)</li>
-<li>docker(10h)</li>
-<li>高性能linux服务器构建实战(14*4=56h)</li>
-<li>英语六级(0.5h/day)</li>
-<li>每日编程(1h/day)</li>
-<li>CCNA考试认证(1h/day)</li>
-<li>考驾照,练车</li>
-</ol>
-<p>3.5*30=105+60+10+56=231+60=291h</p>
-<pre><code>每天10h,吃饭2h,睡觉10h,加油,得良!!!
-
-
-            作者：qq_27803491 发表于2017/1/18 13:59:53 [原文链接](http://blog.csdn.net/qq_27803491/article/details/54600137)
-
-
-        阅读：17 评论：0 [查看评论](http://blog.csdn.net/qq_27803491/article/details/54600137#comments)
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://dearamaze.com/2017/01/05/高斯消元（混合颜料）/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Dear Amaze">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="DearAmaze-桀骜良">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/01/05/高斯消元（混合颜料）/" itemprop="url">
-                  [原]高斯消元（混合颜料）
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-01-05T12:33:55+08:00">
-                2017-01-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/01/05/高斯消元（混合颜料）/" class="leancloud_visitors" data-flag-title="[原]高斯消元（混合颜料）">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="题目（网易2017内推编程题（二）的第一题）"><a href="#题目（网易2017内推编程题（二）的第一题）" class="headerlink" title="题目（网易2017内推编程题（二）的第一题）"></a>题目（网易2017内推编程题（二）的第一题）</h2><p>你就是一个画家！你现在想绘制一幅画，但是你现在没有足够颜色的颜料。为了让问题简单，我们用正整数表示不同颜色的颜料。你知道这幅画需要的n种颜色的颜料，你现在可以去商店购买一些颜料，但是商店不能保证能供应所有颜色的颜料，所以你需要自己混合一些颜料。混合两种不一样的颜色A和颜色B颜料可以产生(A XOR B)这种颜色的颜料(新产生的颜料也可以用作继续混合产生新的颜色,XOR表示异或操作)。本着勤俭节约的精神，你想购买更少的颜料就满足要求，所以兼职程序员的你需要编程来计算出最少需要购买几种颜色的颜料？  </p>
-<p>输入描述: </p>
-<p>第一行为绘制这幅画需要的颜色种数n (1 ≤ n ≤ 50) </p>
-<p>第二行为n个数xi(1 ≤ xi ≤ 1,000,000,000)，表示需要的各种颜料.</p>
-<p>输出描述: </p>
-<p>输出最少需要在商店购买的颜料颜色种数，注意可能购买的颜色不一定会使用在画中，只是为了产生新的颜色。</p>
-<p>输入例子: </p>
-<p>3 </p>
-<p>1 7 3</p>
-<p>输出例子: </p>
-<p>3</p>
-<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><pre><code>该题是利用行列式解决异或问题，通过求行列式的秩来求最少需要多少种颜色，没接触过这种题目的同学应该很难将它们联系到一块，不过仔细想想：
-化简行列式的过程与本题求解的过程，这道题，你上来如果暴力的话，复杂度O(n^3),而且可能会涉及到重复的计算。利用行列式化简（高斯消元）的方法，就是利用到了：
-7：0111
-3：0011
-2：0010
-1：0001
-这样的话，7是不可能被异或得出来的，因为他的最高位为1，其他数的最高位为0，而行列式化简，化简成上三角行列式也相同的过程。
-本题中只涉及到二进制的异或化简，所以利用高斯消元法较为简单。
-`
-
-## 代码
-
-`
-#include&amp;lt;iostream&amp;gt;
-#include&amp;lt;cstdio&amp;gt;
-#include&amp;lt;cstring&amp;gt;
-#include&amp;lt;algorithm&amp;gt;
-#include&amp;lt;vector&amp;gt;
-
-using namespace std;
-int getbit(int x)
-{
-    int cnt=0;
-    while(x){
-        x&amp;gt;&amp;gt;=1;
-        cnt++;
-    }
-    return cnt;
- } 
-bool cmp(const int&amp;amp; a,const int&amp;amp; b)
-{
-    return a&amp;gt;b;
-}
-int main()
-{
-    int n;
-    while(scanf(&quot;%d&quot;,&amp;amp;n)!=EOF){
-        vector&amp;lt;int&amp;gt; v;
-        int ans=0;
-        for(int i=0;i&amp;lt;n;i++){
-            int a;
-            scanf(&quot;%d&quot;,&amp;amp;a);
-            v.push_back(a);
-        }
-        while(v.size()&amp;gt;=1){
-            sort(v.begin(),v.end(),cmp);
-            if(v[0]==0){
-                ans+=v.size();
-                break;
-            }
-            vector&amp;lt;int&amp;gt;::iterator it=v.begin();
-            int fnb=getbit(v[0]);
-            for(++it;it!=v.end();it++){
-                if(getbit(*it)==fnb){
-                    (*it)=(*it)^v[0];
-                }
-                else break;
-            }
-            v.erase(v.begin());
-        }
-        cout&amp;lt;&amp;lt;n-ans&amp;lt;&amp;lt;endl;
-    }
-    return 0;
-}
-/*
-15
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15
-*/
-</code></pre><h2 id="收获"><a href="#收获" class="headerlink" title="收获"></a>收获</h2><ol>
-<li>熟悉了高斯消元法求解化简行列式，高斯（约当）消元法：就是每次把要消去位上含有最大的元素的行调到最高的地方。</li>
-<li><p>了解了异或运算与行列式化简的联系。</p>
-<pre><code>作者：qq_27803491 发表于2017/1/5 12:33:55 [原文链接](http://blog.csdn.net/qq_27803491/article/details/54091966)
-</code></pre></li>
-</ol>
-<pre><code>阅读：31 评论：0 [查看评论](http://blog.csdn.net/qq_27803491/article/details/54091966#comments)
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://dearamaze.com/2016/12/29/googleSRE运维——减少琐事/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Dear Amaze">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="DearAmaze-桀骜良">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/12/29/googleSRE运维——减少琐事/" itemprop="url">
-                  [原]googleSRE运维——减少琐事
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-12-29T17:37:17+08:00">
-                2016-12-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2016/12/29/googleSRE运维——减少琐事/" class="leancloud_visitors" data-flag-title="[原]googleSRE运维——减少琐事">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="琐事的属性"><a href="#琐事的属性" class="headerlink" title="琐事的属性"></a>琐事的属性</h2><ol>
-<li>手动性的</li>
-<li>重复性的</li>
-<li>可以被自动化的</li>
-<li>战术性的（不是太懂，原文是这样的）：琐事是突然出现的、对应式的工作，而非策略驱动和主动安排的。处理紧急警报是琐事。我们可能永远都无法完全消除这种类型的工作，但我们必须继续努力减少它。</li>
-<li>没有持久价值</li>
-<li>与服务同步线性增长</li>
-</ol>
-<h2 id="琐事过多的危害"><a href="#琐事过多的危害" class="headerlink" title="琐事过多的危害"></a>琐事过多的危害</h2><ol>
-<li>职业停滞</li>
-<li>士气低落</li>
-<li>造成误解</li>
-<li>进展缓慢</li>
-<li>开创先例：如果SRE过于愿意承担琐事，研发同事就更倾向于加入更多的琐事，有时候甚至将本来研发团队应承担的运维工作转给SRE来承担。其他团队也会开始指望SRE来接受这样的工作，这显然是不好的。</li>
-<li>促进摩擦产生</li>
-<li>违反承诺</li>
-</ol>
-<h2 id="宗旨"><a href="#宗旨" class="headerlink" title="宗旨"></a>宗旨</h2><pre><code>通过工程工作（符合长期战略的会对你的服务进行长久性的改善的工作）消除一点点的琐事，就可以持续行地整顿服务。我们可以将更多的力量投入到扩大服务规模的工程工作上去，或者是进行下一代的服务的架构设计，又或者是建立一套跨SRE使用的工具链。
-多做创新，少干琐事。
-</code></pre><h2 id="对生或中琐事的思考（待续，过一个有条理的生活，因为对我来说，有条理就是自信、充实）"><a href="#对生或中琐事的思考（待续，过一个有条理的生活，因为对我来说，有条理就是自信、充实）" class="headerlink" title="对生或中琐事的思考（待续，过一个有条理的生活，因为对我来说，有条理就是自信、充实）"></a>对生或中琐事的思考（待续，过一个有条理的生活，因为对我来说，有条理就是自信、充实）</h2><h3 id="生活中的琐事"><a href="#生活中的琐事" class="headerlink" title="生活中的琐事"></a>生活中的琐事</h3><ol>
-<li>刷空间</li>
-<li>刷朋友圈</li>
-</ol>
-<h3 id="生活中的不可避免的事情"><a href="#生活中的不可避免的事情" class="headerlink" title="生活中的不可避免的事情"></a>生活中的不可避免的事情</h3><ol>
-<li>日常洗漱</li>
-<li>睡觉</li>
-<li>吃饭</li>
-<li>学习</li>
-<li>工作</li>
-</ol>
-<h3 id="生活中有意义的能够使自己变得优秀的事情"><a href="#生活中有意义的能够使自己变得优秀的事情" class="headerlink" title="生活中有意义的能够使自己变得优秀的事情"></a>生活中有意义的能够使自己变得优秀的事情</h3><ol>
-<li>看书</li>
-<li>跑步</li>
-<li>看一些有意义的电影</li>
-<li><p>拍照发现生活中细小的美</p>
-<pre><code>作者：qq_27803491 发表于2016/12/29 17:37:17 [原文链接](http://blog.csdn.net/qq_27803491/article/details/53930796)
-</code></pre></li>
-</ol>
-<pre><code>阅读：68 评论：0 [查看评论](http://blog.csdn.net/qq_27803491/article/details/53930796#comments)
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2219,7 +2095,7 @@ int main()
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">53</span>
+                <span class="site-state-item-count">57</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2230,7 +2106,7 @@ int main()
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">21</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -2241,7 +2117,7 @@ int main()
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-count">36</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

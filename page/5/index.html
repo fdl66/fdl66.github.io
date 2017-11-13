@@ -325,6 +325,795 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://dearamaze.com/2017/02/08/markdown-语法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dear Amaze">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DearAmaze-桀骜良">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/02/08/markdown-语法/" itemprop="url">
+                  [原]markdown 语法
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-08T22:19:58+08:00">
+                2017-02-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/02/08/markdown-语法/" class="leancloud_visitors" data-flag-title="[原]markdown 语法">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="欢迎使用Markdown编辑器写博客"><a href="#欢迎使用Markdown编辑器写博客" class="headerlink" title="欢迎使用Markdown编辑器写博客"></a>欢迎使用Markdown编辑器写博客</h1><p>本Markdown编辑器使用[StackEdit][6]修改而来，用它写博客，将会带来全新的体验哦：</p>
+<ul>
+<li><strong>Markdown和扩展Markdown简洁的语法</strong></li>
+<li><strong>代码块高亮</strong></li>
+<li><strong>图片链接和图片上传</strong></li>
+<li><strong><em>LaTex</em>数学公式</strong></li>
+<li><strong>UML序列图和流程图</strong></li>
+<li><strong>离线写博客</strong></li>
+<li><strong>导入导出Markdown文件</strong></li>
+<li><strong>丰富的快捷键</strong></li>
+</ul>
+<hr>
+<h2 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h2><ul>
+<li>加粗    <code>Ctrl + B</code><em>   斜体    <code>Ctrl + I</code></em>   引用    <code>Ctrl + Q</code></li>
+<li>插入链接    <code>Ctrl + L</code></li>
+<li>插入代码    <code>Ctrl + K</code></li>
+<li>插入图片    <code>Ctrl + G</code></li>
+<li>提升标题    <code>Ctrl + H</code></li>
+<li>有序列表    <code>Ctrl + O</code></li>
+<li>无序列表    <code>Ctrl + U</code></li>
+<li>横线    <code>Ctrl + R</code></li>
+<li>撤销    <code>Ctrl + Z</code></li>
+<li>重做    <code>Ctrl + Y</code></li>
+</ul>
+<h2 id="Markdown及扩展"><a href="#Markdown及扩展" class="headerlink" title="Markdown及扩展"></a>Markdown及扩展</h2><blockquote>
+<p>Markdown 是一种轻量级标记语言，它允许人们使用易读易写的纯文本格式编写文档，然后转换成格式丰富的HTML页面。    —— <a href="https://zh.wikipedia.org/wiki/Markdown" target="_blank" rel="external"> [ 维基百科 ]</a></p>
+</blockquote>
+<p>使用简单的符号标识不同的标题，将某些文字标记为<strong>粗体</strong>或者<em>斜体</em>，创建一个<a href="http://www.csdn.net" target="_blank" rel="external">链接</a>等，详细语法参考帮助？。</p>
+<p>本编辑器支持 <strong>Markdown Extra</strong> , 　扩展了很多好用的功能。具体请参考<a href="https://github.com/jmcmanus/pagedown-extra" title="Pagedown Extra" target="_blank" rel="external">Github</a>.  </p>
+<h3 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h3><p><strong>Markdown　Extra</strong>　表格语法：</p>
+<p>  项目<br>  价格</p>
+<p>  Computer<br>  $1600</p>
+<p>  Phone<br>  $12</p>
+<p>  Pipe<br>  $1</p>
+<p>可以使用冒号来定义对齐方式：</p>
+<p>  项目<br>  价格<br>  数量</p>
+<p>  Computer<br>  1600 元<br>  5</p>
+<p>  Phone<br>  12 元<br>  12</p>
+<p>  Pipe<br>  1 元<br>  234</p>
+<h3 id="定义列表"><a href="#定义列表" class="headerlink" title="定义列表"></a>定义列表</h3><p><strong>Markdown　Extra</strong>　定义列表语法：<br>项目１<br>项目２<br>定义 A</p>
+<p>定义 B</p>
+<p>项目３<br>定义 C</p>
+<p>定义 D</p>
+<blockquote>
+<p>定义D内容</p>
+</blockquote>
+<h3 id="代码块"><a href="#代码块" class="headerlink" title="代码块"></a>代码块</h3><p>代码块语法遵循标准markdown代码，例如：</p>
+<pre><code>@requires_authorization
+def somefunc(param1=&apos;&apos;, param2=0):
+    &apos;&apos;&apos;A docstring&apos;&apos;&apos;
+    if param1 &amp;gt; param2: # interesting
+        print &apos;Greater&apos;
+    return (param2 - param1 + 1) or None
+class SomeClass:
+    pass
+&amp;gt;&amp;gt;&amp;gt; message = &apos;&apos;&apos;interpreter
+... prompt&apos;&apos;&apos;
+</code></pre><h3 id="脚注"><a href="#脚注" class="headerlink" title="脚注"></a>脚注</h3><p>生成一个脚注<a href="#fn:footnote" title="See footnote">1</a>.</p>
+<ul>
+<li><p><a href="#欢迎使用markdown编辑器写博客">欢迎使用Markdown编辑器写博客</a></p>
+<pre><code>*   [快捷键](#快捷键)
+</code></pre><ul>
+<li><p><a href="#markdown及扩展">Markdown及扩展</a></p>
+<pre><code>*   [表格](#表格)
+</code></pre><ul>
+<li><a href="#定义列表">定义列表</a></li>
+<li><a href="#代码块">代码块</a></li>
+<li><a href="#脚注">脚注</a></li>
+<li><a href="#数学公式">数学公式</a></li>
+<li><p><a href="#uml-图">UML 图</a></p>
+</li>
+<li><p><a href="#离线写博客">离线写博客</a></p>
+</li>
+</ul>
+</li>
+<li><a href="#浏览器兼容">浏览器兼容</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="数学公式"><a href="#数学公式" class="headerlink" title="数学公式"></a>数学公式</h3><p>使用MathJax渲染<em>LaTex</em> 数学公式，详见<a href="http://math.stackexchange.com/" target="_blank" rel="external">math.stackexchange.com</a>.</p>
+<ul>
+<li>行内公式，数学公式为：Γ(n)=(n−1)!∀n∈N\Gamma(n) = (n-1)!\quad\forall n\in\mathbb N。</li>
+<li>块级公式：</li>
+</ul>
+<p>x=−b±b2−4ac−−−−−−−√2a    x = \dfrac{-b \pm \sqrt{b^2 - 4ac}}{2a} </p>
+<p>更多LaTex语法请参考 <a href="http://meta.math.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference" target="_blank" rel="external">这儿</a>.</p>
+<h3 id="UML-图"><a href="#UML-图" class="headerlink" title="UML 图:"></a>UML 图:</h3><p>可以渲染序列图：</p>
+<p>Created with Raphaël 2.1.0张三张三李四李四嘿，小四儿, 写博客了没?李四愣了一下，说：忙得吐血，哪有时间写。</p>
+<p>或者流程图：</p>
+<p>Created with Raphaël 2.1.0开始我的操作确认？结束yesno</p>
+<ul>
+<li>关于 <strong>序列图</strong> 语法，参考 <a href="http://bramp.github.io/js-sequence-diagrams/" target="_blank" rel="external">这儿</a>,</li>
+<li>关于 <strong>流程图</strong> 语法，参考 <a href="http://adrai.github.io/flowchart.js/" target="_blank" rel="external">这儿</a>.</li>
+</ul>
+<h2 id="离线写博客"><a href="#离线写博客" class="headerlink" title="离线写博客"></a>离线写博客</h2><p>即使用户在没有网络的情况下，也可以通过本编辑器离线写博客（直接在曾经使用过的浏览器中输入<a href="http://write.blog.csdn.net/mdeditor" target="_blank" rel="external">write.blog.csdn.net/mdeditor</a>即可。<strong>Markdown编辑器</strong>使用浏览器离线存储将内容保存在本地。</p>
+<p>用户写博客的过程中，内容实时保存在浏览器缓存中，在用户关闭浏览器或者其它异常情况下，内容不会丢失。用户再次打开浏览器时，会显示上次用户正在编辑的没有发表的内容。</p>
+<p>博客发表后，本地缓存将被删除。　</p>
+<p>用户可以选择  把正在写的博客保存到服务器草稿箱，即使换浏览器或者清除缓存，内容也不会丢失。</p>
+<blockquote>
+<p><strong>注意：</strong>虽然浏览器存储大部分时候都比较可靠，但为了您的数据安全，在联网后，<strong>请务必及时发表或者保存到服务器草稿箱</strong>。</p>
+</blockquote>
+<h2 id="浏览器兼容"><a href="#浏览器兼容" class="headerlink" title="浏览器兼容"></a>浏览器兼容</h2><ol>
+<li>目前，本编辑器对Chrome浏览器支持最为完整。建议大家使用较新版本的Chrome。</li>
+<li>IE９以下不支持</li>
+<li><p>IE９，１０，１１存在以下问题</p>
+<pre><code>1.  不支持离线功能
+</code></pre><ol>
+<li>IE9不支持文件导入导出</li>
+<li>IE10不支持拖拽文件导入</li>
+</ol>
+</li>
+</ol>
+<hr>
+<hr>
+<ol>
+<li><p>这里是 <strong>脚注</strong> 的 <em>内容</em>.</p>
+<p>目录</p>
+<p>用 <code>[TOC]</code>来生成目录：<br>[6]: <a href="https://github.com/benweet/stackedit" target="_blank" rel="external">https://github.com/benweet/stackedit</a> <a href="#fnref:footnote" title="Return to article">↩</a></p>
+<pre><code>作者：qq_27803491 发表于2017/2/8 22:19:58 [原文链接](http://blog.csdn.net/qq_27803491/article/details/54933885)
+</code></pre></li>
+</ol>
+<pre><code>阅读：19 评论：0 [查看评论](http://blog.csdn.net/qq_27803491/article/details/54933885#comments)
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://dearamaze.com/2017/01/18/大三寒假-2017-1-18/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dear Amaze">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DearAmaze-桀骜良">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/01/18/大三寒假-2017-1-18/" itemprop="url">
+                  [原]大三寒假(2017.1.18)
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-01-18T13:59:53+08:00">
+                2017-01-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/01/18/大三寒假-2017-1-18/" class="leancloud_visitors" data-flag-title="[原]大三寒假(2017.1.18)">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="计划"><a href="#计划" class="headerlink" title="计划"></a>计划</h2><ol>
+<li>shell脚本精通,linux命令行与shell脚本编程大全,linux shell脚本攻略,awk&amp;sed,ABS(1h/day)</li>
+<li>linux环境编程(15*4h=60h)</li>
+<li>docker(10h)</li>
+<li>高性能linux服务器构建实战(14*4=56h)</li>
+<li>英语六级(0.5h/day)</li>
+<li>每日编程(1h/day)</li>
+<li>CCNA考试认证(1h/day)</li>
+<li>考驾照,练车</li>
+</ol>
+<p>3.5*30=105+60+10+56=231+60=291h</p>
+<pre><code>每天10h,吃饭2h,睡觉10h,加油,得良!!!
+
+
+            作者：qq_27803491 发表于2017/1/18 13:59:53 [原文链接](http://blog.csdn.net/qq_27803491/article/details/54600137)
+
+
+        阅读：17 评论：0 [查看评论](http://blog.csdn.net/qq_27803491/article/details/54600137#comments)
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://dearamaze.com/2017/01/05/高斯消元（混合颜料）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dear Amaze">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DearAmaze-桀骜良">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/01/05/高斯消元（混合颜料）/" itemprop="url">
+                  [原]高斯消元（混合颜料）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-01-05T12:33:55+08:00">
+                2017-01-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/01/05/高斯消元（混合颜料）/" class="leancloud_visitors" data-flag-title="[原]高斯消元（混合颜料）">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="题目（网易2017内推编程题（二）的第一题）"><a href="#题目（网易2017内推编程题（二）的第一题）" class="headerlink" title="题目（网易2017内推编程题（二）的第一题）"></a>题目（网易2017内推编程题（二）的第一题）</h2><p>你就是一个画家！你现在想绘制一幅画，但是你现在没有足够颜色的颜料。为了让问题简单，我们用正整数表示不同颜色的颜料。你知道这幅画需要的n种颜色的颜料，你现在可以去商店购买一些颜料，但是商店不能保证能供应所有颜色的颜料，所以你需要自己混合一些颜料。混合两种不一样的颜色A和颜色B颜料可以产生(A XOR B)这种颜色的颜料(新产生的颜料也可以用作继续混合产生新的颜色,XOR表示异或操作)。本着勤俭节约的精神，你想购买更少的颜料就满足要求，所以兼职程序员的你需要编程来计算出最少需要购买几种颜色的颜料？  </p>
+<p>输入描述: </p>
+<p>第一行为绘制这幅画需要的颜色种数n (1 ≤ n ≤ 50) </p>
+<p>第二行为n个数xi(1 ≤ xi ≤ 1,000,000,000)，表示需要的各种颜料.</p>
+<p>输出描述: </p>
+<p>输出最少需要在商店购买的颜料颜色种数，注意可能购买的颜色不一定会使用在画中，只是为了产生新的颜色。</p>
+<p>输入例子: </p>
+<p>3 </p>
+<p>1 7 3</p>
+<p>输出例子: </p>
+<p>3</p>
+<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><pre><code>该题是利用行列式解决异或问题，通过求行列式的秩来求最少需要多少种颜色，没接触过这种题目的同学应该很难将它们联系到一块，不过仔细想想：
+化简行列式的过程与本题求解的过程，这道题，你上来如果暴力的话，复杂度O(n^3),而且可能会涉及到重复的计算。利用行列式化简（高斯消元）的方法，就是利用到了：
+7：0111
+3：0011
+2：0010
+1：0001
+这样的话，7是不可能被异或得出来的，因为他的最高位为1，其他数的最高位为0，而行列式化简，化简成上三角行列式也相同的过程。
+本题中只涉及到二进制的异或化简，所以利用高斯消元法较为简单。
+`
+
+## 代码
+
+`
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;vector&amp;gt;
+
+using namespace std;
+int getbit(int x)
+{
+    int cnt=0;
+    while(x){
+        x&amp;gt;&amp;gt;=1;
+        cnt++;
+    }
+    return cnt;
+ } 
+bool cmp(const int&amp;amp; a,const int&amp;amp; b)
+{
+    return a&amp;gt;b;
+}
+int main()
+{
+    int n;
+    while(scanf(&quot;%d&quot;,&amp;amp;n)!=EOF){
+        vector&amp;lt;int&amp;gt; v;
+        int ans=0;
+        for(int i=0;i&amp;lt;n;i++){
+            int a;
+            scanf(&quot;%d&quot;,&amp;amp;a);
+            v.push_back(a);
+        }
+        while(v.size()&amp;gt;=1){
+            sort(v.begin(),v.end(),cmp);
+            if(v[0]==0){
+                ans+=v.size();
+                break;
+            }
+            vector&amp;lt;int&amp;gt;::iterator it=v.begin();
+            int fnb=getbit(v[0]);
+            for(++it;it!=v.end();it++){
+                if(getbit(*it)==fnb){
+                    (*it)=(*it)^v[0];
+                }
+                else break;
+            }
+            v.erase(v.begin());
+        }
+        cout&amp;lt;&amp;lt;n-ans&amp;lt;&amp;lt;endl;
+    }
+    return 0;
+}
+/*
+15
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15
+*/
+</code></pre><h2 id="收获"><a href="#收获" class="headerlink" title="收获"></a>收获</h2><ol>
+<li>熟悉了高斯消元法求解化简行列式，高斯（约当）消元法：就是每次把要消去位上含有最大的元素的行调到最高的地方。</li>
+<li><p>了解了异或运算与行列式化简的联系。</p>
+<pre><code>作者：qq_27803491 发表于2017/1/5 12:33:55 [原文链接](http://blog.csdn.net/qq_27803491/article/details/54091966)
+</code></pre></li>
+</ol>
+<pre><code>阅读：31 评论：0 [查看评论](http://blog.csdn.net/qq_27803491/article/details/54091966#comments)
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://dearamaze.com/2016/12/29/googleSRE运维——减少琐事/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dear Amaze">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DearAmaze-桀骜良">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/12/29/googleSRE运维——减少琐事/" itemprop="url">
+                  [原]googleSRE运维——减少琐事
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-12-29T17:37:17+08:00">
+                2016-12-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2016/12/29/googleSRE运维——减少琐事/" class="leancloud_visitors" data-flag-title="[原]googleSRE运维——减少琐事">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="琐事的属性"><a href="#琐事的属性" class="headerlink" title="琐事的属性"></a>琐事的属性</h2><ol>
+<li>手动性的</li>
+<li>重复性的</li>
+<li>可以被自动化的</li>
+<li>战术性的（不是太懂，原文是这样的）：琐事是突然出现的、对应式的工作，而非策略驱动和主动安排的。处理紧急警报是琐事。我们可能永远都无法完全消除这种类型的工作，但我们必须继续努力减少它。</li>
+<li>没有持久价值</li>
+<li>与服务同步线性增长</li>
+</ol>
+<h2 id="琐事过多的危害"><a href="#琐事过多的危害" class="headerlink" title="琐事过多的危害"></a>琐事过多的危害</h2><ol>
+<li>职业停滞</li>
+<li>士气低落</li>
+<li>造成误解</li>
+<li>进展缓慢</li>
+<li>开创先例：如果SRE过于愿意承担琐事，研发同事就更倾向于加入更多的琐事，有时候甚至将本来研发团队应承担的运维工作转给SRE来承担。其他团队也会开始指望SRE来接受这样的工作，这显然是不好的。</li>
+<li>促进摩擦产生</li>
+<li>违反承诺</li>
+</ol>
+<h2 id="宗旨"><a href="#宗旨" class="headerlink" title="宗旨"></a>宗旨</h2><pre><code>通过工程工作（符合长期战略的会对你的服务进行长久性的改善的工作）消除一点点的琐事，就可以持续行地整顿服务。我们可以将更多的力量投入到扩大服务规模的工程工作上去，或者是进行下一代的服务的架构设计，又或者是建立一套跨SRE使用的工具链。
+多做创新，少干琐事。
+</code></pre><h2 id="对生或中琐事的思考（待续，过一个有条理的生活，因为对我来说，有条理就是自信、充实）"><a href="#对生或中琐事的思考（待续，过一个有条理的生活，因为对我来说，有条理就是自信、充实）" class="headerlink" title="对生或中琐事的思考（待续，过一个有条理的生活，因为对我来说，有条理就是自信、充实）"></a>对生或中琐事的思考（待续，过一个有条理的生活，因为对我来说，有条理就是自信、充实）</h2><h3 id="生活中的琐事"><a href="#生活中的琐事" class="headerlink" title="生活中的琐事"></a>生活中的琐事</h3><ol>
+<li>刷空间</li>
+<li>刷朋友圈</li>
+</ol>
+<h3 id="生活中的不可避免的事情"><a href="#生活中的不可避免的事情" class="headerlink" title="生活中的不可避免的事情"></a>生活中的不可避免的事情</h3><ol>
+<li>日常洗漱</li>
+<li>睡觉</li>
+<li>吃饭</li>
+<li>学习</li>
+<li>工作</li>
+</ol>
+<h3 id="生活中有意义的能够使自己变得优秀的事情"><a href="#生活中有意义的能够使自己变得优秀的事情" class="headerlink" title="生活中有意义的能够使自己变得优秀的事情"></a>生活中有意义的能够使自己变得优秀的事情</h3><ol>
+<li>看书</li>
+<li>跑步</li>
+<li>看一些有意义的电影</li>
+<li><p>拍照发现生活中细小的美</p>
+<pre><code>作者：qq_27803491 发表于2016/12/29 17:37:17 [原文链接](http://blog.csdn.net/qq_27803491/article/details/53930796)
+</code></pre></li>
+</ol>
+<pre><code>阅读：68 评论：0 [查看评论](http://blog.csdn.net/qq_27803491/article/details/53930796#comments)
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://dearamaze.com/2016/12/22/运维之下-笔记-三（运维平台）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1401,851 +2190,6 @@ esac
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://dearamaze.com/2016/11/15/邮件服务器/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Dear Amaze">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="DearAmaze-桀骜良">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/11/15/邮件服务器/" itemprop="url">
-                  [原]邮件服务器
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-11-15T21:38:12+08:00">
-                2016-11-15
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2016/11/15/邮件服务器/" class="leancloud_visitors" data-flag-title="[原]邮件服务器">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Mail-Server"><a href="#Mail-Server" class="headerlink" title="Mail Server"></a>Mail Server</h2><ol>
-<li>SMTP(监听tcp25号端口)：发邮件</li>
-<li>ESMTP</li>
-<li>POP3：收邮件</li>
-<li>IMAP4</li>
-<li>UUCP:Unix主机复制文件的协议</li>
-<li>C/S smtpd,smtp</li>
-<li>MUA：邮件用户代理，</li>
-</ol>
-<p>Outlook，Foxmail<br>    Thundbird<br>    evolution<br>    mutt</p>
-<ol>
-<li>MTA:邮件传输代理，smtp服务器，sendmail，uucp，</li>
-</ol>
-<p>qmail,<br>    postfix:模块化设计，安全，与sendmail兼容性好，投递效率<br>    exim：<br>    exchange：（windows，异步消息协作平台）</p>
-<ol>
-<li>MDA</li>
-</ol>
-<p>procmail：<br>    maildrop：</p>
-<ol>
-<li>MRA：邮件取回代理（pop3，IMAP4）</li>
-</ol>
-<p>cyrus-imap<br>    dovecot</p>
-<ol>
-<li><p>SASL：简单认证安全层<br>只是一个框架，需要依靠控件来完成认证<br>cyrus-sasl<br>courier-authlib</p>
-</li>
-<li><p>Webmail:</p>
-</li>
-</ol>
-<p>Openwebmail（perl）<br>    Squirrelmail    （php）<br>    Extmail（Extman）</p>
-<ol>
-<li><p>LDAP:Lightweight dirctory Access protocol:轻量级目录访问协议:读取速度快，写入速度慢（读快mysql一个数量级，写慢mysql一个数量级）</p>
-</li>
-<li><p>mysql：</p>
-</li>
-<li>虚拟用户：仅用于访问某服务的数字表示</li>
-<li>用户：字符串，凭证</li>
-</ol>
-<h2 id="搭建"><a href="#搭建" class="headerlink" title="搭建"></a>搭建</h2><ol>
-<li>Postfix+SASL(courier-authlib)+Mysql</li>
-<li>Dovecot+MySQL</li>
-<li>webmail：Extmail+Extman+httpd</li>
-<li><p>Postfix配置文件：<br>模块化：</p>
-<pre><code>master：/etc/postfix/master.cf
-mail：/etc/postfix/main.cf
-</code></pre><p>postconf：配置postfix<br>-d:显示默认的配置<br>-n:修改了的配置<br>-m:显示支持的查找表类型<br>-A:显示支持的sasl客户端插件类型<br>-e:PARMATER=VALUE :更改某参数配置信息，并保存到main.cf文件中</p>
-<pre><code>作者：qq_27803491 发表于2016/11/15 21:38:12 [原文链接](http://blog.csdn.net/qq_27803491/article/details/53177971)
-</code></pre></li>
-</ol>
-<pre><code>阅读：64 评论：0 [查看评论](http://blog.csdn.net/qq_27803491/article/details/53177971#comments)
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://dearamaze.com/2016/11/08/poj3169（差分约束系统）/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Dear Amaze">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="DearAmaze-桀骜良">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/11/08/poj3169（差分约束系统）/" itemprop="url">
-                  [原]poj3169（差分约束系统）
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-11-08T12:24:18+08:00">
-                2016-11-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2016/11/08/poj3169（差分约束系统）/" class="leancloud_visitors" data-flag-title="[原]poj3169（差分约束系统）">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><ol>
-<li>网址：<a href="http://poj.org/problem?id=3169" target="_blank" rel="external">http://poj.org/problem?id=3169</a></li>
-<li>大概题意：有N个点，其中有ml个限制条件：点a，点b，的最长距离为d，有md个限制条件，点a,点b，的最短距离为d；点按序号顺序排，求第一个点到最后一个点的最长距离。</li>
-<li>解题思路：差分约束，其实我也不太清楚什么是差分约束，大概就是将各种限制条件，逐个加入，先假设N个点间的距离都为无穷大，然后，按下列顺序，（循环）N（N，ml，md），依次加入限制条件，就可以了，加入第一种限制时，点b的原距离与a点距离加上d，比较，取最小值为b点的最新距离,,min(b(原)，a+d)。加入第二种限制时，已知b求a，min（a（原），b-d）;</li>
-</ol>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><pre><code>#include&amp;lt;iostream&amp;gt;
-#include&amp;lt;cstdio&amp;gt;
-#include&amp;lt;string&amp;gt;
-#include&amp;lt;cstring&amp;gt;
-#include&amp;lt;cmath&amp;gt;
-#include&amp;lt;algorithm&amp;gt;
-#define INF 0x3f3f3f3f
-using namespace std;
-int d[1010];
-struct MLD{
-    int a,b,d;
-}ML[10010];
-struct MDD{
-    int a,b,d;
-}MD[10010];
-
-int main()
-{
-    memset(d,INF,sizeof(d));
-    memset(ML,0,sizeof(ML));
-    memset(MD,0,sizeof(MD));
-    int n,ml,md;
-    scanf(&quot;%d%d%d&quot;,&amp;amp;n,&amp;amp;ml,&amp;amp;md);
-    d[0]=0;
-    for(int i=0;i&amp;lt;ml;i++){
-        scanf(&quot;%d%d%d&quot;,&amp;amp;ML[i].a,&amp;amp;ML[i].b,&amp;amp;ML[i].d);
-    }
-    for(int i=0;i&amp;lt;md;i++){
-        scanf(&quot;%d%d%d&quot;,&amp;amp;MD[i].a,&amp;amp;MD[i].b,&amp;amp;MD[i].d);
-    }
-    for(int i=0;i&amp;lt;n;i++){
-        for(int j=0;j&amp;lt;n;j++){
-            if(d[j+1]&amp;lt;INF)d[j]=min(d[j],d[j+1]);
-        }
-        for(int j=0;j&amp;lt;ml;j++){
-            if(d[ML[j].a-1]&amp;lt;INF){
-                d[ML[j].b-1]=min(d[ML[j].a-1]+ML[j].d,d[ML[j].b-1]);
-            }
-        }
-        for(int j=0;j&amp;lt;md;j++){
-            if(d[MD[j].b-1]&amp;lt;INF){
-                d[MD[j].a-1]=min(d[MD[j].b-1]-MD[j].d,d[MD[j].a-1]);
-            }
-        }
-    }
-    if(d[0]&amp;lt;0)printf(&quot;-1\n&quot;);
-    else if(d[n-1]==INF)printf(&quot;-2\n&quot;);
-    else {
-        printf(&quot;%d\n&quot;,d[n-1]);
-    }
-
-    return 0;
-}
-
-
-            作者：qq_27803491 发表于2016/11/8 12:24:18 [原文链接](http://blog.csdn.net/qq_27803491/article/details/53080973)
-
-
-        阅读：61 评论：0 [查看评论](http://blog.csdn.net/qq_27803491/article/details/53080973#comments)
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://dearamaze.com/2016/11/04/细节（水）题codeforce-378C/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Dear Amaze">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="DearAmaze-桀骜良">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/11/04/细节（水）题codeforce-378C/" itemprop="url">
-                  [原]细节（水）题codeforce#378C
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-11-04T01:17:06+08:00">
-                2016-11-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2016/11/04/细节（水）题codeforce-378C/" class="leancloud_visitors" data-flag-title="[原]细节（水）题codeforce#378C">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><h3 id="网址"><a href="#网址" class="headerlink" title="网址"></a>网址</h3><p><a href="http://codeforces.com/contest/733/problem/C" target="_blank" rel="external">http://codeforces.com/contest/733/problem/C</a></p>
-<h3 id="大概题意"><a href="#大概题意" class="headerlink" title="大概题意"></a>大概题意</h3><p>给你N个数，然后再给你经过合并操作后的K个数，求中间合并操作？</p>
-<h2 id="AC代码"><a href="#AC代码" class="headerlink" title="AC代码"></a>AC代码</h2><pre><code>#define _CRT_SECURE_NO_WARNINGS
-#include &amp;lt;iostream&amp;gt;
-#include &amp;lt;cstdio&amp;gt;
-#include &amp;lt;cstring&amp;gt;
-#include &amp;lt;algorithm&amp;gt;
-#include &amp;lt;stack&amp;gt;
-#include &amp;lt;string&amp;gt;
-#include &amp;lt;set&amp;gt;
-#include &amp;lt;cmath&amp;gt;
-#include &amp;lt;map&amp;gt;
-#include &amp;lt;queue&amp;gt;
-#include &amp;lt;sstream&amp;gt;
-#include &amp;lt;vector&amp;gt;
-#include &amp;lt;iomanip&amp;gt;
-#define m0(a) memset(a,0,sizeof(a))
-#define mm(a) memset(a,0x3f,sizeof(a))
-#define m_1(a) memset(a,-1,sizeof(a))
-#define f(i,a,b) for(i = a;i&amp;lt;=b;i++)
-#define fi(i,a,b) for(i = a;i&amp;gt;=b;i--)
-#define lowbit(a) ((a)&amp;amp;(-a))
-#define FFR freopen(&quot;data.in&quot;,&quot;r&quot;,stdin)
-#define FFW freopen(&quot;data.out&quot;,&quot;w&quot;,stdout)
-#define INF 0x3f3f3f3f
-#define DEBUG printf
-typedef long long ll;
-typedef long double ld;
-
-const ld PI = acos(-1.0);
-
-using namespace std;
-#define SIZE 550
-
-int a[SIZE];
-int b[SIZE];
-
-struct Chuan{
-    int c_start;
-    int c_end;
-    int c_max;
-};
-struct Print{
-    int num;
-    char dire;
-};
-vector&amp;lt;Chuan&amp;gt; chuan;
-queue&amp;lt;Print&amp;gt; print;
-int main()
-{
-    int n,k;
-    scanf(&quot;%d&quot;,&amp;amp;n);
-    int i;
-    f(i,1,n){
-        scanf(&quot;%d&quot;,&amp;amp;a[i]);
-    }
-    scanf(&quot;%d&quot;,&amp;amp;k);
-    int site=1;
-    bool flag=0;
-    f(i,1,k){
-        scanf(&quot;%d&quot;,&amp;amp;b[i]);
-        if(flag)continue;
-        ll all=0;
-        Chuan onechuan;
-        onechuan.c_start=site;
-        onechuan.c_max=0;
-        int max_ele=0;
-        while(all&amp;lt;b[i]){
-            if(a[site]&amp;gt;max_ele){
-                max_ele=a[site];
-                onechuan.c_max=site;
-            }
-            else if(a[site]==max_ele){
-                if(site-1&amp;gt;=onechuan.c_start&amp;amp;&amp;amp;a[site]&amp;gt;a[site-1]){
-                    onechuan.c_max=site;
-                }
-                else if(site+1&amp;lt;=n&amp;amp;&amp;amp;all+a[site]+a[site+1]&amp;lt;=b[i]&amp;amp;&amp;amp;a[site]&amp;gt;a[site+1]){
-                    onechuan.c_max=site;
-                }
-            }
-            all+=a[site++];
-        }
-        onechuan.c_end=site-1;
-        if(all!=b[i])flag=1;
-        chuan.push_back(onechuan);
-        //DEBUG(&quot;%d %d %d \n&quot;,onechuan.c_start,onechuan.c_max,onechuan.c_end);
-    }
-    if(flag){
-        printf(&quot;NO\n&quot;);
-        return 0;
-    }
-    if(site!=n+1){
-        printf(&quot;NO\n&quot;);
-        return 0;
-    }
-    i=0;
-    while(!print.empty()){
-        print.pop();
-    }
-    for(vector&amp;lt;Chuan&amp;gt;::iterator it=chuan.begin();it&amp;lt;chuan.end();it++){
-        i++;
-        if(it-&amp;gt;c_start==it-&amp;gt;c_end)continue;
-        int pointer=it-&amp;gt;c_max;
-        if(pointer-1&amp;gt;=it-&amp;gt;c_start&amp;amp;&amp;amp;a[pointer]&amp;gt;a[pointer-1]){
-            while(pointer&amp;gt;it-&amp;gt;c_start){
-                Print oneprint;
-                oneprint.num=i+pointer-it-&amp;gt;c_start;
-                pointer--;
-                oneprint.dire=&apos;L&apos;;
-                print.push(oneprint);
-            }
-            pointer=it-&amp;gt;c_max;
-            while(pointer&amp;lt;it-&amp;gt;c_end){
-                Print oneprint;
-                oneprint.num=i;
-                pointer++;
-                oneprint.dire=&apos;R&apos;;
-                print.push(oneprint);
-            }
-
-        }
-        else if(pointer+1&amp;lt;=it-&amp;gt;c_end&amp;amp;&amp;amp;a[pointer]&amp;gt;a[pointer+1]){
-            while(pointer&amp;lt;it-&amp;gt;c_end){
-                Print oneprint;
-                oneprint.num=i+it-&amp;gt;c_max-it-&amp;gt;c_start;
-                //DEBUG(&quot;hello world!\n&quot;);
-                pointer++;
-                oneprint.dire=&apos;R&apos;;
-                print.push(oneprint);
-            }
-            pointer=it-&amp;gt;c_max;
-            while(pointer&amp;gt;it-&amp;gt;c_start){
-                Print oneprint;
-                oneprint.num=i+pointer-it-&amp;gt;c_start;
-                pointer--;
-                oneprint.dire=&apos;L&apos;;
-                print.push(oneprint);
-            }
-        }
-        else {
-            printf(&quot;NO\n&quot;);
-            while(!print.empty()){
-                print.pop();
-            }
-            return 0;
-        }
-        //DEBUG(&quot;%d %d %d\n&quot;,it-&amp;gt;c_start,it-&amp;gt;c_max,it-&amp;gt;c_end);
-    }
-    puts(&quot;YES&quot;);
-    while(!print.empty()){
-        Print oneprint=print.front();
-        print.pop();
-        printf(&quot;%d %c\n&quot;,oneprint.num,oneprint.dire);
-    }
-    return 0;
-}
-</code></pre><h2 id="经验教训"><a href="#经验教训" class="headerlink" title="经验教训"></a>经验教训</h2><ol>
-<li>你离AC还差N个细节！</li>
-<li>其实还是心不够静，思维跟不上，静下来后，你的智商会变高！</li>
-<li><p>仔细阅读题意，然后注意关掉DEBUG！</p>
-<pre><code>作者：qq_27803491 发表于2016/11/4 1:17:06 [原文链接](http://blog.csdn.net/qq_27803491/article/details/53029288)
-</code></pre></li>
-</ol>
-<pre><code>阅读：89 评论：0 [查看评论](http://blog.csdn.net/qq_27803491/article/details/53029288#comments)
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://dearamaze.com/2016/11/03/AC必备/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Dear Amaze">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="DearAmaze-桀骜良">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/11/03/AC必备/" itemprop="url">
-                  [原]AC必备
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-11-03T23:50:06+08:00">
-                2016-11-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2016/11/03/AC必备/" class="leancloud_visitors" data-flag-title="[原]AC必备">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <pre><code>#define _CRT_SECURE_NO_WARNINGS
-#include &amp;lt;iostream&amp;gt;
-#include &amp;lt;cstdio&amp;gt;
-#include &amp;lt;cstring&amp;gt;
-#include &amp;lt;algorithm&amp;gt;
-#include &amp;lt;stack&amp;gt;
-#include &amp;lt;string&amp;gt;
-#include &amp;lt;set&amp;gt;
-#include &amp;lt;cmath&amp;gt;
-#include &amp;lt;map&amp;gt;
-#include &amp;lt;queue&amp;gt;
-#include &amp;lt;sstream&amp;gt;
-#include &amp;lt;vector&amp;gt;
-#include &amp;lt;iomanip&amp;gt;
-#define m0(a) memset(a,0,sizeof(a))
-#define mm(a) memset(a,0x3f,sizeof(a))
-#define m_1(a) memset(a,-1,sizeof(a))
-#define f(i,a,b) for(int i = a;i&amp;lt;=b;i++)
-#define fi(i,a,b) for(int i = a;i&amp;gt;=b;i--)
-#define lowbit(a) ((a)&amp;amp;(-a))
-#define FFR freopen(&quot;data.in&quot;,&quot;r&quot;,stdin)
-#define FFW freopen(&quot;data.out&quot;,&quot;w&quot;,stdout)
-#define INF 0x3f3f3f3f
-#define DEBUG //printf
-typedef long long ll;
-typedef long double ld;
-
-const ld PI = acos(-1.0);
-
-using namespace std;
-#define SIZE (1)
-
-int aa[SIZE];
-
-int main()
-{
-
-    return 0;
-}
-</code></pre><p>写每道题都会用到，把他们做成模版，每次就没必要都打一遍了，节省了时间。</p>
-<pre><code>    作者：qq_27803491 发表于2016/11/3 23:50:06 [原文链接](http://blog.csdn.net/qq_27803491/article/details/53028318)
-
-
-阅读：66 评论：0 [查看评论](http://blog.csdn.net/qq_27803491/article/details/53028318#comments)
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2295,7 +2239,7 @@ int main()
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">53</span>
+                <span class="site-state-item-count">57</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2306,7 +2250,7 @@ int main()
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">21</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -2317,7 +2261,7 @@ int main()
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-count">36</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
