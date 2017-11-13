@@ -97,13 +97,13 @@
 
 
 
-<meta name="description" content="thread 模块使用单线程执行循环代码:123456789101112131415161718192021222324#!/usr/bin/env python# coding=utf-8from time import sleep , ctime def loop0():    print &apos;start loop 0 at : &apos;, ctime()    sleep(4)    print &apos;">
+<meta name="description" content="thread 模块使用单线程执行循环代码: #!/usr/bin/env python # coding=utf-8  from time import sleep , ctime   def loop0():     print &amp;#39;start loop 0 at : &amp;#39;, ctime()     sleep(4)     print &amp;#39;loop 0 done ate :">
 <meta name="keywords" content="多线程,Python">
 <meta property="og:type" content="article">
 <meta property="og:title" content="python多线程">
 <meta property="og:url" content="https://dearamaze.com/2017/04/22/python多线程/index.html">
 <meta property="og:site_name" content="DearAmaze-桀骜良">
-<meta property="og:description" content="thread 模块使用单线程执行循环代码:123456789101112131415161718192021222324#!/usr/bin/env python# coding=utf-8from time import sleep , ctime def loop0():    print &apos;start loop 0 at : &apos;, ctime()    sleep(4)    print &apos;">
+<meta property="og:description" content="thread 模块使用单线程执行循环代码: #!/usr/bin/env python # coding=utf-8  from time import sleep , ctime   def loop0():     print &amp;#39;start loop 0 at : &amp;#39;, ctime()     sleep(4)     print &amp;#39;loop 0 done ate :">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://function.dearamaze.com/onethr_run.png">
 <meta property="og:image" content="http://function.dearamaze.com/mtsleepA.png">
@@ -112,7 +112,7 @@
 <meta property="og:updated_time" content="2017-09-29T13:28:16.527Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python多线程">
-<meta name="twitter:description" content="thread 模块使用单线程执行循环代码:123456789101112131415161718192021222324#!/usr/bin/env python# coding=utf-8from time import sleep , ctime def loop0():    print &apos;start loop 0 at : &apos;, ctime()    sleep(4)    print &apos;">
+<meta name="twitter:description" content="thread 模块使用单线程执行循环代码: #!/usr/bin/env python # coding=utf-8  from time import sleep , ctime   def loop0():     print &amp;#39;start loop 0 at : &amp;#39;, ctime()     sleep(4)     print &amp;#39;loop 0 done ate :">
 <meta name="twitter:image" content="http://function.dearamaze.com/onethr_run.png">
 
 
@@ -148,6 +148,8 @@
 
 
   <title> python多线程 | DearAmaze-桀骜良 </title>
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -435,23 +437,134 @@
       
 
       
-        <h1 id="thread-模块"><a href="#thread-模块" class="headerlink" title="thread 模块"></a>thread 模块</h1><h2 id="使用单线程执行循环"><a href="#使用单线程执行循环" class="headerlink" title="使用单线程执行循环"></a>使用单线程执行循环</h2><h3 id="代码"><a href="#代码" class="headerlink" title="代码:"></a>代码:</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="comment"># coding=utf-8</span></div><div class="line"></div><div class="line"><span class="keyword">from</span> time <span class="keyword">import</span> sleep , ctime </div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">loop0</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">print</span> <span class="string">'start loop 0 at : '</span>, ctime()</div><div class="line">    sleep(<span class="number">4</span>)</div><div class="line">    <span class="keyword">print</span> <span class="string">'loop 0 done ate : '</span>, ctime()</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">loop1</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">print</span> <span class="string">'start loop 1 at : '</span>, ctime()</div><div class="line">    sleep(<span class="number">2</span>)</div><div class="line">    <span class="keyword">print</span> <span class="string">'loop 1 done ate : '</span>, ctime()</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">print</span> <span class="string">"starting at : "</span>,ctime()</div><div class="line">    loop0()</div><div class="line">    loop1()</div><div class="line">    <span class="keyword">print</span> <span class="string">"all DONE at : "</span>,ctime()</div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    main()</div></pre></td></tr></table></figure>
+        <h1 id="thread-模块"><a href="#thread-模块" class="headerlink" title="thread 模块"></a>thread 模块</h1><h2 id="使用单线程执行循环"><a href="#使用单线程执行循环" class="headerlink" title="使用单线程执行循环"></a>使用单线程执行循环</h2><h3 id="代码"><a href="#代码" class="headerlink" title="代码:"></a>代码:</h3><pre><code class="python">
+#!/usr/bin/env python
+# coding=utf-8
+
+from time import sleep , ctime 
+
+def loop0():
+    print &#39;start loop 0 at : &#39;, ctime()
+    sleep(4)
+    print &#39;loop 0 done ate : &#39;, ctime()
+
+def loop1():
+    print &#39;start loop 1 at : &#39;, ctime()
+    sleep(2)
+    print &#39;loop 1 done ate : &#39;, ctime()
+
+def main():
+    print &quot;starting at : &quot;,ctime()
+    loop0()
+    loop1()
+    print &quot;all DONE at : &quot;,ctime()
+
+if __name__ == &#39;__main__&#39;:
+    main()
+</code></pre>
 <h3 id="执行结果"><a href="#执行结果" class="headerlink" title="执行结果:"></a>执行结果:</h3><blockquote>
 <p><code>顺序执行</code></p>
 </blockquote>
 <p><img src="http://function.dearamaze.com/onethr_run.png" alt="运行结果,顺序执行"></p>
-<h2 id="使用thread模块-mtsleepA-py"><a href="#使用thread模块-mtsleepA-py" class="headerlink" title="使用thread模块(mtsleepA.py)"></a>使用thread模块(mtsleepA.py)</h2><h3 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="comment"># coding=utf-8</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> thread </div><div class="line"><span class="keyword">from</span> time <span class="keyword">import</span> sleep , ctime </div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">loop0</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">print</span> <span class="string">'start loop 0 at : '</span>,ctime()</div><div class="line">    sleep(<span class="number">4</span>)</div><div class="line">    <span class="keyword">print</span> <span class="string">'loop 0 done at : '</span>,ctime()</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">loop1</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">print</span> <span class="string">'start loop 1 at :'</span>,ctime()</div><div class="line">    sleep(<span class="number">2</span>)</div><div class="line">    <span class="keyword">print</span> <span class="string">'loop 1 done at :'</span>,ctime()</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">print</span> <span class="string">'starting at :'</span>,ctime()</div><div class="line">    thread.start_new_thread(loop0,())</div><div class="line">    thread.start_new_thread(loop1,())</div><div class="line">    sleep(<span class="number">6</span>)</div><div class="line">    <span class="keyword">print</span> <span class="string">'all done at :'</span>,ctime()</div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    main()</div></pre></td></tr></table></figure>
+<h2 id="使用thread模块-mtsleepA-py"><a href="#使用thread模块-mtsleepA-py" class="headerlink" title="使用thread模块(mtsleepA.py)"></a>使用thread模块(mtsleepA.py)</h2><h3 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h3><pre><code class="python">#!/usr/bin/env python
+# coding=utf-8
+
+import thread 
+from time import sleep , ctime 
+
+def loop0():
+    print &#39;start loop 0 at : &#39;,ctime()
+    sleep(4)
+    print &#39;loop 0 done at : &#39;,ctime()
+
+def loop1():
+    print &#39;start loop 1 at :&#39;,ctime()
+    sleep(2)
+    print &#39;loop 1 done at :&#39;,ctime()
+
+def main():
+    print &#39;starting at :&#39;,ctime()
+    thread.start_new_thread(loop0,())
+    thread.start_new_thread(loop1,())
+    sleep(6)
+    print &#39;all done at :&#39;,ctime()
+
+if __name__ == &#39;__main__&#39;:
+    main()
+</code></pre>
 <h3 id="执行结果-1"><a href="#执行结果-1" class="headerlink" title="执行结果"></a>执行结果</h3><blockquote>
 <p><code>并行执行</code></p>
 </blockquote>
 <p><img src="http://function.dearamaze.com/mtsleepA.png" alt="执行结果,并行执行"></p>
-<h2 id="修改mtsleepA-py-后"><a href="#修改mtsleepA-py-后" class="headerlink" title="修改mtsleepA.py 后"></a>修改mtsleepA.py 后</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="comment"># coding=utf-8</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> thread </div><div class="line"><span class="keyword">from</span> time <span class="keyword">import</span> sleep , ctime </div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">loop0</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">print</span> <span class="string">'start loop 0 at : '</span>,ctime()</div><div class="line">    sleep(<span class="number">4</span>)</div><div class="line">    <span class="keyword">print</span> <span class="string">'loop 0 done at : '</span>,ctime()</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">loop1</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">print</span> <span class="string">'start loop 1 at :'</span>,ctime()</div><div class="line">    sleep(<span class="number">2</span>)</div><div class="line">    <span class="keyword">print</span> <span class="string">'loop 1 done at :'</span>,ctime()</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">print</span> <span class="string">'starting at :'</span>,ctime()</div><div class="line">    thread.start_new_thread(loop0,())</div><div class="line">    thread.start_new_thread(loop1,())</div><div class="line">    <span class="comment">#sleep(6)</span></div><div class="line">    <span class="keyword">print</span> <span class="string">'all done at :'</span>,ctime()</div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    main()</div></pre></td></tr></table></figure>
+<h2 id="修改mtsleepA-py-后"><a href="#修改mtsleepA-py-后" class="headerlink" title="修改mtsleepA.py 后"></a>修改mtsleepA.py 后</h2><pre><code class="python">#!/usr/bin/env python
+# coding=utf-8
+
+import thread 
+from time import sleep , ctime 
+
+def loop0():
+    print &#39;start loop 0 at : &#39;,ctime()
+    sleep(4)
+    print &#39;loop 0 done at : &#39;,ctime()
+
+def loop1():
+    print &#39;start loop 1 at :&#39;,ctime()
+    sleep(2)
+    print &#39;loop 1 done at :&#39;,ctime()
+
+def main():
+    print &#39;starting at :&#39;,ctime()
+    thread.start_new_thread(loop0,())
+    thread.start_new_thread(loop1,())
+    #sleep(6)
+    print &#39;all done at :&#39;,ctime()
+
+if __name__ == &#39;__main__&#39;:
+    main()
+</code></pre>
 <p>注释掉了主线程中的sleep函数,发生了什么,反映了什么?</p>
 <h3 id="执行结果-2"><a href="#执行结果-2" class="headerlink" title="执行结果"></a>执行结果</h3><blockquote>
 <p><code>子线程隶属于父线程,父线程生命周期结束时,子线程也会结束.</code></p>
 </blockquote>
 <p><img src="http://function.dearamaze.com/mtsleepA_run2.png" alt="执行结果,主线程会强制结束子线程"></p>
-<h2 id="使用线程和锁-mtsleepB-py"><a href="#使用线程和锁-mtsleepB-py" class="headerlink" title="使用线程和锁 (mtsleepB.py)"></a>使用线程和锁 (mtsleepB.py)</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="comment"># coding=utf-8</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> thread </div><div class="line"><span class="keyword">from</span> time <span class="keyword">import</span> sleep , ctime </div><div class="line"></div><div class="line">loops = [<span class="number">4</span>,<span class="number">2</span>]</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">loop</span><span class="params">(nloop,nsec,lock)</span>:</span></div><div class="line">    <span class="keyword">print</span> <span class="string">'start loop '</span>,nloop,<span class="string">'at:'</span>,ctime()</div><div class="line">    sleep(nsec)</div><div class="line">    <span class="keyword">print</span> <span class="string">'loop '</span>,nloop ,<span class="string">'done at :'</span>,ctime()</div><div class="line">    lock.release()</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">print</span> <span class="string">'starting at:'</span>,ctime()</div><div class="line">    locks=[]</div><div class="line">    nloops = range(len(loops))</div><div class="line">    </div><div class="line">    <span class="comment">#为线程创建锁</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> nloops:</div><div class="line">        lock = thread.allocate_lock()</div><div class="line">        lock.acquire()</div><div class="line">        locks.append(lock)</div><div class="line">    </div><div class="line">    <span class="comment">#开始执行各个线程</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> nloops:</div><div class="line">        thread.start_new_thread(loop,(i,loops[i],locks[i]))</div><div class="line">    </div><div class="line">    <span class="comment">#主线程等待所有的线程的锁完全释放</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> nloops:</div><div class="line">        <span class="keyword">while</span> locks[i].locked():<span class="keyword">pass</span></div><div class="line"></div><div class="line">    <span class="keyword">print</span> <span class="string">'all DONE at:'</span>,ctime()</div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span> :</div><div class="line">    main()</div></pre></td></tr></table></figure>
+<h2 id="使用线程和锁-mtsleepB-py"><a href="#使用线程和锁-mtsleepB-py" class="headerlink" title="使用线程和锁 (mtsleepB.py)"></a>使用线程和锁 (mtsleepB.py)</h2><pre><code class="python">#!/usr/bin/env python
+# coding=utf-8
+
+import thread 
+from time import sleep , ctime 
+
+loops = [4,2]
+
+def loop(nloop,nsec,lock):
+    print &#39;start loop &#39;,nloop,&#39;at:&#39;,ctime()
+    sleep(nsec)
+    print &#39;loop &#39;,nloop ,&#39;done at :&#39;,ctime()
+    lock.release()
+
+def main():
+    print &#39;starting at:&#39;,ctime()
+    locks=[]
+    nloops = range(len(loops))
+
+    #为线程创建锁
+    for i in nloops:
+        lock = thread.allocate_lock()
+        lock.acquire()
+        locks.append(lock)
+
+    #开始执行各个线程
+    for i in nloops:
+        thread.start_new_thread(loop,(i,loops[i],locks[i]))
+
+    #主线程等待所有的线程的锁完全释放
+    for i in nloops:
+        while locks[i].locked():pass
+
+    print &#39;all DONE at:&#39;,ctime()
+
+if __name__ == &#39;__main__&#39; :
+    main()
+</code></pre>
 <h3 id="执行结果-3"><a href="#执行结果-3" class="headerlink" title="执行结果:"></a>执行结果:</h3><p><img src="http://function.dearamaze.com/mtsleepB.png" alt="线程锁"></p>
 
       
@@ -1110,5 +1223,9 @@
 
   
 
+  <script>
+      // highlight
+      hljs.initHighlightingOnLoad();
+  </script>
 </body>
 </html>

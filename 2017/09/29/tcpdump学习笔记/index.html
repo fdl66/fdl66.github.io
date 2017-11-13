@@ -143,6 +143,8 @@
 
 
   <title> tcpdump 学习笔记 | DearAmaze-桀骜良 </title>
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -494,14 +496,26 @@
 -w&lt;数据包文件&gt;：直接将包写入文件中，并不分析和打印出来；
 expression：用于筛选的逻辑表达式；
 </code></pre><h3 id="命令实践"><a href="#命令实践" class="headerlink" title="命令实践"></a>命令实践</h3><ol>
-<li>直接启动tcpdump，将抓取所有经过第一个网络接口上的数据包<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tcpdump</div></pre></td></tr></table></figure>
+<li><p>直接启动tcpdump，将抓取所有经过第一个网络接口上的数据包</p>
+<pre><code>tcpdump
+</code></pre><p>控制台输出：</p>
+<pre><code>@dl  sudo tcpdump
+[sudo] dl 的密码：
+tcpdump: verbose output suppressed, use -v or -vv for full protocol decode
+listening on wlp2s0, link-type EN10MB (Ethernet), capture size 262144 bytes
+15:05:00.550658 IP 10.0.23.44.netbios-ns &gt; 10.0.23.255.netbios-ns: NBT UDP PACKET(137): QUERY; REQUEST; BROADCAST
+15:05:00.550712 IP 10.0.23.44.netbios-ns &gt; 10.0.23.255.netbios-ns: NBT UDP PACKET(137): QUERY; REQUEST; BROADCAST
+15:05:00.550722 IP 10.0.23.44.netbios-ns &gt; 10.0.23.255.netbios-ns: NBT UDP PACKET(137): QUERY; REQUEST; BROADCAST
+15:05:00.551563 IP 10.0.23.75.38501 &gt; gw-beijing.intra.knownsec.com.domain: 51446+ PTR? 255.23.0.10.in-addr.arpa. (42)
+15:05:00.565305 IP gw-beijing.intra.knownsec.com.domain &gt; 10.0.23.75.38501: 51446 NXDomain* 0/1/0 (104)
+15:05:00.565594 IP 10.0.23.75.50654 &gt; gw-beijing.intra.knownsec.com.domain: 56445+ PTR? 44.23.0.10.in-addr.arpa. (41)
+15:05:00.574085 IP gw-beijing.intra.knownsec.com.domain &gt; 10.0.23.75.50654: 56445 NXDomain* 0/1/0 (103)
+</code></pre></li>
+<li><p>抓取所有经过 en0，目的或源地址是 10.37.63.255 的网络数据：</p>
 </li>
 </ol>
-<p>控制台输出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"> @dl  sudo tcpdump</div><div class="line">[sudo] dl 的密码：</div><div class="line">tcpdump: verbose output suppressed, use -v or -vv for full protocol decode</div><div class="line">listening on wlp2s0, link-type EN10MB (Ethernet), capture size 262144 bytes</div><div class="line">15:05:00.550658 IP 10.0.23.44.netbios-ns &gt; 10.0.23.255.netbios-ns: NBT UDP PACKET(137): QUERY; REQUEST; BROADCAST</div><div class="line">15:05:00.550712 IP 10.0.23.44.netbios-ns &gt; 10.0.23.255.netbios-ns: NBT UDP PACKET(137): QUERY; REQUEST; BROADCAST</div><div class="line">15:05:00.550722 IP 10.0.23.44.netbios-ns &gt; 10.0.23.255.netbios-ns: NBT UDP PACKET(137): QUERY; REQUEST; BROADCAST</div><div class="line">15:05:00.551563 IP 10.0.23.75.38501 &gt; gw-beijing.intra.knownsec.com.domain: 51446+ PTR? 255.23.0.10.in-addr.arpa. (42)</div><div class="line">15:05:00.565305 IP gw-beijing.intra.knownsec.com.domain &gt; 10.0.23.75.38501: 51446 NXDomain* 0/1/0 (104)</div><div class="line">15:05:00.565594 IP 10.0.23.75.50654 &gt; gw-beijing.intra.knownsec.com.domain: 56445+ PTR? 44.23.0.10.in-addr.arpa. (41)</div><div class="line">15:05:00.574085 IP gw-beijing.intra.knownsec.com.domain &gt; 10.0.23.75.50654: 56445 NXDomain* 0/1/0 (103)</div></pre></td></tr></table></figure></p>
-<ol>
-<li>抓取所有经过 en0，目的或源地址是 10.37.63.255 的网络数据：</li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tcpdump -i en0 host 10.37.63.255</div></pre></td></tr></table></figure>
+<pre><code class="shell">tcpdump -i en0 host 10.37.63.255
+</code></pre>
 <pre><code>taomingkais-MacBook-Pro:~ TaoBangren$ sudo tcpdump host 10.37.63.255
 tcpdump: data link type PKTAP
 tcpdump: verbose output suppressed, use -v or -vv for full protocol decode
@@ -517,46 +531,70 @@ listening on pktap, link-type PKTAP (Packet Tap), capture size 262144 bytes
 </code></pre><ol>
 <li>抓取主机10.37.63.255和主机10.37.63.61或10.37.63.95的通信：</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">tcpdump host 10.37.63.255 and \(10.37.63.61 or 10.37.63.95 \)</div><div class="line"></div><div class="line">taomingkais-MacBook-Pro:~ TaoBangren$ sudo tcpdump host 10.37.63.255 and \(10.37.63.61 or 10.37.63.95 \)</div><div class="line">tcpdump: data link type PKTAP</div><div class="line">tcpdump: verbose output suppressed, use -v or -vv for full protocol decode</div><div class="line">listening on pktap, link-type PKTAP (Packet Tap), capture size 262144 bytes</div><div class="line">11:10:38.395320 IP 10.37.63.61.netbios-ns &gt; 10.37.63.255.netbios-ns: NBT UDP PACKET(137): QUERY; REQUEST; BROADCAST</div><div class="line">11:10:39.234047 IP 10.37.63.61.netbios-ns &gt; 10.37.63.255.netbios-ns: NBT UDP PACKET(137): QUERY; REQUEST; BROADCAST</div><div class="line">11:10:39.962286 IP 10.37.63.61.netbios-ns &gt; 10.37.63.255.netbios-ns: NBT UDP PACKET(137): QUERY; REQUEST; BROADCAST</div><div class="line">11:10:48.422443 IP 10.37.63.61.netbios-ns &gt; 10.37.63.255.netbios-ns: NBT UDP PACKET(137): QUERY; REQUEST; BROADCAST</div><div class="line">11:10:49.153630 IP 10.37.63.61.netbios-ns &gt; 10.37.63.255.netbios-ns: NBT UDP PACKET(137): QUERY; REQUEST; BROADCAST</div><div class="line">11:10:49.894146 IP 10.37.63.61.netbios-ns &gt; 10.37.63.255.netbios-ns: NBT UDP PACKET(137): QUERY; REQUEST; BROADCAST</div><div class="line">11:10:52.600297 IP 10.37.63.61.netbios-ns &gt; 10.37.63.255.netbios-ns: NBT UDP PACKET(137): QUERY; REQUEST; BROADCAST</div></pre></td></tr></table></figure>
+<pre><code class="shell?linenums">tcpdump host 10.37.63.255 and \(10.37.63.61 or 10.37.63.95 \)
+
+taomingkais-MacBook-Pro:~ TaoBangren$ sudo tcpdump host 10.37.63.255 and \(10.37.63.61 or 10.37.63.95 \)
+tcpdump: data link type PKTAP
+tcpdump: verbose output suppressed, use -v or -vv for full protocol decode
+listening on pktap, link-type PKTAP (Packet Tap), capture size 262144 bytes
+11:10:38.395320 IP 10.37.63.61.netbios-ns &gt; 10.37.63.255.netbios-ns: NBT UDP PACKET(137): QUERY; REQUEST; BROADCAST
+11:10:39.234047 IP 10.37.63.61.netbios-ns &gt; 10.37.63.255.netbios-ns: NBT UDP PACKET(137): QUERY; REQUEST; BROADCAST
+11:10:39.962286 IP 10.37.63.61.netbios-ns &gt; 10.37.63.255.netbios-ns: NBT UDP PACKET(137): QUERY; REQUEST; BROADCAST
+11:10:48.422443 IP 10.37.63.61.netbios-ns &gt; 10.37.63.255.netbios-ns: NBT UDP PACKET(137): QUERY; REQUEST; BROADCAST
+11:10:49.153630 IP 10.37.63.61.netbios-ns &gt; 10.37.63.255.netbios-ns: NBT UDP PACKET(137): QUERY; REQUEST; BROADCAST
+11:10:49.894146 IP 10.37.63.61.netbios-ns &gt; 10.37.63.255.netbios-ns: NBT UDP PACKET(137): QUERY; REQUEST; BROADCAST
+11:10:52.600297 IP 10.37.63.61.netbios-ns &gt; 10.37.63.255.netbios-ns: NBT UDP PACKET(137): QUERY; REQUEST; BROADCAST
+</code></pre>
 <ol>
 <li><p>抓取主机10.37.63.3所有在TCP 80端口接收到的数据包：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tcpdump -i en0 host 10.37.63.3 and dst tcp port 80</div></pre></td></tr></table></figure>
-</li>
+<pre><code>tcpdump -i en0 host 10.37.63.3 and dst tcp port 80
+</code></pre></li>
 <li><p>抓取所有经过 en0，目标 MAC 地址是 00:01:02:03:04:05 的 ICMP 数据</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tcpdump -i eth1 &apos;((icmp) and ((ether dst host 00:01:02:03:04:05)))&apos;</div></pre></td></tr></table></figure>
-</li>
+<pre><code>tcpdump -i eth1 &#39;((icmp) and ((ether dst host 00:01:02:03:04:05)))&#39;
+</code></pre></li>
 <li><p>抓SYN，ACK</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tcpdump -i en0 &apos;tcp[tcpflags] &amp; tcp-syn != 0 and tcp[tcpflags] &amp; tcp-ack != 0&apos;</div></pre></td></tr></table></figure>
-</li>
+<pre><code>tcpdump -i en0 &#39;tcp[tcpflags] &amp; tcp-syn != 0 and tcp[tcpflags] &amp; tcp-ack != 0&#39;
+</code></pre></li>
 <li><p>抓 SMTP 数据，抓取数据区开始为”MAIL”的包，”MAIL”的十六进制为 0x4d41494c</p>
 </li>
 </ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tcpdump -i en0 '((port 25) and (tcp[(tcp[12]&gt;&gt;2):4] = 0x4d41494c))'</div></pre></td></tr></table></figure>
+<pre><code class="shell">tcpdump -i en0 &#39;((port 25) and (tcp[(tcp[12]&gt;&gt;2):4] = 0x4d41494c))&#39;
+</code></pre>
 <ol>
-<li><p>抓 HTTP GET 数据，”GET “的十六进制是 0x47455420</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">tcpdump -i en0 &apos;tcp[(tcp[12]&gt;&gt;2):4] = 0x47455420&apos;</div><div class="line"></div><div class="line"># 0x4745 为&quot;GET&quot;前两个字母&quot;GE&quot;,0x4854 为&quot;HTTP&quot;前两个字母&quot;HT&quot;</div><div class="line">tcpdump  -XvvennSs 0 -i en0 tcp[20:2]=0x4745 or tcp[20:2]=0x4854</div></pre></td></tr></table></figure>
-</li>
-<li><p>抓 SSH 返回，”SSH-“的十六进制是 0x5353482D</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">tcpdump -i en0 &apos;tcp[(tcp[12]&gt;&gt;2):4] = 0x5353482D&apos;</div><div class="line"></div><div class="line"># 抓老版本的 SSH 返回信息，如&quot;SSH-1.99..&quot;</div><div class="line">tcpdump -i en0 &apos;(tcp[(tcp[12]&gt;&gt;2):4] = 0x5353482D) and (tcp[((tcp[12]&gt;&gt;2)+4):2] = 0x312E)&apos;</div></pre></td></tr></table></figure>
-</li>
-<li><p>高级包头过滤<br><strong>如前两个的包头过滤，首先了解如何从包头过滤信息：</strong></p>
-<p>proto[x:y]          : 过滤从x字节开始的y字节数。比如ip[2:2]过滤出3、4字节（第一字节从0开始排）<br>proto[x:y] &amp; z = 0  : proto[x:y]和z的与操作为0<br>proto[x:y] &amp; z !=0  : proto[x:y]和z的与操作不为0<br>proto[x:y] &amp; z = z  : proto[x:y]和z的与操作为z<br>proto[x:y] = z      : proto[x:y]等于z</p>
-</li>
+<li>抓 HTTP GET 数据，”GET “的十六进制是 0x47455420<br>```<br>tcpdump -i en0 ‘tcp[(tcp[12]&gt;&gt;2):4] = 0x47455420’</li>
 </ol>
-<blockquote>
-<p>操作符 : &gt;, &lt;, &gt;=, &lt;=, =, !=</p>
-</blockquote>
-<p><strong>抓取端口大于1024的TCP数据包：</strong><br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tcpdump -i en0 'tcp[0:2] &gt; 1024'</div></pre></td></tr></table></figure></p>
-<ol>
+<h1 id="0x4745-为”GET”前两个字母”GE”-0x4854-为”HTTP”前两个字母”HT”"><a href="#0x4745-为”GET”前两个字母”GE”-0x4854-为”HTTP”前两个字母”HT”" class="headerlink" title="0x4745 为”GET”前两个字母”GE”,0x4854 为”HTTP”前两个字母”HT”"></a>0x4745 为”GET”前两个字母”GE”,0x4854 为”HTTP”前两个字母”HT”</h1><p>tcpdump  -XvvennSs 0 -i en0 tcp[20:2]=0x4745 or tcp[20:2]=0x4854</p>
+<pre><code>
+9. 抓 SSH 返回，&quot;SSH-&quot;的十六进制是 0x5353482D
+</code></pre><p>tcpdump -i en0 ‘tcp[(tcp[12]&gt;&gt;2):4] = 0x5353482D’</p>
+<h1 id="抓老版本的-SSH-返回信息，如”SSH-1-99-”"><a href="#抓老版本的-SSH-返回信息，如”SSH-1-99-”" class="headerlink" title="抓老版本的 SSH 返回信息，如”SSH-1.99..”"></a>抓老版本的 SSH 返回信息，如”SSH-1.99..”</h1><p>tcpdump -i en0 ‘(tcp[(tcp[12]&gt;&gt;2):4] = 0x5353482D) and (tcp[((tcp[12]&gt;&gt;2)+4):2] = 0x312E)’</p>
+<pre><code>10. 高级包头过滤
+**如前两个的包头过滤，首先了解如何从包头过滤信息：**
+
+    proto[x:y]          : 过滤从x字节开始的y字节数。比如ip[2:2]过滤出3、4字节（第一字节从0开始排）
+    proto[x:y] &amp; z = 0  : proto[x:y]和z的与操作为0
+    proto[x:y] &amp; z !=0  : proto[x:y]和z的与操作不为0
+    proto[x:y] &amp; z = z  : proto[x:y]和z的与操作为z
+    proto[x:y] = z      : proto[x:y]等于z
+
+&gt;操作符 : &gt;, &lt;, &gt;=, &lt;=, =, !=
+
+**抓取端口大于1024的TCP数据包：**
+``` shell
+tcpdump -i en0 &#39;tcp[0:2] &gt; 1024&#39;
+</code></pre><ol>
 <li>抓 DNS 请求数据</li>
 </ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tcpdump -i en0 udp dst port 53</div></pre></td></tr></table></figure>
+<pre><code class="shell">tcpdump -i en0 udp dst port 53
+</code></pre>
 <ol>
-<li>其他<br>-c 参数对于运维人员来说也比较常用，因为流量比较大的服务器，靠人工 CTRL+C 还是抓的太多，于是可以用-c 参数指定抓多少个包。<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">time tcpdump -nn -i en0 'tcp[tcpflags] = tcp-syn' -c 10000 &gt; /dev/null</div></pre></td></tr></table></figure>
-</li>
+<li>其他<br>-c 参数对于运维人员来说也比较常用，因为流量比较大的服务器，靠人工 CTRL+C 还是抓的太多，于是可以用-c 参数指定抓多少个包。<pre><code class="shell">time tcpdump -nn -i en0 &#39;tcp[tcpflags] = tcp-syn&#39; -c 10000 &gt; /dev/null
+</code></pre>
+上面的命令计算抓 10000 个 SYN 包花费多少时间，可以判断访问量大概是多少。</li>
 </ol>
-<p>上面的命令计算抓 10000 个 SYN 包花费多少时间，可以判断访问量大概是多少。</p>
-<p>实时抓取端口号8000的GET包，然后写入GET.log<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tcpdump -i en0 '((port 8000) and (tcp[(tcp[12]&gt;&gt;2):4]=0x47455420))' -nnAl -w /tmp/GET.log</div></pre></td></tr></table></figure></p>
+<p>实时抓取端口号8000的GET包，然后写入GET.log</p>
+<pre><code class="shell">tcpdump -i en0 &#39;((port 8000) and (tcp[(tcp[12]&gt;&gt;2):4]=0x47455420))&#39; -nnAl -w /tmp/GET.log
+</code></pre>
 <pre><code>转自：
     作者：陶邦仁
     链接：http://www.jianshu.com/p/a62ed1bb5b20
@@ -812,7 +850,7 @@ listening on pktap, link-type PKTAP (Packet Tap), capture size 262144 bytes
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux-抓包原理"><span class="nav-number">1.1.</span> <span class="nav-text">Linux 抓包原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Wireshark"><span class="nav-number">1.2.</span> <span class="nav-text">Wireshark</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用"><span class="nav-number">2.</span> <span class="nav-text">使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#语法"><span class="nav-number">2.1.</span> <span class="nav-text">语法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#类型关键字"><span class="nav-number">2.1.1.</span> <span class="nav-text">类型关键字</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#确定方向关键字"><span class="nav-number">2.1.2.</span> <span class="nav-text">确定方向关键字</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#协议的关键字：缺省值是监听所有协议的信息包"><span class="nav-number">2.1.3.</span> <span class="nav-text">协议的关键字：缺省值是监听所有协议的信息包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#其他关键字"><span class="nav-number">2.1.4.</span> <span class="nav-text">其他关键字</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#常用表达式：多条件时可以用括号，但是得用-转义"><span class="nav-number">2.1.5.</span> <span class="nav-text">常用表达式：多条件时可以用括号，但是得用\转义</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#选项"><span class="nav-number">2.2.</span> <span class="nav-text">选项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#命令实践"><span class="nav-number">2.3.</span> <span class="nav-text">命令实践</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux-抓包原理"><span class="nav-number">1.1.</span> <span class="nav-text">Linux 抓包原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Wireshark"><span class="nav-number">1.2.</span> <span class="nav-text">Wireshark</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用"><span class="nav-number">2.</span> <span class="nav-text">使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#语法"><span class="nav-number">2.1.</span> <span class="nav-text">语法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#类型关键字"><span class="nav-number">2.1.1.</span> <span class="nav-text">类型关键字</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#确定方向关键字"><span class="nav-number">2.1.2.</span> <span class="nav-text">确定方向关键字</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#协议的关键字：缺省值是监听所有协议的信息包"><span class="nav-number">2.1.3.</span> <span class="nav-text">协议的关键字：缺省值是监听所有协议的信息包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#其他关键字"><span class="nav-number">2.1.4.</span> <span class="nav-text">其他关键字</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#常用表达式：多条件时可以用括号，但是得用-转义"><span class="nav-number">2.1.5.</span> <span class="nav-text">常用表达式：多条件时可以用括号，但是得用\转义</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#选项"><span class="nav-number">2.2.</span> <span class="nav-text">选项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#命令实践"><span class="nav-number">2.3.</span> <span class="nav-text">命令实践</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0x4745-为”GET”前两个字母”GE”-0x4854-为”HTTP”前两个字母”HT”"><span class="nav-number"></span> <span class="nav-text">0x4745 为”GET”前两个字母”GE”,0x4854 为”HTTP”前两个字母”HT”</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#抓老版本的-SSH-返回信息，如”SSH-1-99-”"><span class="nav-number"></span> <span class="nav-text">抓老版本的 SSH 返回信息，如”SSH-1.99..”</span></a></div>
             
 
           </div>
@@ -1216,5 +1254,9 @@ listening on pktap, link-type PKTAP (Packet Tap), capture size 262144 bytes
 
   
 
+  <script>
+      // highlight
+      hljs.initHighlightingOnLoad();
+  </script>
 </body>
 </html>

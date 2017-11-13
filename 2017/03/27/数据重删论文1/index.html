@@ -146,6 +146,8 @@
 
 
   <title> 数据重删论文1 | DearAmaze-桀骜良 </title>
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -450,13 +452,13 @@
 <p>它和RAID , LVM 在同一层对linux内核块设备进行操作.</p>
 <h2 id="设计"><a href="#设计" class="headerlink" title="设计"></a>设计</h2><h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><h4 id="数据重删层面"><a href="#数据重删层面" class="headerlink" title="数据重删层面"></a>数据重删层面</h4><ol>
 <li>应用层</li>
-<li>文件系统层<br> 实现方式:<pre><code>1. 修改现有的文件系统,比如EXT3或者WAFL.
-2. 在内核或者利用用户空间文件系统创建一个可折叠的文件系统.
-3. 从零开始实现一个重复数据删除的文件系统,比如,EMC 数据域的文件系统.
+<li>文件系统层<br> 实现方式:<pre><code> 1. 修改现有的文件系统,比如EXT3或者WAFL.
+ 2. 在内核或者利用用户空间文件系统创建一个可折叠的文件系统.
+ 3. 从零开始实现一个重复数据删除的文件系统,比如,EMC 数据域的文件系统.
 </code></pre></li>
-<li>block level<br> 缺点:<pre><code>1. 它必须保持一个额外的映射（超出文件系统的)逻辑和物理块之间的映射；
-2. 文件系统和应用程序有用的上下文丢失.
-3. variable length chunking is more difficult at the block layer. 
+<li>block level<br> 缺点:<pre><code> 1. 它必须保持一个额外的映射（超出文件系统的)逻辑和物理块之间的映射；
+ 2. 文件系统和应用程序有用的上下文丢失.
+ 3. variable length chunking is more difficult at the block layer. 
 </code></pre></li>
 </ol>
 <h4 id="时效性"><a href="#时效性" class="headerlink" title="时效性"></a>时效性</h4><h3 id="DM-设备映射器"><a href="#DM-设备映射器" class="headerlink" title="DM:设备映射器"></a>DM:设备映射器</h3><p>Device Mapper 是 Linux2.6 内核中支持逻辑卷管理的通用设备映射机制，它为实现用于存储资源管理的块设备驱动提供了一个高度模块化的内核架构.</p>
@@ -1190,5 +1192,9 @@
 
   
 
+  <script>
+      // highlight
+      hljs.initHighlightingOnLoad();
+  </script>
 </body>
 </html>

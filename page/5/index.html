@@ -141,6 +141,8 @@
 
 
   <title> DearAmaze-桀骜良 </title>
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -461,22 +463,22 @@
 </blockquote>
 <h3 id="代码块"><a href="#代码块" class="headerlink" title="代码块"></a>代码块</h3><p>代码块语法遵循标准markdown代码，例如：</p>
 <pre><code>@requires_authorization
-def somefunc(param1=&apos;&apos;, param2=0):
-    &apos;&apos;&apos;A docstring&apos;&apos;&apos;
+def somefunc(param1=&#39;&#39;, param2=0):
+    &#39;&#39;&#39;A docstring&#39;&#39;&#39;
     if param1 &amp;gt; param2: # interesting
-        print &apos;Greater&apos;
+        print &#39;Greater&#39;
     return (param2 - param1 + 1) or None
 class SomeClass:
     pass
-&amp;gt;&amp;gt;&amp;gt; message = &apos;&apos;&apos;interpreter
-... prompt&apos;&apos;&apos;
+&amp;gt;&amp;gt;&amp;gt; message = &#39;&#39;&#39;interpreter
+... prompt&#39;&#39;&#39;
 </code></pre><h3 id="脚注"><a href="#脚注" class="headerlink" title="脚注"></a>脚注</h3><p>生成一个脚注<a href="#fn:footnote" title="See footnote">1</a>.</p>
 <ul>
 <li><p><a href="#欢迎使用markdown编辑器写博客">欢迎使用Markdown编辑器写博客</a></p>
 <pre><code>*   [快捷键](#快捷键)
 </code></pre><ul>
 <li><p><a href="#markdown及扩展">Markdown及扩展</a></p>
-<pre><code>*   [表格](#表格)
+<pre><code>    *   [表格](#表格)
 </code></pre><ul>
 <li><a href="#定义列表">定义列表</a></li>
 <li><a href="#代码块">代码块</a></li>
@@ -531,10 +533,10 @@ class SomeClass:
 <li><p>这里是 <strong>脚注</strong> 的 <em>内容</em>.</p>
 <p>目录</p>
 <p>用 <code>[TOC]</code>来生成目录：<br>[6]: <a href="https://github.com/benweet/stackedit" target="_blank" rel="external">https://github.com/benweet/stackedit</a> <a href="#fnref:footnote" title="Return to article">↩</a></p>
-<pre><code>作者：qq_27803491 发表于2017/2/8 22:19:58 [原文链接](http://blog.csdn.net/qq_27803491/article/details/54933885)
+<pre><code>        作者：qq_27803491 发表于2017/2/8 22:19:58 [原文链接](http://blog.csdn.net/qq_27803491/article/details/54933885)
 </code></pre></li>
 </ol>
-<pre><code>阅读：19 评论：0 [查看评论](http://blog.csdn.net/qq_27803491/article/details/54933885#comments)
+<pre><code>        阅读：19 评论：0 [查看评论](http://blog.csdn.net/qq_27803491/article/details/54933885#comments)
 </code></pre>
           
         
@@ -897,10 +899,10 @@ int main()
 </code></pre><h2 id="收获"><a href="#收获" class="headerlink" title="收获"></a>收获</h2><ol>
 <li>熟悉了高斯消元法求解化简行列式，高斯（约当）消元法：就是每次把要消去位上含有最大的元素的行调到最高的地方。</li>
 <li><p>了解了异或运算与行列式化简的联系。</p>
-<pre><code>作者：qq_27803491 发表于2017/1/5 12:33:55 [原文链接](http://blog.csdn.net/qq_27803491/article/details/54091966)
+<pre><code>        作者：qq_27803491 发表于2017/1/5 12:33:55 [原文链接](http://blog.csdn.net/qq_27803491/article/details/54091966)
 </code></pre></li>
 </ol>
-<pre><code>阅读：31 评论：0 [查看评论](http://blog.csdn.net/qq_27803491/article/details/54091966#comments)
+<pre><code>        阅读：31 评论：0 [查看评论](http://blog.csdn.net/qq_27803491/article/details/54091966#comments)
 </code></pre>
           
         
@@ -1049,8 +1051,8 @@ int main()
 <li>促进摩擦产生</li>
 <li>违反承诺</li>
 </ol>
-<h2 id="宗旨"><a href="#宗旨" class="headerlink" title="宗旨"></a>宗旨</h2><pre><code>通过工程工作（符合长期战略的会对你的服务进行长久性的改善的工作）消除一点点的琐事，就可以持续行地整顿服务。我们可以将更多的力量投入到扩大服务规模的工程工作上去，或者是进行下一代的服务的架构设计，又或者是建立一套跨SRE使用的工具链。
-多做创新，少干琐事。
+<h2 id="宗旨"><a href="#宗旨" class="headerlink" title="宗旨"></a>宗旨</h2><pre><code>    通过工程工作（符合长期战略的会对你的服务进行长久性的改善的工作）消除一点点的琐事，就可以持续行地整顿服务。我们可以将更多的力量投入到扩大服务规模的工程工作上去，或者是进行下一代的服务的架构设计，又或者是建立一套跨SRE使用的工具链。
+    多做创新，少干琐事。
 </code></pre><h2 id="对生或中琐事的思考（待续，过一个有条理的生活，因为对我来说，有条理就是自信、充实）"><a href="#对生或中琐事的思考（待续，过一个有条理的生活，因为对我来说，有条理就是自信、充实）" class="headerlink" title="对生或中琐事的思考（待续，过一个有条理的生活，因为对我来说，有条理就是自信、充实）"></a>对生或中琐事的思考（待续，过一个有条理的生活，因为对我来说，有条理就是自信、充实）</h2><h3 id="生活中的琐事"><a href="#生活中的琐事" class="headerlink" title="生活中的琐事"></a>生活中的琐事</h3><ol>
 <li>刷空间</li>
 <li>刷朋友圈</li>
@@ -1067,10 +1069,10 @@ int main()
 <li>跑步</li>
 <li>看一些有意义的电影</li>
 <li><p>拍照发现生活中细小的美</p>
-<pre><code>作者：qq_27803491 发表于2016/12/29 17:37:17 [原文链接](http://blog.csdn.net/qq_27803491/article/details/53930796)
+<pre><code>        作者：qq_27803491 发表于2016/12/29 17:37:17 [原文链接](http://blog.csdn.net/qq_27803491/article/details/53930796)
 </code></pre></li>
 </ol>
-<pre><code>阅读：68 评论：0 [查看评论](http://blog.csdn.net/qq_27803491/article/details/53930796#comments)
+<pre><code>        阅读：68 评论：0 [查看评论](http://blog.csdn.net/qq_27803491/article/details/53930796#comments)
 </code></pre>
           
         
@@ -1352,7 +1354,7 @@ int main()
 <p>pillow、pytesseract、tesseract-ocr</p>
 <pre><code>import pytesseract
 from PIL import Image
-image = Image.open(&apos;C:/Users/Dear/Pictures/code_img/2.jpg&apos;)
+image = Image.open(&#39;C:/Users/Dear/Pictures/code_img/2.jpg&#39;)
 vcode = pytesseract.image_to_string(image)
 print (vcode)
 
@@ -1493,27 +1495,27 @@ print (vcode)
         
           
             <h2 id="python-post请求"><a href="#python-post请求" class="headerlink" title="python  post请求"></a>python  post请求</h2><pre><code>import requests
-url = &apos;http://xx.xxxx.edu.cn/userPasswordValidate.portal&apos;
+url = &#39;http://xx.xxxx.edu.cn/userPasswordValidate.portal&#39;
 user=20160001
 parms={
-    &apos;Login.Token1&apos;: user,
-    &apos;Login.Token2&apos;: &apos;123456&apos;,
-    &apos;captchaField&apos;: &apos;485c&apos;
+    &#39;Login.Token1&#39;: user,
+    &#39;Login.Token2&#39;: &#39;123456&#39;,
+    &#39;captchaField&#39;: &#39;485c&#39;
 }
 
 headers = {
-    &apos;Connection&apos;:&apos;keep-alive&apos;,
-    &apos;Content-Length&apos;: &apos;174&apos;,
-    &apos;Cache-Control&apos;: &apos;max-age=0&apos;,
-    &apos;Origin&apos;: &apos;http://xx.xxxx.edu.cn&apos;,
-    &apos;Upgrade-Insecure-Requests&apos;: &apos;1&apos;,
-    &apos;User-Agent&apos;: &apos;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36&apos;,
-    &apos;Content-Type&apos;: &apos;application/x-www-form-urlencoded&apos;,
-    &apos;Accept&apos;: &apos;text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8&apos;,
-    &apos;Referer&apos;: &apos;http://xx.xxxx.edu.cn/&apos;,
-    &apos;Accept-Encoding&apos;: &apos;gzip, deflate&apos;,
-    &apos;Accept-Language&apos;: &apos;zh-CN,zh;q=0.8&apos;,
-    &apos;Cookie&apos;: &apos;JSESSIONID=0000O1UhImqKAdSpqQwJ6Nz9Tow:17kv91lok&apos;
+    &#39;Connection&#39;:&#39;keep-alive&#39;,
+    &#39;Content-Length&#39;: &#39;174&#39;,
+    &#39;Cache-Control&#39;: &#39;max-age=0&#39;,
+    &#39;Origin&#39;: &#39;http://xx.xxxx.edu.cn&#39;,
+    &#39;Upgrade-Insecure-Requests&#39;: &#39;1&#39;,
+    &#39;User-Agent&#39;: &#39;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36&#39;,
+    &#39;Content-Type&#39;: &#39;application/x-www-form-urlencoded&#39;,
+    &#39;Accept&#39;: &#39;text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8&#39;,
+    &#39;Referer&#39;: &#39;http://xx.xxxx.edu.cn/&#39;,
+    &#39;Accept-Encoding&#39;: &#39;gzip, deflate&#39;,
+    &#39;Accept-Language&#39;: &#39;zh-CN,zh;q=0.8&#39;,
+    &#39;Cookie&#39;: &#39;JSESSIONID=0000O1UhImqKAdSpqQwJ6Nz9Tow:17kv91lok&#39;
 }
 
 resp = requests.post(url, data=parms, headers=headers)
@@ -1657,27 +1659,27 @@ print(text)
         
           
             <pre><code>#FIND
-mystr=&apos;xxxSPAMxxx&apos;
-site=mystr.find(&apos;SPAM&apos;)
+mystr=&#39;xxxSPAMxxx&#39;
+site=mystr.find(&#39;SPAM&#39;)
 print(site)
 
 #replace
-mystr=&apos;xxaaxxaa&apos;
-print(mystr.replace(&apos;aa&apos;,&apos;SPAM&apos;))
+mystr=&#39;xxaaxxaa&#39;
+print(mystr.replace(&#39;aa&#39;,&#39;SPAM&#39;))
 
 #in
 mystr=&quot;xxxspamxxx&quot;
-print(&apos;spam&apos; in mystr)
+print(&#39;spam&#39; in mystr)
 
 #strip
-mystr=&apos;\t Ni\n&apos;
+mystr=&#39;\t Ni\n&#39;
 print(mystr)
 print(mystr.strip())
 print(mystr.rstrip())
 print(mystr.lstrip())
 
 #lower
-mystr=&apos;SHRUBBERY&apos;
+mystr=&#39;SHRUBBERY&#39;
 print(mystr.lower())
 
 #isalpha
@@ -1687,23 +1689,23 @@ print(mystr.isalpha())
 print(mystr.isdigit())
 
 #split
-mystr=&apos;aaa,bbb,ccc&apos;
-print(mystr.split(&apos;,&apos;))
+mystr=&#39;aaa,bbb,ccc&#39;
+print(mystr.split(&#39;,&#39;))
 #split 默认分隔符为泛空格符
-mystr=&apos;a b\nc\n d &apos;
+mystr=&#39;a b\nc\n d &#39;
 print(mystr.split())
 
 #join
-delim=&apos;ni&apos;
-print(delim.join([&apos;aaa&apos;,&apos;bbb&apos;,&apos;ccc&apos;]))
-print(&apos; &apos;.join([&apos;aaa&apos;,&apos;bbb&apos;,&apos;ccc&apos;]))
+delim=&#39;ni&#39;
+print(delim.join([&#39;aaa&#39;,&#39;bbb&#39;,&#39;ccc&#39;]))
+print(&#39; &#39;.join([&#39;aaa&#39;,&#39;bbb&#39;,&#39;ccc&#39;]))
 
 #list
-chars=list(&apos;lorreta&apos;)
+chars=list(&#39;lorreta&#39;)
 print(chars)
 
-chars.append(&apos;!&apos;)
-print(&apos;&apos;.join(chars))
+chars.append(&#39;!&#39;)
+print(&#39;&#39;.join(chars))
 
 #整形和字符串类型转换
 int(&quot;42&quot;)
@@ -1713,7 +1715,7 @@ str(42)
 repr(42)
 
 print(&quot;%d&quot; %42)
-print(&apos;{:d}&apos;.format(42))
+print(&#39;{:d}&#39;.format(42))
 
 
             作者：qq_27803491 发表于2016/12/20 12:45:17 [原文链接](http://blog.csdn.net/qq_27803491/article/details/53761679)
@@ -1947,7 +1949,7 @@ print(&apos;{:d}&apos;.format(42))
 
 `#!/bin/bash
 
-read -p &quot;Please input files&apos; name,which you want to compress:&quot; FILENAME
+read -p &quot;Please input files&#39; name,which you want to compress:&quot; FILENAME
 read -p &quot;Please input Destination:&quot; DEST 
 read -p &quot;Please input the compress type :&quot; TYPE 
 
@@ -2152,10 +2154,10 @@ esac
 16_04_Linux系统裁减之六 为系统添加ssh服务.rar
 </code></pre><h2 id="打卡"><a href="#打卡" class="headerlink" title="打卡"></a>打卡</h2><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>我们离理想中的自己越来越远,很大程度上是因为我们一点点的辜负自己. </p>
 <p> 六级没有考过,任务没有完成,有些东西是靠积累得来的,不要被各种事情扰乱了生活,要在各种事情之间生活的游刃有余.</p>
-<pre><code>    作者：qq_27803491 发表于2016/11/16 18:08:45 [原文链接](http://blog.csdn.net/qq_27803491/article/details/53189469)
+<pre><code>            作者：qq_27803491 发表于2016/11/16 18:08:45 [原文链接](http://blog.csdn.net/qq_27803491/article/details/53189469)
 
 
-阅读：70 评论：0 [查看评论](http://blog.csdn.net/qq_27803491/article/details/53189469#comments)
+        阅读：70 评论：0 [查看评论](http://blog.csdn.net/qq_27803491/article/details/53189469#comments)
 </code></pre>
           
         
@@ -2727,5 +2729,9 @@ esac
 
   
 
+  <script>
+      // highlight
+      hljs.initHighlightingOnLoad();
+  </script>
 </body>
 </html>

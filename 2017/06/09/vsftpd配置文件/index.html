@@ -143,6 +143,8 @@
 
 
   <title> vsftpd配置文件 | DearAmaze-桀骜良 </title>
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -432,7 +434,53 @@
       
         <p>vsftpd配置文件</p>
 <a id="more"></a>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line">#禁用匿名用户登陆</div><div class="line">anonymous_enable=NO</div><div class="line"></div><div class="line">#允许本地用户登陆</div><div class="line">local_enable=YES</div><div class="line"></div><div class="line">#允许本地用户写入</div><div class="line">write_enable=YES</div><div class="line"></div><div class="line">#注意：这个地方如果不配置，就会出现只有root用户可以登陆，普通用户不可以</div><div class="line">check_shell=NO</div><div class="line"></div><div class="line">#掩码，决定了上传上来的文件的权限。设置为000使之有最大权限</div><div class="line">local_umask=000</div><div class="line"></div><div class="line">#允许记录日志</div><div class="line">xferlog_enable=YES</div><div class="line"></div><div class="line">#允许数据流从20端口传输</div><div class="line">connect_from_port_20=YES</div><div class="line"></div><div class="line">#日志路径</div><div class="line">xferlog_file=/var/log/vsftpd.log</div><div class="line"></div><div class="line">#ftp欢迎语，可以随便设置</div><div class="line">ftpd_banner=hi,guys!</div><div class="line"></div><div class="line">#注意：这个选项可以保证用户锁定在指定的家目录里，防止系统文件被修改。</div><div class="line">chroot_local_user=YES</div><div class="line"></div><div class="line">#注意：这个不配置有可能出现只能下载不能上传</div><div class="line">allow_writeable_chroot=YES</div><div class="line"></div><div class="line">#配置了可以以stand alone模式运行</div><div class="line">listen=YES</div><div class="line"></div><div class="line">#注意：该选项不配置可能导致莫名其妙的530问题</div><div class="line">seccomp_sandbox=NO</div><div class="line"></div><div class="line">#说明我们要指定一个userlist，里边放的是允许ftp登陆的本地用户。如果设置为YES，则文件里设置的是不允许登陆的本地用户</div><div class="line">userlist_deny=NO</div><div class="line">userlist_enable=YES</div><div class="line"></div><div class="line">#记录允许本地登陆用户名的文件</div><div class="line">userlist_file=/etc/vsftpd/allowed_users</div></pre></td></tr></table></figure>
+<pre><code class="conf">#禁用匿名用户登陆
+anonymous_enable=NO
+
+#允许本地用户登陆
+local_enable=YES
+
+#允许本地用户写入
+write_enable=YES
+
+#注意：这个地方如果不配置，就会出现只有root用户可以登陆，普通用户不可以
+check_shell=NO
+
+#掩码，决定了上传上来的文件的权限。设置为000使之有最大权限
+local_umask=000
+
+#允许记录日志
+xferlog_enable=YES
+
+#允许数据流从20端口传输
+connect_from_port_20=YES
+
+#日志路径
+xferlog_file=/var/log/vsftpd.log
+
+#ftp欢迎语，可以随便设置
+ftpd_banner=hi,guys!
+
+#注意：这个选项可以保证用户锁定在指定的家目录里，防止系统文件被修改。
+chroot_local_user=YES
+
+#注意：这个不配置有可能出现只能下载不能上传
+allow_writeable_chroot=YES
+
+#配置了可以以stand alone模式运行
+listen=YES
+
+#注意：该选项不配置可能导致莫名其妙的530问题
+seccomp_sandbox=NO
+
+#说明我们要指定一个userlist，里边放的是允许ftp登陆的本地用户。如果设置为YES，则文件里设置的是不允许登陆的本地用户
+userlist_deny=NO
+userlist_enable=YES
+
+#记录允许本地登陆用户名的文件
+userlist_file=/etc/vsftpd/allowed_users
+</code></pre>
+
       
     </div>
 
@@ -1064,5 +1112,9 @@
 
   
 
+  <script>
+      // highlight
+      hljs.initHighlightingOnLoad();
+  </script>
 </body>
 </html>

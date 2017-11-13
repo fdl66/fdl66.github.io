@@ -97,19 +97,19 @@
 
 
 
-<meta name="description" content="字符1.特定字符 1&amp;apos;a&amp;apos; 2.范围内字符  123456[]单个字符数字字符:[0-9],[259]小写字母:[a-z]大写字母:[A-Z]符号:[,;:]取反:[^0-9] 3.任意字符 1.:单个任意字符(注意:[.]和\.  , 这里就只表示点) 其他符号1.边界字符:头尾字符 1234^: ^root 表示以root开头的行$: false$ 表示以false结束的行">
+<meta name="description" content="字符1.特定字符 &amp;#39;a&amp;#39; 2.范围内字符  []单个字符 数字字符:[0-9],[259] 小写字母:[a-z] 大写字母:[A-Z] 符号:[,;:] 取反:[^0-9] 3.任意字符 .:单个任意字符(注意:[.]和\.  , 这里就只表示点) 其他符号1.边界字符:头尾字符 ^: ^root 表示以root开头的行 $: false$ 表示以false结束的行  空行的表示:">
 <meta name="keywords" content="linux,shell">
 <meta property="og:type" content="article">
 <meta property="og:title" content="shell正则">
 <meta property="og:url" content="https://dearamaze.com/2017/05/05/shell正则/index.html">
 <meta property="og:site_name" content="DearAmaze-桀骜良">
-<meta property="og:description" content="字符1.特定字符 1&amp;apos;a&amp;apos; 2.范围内字符  123456[]单个字符数字字符:[0-9],[259]小写字母:[a-z]大写字母:[A-Z]符号:[,;:]取反:[^0-9] 3.任意字符 1.:单个任意字符(注意:[.]和\.  , 这里就只表示点) 其他符号1.边界字符:头尾字符 1234^: ^root 表示以root开头的行$: false$ 表示以false结束的行">
+<meta property="og:description" content="字符1.特定字符 &amp;#39;a&amp;#39; 2.范围内字符  []单个字符 数字字符:[0-9],[259] 小写字母:[a-z] 大写字母:[A-Z] 符号:[,;:] 取反:[^0-9] 3.任意字符 .:单个任意字符(注意:[.]和\.  , 这里就只表示点) 其他符号1.边界字符:头尾字符 ^: ^root 表示以root开头的行 $: false$ 表示以false结束的行  空行的表示:">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://function.dearamaze.com/shell%E6%AD%A3%E5%88%99%E6%80%BB%E7%BB%93.png">
 <meta property="og:updated_time" content="2017-09-29T13:28:16.527Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="shell正则">
-<meta name="twitter:description" content="字符1.特定字符 1&amp;apos;a&amp;apos; 2.范围内字符  123456[]单个字符数字字符:[0-9],[259]小写字母:[a-z]大写字母:[A-Z]符号:[,;:]取反:[^0-9] 3.任意字符 1.:单个任意字符(注意:[.]和\.  , 这里就只表示点) 其他符号1.边界字符:头尾字符 1234^: ^root 表示以root开头的行$: false$ 表示以false结束的行">
+<meta name="twitter:description" content="字符1.特定字符 &amp;#39;a&amp;#39; 2.范围内字符  []单个字符 数字字符:[0-9],[259] 小写字母:[a-z] 大写字母:[A-Z] 符号:[,;:] 取反:[^0-9] 3.任意字符 .:单个任意字符(注意:[.]和\.  , 这里就只表示点) 其他符号1.边界字符:头尾字符 ^: ^root 表示以root开头的行 $: false$ 表示以false结束的行  空行的表示:">
 <meta name="twitter:image" content="http://function.dearamaze.com/shell%E6%AD%A3%E5%88%99%E6%80%BB%E7%BB%93.png">
 
 
@@ -145,6 +145,8 @@
 
 
   <title> shell正则 | DearAmaze-桀骜良 </title>
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -433,39 +435,60 @@
 
       
         <h2 id="字符"><a href="#字符" class="headerlink" title="字符"></a>字符</h2><p>1.特定字符</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&apos;a&apos;</div></pre></td></tr></table></figure>
-<p>2.范围内字符 </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">[]单个字符</div><div class="line">数字字符:[0-9],[259]</div><div class="line">小写字母:[a-z]</div><div class="line">大写字母:[A-Z]</div><div class="line">符号:[,;:]</div><div class="line">取反:[^0-9]</div></pre></td></tr></table></figure>
-<p>3.任意字符</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">.:单个任意字符(注意:[.]和\.  , 这里就只表示点)</div></pre></td></tr></table></figure>
-<h2 id="其他符号"><a href="#其他符号" class="headerlink" title="其他符号"></a>其他符号</h2><p>1.边界字符:头尾字符</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">^: ^root 表示以root开头的行</div><div class="line">$: false$ 表示以false结束的行</div><div class="line"></div><div class="line">空行的表示: ^$</div></pre></td></tr></table></figure>
-<p>2.元字符(代表普通字符或者特殊字符)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">\w: 匹配任何字类字符,包括下划线([A-Za-z0-9_])</div><div class="line">\W: 匹配任何非字类字符([^A-Za-z0-9_])</div><div class="line">\b: 单词的分隔(不只是空格或者制表符)</div><div class="line">dear@dear3442:~/code/sh$ egrep &apos;\b[0-9]+\b&apos; passwd </div><div class="line">root:x:0:0:root:/root:/bin/bash</div><div class="line">daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin</div><div class="line">bin:x:2:2:bin:/bin:/usr/sbin/nologin</div><div class="line">sys:x:3:3:sys:/dev:/usr/sbin/nologin</div><div class="line">sync:x:4:65534:sync:/bin:/bin/sync</div><div class="line">games:x:5:60:games:/usr/games:/usr/sbin/nologin</div><div class="line">man:x:6:12:man:/var/cache/man:/usr/sbin/nologin</div><div class="line">lp:x:7:7:lp:/var/spool/lpd:/usr/sbin/nologin</div></pre></td></tr></table></figure>
-<h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><ol>
+<pre><code>&#39;a&#39;
+</code></pre><p>2.范围内字符 </p>
+<pre><code>[]单个字符
+数字字符:[0-9],[259]
+小写字母:[a-z]
+大写字母:[A-Z]
+符号:[,;:]
+取反:[^0-9]
+</code></pre><p>3.任意字符</p>
+<pre><code>.:单个任意字符(注意:[.]和\.  , 这里就只表示点)
+</code></pre><h2 id="其他符号"><a href="#其他符号" class="headerlink" title="其他符号"></a>其他符号</h2><p>1.边界字符:头尾字符</p>
+<pre><code>^: ^root 表示以root开头的行
+$: false$ 表示以false结束的行
+
+空行的表示: ^$
+</code></pre><p>2.元字符(代表普通字符或者特殊字符)</p>
+<pre><code>
+\w: 匹配任何字类字符,包括下划线([A-Za-z0-9_])
+\W: 匹配任何非字类字符([^A-Za-z0-9_])
+\b: 单词的分隔(不只是空格或者制表符)
+dear@dear3442:~/code/sh$ egrep &#39;\b[0-9]+\b&#39; passwd 
+root:x:0:0:root:/root:/bin/bash
+daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
+bin:x:2:2:bin:/bin:/usr/sbin/nologin
+sys:x:3:3:sys:/dev:/usr/sbin/nologin
+sync:x:4:65534:sync:/bin:/bin/sync
+games:x:5:60:games:/usr/games:/usr/sbin/nologin
+man:x:6:12:man:/var/cache/man:/usr/sbin/nologin
+lp:x:7:7:lp:/var/spool/lpd:/usr/sbin/nologin
+</code></pre><h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><ol>
 <li><code>&#39;asdf&#39;</code> ,<code>&#39;asdf&#39;</code></li>
 <li><code>[0-9][0-9][0-9]</code>,<code>[a-z][a-z][a-z]</code></li>
 <li><p>重复,逻辑</p>
 <p> 重复:</p>
-<pre><code>1. *:零次或者多次 匹配前面的字符或子表达式
-2. \+:一次或者多次 匹配前面的字符或子表达式(注意grep使用的时候,要用 \+ )
-3. \?:零次或者一次 匹配前面的字符或子表达式(注意grep使用的时候,要用 \? )
-4. \{n,m\}: 重复n次到m次
+<pre><code> 1. *:零次或者多次 匹配前面的字符或子表达式
+ 2. \+:一次或者多次 匹配前面的字符或子表达式(注意grep使用的时候,要用 \+ )
+ 3. \?:零次或者一次 匹配前面的字符或子表达式(注意grep使用的时候,要用 \? )
+ 4. \{n,m\}: 重复n次到m次
 </code></pre><p> 分组:</p>
-<pre><code>$ grep &apos;\(se\)*&apos; test.txt #表示匹配se多次
+<pre><code> $ grep &#39;\(se\)*&#39; test.txt #表示匹配se多次
 </code></pre><p> 任意字符串:</p>
-<pre><code>$ grep &apos;.*&apos; test.txt #可能会贪婪匹配
+<pre><code> $ grep &#39;.*&#39; test.txt #可能会贪婪匹配
 </code></pre><p> 逻辑:</p>
-<pre><code>1. 逻辑或: | : &apos;/bin/\(false\|true\)&apos;
+<pre><code> 1. 逻辑或: | : &#39;/bin/\(false\|true\)&#39;
 </code></pre></li>
 </ol>
 <h2 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h2><ol>
 <li>4-10位的QQ号</li>
 </ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">grep '^[0-9]\&#123;4-10\&#125;$' qq.txt</div></pre></td></tr></table></figure>
+<pre><code class="shell">grep &#39;^[0-9]\{4-10\}$&#39; qq.txt
+</code></pre>
 <p>2.匹配密码(有数字,26个字母和下划线组成)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">grep &apos;^\w\+$&apos; qq.txt</div></pre></td></tr></table></figure>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><img src="http://function.dearamaze.com/shell%E6%AD%A3%E5%88%99%E6%80%BB%E7%BB%93.png" alt=""></p>
+<pre><code>grep &#39;^\w\+$&#39; qq.txt
+</code></pre><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><img src="http://function.dearamaze.com/shell%E6%AD%A3%E5%88%99%E6%80%BB%E7%BB%93.png" alt=""></p>
 
       
     </div>
@@ -1123,5 +1146,9 @@
 
   
 
+  <script>
+      // highlight
+      hljs.initHighlightingOnLoad();
+  </script>
 </body>
 </html>

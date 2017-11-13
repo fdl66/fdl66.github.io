@@ -97,17 +97,17 @@
 
 
 
-<meta name="description" content="#FIND mystr=&amp;apos;xxxSPAMxxx&amp;apos; site=mystr.find(&amp;apos;SPAM&amp;apos;) print(site)  #replace mystr=&amp;apos;xxaaxxaa&amp;apos; print(mystr.replace(&amp;apos;aa&amp;apos;,&amp;apos;SPAM&amp;apos;))  #in mystr=&amp;quot;xxxspamxxx&amp;">
+<meta name="description" content="#FIND mystr=&amp;#39;xxxSPAMxxx&amp;#39; site=mystr.find(&amp;#39;SPAM&amp;#39;) print(site)  #replace mystr=&amp;#39;xxaaxxaa&amp;#39; print(mystr.replace(&amp;#39;aa&amp;#39;,&amp;#39;SPAM&amp;#39;))  #in mystr=&amp;quot;xxxspamxxx&amp;quot; prin">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[原]python字符串方法基础">
 <meta property="og:url" content="https://dearamaze.com/2016/12/20/python字符串方法基础/index.html">
 <meta property="og:site_name" content="DearAmaze-桀骜良">
-<meta property="og:description" content="#FIND mystr=&amp;apos;xxxSPAMxxx&amp;apos; site=mystr.find(&amp;apos;SPAM&amp;apos;) print(site)  #replace mystr=&amp;apos;xxaaxxaa&amp;apos; print(mystr.replace(&amp;apos;aa&amp;apos;,&amp;apos;SPAM&amp;apos;))  #in mystr=&amp;quot;xxxspamxxx&amp;">
+<meta property="og:description" content="#FIND mystr=&amp;#39;xxxSPAMxxx&amp;#39; site=mystr.find(&amp;#39;SPAM&amp;#39;) print(site)  #replace mystr=&amp;#39;xxaaxxaa&amp;#39; print(mystr.replace(&amp;#39;aa&amp;#39;,&amp;#39;SPAM&amp;#39;))  #in mystr=&amp;quot;xxxspamxxx&amp;quot; prin">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2017-09-29T13:28:16.531Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[原]python字符串方法基础">
-<meta name="twitter:description" content="#FIND mystr=&amp;apos;xxxSPAMxxx&amp;apos; site=mystr.find(&amp;apos;SPAM&amp;apos;) print(site)  #replace mystr=&amp;apos;xxaaxxaa&amp;apos; print(mystr.replace(&amp;apos;aa&amp;apos;,&amp;apos;SPAM&amp;apos;))  #in mystr=&amp;quot;xxxspamxxx&amp;">
+<meta name="twitter:description" content="#FIND mystr=&amp;#39;xxxSPAMxxx&amp;#39; site=mystr.find(&amp;#39;SPAM&amp;#39;) print(site)  #replace mystr=&amp;#39;xxaaxxaa&amp;#39; print(mystr.replace(&amp;#39;aa&amp;#39;,&amp;#39;SPAM&amp;#39;))  #in mystr=&amp;quot;xxxspamxxx&amp;quot; prin">
 
 
 
@@ -142,6 +142,8 @@
 
 
   <title> [原]python字符串方法基础 | DearAmaze-桀骜良 </title>
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -408,27 +410,27 @@
 
       
         <pre><code>#FIND
-mystr=&apos;xxxSPAMxxx&apos;
-site=mystr.find(&apos;SPAM&apos;)
+mystr=&#39;xxxSPAMxxx&#39;
+site=mystr.find(&#39;SPAM&#39;)
 print(site)
 
 #replace
-mystr=&apos;xxaaxxaa&apos;
-print(mystr.replace(&apos;aa&apos;,&apos;SPAM&apos;))
+mystr=&#39;xxaaxxaa&#39;
+print(mystr.replace(&#39;aa&#39;,&#39;SPAM&#39;))
 
 #in
 mystr=&quot;xxxspamxxx&quot;
-print(&apos;spam&apos; in mystr)
+print(&#39;spam&#39; in mystr)
 
 #strip
-mystr=&apos;\t Ni\n&apos;
+mystr=&#39;\t Ni\n&#39;
 print(mystr)
 print(mystr.strip())
 print(mystr.rstrip())
 print(mystr.lstrip())
 
 #lower
-mystr=&apos;SHRUBBERY&apos;
+mystr=&#39;SHRUBBERY&#39;
 print(mystr.lower())
 
 #isalpha
@@ -438,23 +440,23 @@ print(mystr.isalpha())
 print(mystr.isdigit())
 
 #split
-mystr=&apos;aaa,bbb,ccc&apos;
-print(mystr.split(&apos;,&apos;))
+mystr=&#39;aaa,bbb,ccc&#39;
+print(mystr.split(&#39;,&#39;))
 #split 默认分隔符为泛空格符
-mystr=&apos;a b\nc\n d &apos;
+mystr=&#39;a b\nc\n d &#39;
 print(mystr.split())
 
 #join
-delim=&apos;ni&apos;
-print(delim.join([&apos;aaa&apos;,&apos;bbb&apos;,&apos;ccc&apos;]))
-print(&apos; &apos;.join([&apos;aaa&apos;,&apos;bbb&apos;,&apos;ccc&apos;]))
+delim=&#39;ni&#39;
+print(delim.join([&#39;aaa&#39;,&#39;bbb&#39;,&#39;ccc&#39;]))
+print(&#39; &#39;.join([&#39;aaa&#39;,&#39;bbb&#39;,&#39;ccc&#39;]))
 
 #list
-chars=list(&apos;lorreta&apos;)
+chars=list(&#39;lorreta&#39;)
 print(chars)
 
-chars.append(&apos;!&apos;)
-print(&apos;&apos;.join(chars))
+chars.append(&#39;!&#39;)
+print(&#39;&#39;.join(chars))
 
 #整形和字符串类型转换
 int(&quot;42&quot;)
@@ -464,7 +466,7 @@ str(42)
 repr(42)
 
 print(&quot;%d&quot; %42)
-print(&apos;{:d}&apos;.format(42))
+print(&#39;{:d}&#39;.format(42))
 
 
             作者：qq_27803491 发表于2016/12/20 12:45:17 [原文链接](http://blog.csdn.net/qq_27803491/article/details/53761679)
@@ -1095,5 +1097,9 @@ print(&apos;{:d}&apos;.format(42))
 
   
 
+  <script>
+      // highlight
+      hljs.initHighlightingOnLoad();
+  </script>
 </body>
 </html>

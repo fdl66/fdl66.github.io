@@ -142,6 +142,8 @@
 
 
   <title> [原]markdown 语法 | DearAmaze-桀骜良 </title>
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -455,22 +457,22 @@
 </blockquote>
 <h3 id="代码块"><a href="#代码块" class="headerlink" title="代码块"></a>代码块</h3><p>代码块语法遵循标准markdown代码，例如：</p>
 <pre><code>@requires_authorization
-def somefunc(param1=&apos;&apos;, param2=0):
-    &apos;&apos;&apos;A docstring&apos;&apos;&apos;
+def somefunc(param1=&#39;&#39;, param2=0):
+    &#39;&#39;&#39;A docstring&#39;&#39;&#39;
     if param1 &amp;gt; param2: # interesting
-        print &apos;Greater&apos;
+        print &#39;Greater&#39;
     return (param2 - param1 + 1) or None
 class SomeClass:
     pass
-&amp;gt;&amp;gt;&amp;gt; message = &apos;&apos;&apos;interpreter
-... prompt&apos;&apos;&apos;
+&amp;gt;&amp;gt;&amp;gt; message = &#39;&#39;&#39;interpreter
+... prompt&#39;&#39;&#39;
 </code></pre><h3 id="脚注"><a href="#脚注" class="headerlink" title="脚注"></a>脚注</h3><p>生成一个脚注<a href="#fn:footnote" title="See footnote">1</a>.</p>
 <ul>
 <li><p><a href="#欢迎使用markdown编辑器写博客">欢迎使用Markdown编辑器写博客</a></p>
 <pre><code>*   [快捷键](#快捷键)
 </code></pre><ul>
 <li><p><a href="#markdown及扩展">Markdown及扩展</a></p>
-<pre><code>*   [表格](#表格)
+<pre><code>    *   [表格](#表格)
 </code></pre><ul>
 <li><a href="#定义列表">定义列表</a></li>
 <li><a href="#代码块">代码块</a></li>
@@ -525,10 +527,10 @@ class SomeClass:
 <li><p>这里是 <strong>脚注</strong> 的 <em>内容</em>.</p>
 <p>目录</p>
 <p>用 <code>[TOC]</code>来生成目录：<br>[6]: <a href="https://github.com/benweet/stackedit" target="_blank" rel="external">https://github.com/benweet/stackedit</a> <a href="#fnref:footnote" title="Return to article">↩</a></p>
-<pre><code>作者：qq_27803491 发表于2017/2/8 22:19:58 [原文链接](http://blog.csdn.net/qq_27803491/article/details/54933885)
+<pre><code>        作者：qq_27803491 发表于2017/2/8 22:19:58 [原文链接](http://blog.csdn.net/qq_27803491/article/details/54933885)
 </code></pre></li>
 </ol>
-<pre><code>阅读：19 评论：0 [查看评论](http://blog.csdn.net/qq_27803491/article/details/54933885#comments)
+<pre><code>        阅读：19 评论：0 [查看评论](http://blog.csdn.net/qq_27803491/article/details/54933885#comments)
 </code></pre>
       
     </div>
@@ -1178,5 +1180,9 @@ class SomeClass:
 
   
 
+  <script>
+      // highlight
+      hljs.initHighlightingOnLoad();
+  </script>
 </body>
 </html>

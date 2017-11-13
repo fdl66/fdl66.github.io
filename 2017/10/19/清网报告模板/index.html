@@ -97,18 +97,18 @@
 
 
 
-<meta name="description" content="导出数据脚本1234567891011121314151617181920212223# 历史累计总量# 字段含义依次：恶意总量、拦截总量、告警总量、继续访问总量、停止访问总量mongoexport -d afui -c stat_count_throughout --csv -f &amp;apos;total_count,murl_count,block_count,warning_count,go_">
+<meta name="description" content="导出数据脚本# 历史累计总量 # 字段含义依次：恶意总量、拦截总量、告警总量、继续访问总量、停止访问总量 mongoexport -d afui -c stat_count_throughout --csv -f &amp;#39;total_count,murl_count,block_count,warning_count,go_count,stop_count,area_code&amp;#39; -o s">
 <meta name="keywords" content="工作,文档">
 <meta property="og:type" content="article">
 <meta property="og:title" content="清网报告模板">
 <meta property="og:url" content="https://dearamaze.com/2017/10/19/清网报告模板/index.html">
 <meta property="og:site_name" content="DearAmaze-桀骜良">
-<meta property="og:description" content="导出数据脚本1234567891011121314151617181920212223# 历史累计总量# 字段含义依次：恶意总量、拦截总量、告警总量、继续访问总量、停止访问总量mongoexport -d afui -c stat_count_throughout --csv -f &amp;apos;total_count,murl_count,block_count,warning_count,go_">
+<meta property="og:description" content="导出数据脚本# 历史累计总量 # 字段含义依次：恶意总量、拦截总量、告警总量、继续访问总量、停止访问总量 mongoexport -d afui -c stat_count_throughout --csv -f &amp;#39;total_count,murl_count,block_count,warning_count,go_count,stop_count,area_code&amp;#39; -o s">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2017-10-25T10:28:29.759Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="清网报告模板">
-<meta name="twitter:description" content="导出数据脚本1234567891011121314151617181920212223# 历史累计总量# 字段含义依次：恶意总量、拦截总量、告警总量、继续访问总量、停止访问总量mongoexport -d afui -c stat_count_throughout --csv -f &amp;apos;total_count,murl_count,block_count,warning_count,go_">
+<meta name="twitter:description" content="导出数据脚本# 历史累计总量 # 字段含义依次：恶意总量、拦截总量、告警总量、继续访问总量、停止访问总量 mongoexport -d afui -c stat_count_throughout --csv -f &amp;#39;total_count,murl_count,block_count,warning_count,go_count,stop_count,area_code&amp;#39; -o s">
 
 
 
@@ -143,6 +143,8 @@
 
 
   <title> 清网报告模板 | DearAmaze-桀骜良 </title>
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -430,7 +432,30 @@
       
 
       
-        <h2 id="导出数据脚本"><a href="#导出数据脚本" class="headerlink" title="导出数据脚本"></a>导出数据脚本</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"># 历史累计总量</div><div class="line"># 字段含义依次：恶意总量、拦截总量、告警总量、继续访问总量、停止访问总量</div><div class="line">mongoexport -d afui -c stat_count_throughout --csv -f &apos;total_count,murl_count,block_count,warning_count,go_count,stop_count,area_code&apos; -o stat_count_throughout.csv</div><div class="line"></div><div class="line"># 每日趋势（按类别）</div><div class="line"># 字段含义依次：时间点（天）、社工欺诈、信息诈骗、虚假销售、诈骗文件、色情网站、赌博网站</div><div class="line">mongoexport -d afui -c trend --csv -f &apos;fraud_date,fraud_social,fraud_info,fraud_sales,fraud_mware,fraud_porn,fraud_gamble&apos; -o trend.csv</div><div class="line"></div><div class="line"># 每日趋势（按行为）	</div><div class="line"># 字段含义依次：时间点（天）、恶意总量、拦截总量、告警总量、继续访问总量、停止访问总量</div><div class="line">mongoexport -d afui -c history_stat --csv -f &apos;day_time,murl_count,block_count,warning_count,stop_count,go_count&apos; -o history_stat.csv</div><div class="line"></div><div class="line"># 每小时趋势（按行为）</div><div class="line"># 字段含义依次：时间点（小时）、恶意总量、拦截总量、告警总量、继续访问总量、停止访问总量、地区（这里无意义，忽略）</div><div class="line">mongoexport -d afui -c stat_count_hour --csv -f &apos;hour_time,murl_count,block_count,warning_count,go_count,stop_count,area_code&apos; -o stat_count_hour.csv</div><div class="line"></div><div class="line"># 网址累计访问</div><div class="line"># 字段含义依次：行为：拦截/告警、累计访问、是否整域名、恶意分类、URL</div><div class="line">mongoexport -d afui -c stat_url --csv -f &apos;fraud_action,fraud_count,fraud_range,fraud_type,fraud_url&apos; -o stat_url.csv</div><div class="line"></div><div class="line"># 访问网址原始日志</div><div class="line"># 字段含义依次：时间点（秒）、恶意类型、URL、IP、是否域名、是否拦截、域名</div><div class="line">mongoexport -d afui -c detail_murl --csv -f &apos;time,etype,url,ip,domain,block,url_host&apos; -o detail_murl.csv</div></pre></td></tr></table></figure>
+        <h2 id="导出数据脚本"><a href="#导出数据脚本" class="headerlink" title="导出数据脚本"></a>导出数据脚本</h2><pre><code class="shell?linenums"># 历史累计总量
+# 字段含义依次：恶意总量、拦截总量、告警总量、继续访问总量、停止访问总量
+mongoexport -d afui -c stat_count_throughout --csv -f &#39;total_count,murl_count,block_count,warning_count,go_count,stop_count,area_code&#39; -o stat_count_throughout.csv
+
+# 每日趋势（按类别）
+# 字段含义依次：时间点（天）、社工欺诈、信息诈骗、虚假销售、诈骗文件、色情网站、赌博网站
+mongoexport -d afui -c trend --csv -f &#39;fraud_date,fraud_social,fraud_info,fraud_sales,fraud_mware,fraud_porn,fraud_gamble&#39; -o trend.csv
+
+# 每日趋势（按行为）    
+# 字段含义依次：时间点（天）、恶意总量、拦截总量、告警总量、继续访问总量、停止访问总量
+mongoexport -d afui -c history_stat --csv -f &#39;day_time,murl_count,block_count,warning_count,stop_count,go_count&#39; -o history_stat.csv
+
+# 每小时趋势（按行为）
+# 字段含义依次：时间点（小时）、恶意总量、拦截总量、告警总量、继续访问总量、停止访问总量、地区（这里无意义，忽略）
+mongoexport -d afui -c stat_count_hour --csv -f &#39;hour_time,murl_count,block_count,warning_count,go_count,stop_count,area_code&#39; -o stat_count_hour.csv
+
+# 网址累计访问
+# 字段含义依次：行为：拦截/告警、累计访问、是否整域名、恶意分类、URL
+mongoexport -d afui -c stat_url --csv -f &#39;fraud_action,fraud_count,fraud_range,fraud_type,fraud_url&#39; -o stat_url.csv
+
+# 访问网址原始日志
+# 字段含义依次：时间点（秒）、恶意类型、URL、IP、是否域名、是否拦截、域名
+mongoexport -d afui -c detail_murl --csv -f &#39;time,etype,url,ip,domain,block,url_host&#39; -o detail_murl.csv
+</code></pre>
 <a id="more"></a>
 <h2 id="报告模块"><a href="#报告模块" class="headerlink" title="报告模块"></a>报告模块</h2><h3 id="周、月、季度、年-环比（反映效果）"><a href="#周、月、季度、年-环比（反映效果）" class="headerlink" title="周、月、季度、年 环比（反映效果）"></a>周、月、季度、年 环比（反映效果）</h3><h4 id="数据表格"><a href="#数据表格" class="headerlink" title="数据表格"></a>数据表格</h4><p>恶意总量，拦截总量，告警总量，继续访问，停止访问</p>
 <p>疑似中毒机器数量</p>
@@ -1116,5 +1141,9 @@
 
   
 
+  <script>
+      // highlight
+      hljs.initHighlightingOnLoad();
+  </script>
 </body>
 </html>

@@ -97,18 +97,18 @@
 
 
 
-<meta name="description" content="##查看当前开启的服务  1ls /etc/rc`runlevel|sed &apos;s/N.//&apos;`.d|awk &apos;!/K/ &amp;#123;print&amp;#125;&apos;|sed &apos;s/S[0-9][0-9]//&apos;  1sudo service --status-all">
+<meta name="description" content="##查看当前开启的服务  ls /etc/rc`runlevel|sed &amp;#39;s/N.//&amp;#39;`.d|awk &amp;#39;!/K/ {print}&amp;#39;|sed &amp;#39;s/S[0-9][0-9]//&amp;#39;   sudo service --status-all">
 <meta name="keywords" content="linux,shell">
 <meta property="og:type" content="article">
 <meta property="og:title" content="常用shell">
 <meta property="og:url" content="https://dearamaze.com/2017/04/03/常用shell/index.html">
 <meta property="og:site_name" content="DearAmaze-桀骜良">
-<meta property="og:description" content="##查看当前开启的服务  1ls /etc/rc`runlevel|sed &apos;s/N.//&apos;`.d|awk &apos;!/K/ &amp;#123;print&amp;#125;&apos;|sed &apos;s/S[0-9][0-9]//&apos;  1sudo service --status-all">
+<meta property="og:description" content="##查看当前开启的服务  ls /etc/rc`runlevel|sed &amp;#39;s/N.//&amp;#39;`.d|awk &amp;#39;!/K/ {print}&amp;#39;|sed &amp;#39;s/S[0-9][0-9]//&amp;#39;   sudo service --status-all">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2017-09-29T13:28:16.531Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="常用shell">
-<meta name="twitter:description" content="##查看当前开启的服务  1ls /etc/rc`runlevel|sed &apos;s/N.//&apos;`.d|awk &apos;!/K/ &amp;#123;print&amp;#125;&apos;|sed &apos;s/S[0-9][0-9]//&apos;  1sudo service --status-all">
+<meta name="twitter:description" content="##查看当前开启的服务  ls /etc/rc`runlevel|sed &amp;#39;s/N.//&amp;#39;`.d|awk &amp;#39;!/K/ {print}&amp;#39;|sed &amp;#39;s/S[0-9][0-9]//&amp;#39;   sudo service --status-all">
 
 
 
@@ -143,6 +143,8 @@
 
 
   <title> 常用shell | DearAmaze-桀骜良 </title>
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -432,9 +434,12 @@
       
         <p>##查看当前开启的服务</p>
 <ol>
-<li><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ls /etc/rc`runlevel|sed 's/N.//'`.d|awk '!/K/ &#123;print&#125;'|sed 's/S[0-9][0-9]//'</div></pre></td></tr></table></figure>
+<li><pre><code class="shell">ls /etc/rc`runlevel|sed &#39;s/N.//&#39;`.d|awk &#39;!/K/ {print}&#39;|sed &#39;s/S[0-9][0-9]//&#39;
+</code></pre>
 </li>
-<li><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo service --status-all</div></pre></td></tr></table></figure></li>
+<li><pre><code class="shell">sudo service --status-all
+</code></pre>
+</li>
 </ol>
 
       
@@ -1068,5 +1073,9 @@
 
   
 
+  <script>
+      // highlight
+      hljs.initHighlightingOnLoad();
+  </script>
 </body>
 </html>

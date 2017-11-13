@@ -143,6 +143,8 @@
 
 
   <title> py自动化运维第一章 | DearAmaze-桀骜良 </title>
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -436,17 +438,34 @@
 <h3 id="shell中常用监控命令"><a href="#shell中常用监控命令" class="headerlink" title="shell中常用监控命令"></a>shell中常用监控命令</h3><p>ps:<br>top:<br>lsof:<br>netstat:<br>ifconfig:<br>who:<br>df:<br>kill:<br>free:<br>nice:<br>ionice:<br>iostat:<br>iotop:<br>uptime:<br>pidof:<br>tty:<br>taskset:<br>pmap:</p>
 <!--more-->
 <h3 id="获取系统性能信息"><a href="#获取系统性能信息" class="headerlink" title="获取系统性能信息"></a>获取系统性能信息</h3><ol>
-<li>CPU信息<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> psutil</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>psutil.cpu_times()</div><div class="line">scputimes(user=<span class="number">3961.46</span>, nice=<span class="number">169.729</span>, system=<span class="number">2150.659</span>, idle=<span class="number">16900.540</span>, iowait=<span class="number">629.59</span>, irq=<span class="number">0.0</span>, softirq=<span class="number">19.42</span>, steal=<span class="number">0.0</span>, guest=<span class="number">0</span>, nice=<span class="number">0.0</span>)</div><div class="line">&gt;&gt;&gt;</div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">3</span>):</div><div class="line"><span class="meta">... </span>    psutil.cpu_percent(interval=<span class="number">1</span>)</div><div class="line">...</div><div class="line"><span class="number">4.0</span></div><div class="line"><span class="number">5.9</span></div><div class="line"><span class="number">3.8</span></div><div class="line">&gt;&gt;&gt;</div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">3</span>):</div><div class="line"><span class="meta">... </span>    psutil.cpu_percent(interval=<span class="number">1</span>, percpu=<span class="keyword">True</span>)</div><div class="line">...</div><div class="line">[<span class="number">4.0</span>, <span class="number">6.9</span>, <span class="number">3.7</span>, <span class="number">9.2</span>]</div><div class="line">[<span class="number">7.0</span>, <span class="number">8.5</span>, <span class="number">2.4</span>, <span class="number">2.1</span>]</div><div class="line">[<span class="number">1.2</span>, <span class="number">9.0</span>, <span class="number">9.9</span>, <span class="number">7.2</span>]</div><div class="line">&gt;&gt;&gt;</div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">3</span>):</div><div class="line"><span class="meta">... </span>    psutil.cpu_times_percent(interval=<span class="number">1</span>, percpu=<span class="keyword">False</span>)</div><div class="line">...</div><div class="line">scputimes(user=<span class="number">1.5</span>, nice=<span class="number">0.0</span>, system=<span class="number">0.5</span>, idle=<span class="number">96.5</span>, iowait=<span class="number">1.5</span>, irq=<span class="number">0.0</span>, softirq=<span class="number">0.0</span>, steal=<span class="number">0.0</span>, guest=<span class="number">0.0</span>, guest_nice=<span class="number">0.0</span>)</div><div class="line">scputimes(user=<span class="number">1.0</span>, nice=<span class="number">0.0</span>, system=<span class="number">0.0</span>, idle=<span class="number">99.0</span>, iowait=<span class="number">0.0</span>, irq=<span class="number">0.0</span>, softirq=<span class="number">0.0</span>, steal=<span class="number">0.0</span>, guest=<span class="number">0.0</span>, guest_nice=<span class="number">0.0</span>)</div><div class="line">scputimes(user=<span class="number">2.0</span>, nice=<span class="number">0.0</span>, system=<span class="number">0.0</span>, idle=<span class="number">98.0</span>, iowait=<span class="number">0.0</span>, irq=<span class="number">0.0</span>, softirq=<span class="number">0.0</span>, steal=<span class="number">0.0</span>, guest=<span class="number">0.0</span>, guest_nice=<span class="number">0.0</span>)</div><div class="line">&gt;&gt;&gt;</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>psutil.cpu_count()</div><div class="line"><span class="number">4</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>psutil.cpu_count(logical=<span class="keyword">False</span>)</div><div class="line"><span class="number">2</span></div><div class="line">&gt;&gt;&gt;</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>psutil.cpu_stats()</div><div class="line">scpustats(ctx_switches=<span class="number">20455687</span>, interrupts=<span class="number">6598984</span>, soft_interrupts=<span class="number">2134212</span>, syscalls=<span class="number">0</span>)</div><div class="line">&gt;&gt;&gt;</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>psutil.cpu_freq()</div><div class="line">scpufreq(current=<span class="number">931.42925</span>, min=<span class="number">800.0</span>, max=<span class="number">3500.0</span>)</div><div class="line">&gt;&gt;&gt;</div></pre></td></tr></table></figure>
+<li>CPU信息<br>```python <blockquote>
+<blockquote>
+<blockquote>
+<p>import psutil<br>psutil.cpu_times()<br>scputimes(user=3961.46, nice=169.729, system=2150.659, idle=16900.540, iowait=629.59, irq=0.0, softirq=19.42, steal=0.0, guest=0, nice=0.0)</p>
+<p>for x in range(3):<br>…     psutil.cpu_percent(interval=1)<br>…<br>4.0<br>5.9<br>3.8</p>
+<p>for x in range(3):<br>…     psutil.cpu_percent(interval=1, percpu=True)<br>…<br>[4.0, 6.9, 3.7, 9.2]<br>[7.0, 8.5, 2.4, 2.1]<br>[1.2, 9.0, 9.9, 7.2]</p>
+<p>for x in range(3):<br>…     psutil.cpu_times_percent(interval=1, percpu=False)<br>…<br>scputimes(user=1.5, nice=0.0, system=0.5, idle=96.5, iowait=1.5, irq=0.0, softirq=0.0, steal=0.0, guest=0.0, guest_nice=0.0)<br>scputimes(user=1.0, nice=0.0, system=0.0, idle=99.0, iowait=0.0, irq=0.0, softirq=0.0, steal=0.0, guest=0.0, guest_nice=0.0)<br>scputimes(user=2.0, nice=0.0, system=0.0, idle=98.0, iowait=0.0, irq=0.0, softirq=0.0, steal=0.0, guest=0.0, guest_nice=0.0)</p>
+<p>psutil.cpu_count()<br>4<br>psutil.cpu_count(logical=False)<br>2</p>
+<p>psutil.cpu_stats()<br>scpustats(ctx_switches=20455687, interrupts=6598984, soft_interrupts=2134212, syscalls=0)</p>
+<p>psutil.cpu_freq()<br>scpufreq(current=931.42925, min=800.0, max=3500.0)</p>
+</blockquote>
+</blockquote>
+</blockquote>
 </li>
 </ol>
-<p>tip:</p>
-<pre><code>irq:硬件中断
-softirq：软件中断
-</code></pre><ol>
-<li>内存信息<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> psutil</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>psutil.virtual_memory() <span class="comment">#内存完整信息</span></div><div class="line">svmem(total=<span class="number">10367352832</span>, available=<span class="number">6472179712</span>, percent=<span class="number">37.6</span>, used=<span class="number">8186245120</span>, free=<span class="number">2181107712</span>, active=<span class="number">4748992512</span>, inactive=<span class="number">2758115328</span>, buffers=<span class="number">790724608</span>, cached=<span class="number">3500347392</span>, shared=<span class="number">787554304</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>psutil.swap_memory() <span class="comment">#获取交换分区信息</span></div><div class="line">sswap(total=<span class="number">2097147904</span>, used=<span class="number">296128512</span>, free=<span class="number">1801019392</span>, percent=<span class="number">14.1</span>, sin=<span class="number">304193536</span>, sout=<span class="number">677842944</span>)</div><div class="line">&gt;&gt;&gt;</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>tip:</p>
+<pre><code>tip:
+
+    irq:硬件中断
+    softirq：软件中断
+2. 内存信息
+```python
+&gt;&gt;&gt; import psutil
+&gt;&gt;&gt; psutil.virtual_memory() #内存完整信息
+svmem(total=10367352832, available=6472179712, percent=37.6, used=8186245120, free=2181107712, active=4748992512, inactive=2758115328, buffers=790724608, cached=3500347392, shared=787554304)
+&gt;&gt;&gt; psutil.swap_memory() #获取交换分区信息
+sswap(total=2097147904, used=296128512, free=1801019392, percent=14.1, sin=304193536, sout=677842944)
+&gt;&gt;&gt;
+</code></pre><p>tip:</p>
 <pre><code>total:内存总数
 used：已经使用的内存数
 free：空闲内存数
@@ -456,13 +475,55 @@ swap：交换分区使用数
 </code></pre><p><a href="http://www.cnblogs.com/chenpingzhao/p/5161844.html" target="_blank" rel="external">free命令中cached和buffers的区别</a></p>
 <ol>
 <li><p>磁盘信息</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> psutil</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>psutil.disk_partitions()</div><div class="line">[sdiskpart(device=<span class="string">'/dev/sda1'</span>, mountpoint=<span class="string">'/'</span>, fstype=<span class="string">'ext4'</span>, opts=<span class="string">'rw,nosuid'</span>),</div><div class="line"> sdiskpart(device=<span class="string">'/dev/sda2'</span>, mountpoint=<span class="string">'/home'</span>, fstype=<span class="string">'ext, opts='</span>rw<span class="string">')]</span></div><div class="line"><span class="string">&gt;&gt;&gt;</span></div><div class="line"><span class="string">&gt;&gt;&gt; psutil.disk_usage('</span>/<span class="string">')</span></div><div class="line"><span class="string">sdiskusage(total=21378641920, used=4809781248, free=15482871808, percent=22.5)</span></div><div class="line"><span class="string">&gt;&gt;&gt;</span></div><div class="line"><span class="string">&gt;&gt;&gt; psutil.disk_io_counters(perdisk=False)</span></div><div class="line"><span class="string">sdiskio(read_count=719566, write_count=1082197, read_bytes=18626220032, write_bytes=24081764352, read_time=5023392, write_time=63199568, read_merged_count=619166, write_merged_count=812396, busy_time=4523412)</span></div><div class="line"><span class="string">&gt;&gt;&gt;</span></div></pre></td></tr></table></figure>
+<pre><code class="python">&gt;&gt;&gt; import psutil
+&gt;&gt;&gt; psutil.disk_partitions()
+[sdiskpart(device=&#39;/dev/sda1&#39;, mountpoint=&#39;/&#39;, fstype=&#39;ext4&#39;, opts=&#39;rw,nosuid&#39;),
+sdiskpart(device=&#39;/dev/sda2&#39;, mountpoint=&#39;/home&#39;, fstype=&#39;ext, opts=&#39;rw&#39;)]
+&gt;&gt;&gt;
+&gt;&gt;&gt; psutil.disk_usage(&#39;/&#39;)
+sdiskusage(total=21378641920, used=4809781248, free=15482871808, percent=22.5)
+&gt;&gt;&gt;
+&gt;&gt;&gt; psutil.disk_io_counters(perdisk=False)
+sdiskio(read_count=719566, write_count=1082197, read_bytes=18626220032, write_bytes=24081764352, read_time=5023392, write_time=63199568, read_merged_count=619166, write_merged_count=812396, busy_time=4523412)
+&gt;&gt;&gt;
+</code></pre>
 </li>
 <li><p>网络信息</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> psutil</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>psutil.net_io_counters(pernic=<span class="keyword">True</span>)</div><div class="line">&#123;<span class="string">'eth0'</span>: netio(bytes_sent=<span class="number">485291293</span>, bytes_recv=<span class="number">6004858642</span>, packets_sent=<span class="number">3251564</span>, packets_recv=<span class="number">4787798</span>, errin=<span class="number">0</span>, errout=<span class="number">0</span>, dropin=<span class="number">0</span>, dropout=<span class="number">0</span>),</div><div class="line"> <span class="string">'lo'</span>: netio(bytes_sent=<span class="number">2838627</span>, bytes_recv=<span class="number">2838627</span>, packets_sent=<span class="number">30567</span>, packets_recv=<span class="number">30567</span>, errin=<span class="number">0</span>, errout=<span class="number">0</span>, dropin=<span class="number">0</span>, dropout=<span class="number">0</span>)&#125;</div><div class="line">&gt;&gt;&gt;</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>psutil.net_connections()</div><div class="line">[pconn(fd=<span class="number">115</span>, family=&lt;AddressFamily.AF_INET: <span class="number">2</span>&gt;, type=&lt;SocketType.SOCK_STREAM: <span class="number">1</span>&gt;, laddr=(<span class="string">'10.0.0.1'</span>, <span class="number">48776</span>), raddr=(<span class="string">'93.186.135.91'</span>, <span class="number">80</span>), status=<span class="string">'ESTABLISHED'</span>, pid=<span class="number">1254</span>),</div><div class="line"> pconn(fd=<span class="number">117</span>, family=&lt;AddressFamily.AF_INET: <span class="number">2</span>&gt;, type=&lt;SocketType.SOCK_STREAM: <span class="number">1</span>&gt;, laddr=(<span class="string">'10.0.0.1'</span>, <span class="number">43761</span>), raddr=(<span class="string">'72.14.234.100'</span>, <span class="number">80</span>), status=<span class="string">'CLOSING'</span>, pid=<span class="number">2987</span>),</div><div class="line"> pconn(fd=<span class="number">-1</span>, family=&lt;AddressFamily.AF_INET: <span class="number">2</span>&gt;, type=&lt;SocketType.SOCK_STREAM: <span class="number">1</span>&gt;, laddr=(<span class="string">'10.0.0.1'</span>, <span class="number">60759</span>), raddr=(<span class="string">'72.14.234.104'</span>, <span class="number">80</span>), status=<span class="string">'ESTABLISHED'</span>, pid=<span class="keyword">None</span>),</div><div class="line"> pconn(fd=<span class="number">-1</span>, family=&lt;AddressFamily.AF_INET: <span class="number">2</span>&gt;, type=&lt;SocketType.SOCK_STREAM: <span class="number">1</span>&gt;, laddr=(<span class="string">'10.0.0.1'</span>, <span class="number">51314</span>), raddr=(<span class="string">'72.14.234.83'</span>, <span class="number">443</span>), status=<span class="string">'SYN_SENT'</span>, pid=<span class="keyword">None</span>)</div><div class="line"> ...]</div><div class="line">&gt;&gt;&gt;</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>psutil.net_if_addrs()</div><div class="line">&#123;<span class="string">'lo'</span>: [snic(family=&lt;AddressFamily.AF_INET: <span class="number">2</span>&gt;, address=<span class="string">'127.0.0.1'</span>, netmask=<span class="string">'255.0.0.0'</span>, broadcast=<span class="string">'127.0.0.1'</span>, ptp=<span class="keyword">None</span>),</div><div class="line">        snic(family=&lt;AddressFamily.AF_INET6: <span class="number">10</span>&gt;, address=<span class="string">'::1'</span>, netmask=<span class="string">'ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff'</span>, broadcast=<span class="keyword">None</span>, ptp=<span class="keyword">None</span>),</div><div class="line">        snic(family=&lt;AddressFamily.AF_LINK: <span class="number">17</span>&gt;, address=<span class="string">'00:00:00:00:00:00'</span>, netmask=<span class="keyword">None</span>, broadcast=<span class="string">'00:00:00:00:00:00'</span>, ptp=<span class="keyword">None</span>)],</div><div class="line"> <span class="string">'wlan0'</span>: [snic(family=&lt;AddressFamily.AF_INET: <span class="number">2</span>&gt;, address=<span class="string">'192.168.1.3'</span>, netmask=<span class="string">'255.255.255.0'</span>, broadcast=<span class="string">'192.168.1.255'</span>, ptp=<span class="keyword">None</span>),</div><div class="line">           snic(family=&lt;AddressFamily.AF_INET6: <span class="number">10</span>&gt;, address=<span class="string">'fe80::c685:8ff:fe45:641%wlan0'</span>, netmask=<span class="string">'ffff:ffff:ffff:ffff::'</span>, broadcast=<span class="keyword">None</span>, ptp=<span class="keyword">None</span>),</div><div class="line">           snic(family=&lt;AddressFamily.AF_LINK: <span class="number">17</span>&gt;, address=<span class="string">'c4:85:08:45:06:41'</span>, netmask=<span class="keyword">None</span>, broadcast=<span class="string">'ff:ff:ff:ff:ff:ff'</span>, ptp=<span class="keyword">None</span>)]&#125;</div><div class="line">&gt;&gt;&gt;</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>psutil.net_if_stats()</div><div class="line">&#123;<span class="string">'eth0'</span>: snicstats(isup=<span class="keyword">True</span>, duplex=&lt;NicDuplex.NIC_DUPLEX_FULL: <span class="number">2</span>&gt;, speed=<span class="number">100</span>, mtu=<span class="number">1500</span>),</div><div class="line"> <span class="string">'lo'</span>: snicstats(isup=<span class="keyword">True</span>, duplex=&lt;NicDuplex.NIC_DUPLEX_UNKNOWN: <span class="number">0</span>&gt;, speed=<span class="number">0</span>, mtu=<span class="number">65536</span>)&#125;</div><div class="line">&gt;&gt;&gt;</div></pre></td></tr></table></figure>
+<pre><code class="python">&gt;&gt;&gt; import psutil
+&gt;&gt;&gt; psutil.net_io_counters(pernic=True)
+{&#39;eth0&#39;: netio(bytes_sent=485291293, bytes_recv=6004858642, packets_sent=3251564, packets_recv=4787798, errin=0, errout=0, dropin=0, dropout=0),
+&#39;lo&#39;: netio(bytes_sent=2838627, bytes_recv=2838627, packets_sent=30567, packets_recv=30567, errin=0, errout=0, dropin=0, dropout=0)}
+&gt;&gt;&gt;
+&gt;&gt;&gt; psutil.net_connections()
+[pconn(fd=115, family=&lt;AddressFamily.AF_INET: 2&gt;, type=&lt;SocketType.SOCK_STREAM: 1&gt;, laddr=(&#39;10.0.0.1&#39;, 48776), raddr=(&#39;93.186.135.91&#39;, 80), status=&#39;ESTABLISHED&#39;, pid=1254),
+pconn(fd=117, family=&lt;AddressFamily.AF_INET: 2&gt;, type=&lt;SocketType.SOCK_STREAM: 1&gt;, laddr=(&#39;10.0.0.1&#39;, 43761), raddr=(&#39;72.14.234.100&#39;, 80), status=&#39;CLOSING&#39;, pid=2987),
+pconn(fd=-1, family=&lt;AddressFamily.AF_INET: 2&gt;, type=&lt;SocketType.SOCK_STREAM: 1&gt;, laddr=(&#39;10.0.0.1&#39;, 60759), raddr=(&#39;72.14.234.104&#39;, 80), status=&#39;ESTABLISHED&#39;, pid=None),
+pconn(fd=-1, family=&lt;AddressFamily.AF_INET: 2&gt;, type=&lt;SocketType.SOCK_STREAM: 1&gt;, laddr=(&#39;10.0.0.1&#39;, 51314), raddr=(&#39;72.14.234.83&#39;, 443), status=&#39;SYN_SENT&#39;, pid=None)
+...]
+&gt;&gt;&gt;
+&gt;&gt;&gt; psutil.net_if_addrs()
+{&#39;lo&#39;: [snic(family=&lt;AddressFamily.AF_INET: 2&gt;, address=&#39;127.0.0.1&#39;, netmask=&#39;255.0.0.0&#39;, broadcast=&#39;127.0.0.1&#39;, ptp=None),
+     snic(family=&lt;AddressFamily.AF_INET6: 10&gt;, address=&#39;::1&#39;, netmask=&#39;ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff&#39;, broadcast=None, ptp=None),
+     snic(family=&lt;AddressFamily.AF_LINK: 17&gt;, address=&#39;00:00:00:00:00:00&#39;, netmask=None, broadcast=&#39;00:00:00:00:00:00&#39;, ptp=None)],
+&#39;wlan0&#39;: [snic(family=&lt;AddressFamily.AF_INET: 2&gt;, address=&#39;192.168.1.3&#39;, netmask=&#39;255.255.255.0&#39;, broadcast=&#39;192.168.1.255&#39;, ptp=None),
+        snic(family=&lt;AddressFamily.AF_INET6: 10&gt;, address=&#39;fe80::c685:8ff:fe45:641%wlan0&#39;, netmask=&#39;ffff:ffff:ffff:ffff::&#39;, broadcast=None, ptp=None),
+        snic(family=&lt;AddressFamily.AF_LINK: 17&gt;, address=&#39;c4:85:08:45:06:41&#39;, netmask=None, broadcast=&#39;ff:ff:ff:ff:ff:ff&#39;, ptp=None)]}
+&gt;&gt;&gt;
+&gt;&gt;&gt; psutil.net_if_stats()
+{&#39;eth0&#39;: snicstats(isup=True, duplex=&lt;NicDuplex.NIC_DUPLEX_FULL: 2&gt;, speed=100, mtu=1500),
+&#39;lo&#39;: snicstats(isup=True, duplex=&lt;NicDuplex.NIC_DUPLEX_UNKNOWN: 0&gt;, speed=0, mtu=65536)}
+&gt;&gt;&gt;
+</code></pre>
 </li>
-<li><p>其他系统信息</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> psutil</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>psutil.users()</div><div class="line">[suser(name=<span class="string">'giampaolo'</span>, terminal=<span class="string">'pts/2'</span>, host=<span class="string">'localhost'</span>, started=<span class="number">1340737536.0</span>, pid=<span class="number">1352</span>),</div><div class="line"> suser(name=<span class="string">'giampaolo'</span>, terminal=<span class="string">'pts/3'</span>, host=<span class="string">'localhost'</span>, started=<span class="number">1340737792.0</span>, pid=<span class="number">1788</span>)]</div><div class="line">&gt;&gt;&gt;</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>psutil.boot_time()</div><div class="line"><span class="number">1365519115.0</span></div><div class="line">&gt;&gt;&gt;</div></pre></td></tr></table></figure>
+<li>其他系统信息<pre><code class="python">&gt;&gt;&gt; import psutil
+&gt;&gt;&gt; psutil.users()
+[suser(name=&#39;giampaolo&#39;, terminal=&#39;pts/2&#39;, host=&#39;localhost&#39;, started=1340737536.0, pid=1352),
+suser(name=&#39;giampaolo&#39;, terminal=&#39;pts/3&#39;, host=&#39;localhost&#39;, started=1340737792.0, pid=1788)]
+&gt;&gt;&gt;
+&gt;&gt;&gt; psutil.boot_time()
+1365519115.0
+&gt;&gt;&gt;
+</code></pre>
 </li>
 </ol>
 <h3 id="系统进程管理方法"><a href="#系统进程管理方法" class="headerlink" title="系统进程管理方法"></a>系统进程管理方法</h3><ol>
@@ -471,8 +532,40 @@ swap：交换分区使用数
 <li><p>popen类的使用</p>
 </li>
 </ol>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> psutil</div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> subprocess <span class="keyword">import</span> PIPE</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>p = psutil.Popen([<span class="string">"/usr/bin/python"</span>, <span class="string">"-c"</span>, <span class="string">"print('hello')"</span>], stdout=PIPE)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>p.name()</div><div class="line"><span class="string">'python'</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>p.username()</div><div class="line"><span class="string">'giampaolo'</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>p.communicate()</div><div class="line">(<span class="string">'hello\n'</span>, <span class="keyword">None</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>p.wait(timeout=<span class="number">2</span>)</div><div class="line"><span class="number">0</span></div><div class="line">&gt;&gt;&gt;</div></pre></td></tr></table></figure>
-<h2 id="实用的IP地址处理模块IPy"><a href="#实用的IP地址处理模块IPy" class="headerlink" title="实用的IP地址处理模块IPy"></a>实用的IP地址处理模块<code>IPy</code></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"></div><div class="line"><span class="keyword">from</span> IPy <span class="keyword">import</span> IP</div><div class="line"></div><div class="line">ip_s = raw_input(<span class="string">'Please input an IP or net-range: '</span>)</div><div class="line">ips = IP(ip_s)</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">if</span> len(ips) &gt; <span class="number">1</span>:</div><div class="line">    print(<span class="string">'net: %s'</span> % ips.net()) <span class="comment">#输出网络地址</span></div><div class="line">    print(<span class="string">'netmask: %s'</span> % ips.netmask()) <span class="comment">#输出网络掩码地址</span></div><div class="line">    print(<span class="string">'broadcast: %s'</span> % ips.broadcast())  <span class="comment">#输出广播地址</span></div><div class="line">    print(<span class="string">'reverse address: %s'</span> % ips.reverseNames()[<span class="number">0</span>])  <span class="comment">#输出地址反向解析</span></div><div class="line">    print(<span class="string">'subnet: %s'</span> % len(ips)) <span class="comment">#输出网络子网数</span></div><div class="line"><span class="keyword">else</span>:</div><div class="line">    print(<span class="string">'reverse address: %s'</span> % ips.reverseNames()[<span class="number">0</span>])</div><div class="line"></div><div class="line">print(<span class="string">'hexadecimal: %s'</span> % ips.strHex()) <span class="comment">#十六进制地址</span></div><div class="line">print(<span class="string">'binary ip: %s'</span> % ips.strBin()) <span class="comment">#二进制地址</span></div><div class="line">print(<span class="string">'iptype: %s'</span> % ips.iptype()) <span class="comment">#地址类型</span></div></pre></td></tr></table></figure>
+<pre><code class="python">&gt;&gt;&gt; import psutil
+&gt;&gt;&gt; from subprocess import PIPE
+&gt;&gt;&gt; p = psutil.Popen([&quot;/usr/bin/python&quot;, &quot;-c&quot;, &quot;print(&#39;hello&#39;)&quot;], stdout=PIPE)
+&gt;&gt;&gt; p.name()
+&#39;python&#39;
+&gt;&gt;&gt; p.username()
+&#39;giampaolo&#39;
+&gt;&gt;&gt; p.communicate()
+(&#39;hello\n&#39;, None)
+&gt;&gt;&gt; p.wait(timeout=2)
+0
+&gt;&gt;&gt;
+</code></pre>
+<h2 id="实用的IP地址处理模块IPy"><a href="#实用的IP地址处理模块IPy" class="headerlink" title="实用的IP地址处理模块IPy"></a>实用的IP地址处理模块<code>IPy</code></h2><pre><code class="python">#!/usr/bin/env python
+
+from IPy import IP
+
+ip_s = raw_input(&#39;Please input an IP or net-range: &#39;)
+ips = IP(ip_s)
+
+
+if len(ips) &gt; 1:
+    print(&#39;net: %s&#39; % ips.net()) #输出网络地址
+    print(&#39;netmask: %s&#39; % ips.netmask()) #输出网络掩码地址
+    print(&#39;broadcast: %s&#39; % ips.broadcast())  #输出广播地址
+    print(&#39;reverse address: %s&#39; % ips.reverseNames()[0])  #输出地址反向解析
+    print(&#39;subnet: %s&#39; % len(ips)) #输出网络子网数
+else:
+    print(&#39;reverse address: %s&#39; % ips.reverseNames()[0])
+
+print(&#39;hexadecimal: %s&#39; % ips.strHex()) #十六进制地址
+print(&#39;binary ip: %s&#39; % ips.strBin()) #二进制地址
+print(&#39;iptype: %s&#39; % ips.iptype()) #地址类型
+</code></pre>
 <h2 id="DNS处理模块dnspython"><a href="#DNS处理模块dnspython" class="headerlink" title="DNS处理模块dnspython"></a>DNS处理模块<code>dnspython</code></h2><p>插播新知识：<a href="http://roclinux.cn/?p=2449" target="_blank" rel="external">dig命令</a></p>
 <h3 id="模块域名解析方法详解"><a href="#模块域名解析方法详解" class="headerlink" title="模块域名解析方法详解"></a>模块域名解析方法详解</h3><h4 id="常见的DNS解析类型"><a href="#常见的DNS解析类型" class="headerlink" title="常见的DNS解析类型"></a>常见的DNS解析类型</h4><p>A记录： 将域名指向一个IPv4地址（例如：100.100.100.100），需要增加A记录</p>
 <p>CNAME记录： 如果将域名指向一个域名，实现与被指向域名相同的访问效果，需要增加CNAME记录。这个域名一般是主机服务商提供的一个域名</p>
@@ -498,7 +591,60 @@ swap：交换分区使用数
 <p>IPv4中规定IP地址长度为32位（按TCP/IP参考模型划分) ，即有2^32-1个地址。IPv6的提出最早是为了解决，随着互联网的迅速发展IPv4地址空间将被耗尽的问题。为了扩大地址空间，IPv6将IP地址的长度由32位增加到了128位。在IPv6的设计过程中除了一劳永逸地解决了地址短缺问题以外，还解决了IPv4中的其它问题，如：端到端IP连接、服务质量（QoS）、安全性、多播、移动性、即插即用等。</p>
 <p>2.4 TTL值</p>
 <p>TTL－生存时间（Time To Live），表示解析记录在DNS服务器中的缓存时间，TTL的时间长度单位是秒，一般为3600秒。比如：在访问www.itbilu.com时，如果在DNS服务器的缓存中没有该记录，就会向某个NS服务器发出请求，获得该记录后，该记录会在DNS服务器上保存TTL的时间长度，在TTL有效期内访问www.itbilu.com，DNS服务器会直接缓存中返回刚才的记录。</p>
-<h3 id="DNS轮询（不完善）"><a href="#DNS轮询（不完善）" class="headerlink" title="DNS轮询（不完善）"></a>DNS轮询（不完善）</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python</span></div><div class="line"><span class="comment">#coding:utf-8</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> dns.resolver</div><div class="line"><span class="keyword">import</span> os</div><div class="line"><span class="keyword">import</span> httplib</div><div class="line"></div><div class="line">iplist=[]    <span class="comment">#定义域名IP列表变量</span></div><div class="line">appdomain=<span class="string">"fdl66.github.io"</span>    <span class="comment">#定义业务域名</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_iplist</span><span class="params">(domain=<span class="string">""</span>)</span>:</span>    <span class="comment">#域名解析函数，解析成功IP将追加到iplist</span></div><div class="line">    <span class="keyword">try</span>:</div><div class="line">        cname = dns.resolver.query(domain, <span class="string">'CNAME'</span>)</div><div class="line">        domains = []</div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> cname.response.answer:</div><div class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> i.items:</div><div class="line">                <span class="keyword">print</span> j.to_text()+<span class="string">"debug"</span></div><div class="line">                domains.append(j)</div><div class="line">        <span class="keyword">for</span> dom <span class="keyword">in</span> domains:</div><div class="line">            A=dns.resolver.query(str(dom),<span class="string">'A'</span>)  <span class="comment"># 解析A记录类型</span></div><div class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> A.response.answer:</div><div class="line">                <span class="keyword">for</span> j <span class="keyword">in</span> i.items:</div><div class="line">                    <span class="keyword">print</span> j.address+<span class="string">"debug"</span></div><div class="line">                    iplist.append(j.address)  <span class="comment"># 追加到iplist</span></div><div class="line">    <span class="keyword">except</span> Exception,e:</div><div class="line">        <span class="keyword">print</span> <span class="string">"dns resolver error:"</span>+str(e)</div><div class="line">        <span class="keyword">return</span></div><div class="line">    <span class="keyword">return</span> <span class="keyword">True</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">checkip</span><span class="params">(ip)</span>:</span></div><div class="line">    checkurl=ip+<span class="string">":80"</span></div><div class="line">    getcontent=<span class="string">""</span></div><div class="line">    httplib.socket.setdefaulttimeout(<span class="number">5</span>)    <span class="comment">#定义http连接超时时间(5秒)</span></div><div class="line">    conn=httplib.HTTPConnection(checkurl)    <span class="comment">#创建http连接对象</span></div><div class="line"></div><div class="line">    <span class="keyword">try</span>:</div><div class="line">        conn.request(<span class="string">"GET"</span>, <span class="string">"/"</span>,headers = &#123;<span class="string">"Host"</span>: appdomain&#125;)  <span class="comment">#发起URL请求，添加host主机头</span></div><div class="line">        r=conn.getresponse()</div><div class="line">        getcontent =r.read(<span class="number">15</span>)   <span class="comment">#获取URL页面前15个字符，以便做可用性校验</span></div><div class="line">    <span class="keyword">finally</span>:</div><div class="line">        <span class="keyword">print</span> getcontent+<span class="string">"debug"</span></div><div class="line">        <span class="keyword">if</span> getcontent==<span class="string">"&lt;!doctype html&gt;"</span>:  <span class="comment">#监控URL页的内容一般是事先定义好，比如“HTTP200”等</span></div><div class="line">            <span class="keyword">print</span> ip+<span class="string">" [OK]"</span></div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            <span class="keyword">print</span> ip+<span class="string">" [Error]"</span>    <span class="comment">#此处可放告警程序，可以是邮件、短信通知</span></div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__==<span class="string">"__main__"</span>:</div><div class="line">    <span class="keyword">if</span> get_iplist(appdomain) <span class="keyword">and</span> len(iplist)&gt;<span class="number">0</span>:    <span class="comment">#条件：域名解析正确且至少要返回一个IP</span></div><div class="line">        <span class="keyword">for</span> ip <span class="keyword">in</span> iplist:</div><div class="line">            checkip(ip)</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        <span class="keyword">print</span> <span class="string">"dns resolver error."</span></div></pre></td></tr></table></figure>
+<h3 id="DNS轮询（不完善）"><a href="#DNS轮询（不完善）" class="headerlink" title="DNS轮询（不完善）"></a>DNS轮询（不完善）</h3><pre><code class="python">#!/usr/bin/python
+#coding:utf-8
+
+import dns.resolver
+import os
+import httplib
+
+iplist=[]    #定义域名IP列表变量
+appdomain=&quot;fdl66.github.io&quot;    #定义业务域名
+
+def get_iplist(domain=&quot;&quot;):    #域名解析函数，解析成功IP将追加到iplist
+    try:
+        cname = dns.resolver.query(domain, &#39;CNAME&#39;)
+        domains = []
+        for i in cname.response.answer:
+            for j in i.items:
+                print j.to_text()+&quot;debug&quot;
+                domains.append(j)
+        for dom in domains:
+            A=dns.resolver.query(str(dom),&#39;A&#39;)  # 解析A记录类型
+            for i in A.response.answer:
+                for j in i.items:
+                    print j.address+&quot;debug&quot;
+                    iplist.append(j.address)  # 追加到iplist
+    except Exception,e:
+        print &quot;dns resolver error:&quot;+str(e)
+        return
+    return True
+
+def checkip(ip):
+    checkurl=ip+&quot;:80&quot;
+    getcontent=&quot;&quot;
+    httplib.socket.setdefaulttimeout(5)    #定义http连接超时时间(5秒)
+    conn=httplib.HTTPConnection(checkurl)    #创建http连接对象
+
+    try:
+        conn.request(&quot;GET&quot;, &quot;/&quot;,headers = {&quot;Host&quot;: appdomain})  #发起URL请求，添加host主机头
+        r=conn.getresponse()
+        getcontent =r.read(15)   #获取URL页面前15个字符，以便做可用性校验
+    finally:
+        print getcontent+&quot;debug&quot;
+        if getcontent==&quot;&lt;!doctype html&gt;&quot;:  #监控URL页的内容一般是事先定义好，比如“HTTP200”等
+            print ip+&quot; [OK]&quot;
+        else:
+            print ip+&quot; [Error]&quot;    #此处可放告警程序，可以是邮件、短信通知
+
+if __name__==&quot;__main__&quot;:
+    if get_iplist(appdomain) and len(iplist)&gt;0:    #条件：域名解析正确且至少要返回一个IP
+        for ip in iplist:
+            checkip(ip)
+    else:
+        print &quot;dns resolver error.&quot;
+</code></pre>
+
       
     </div>
 
@@ -1155,5 +1301,9 @@ swap：交换分区使用数
 
   
 
+  <script>
+      // highlight
+      hljs.initHighlightingOnLoad();
+  </script>
 </body>
 </html>

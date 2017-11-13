@@ -97,17 +97,17 @@
 
 
 
-<meta name="description" content="threading 模块使用threading模块(mtsleepC.py)threading模块的Thread类有一个join()方法,可以让主线程等待所有线程执行完毕 12345678910111213141516171819202122232425262728293031#!/usr/bin/env python# coding=utf-8import threadingfrom time">
+<meta name="description" content="threading 模块使用threading模块(mtsleepC.py)threading模块的Thread类有一个join()方法,可以让主线程等待所有线程执行完毕 #!/usr/bin/env python # coding=utf-8  import threading from time import sleep,ctime  loops=[4,2]  def loop(nloop,n">
 <meta property="og:type" content="article">
 <meta property="og:title" content="python多线程之threading模块">
 <meta property="og:url" content="https://dearamaze.com/2017/04/23/python多线程之threading模块/index.html">
 <meta property="og:site_name" content="DearAmaze-桀骜良">
-<meta property="og:description" content="threading 模块使用threading模块(mtsleepC.py)threading模块的Thread类有一个join()方法,可以让主线程等待所有线程执行完毕 12345678910111213141516171819202122232425262728293031#!/usr/bin/env python# coding=utf-8import threadingfrom time">
+<meta property="og:description" content="threading 模块使用threading模块(mtsleepC.py)threading模块的Thread类有一个join()方法,可以让主线程等待所有线程执行完毕 #!/usr/bin/env python # coding=utf-8  import threading from time import sleep,ctime  loops=[4,2]  def loop(nloop,n">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2017-09-29T13:28:16.531Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python多线程之threading模块">
-<meta name="twitter:description" content="threading 模块使用threading模块(mtsleepC.py)threading模块的Thread类有一个join()方法,可以让主线程等待所有线程执行完毕 12345678910111213141516171819202122232425262728293031#!/usr/bin/env python# coding=utf-8import threadingfrom time">
+<meta name="twitter:description" content="threading 模块使用threading模块(mtsleepC.py)threading模块的Thread类有一个join()方法,可以让主线程等待所有线程执行完毕 #!/usr/bin/env python # coding=utf-8  import threading from time import sleep,ctime  loops=[4,2]  def loop(nloop,n">
 
 
 
@@ -142,6 +142,8 @@
 
 
   <title> python多线程之threading模块 | DearAmaze-桀骜良 </title>
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -408,10 +410,81 @@
 
       
         <h1 id="threading-模块"><a href="#threading-模块" class="headerlink" title="threading 模块"></a>threading 模块</h1><h2 id="使用threading模块-mtsleepC-py"><a href="#使用threading模块-mtsleepC-py" class="headerlink" title="使用threading模块(mtsleepC.py)"></a>使用threading模块(mtsleepC.py)</h2><p>threading模块的Thread类有一个join()方法,可以让主线程等待所有线程执行完毕</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env python</div><div class="line"># coding=utf-8</div><div class="line"></div><div class="line">import threading</div><div class="line">from time import sleep,ctime</div><div class="line"></div><div class="line">loops=[4,2]</div><div class="line"></div><div class="line">def loop(nloop,nsec):</div><div class="line">    print &apos;start loop:&apos;,nloop,&apos; done at:&apos;,ctime()</div><div class="line">    sleep(nsec)</div><div class="line">    print &apos;loop&apos;,nloop,&apos;done at:&apos;,ctime()</div><div class="line">def main():</div><div class="line">    print &apos;starting at:&apos;,ctime()</div><div class="line">    threads=[]</div><div class="line">    nloops=range(len(loops))</div><div class="line"></div><div class="line">    for i in nloops:</div><div class="line">        t=threading.Thread(target=loop,args=(i,loops[i]))</div><div class="line">        threads.append(t)</div><div class="line"></div><div class="line">    for i in nloops:</div><div class="line">        threads[i].start()</div><div class="line"></div><div class="line">    for i in nloops:</div><div class="line">        threads[i].join()</div><div class="line"></div><div class="line">    print &apos;all DONE at:&apos;,ctime()</div><div class="line"></div><div class="line">if __name__ == &apos;__main__&apos;:</div><div class="line">    main()</div></pre></td></tr></table></figure>
-<h2 id="子类化的Thread-mtsleepE-py"><a href="#子类化的Thread-mtsleepE-py" class="headerlink" title="子类化的Thread(mtsleepE.py)"></a>子类化的Thread(mtsleepE.py)</h2><p>本例对Thread子类化,而不是直接对其实例化,这将使我们在定制线程对象是拥有更多的灵活性,也能够简化线程调用的过程.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env python</div><div class="line"># coding=utf-8</div><div class="line"></div><div class="line">import threading </div><div class="line">from time import sleep ,ctime</div><div class="line"></div><div class="line">loops=(4,2)</div><div class="line"></div><div class="line">class MyThread(threading.Thread):</div><div class="line">    def __init__(self,func,args,name=&apos;&apos;):</div><div class="line">        threading.Thread.__init__(self)</div><div class="line">        self.name = name </div><div class="line">        self.func = func </div><div class="line">        self.args = args </div><div class="line"></div><div class="line">    def run(self):</div><div class="line">        self.func(*self.args)</div><div class="line"></div><div class="line">def loop(nloop,nsec):</div><div class="line">    print &apos;start loop&apos;,nloop,&apos;at:&apos;,ctime()</div><div class="line">    sleep(nsec)</div><div class="line">    print &apos;loop&apos;,nloop,&apos;done at:&apos;,ctime()</div><div class="line"></div><div class="line">def main():</div><div class="line">    print &apos;starting at:&apos;,ctime()</div><div class="line">    threads  = []</div><div class="line">    nloops=range(len(loops))</div><div class="line"></div><div class="line">    for i in nloops:</div><div class="line">        t=MyThread(loop,(i,loops[i]),loop.__name__)</div><div class="line">        threads.append(t)</div><div class="line"></div><div class="line">    for i in nloops:</div><div class="line">        threads[i].start()</div><div class="line"></div><div class="line">    for i in nloops:</div><div class="line">        threads[i].join()</div><div class="line"></div><div class="line">    print &apos;all DONE at:&apos;,ctime()</div><div class="line"></div><div class="line">if __name__ == &apos;__main__&apos;:</div><div class="line">    main()</div></pre></td></tr></table></figure>
+<pre><code>#!/usr/bin/env python
+# coding=utf-8
 
+import threading
+from time import sleep,ctime
+
+loops=[4,2]
+
+def loop(nloop,nsec):
+    print &#39;start loop:&#39;,nloop,&#39; done at:&#39;,ctime()
+    sleep(nsec)
+    print &#39;loop&#39;,nloop,&#39;done at:&#39;,ctime()
+def main():
+    print &#39;starting at:&#39;,ctime()
+    threads=[]
+    nloops=range(len(loops))
+
+    for i in nloops:
+        t=threading.Thread(target=loop,args=(i,loops[i]))
+        threads.append(t)
+
+    for i in nloops:
+        threads[i].start()
+
+    for i in nloops:
+        threads[i].join()
+
+    print &#39;all DONE at:&#39;,ctime()
+
+if __name__ == &#39;__main__&#39;:
+    main()
+</code></pre><h2 id="子类化的Thread-mtsleepE-py"><a href="#子类化的Thread-mtsleepE-py" class="headerlink" title="子类化的Thread(mtsleepE.py)"></a>子类化的Thread(mtsleepE.py)</h2><p>本例对Thread子类化,而不是直接对其实例化,这将使我们在定制线程对象是拥有更多的灵活性,也能够简化线程调用的过程.</p>
+<pre><code>#!/usr/bin/env python
+# coding=utf-8
+
+import threading 
+from time import sleep ,ctime
+
+loops=(4,2)
+
+class MyThread(threading.Thread):
+    def __init__(self,func,args,name=&#39;&#39;):
+        threading.Thread.__init__(self)
+        self.name = name 
+        self.func = func 
+        self.args = args 
+
+    def run(self):
+        self.func(*self.args)
+
+def loop(nloop,nsec):
+    print &#39;start loop&#39;,nloop,&#39;at:&#39;,ctime()
+    sleep(nsec)
+    print &#39;loop&#39;,nloop,&#39;done at:&#39;,ctime()
+
+def main():
+    print &#39;starting at:&#39;,ctime()
+    threads  = []
+    nloops=range(len(loops))
+
+    for i in nloops:
+        t=MyThread(loop,(i,loops[i]),loop.__name__)
+        threads.append(t)
+
+    for i in nloops:
+        threads[i].start()
+
+    for i in nloops:
+        threads[i].join()
+
+    print &#39;all DONE at:&#39;,ctime()
+
+if __name__ == &#39;__main__&#39;:
+    main()
+</code></pre>
       
     </div>
 
@@ -1060,5 +1133,9 @@
 
   
 
+  <script>
+      // highlight
+      hljs.initHighlightingOnLoad();
+  </script>
 </body>
 </html>

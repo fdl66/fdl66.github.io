@@ -147,6 +147,8 @@
 
 
   <title> JS学习笔记2进阶 | DearAmaze-桀骜良 </title>
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -439,18 +441,105 @@
 <p>注意别吧关键字敲错了。。。</p>
 <h2 id="基础语法"><a href="#基础语法" class="headerlink" title="基础语法"></a>基础语法</h2><h3 id="变量命名规则："><a href="#变量命名规则：" class="headerlink" title="变量命名规则："></a>变量命名规则：</h3><p>1.必须以字母、下划线或美元符号开头，后面可以跟字母、下划线、美元符号和数字。如下:<br>正确:<code>mysum</code>，<code>_mychar</code>，<code>$numa1</code><br>2.变量名区分大小写，如:A与a是两个不同变量。<br>3.不允许使用JavaScript关键字和保留字做变量名<br><img src="http://p.dearamaze.com/%E5%B0%8F%E4%B9%A6%E5%8C%A0/1510456490936.jpg" alt="关键字&amp;保留字"></p>
 <h3 id="运算符优先级"><a href="#运算符优先级" class="headerlink" title="运算符优先级"></a>运算符优先级</h3><p>同C语言：<br>！ &gt; 算术运算符 &gt; 关系运算符 &gt; &amp;&amp; &gt; || &gt; 赋值运算符<br><a href="http://www.jb51.net/article/37282.htm" target="_blank" rel="external">优先级参考</a></p>
-<h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">var myarr=new Array();</div><div class="line">var myarr=new Array(3);//数组长度为3</div><div class="line">var myarr=new Array(3,4);//数组长度为2，第一个元素为3，第二个元素为4</div><div class="line">myarr.length  //myarr的长度</div><div class="line">myarr.splice(a,b);从myarr[a]开始删除b个元素</div><div class="line"></div><div class="line">字符串类型有split方法，分割字符串。</div><div class="line"></div><div class="line">sort方法，</div><div class="line">arr.sort(function(a, b)&#123;</div><div class="line">	if(a.length &gt; b.length)&#123;</div><div class="line">		return 1</div><div class="line">	&#125;else if(a.length &lt; b.length)&#123;</div><div class="line">		return -1</div><div class="line">	&#125;else&#123;</div><div class="line">		return 0</div><div class="line">	&#125;</div><div class="line">&#125;)</div><div class="line">//长度短的在前</div><div class="line"></div><div class="line">二维数组定义方式：</div><div class="line">var myarr=new Array();  //先声明一维 </div><div class="line">for(var i=0;i&lt;2;i++)&#123;   //一维长度为2</div><div class="line">   myarr[i]=new Array();  //再声明二维 </div><div class="line">   for(var j=0;j&lt;3;j++)&#123;   //二维长度为3</div><div class="line">   myarr[i][j]=i+j;   // 赋值，每个数组元素的值为i+j</div><div class="line">   &#125;</div><div class="line"> &#125;</div><div class="line"> </div><div class="line"> 或者：</div><div class="line"> </div><div class="line"> var Myarr = [[0 , 1 , 2 ],[1 , 2 , 3]]//表示的是值</div></pre></td></tr></table></figure>
-<h3 id="判断"><a href="#判断" class="headerlink" title="判断"></a>判断</h3><p>if,else:<br><img src="http://p.dearamaze.com/%E5%B0%8F%E4%B9%A6%E5%8C%A0/1510471496920.jpg" alt="if else"></p>
-<p>switch：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">switch(表达式)</div><div class="line">&#123;</div><div class="line">case值1:</div><div class="line">  执行代码块 1</div><div class="line">  break;</div><div class="line">case值2:</div><div class="line">  执行代码块 2</div><div class="line">  break;</div><div class="line">...</div><div class="line">case值n:</div><div class="line">  执行代码块 n</div><div class="line">  break;</div><div class="line">default:</div><div class="line">  与 case值1 、 case值2...case值n 不同时执行的代码</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h3 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h3><p>for循环：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">var num=1;</div><div class="line">for (num=1;num&lt;=6;num++)  //初始化值；循环条件；循环后条件值更新</div><div class="line">&#123;   document.write(&quot;取出第&quot;+num+&quot;个球&lt;br /&gt;&quot;);</div><div class="line">&#125;</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure></p>
-<p>while循环：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">var num=0;  //初始化值</div><div class="line">while (num&lt;=6)   //条件判断</div><div class="line">&#123;</div><div class="line">  document.write(&quot;取出第&quot;+num+&quot;个球&lt;br /&gt;&quot;);</div><div class="line">  num=num+1;  //条件值更新</div><div class="line">&#125;</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure></p>
-<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><h2 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h2><blockquote>
+<h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3><pre><code>var myarr=new Array();
+var myarr=new Array(3);//数组长度为3
+var myarr=new Array(3,4);//数组长度为2，第一个元素为3，第二个元素为4
+myarr.length  //myarr的长度
+myarr.splice(a,b);从myarr[a]开始删除b个元素
+
+字符串类型有split方法，分割字符串。
+
+sort方法，
+arr.sort(function(a, b){
+    if(a.length &gt; b.length){
+        return 1
+    }else if(a.length &lt; b.length){
+        return -1
+    }else{
+        return 0
+    }
+})
+//长度短的在前
+
+二维数组定义方式：
+var myarr=new Array();  //先声明一维 
+for(var i=0;i&lt;2;i++){   //一维长度为2
+   myarr[i]=new Array();  //再声明二维 
+   for(var j=0;j&lt;3;j++){   //二维长度为3
+   myarr[i][j]=i+j;   // 赋值，每个数组元素的值为i+j
+   }
+ }
+
+ 或者：
+
+ var Myarr = [[0 , 1 , 2 ],[1 , 2 , 3]]//表示的是值
+</code></pre><h3 id="判断"><a href="#判断" class="headerlink" title="判断"></a>判断</h3><p>if,else:<br><img src="http://p.dearamaze.com/%E5%B0%8F%E4%B9%A6%E5%8C%A0/1510471496920.jpg" alt="if else"></p>
+<p>switch：</p>
+<pre><code>switch(表达式)
+{
+case值1:
+  执行代码块 1
+  break;
+case值2:
+  执行代码块 2
+  break;
+...
+case值n:
+  执行代码块 n
+  break;
+default:
+  与 case值1 、 case值2...case值n 不同时执行的代码
+}
+</code></pre><h3 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h3><p>for循环：</p>
+<pre><code>&lt;script type=&quot;text/javascript&quot;&gt;
+var num=1;
+for (num=1;num&lt;=6;num++)  //初始化值；循环条件；循环后条件值更新
+{   document.write(&quot;取出第&quot;+num+&quot;个球&lt;br /&gt;&quot;);
+}
+&lt;/script&gt;
+</code></pre><p>while循环：</p>
+<pre><code>&lt;script type=&quot;text/javascript&quot;&gt;
+var num=0;  //初始化值
+while (num&lt;=6)   //条件判断
+{
+  document.write(&quot;取出第&quot;+num+&quot;个球&lt;br /&gt;&quot;);
+  num=num+1;  //条件值更新
+}
+&lt;/script&gt;
+</code></pre><h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><h2 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h2><blockquote>
 <p>JavaScript 创建动态页面。事件是可以被 JavaScript 侦测到的行为。 网页中的每个元素都可以产生某些可以触发 JavaScript 函数或程序的事件。<br>比如说，当用户单击按钮或者提交表单数据时，就发生一个鼠标单击（onclick）事件，需要浏览器做出处理，返回给用户一个结果。</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">&lt;input name=&quot;点击我&quot; type=&quot;button&quot; value=&quot;点击我&quot; onclick=&quot;openwin()&quot;/&gt;</div><div class="line">&lt;input name=&quot;确定&quot; type=&quot;button&quot; value=&quot;确定&quot; onmouseover=&quot;message()&quot;/&gt;</div><div class="line">&lt;form onmouseout=&quot;message()&quot;&gt;&lt;a href=&quot;http://www.imooc.com&quot; &gt;点击我&lt;/a&gt;&lt;/form&gt;</div><div class="line">onfocus=&quot;message()&quot;</div><div class="line">onblur事件与onfocus是相对事件，当光标离开当前获得聚焦对象的时候，触发onblur事件，同时执行被调用的程序。</div><div class="line">&lt;input name=&quot;username&quot; type=&quot;text&quot; value=&quot;请输入用户名！&quot; onblur=&quot;message()&quot;&gt;</div><div class="line">&lt;textarea name=&quot;summary&quot; cols=&quot;60&quot; rows=&quot;5&quot; onselect=&quot;message()&quot;&gt;请写入个人简介，不少于200字！&lt;/textarea&gt;</div><div class="line">&lt;textarea name=&quot;summary&quot; cols=&quot;60&quot; rows=&quot;5&quot; onchange=&quot;message()&quot;&gt;请写入个人简介，不少于200字！&lt;/textarea&gt;</div><div class="line">&lt;body onload=&quot;message()&quot;&gt;事件会在页面加载完成后，立即发生，同时执行被调用的程序。</div><div class="line">注意：1. 加载页面时，触发onload事件，事件写在&lt;body&gt;标签内。</div><div class="line"></div><div class="line">&lt;script type=&quot;text/javascript&quot;&gt;   </div><div class="line">     window.onunload = onunload_message;   </div><div class="line">     function onunload_message()&#123;   </div><div class="line">        alert(&quot;您确定离开该网页吗？&quot;);   </div><div class="line">    &#125;   </div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
-<p><img src="http://p.dearamaze.com/%E5%B0%8F%E4%B9%A6%E5%8C%A0/1510481297715.jpg" alt="事件"></p>
-<h2 id="javascript内置对象"><a href="#javascript内置对象" class="headerlink" title="javascript内置对象"></a>javascript内置对象</h2><h3 id="Date日期对象"><a href="#Date日期对象" class="headerlink" title="Date日期对象"></a>Date日期对象</h3><h3 id="String字符串对象"><a href="#String字符串对象" class="headerlink" title="String字符串对象"></a>String字符串对象</h3><h3 id="Math对象"><a href="#Math对象" class="headerlink" title="Math对象"></a>Math对象</h3><h3 id="Array数组对象"><a href="#Array数组对象" class="headerlink" title="Array数组对象"></a>Array数组对象</h3><h2 id="浏览器对象"><a href="#浏览器对象" class="headerlink" title="浏览器对象"></a>浏览器对象</h2><h3 id="window对象"><a href="#window对象" class="headerlink" title="window对象"></a>window对象</h3><h3 id="JavaScript计时器"><a href="#JavaScript计时器" class="headerlink" title="JavaScript计时器"></a>JavaScript计时器</h3><h3 id="History对象"><a href="#History对象" class="headerlink" title="History对象"></a>History对象</h3><h3 id="Location对象"><a href="#Location对象" class="headerlink" title="Location对象"></a>Location对象</h3><h3 id="Navigator对象"><a href="#Navigator对象" class="headerlink" title="Navigator对象"></a>Navigator对象</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">  var b=navigator.appName;</div><div class="line">  var b_c=navigator.appCodeName;</div><div class="line">  var b_v=navigator.appVersion;</div><div class="line">  var p=navigator.platform;</div><div class="line">  var ua=navigator.userAgent;</div><div class="line">  document.write(&quot;1:&quot;+b+&quot;&lt;br&gt;&quot;);</div><div class="line">  document.write(&quot;2:&quot;+b_c+&quot;&lt;br&gt;&quot;);</div><div class="line">  document.write(&quot;3:&quot;+b_v+&quot;&lt;br&gt;&quot;);</div><div class="line">  document.write(&quot;4:&quot;+p+&quot;&lt;br&gt;&quot;);</div><div class="line">  document.write(&quot;5:&quot;+ua+&quot;&lt;br&gt;&quot;);</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
-<h3 id="screen对象"><a href="#screen对象" class="headerlink" title="screen对象"></a>screen对象</h3><h2 id="DOM对象，控制HTML元素"><a href="#DOM对象，控制HTML元素" class="headerlink" title="DOM对象，控制HTML元素"></a>DOM对象，控制HTML元素</h2>
+<pre><code>&lt;input name=&quot;点击我&quot; type=&quot;button&quot; value=&quot;点击我&quot; onclick=&quot;openwin()&quot;/&gt;
+&lt;input name=&quot;确定&quot; type=&quot;button&quot; value=&quot;确定&quot; onmouseover=&quot;message()&quot;/&gt;
+&lt;form onmouseout=&quot;message()&quot;&gt;&lt;a href=&quot;http://www.imooc.com&quot; &gt;点击我&lt;/a&gt;&lt;/form&gt;
+onfocus=&quot;message()&quot;
+onblur事件与onfocus是相对事件，当光标离开当前获得聚焦对象的时候，触发onblur事件，同时执行被调用的程序。
+&lt;input name=&quot;username&quot; type=&quot;text&quot; value=&quot;请输入用户名！&quot; onblur=&quot;message()&quot;&gt;
+&lt;textarea name=&quot;summary&quot; cols=&quot;60&quot; rows=&quot;5&quot; onselect=&quot;message()&quot;&gt;请写入个人简介，不少于200字！&lt;/textarea&gt;
+&lt;textarea name=&quot;summary&quot; cols=&quot;60&quot; rows=&quot;5&quot; onchange=&quot;message()&quot;&gt;请写入个人简介，不少于200字！&lt;/textarea&gt;
+&lt;body onload=&quot;message()&quot;&gt;事件会在页面加载完成后，立即发生，同时执行被调用的程序。
+注意：1. 加载页面时，触发onload事件，事件写在&lt;body&gt;标签内。
+
+&lt;script type=&quot;text/javascript&quot;&gt;   
+     window.onunload = onunload_message;   
+     function onunload_message(){   
+        alert(&quot;您确定离开该网页吗？&quot;);   
+    }   
+&lt;/script&gt;
+</code></pre><p><img src="http://p.dearamaze.com/%E5%B0%8F%E4%B9%A6%E5%8C%A0/1510481297715.jpg" alt="事件"></p>
+<h2 id="javascript内置对象"><a href="#javascript内置对象" class="headerlink" title="javascript内置对象"></a>javascript内置对象</h2><h3 id="Date日期对象"><a href="#Date日期对象" class="headerlink" title="Date日期对象"></a>Date日期对象</h3><h3 id="String字符串对象"><a href="#String字符串对象" class="headerlink" title="String字符串对象"></a>String字符串对象</h3><h3 id="Math对象"><a href="#Math对象" class="headerlink" title="Math对象"></a>Math对象</h3><h3 id="Array数组对象"><a href="#Array数组对象" class="headerlink" title="Array数组对象"></a>Array数组对象</h3><h2 id="浏览器对象"><a href="#浏览器对象" class="headerlink" title="浏览器对象"></a>浏览器对象</h2><h3 id="window对象"><a href="#window对象" class="headerlink" title="window对象"></a>window对象</h3><h3 id="JavaScript计时器"><a href="#JavaScript计时器" class="headerlink" title="JavaScript计时器"></a>JavaScript计时器</h3><h3 id="History对象"><a href="#History对象" class="headerlink" title="History对象"></a>History对象</h3><h3 id="Location对象"><a href="#Location对象" class="headerlink" title="Location对象"></a>Location对象</h3><h3 id="Navigator对象"><a href="#Navigator对象" class="headerlink" title="Navigator对象"></a>Navigator对象</h3><pre><code>&lt;script type=&quot;text/javascript&quot;&gt;
+  var b=navigator.appName;
+  var b_c=navigator.appCodeName;
+  var b_v=navigator.appVersion;
+  var p=navigator.platform;
+  var ua=navigator.userAgent;
+  document.write(&quot;1:&quot;+b+&quot;&lt;br&gt;&quot;);
+  document.write(&quot;2:&quot;+b_c+&quot;&lt;br&gt;&quot;);
+  document.write(&quot;3:&quot;+b_v+&quot;&lt;br&gt;&quot;);
+  document.write(&quot;4:&quot;+p+&quot;&lt;br&gt;&quot;);
+  document.write(&quot;5:&quot;+ua+&quot;&lt;br&gt;&quot;);
+&lt;/script&gt;
+</code></pre><h3 id="screen对象"><a href="#screen对象" class="headerlink" title="screen对象"></a>screen对象</h3><h2 id="DOM对象，控制HTML元素"><a href="#DOM对象，控制HTML元素" class="headerlink" title="DOM对象，控制HTML元素"></a>DOM对象，控制HTML元素</h2>
       
     </div>
 
@@ -513,8 +602,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/11/03/毕业设计/" rel="next" title="毕业设计">
-                <i class="fa fa-chevron-left"></i> 毕业设计
+              <a href="/2017/11/12/32位和64位系统区别及int字节数/" rel="next" title="32位和64位系统区别及int字节数">
+                <i class="fa fa-chevron-left"></i> 32位和64位系统区别及int字节数
               </a>
             
           </div>
@@ -522,10 +611,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/11/12/32位和64位系统区别及int字节数/" rel="prev" title="32位和64位系统区别及int字节数">
-                32位和64位系统区别及int字节数 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -1105,5 +1190,9 @@
 
   
 
+  <script>
+      // highlight
+      hljs.initHighlightingOnLoad();
+  </script>
 </body>
 </html>

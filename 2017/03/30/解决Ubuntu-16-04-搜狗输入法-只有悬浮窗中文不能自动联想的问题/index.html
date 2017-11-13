@@ -97,18 +97,18 @@
 
 
 
-<meta name="description" content="一直用得好好的，不知道下载了什么更新导致搜狗输入法，在输入中文的时候，只显示一个悬浮窗。打字的时候什么反应都没有。中文也联想不出来。 找了半天，重新安装fcitx/搜狗输入法N次无果，在网上论坛找到了答案，修复了这个问题，记录一下。 直接删除其配置文件：1rm -rf ~/.config/SogouPY* ~/.config/sogou* 然后直接在右上角点fcitx图标，下拉列表里面重启fcit">
+<meta name="description" content="一直用得好好的，不知道下载了什么更新导致搜狗输入法，在输入中文的时候，只显示一个悬浮窗。打字的时候什么反应都没有。中文也联想不出来。 找了半天，重新安装fcitx/搜狗输入法N次无果，在网上论坛找到了答案，修复了这个问题，记录一下。 直接删除其配置文件： rm -rf ~/.config/SogouPY* ~/.config/sogou* 然后直接在右上角点fcitx图标，下拉列表里面重启fcit">
 <meta name="keywords" content="小问题">
 <meta property="og:type" content="article">
 <meta property="og:title" content="解决Ubuntu 16.04 搜狗输入法 只有悬浮窗中文不能自动联想的问题">
 <meta property="og:url" content="https://dearamaze.com/2017/03/30/解决Ubuntu-16-04-搜狗输入法-只有悬浮窗中文不能自动联想的问题/index.html">
 <meta property="og:site_name" content="DearAmaze-桀骜良">
-<meta property="og:description" content="一直用得好好的，不知道下载了什么更新导致搜狗输入法，在输入中文的时候，只显示一个悬浮窗。打字的时候什么反应都没有。中文也联想不出来。 找了半天，重新安装fcitx/搜狗输入法N次无果，在网上论坛找到了答案，修复了这个问题，记录一下。 直接删除其配置文件：1rm -rf ~/.config/SogouPY* ~/.config/sogou* 然后直接在右上角点fcitx图标，下拉列表里面重启fcit">
+<meta property="og:description" content="一直用得好好的，不知道下载了什么更新导致搜狗输入法，在输入中文的时候，只显示一个悬浮窗。打字的时候什么反应都没有。中文也联想不出来。 找了半天，重新安装fcitx/搜狗输入法N次无果，在网上论坛找到了答案，修复了这个问题，记录一下。 直接删除其配置文件： rm -rf ~/.config/SogouPY* ~/.config/sogou* 然后直接在右上角点fcitx图标，下拉列表里面重启fcit">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2017-09-29T13:28:16.527Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="解决Ubuntu 16.04 搜狗输入法 只有悬浮窗中文不能自动联想的问题">
-<meta name="twitter:description" content="一直用得好好的，不知道下载了什么更新导致搜狗输入法，在输入中文的时候，只显示一个悬浮窗。打字的时候什么反应都没有。中文也联想不出来。 找了半天，重新安装fcitx/搜狗输入法N次无果，在网上论坛找到了答案，修复了这个问题，记录一下。 直接删除其配置文件：1rm -rf ~/.config/SogouPY* ~/.config/sogou* 然后直接在右上角点fcitx图标，下拉列表里面重启fcit">
+<meta name="twitter:description" content="一直用得好好的，不知道下载了什么更新导致搜狗输入法，在输入中文的时候，只显示一个悬浮窗。打字的时候什么反应都没有。中文也联想不出来。 找了半天，重新安装fcitx/搜狗输入法N次无果，在网上论坛找到了答案，修复了这个问题，记录一下。 直接删除其配置文件： rm -rf ~/.config/SogouPY* ~/.config/sogou* 然后直接在右上角点fcitx图标，下拉列表里面重启fcit">
 
 
 
@@ -143,6 +143,8 @@
 
 
   <title> 解决Ubuntu 16.04 搜狗输入法 只有悬浮窗中文不能自动联想的问题 | DearAmaze-桀骜良 </title>
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -432,8 +434,9 @@
       
         <p>一直用得好好的，不知道下载了什么更新导致搜狗输入法，在输入中文的时候，只显示一个悬浮窗。打字的时候什么反应都没有。中文也联想不出来。</p>
 <p>找了半天，重新安装fcitx/搜狗输入法N次无果，在网上论坛找到了答案，修复了这个问题，记录一下。</p>
-<p>直接删除其配置文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rm -rf ~/.config/SogouPY* ~/.config/sogou*</div></pre></td></tr></table></figure></p>
-<p>然后直接在右上角点fcitx图标，下拉列表里面重启fcitx输入法</p>
+<p>直接删除其配置文件：</p>
+<pre><code>rm -rf ~/.config/SogouPY* ~/.config/sogou*
+</code></pre><p>然后直接在右上角点fcitx图标，下拉列表里面重启fcitx输入法</p>
 <p><a href="https://fiture.me/share/linux-ubuntu/1246.html" target="_blank" rel="external">转载自</a></p>
 
       
@@ -1065,5 +1068,9 @@
 
   
 
+  <script>
+      // highlight
+      hljs.initHighlightingOnLoad();
+  </script>
 </body>
 </html>

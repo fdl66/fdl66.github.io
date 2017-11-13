@@ -97,18 +97,18 @@
 
 
 
-<meta name="description" content="数组和关联数组Bash从4.0版本之后才开始支持关联数组。(1) 定义数组的方法有很多种。可以在单行中使用一列值来定义一个数组: 123array_var=(1 2 3 4 5 6)#这些值将会存储在以0为起始索引的连续位置上 另外,还可以将数组定义成一组“索引 - 值”: 123456array_var[0]=&quot;test1&quot;array_var[1]=&quot;test2&quot;array_var[2]=&quot;te">
+<meta name="description" content="数组和关联数组Bash从4.0版本之后才开始支持关联数组。(1) 定义数组的方法有很多种。可以在单行中使用一列值来定义一个数组:  array_var=(1 2 3 4 5 6) #这些值将会存储在以0为起始索引的连续位置上  另外,还可以将数组定义成一组“索引 - 值”: array_var[0]=&amp;quot;test1&amp;quot; array_var[1]=&amp;quot;test2&amp;quot;">
 <meta name="keywords" content="linux,shell">
 <meta property="og:type" content="article">
 <meta property="og:title" content="shell知识遗漏1">
 <meta property="og:url" content="https://dearamaze.com/2017/05/16/shell知识遗漏1/index.html">
 <meta property="og:site_name" content="DearAmaze-桀骜良">
-<meta property="og:description" content="数组和关联数组Bash从4.0版本之后才开始支持关联数组。(1) 定义数组的方法有很多种。可以在单行中使用一列值来定义一个数组: 123array_var=(1 2 3 4 5 6)#这些值将会存储在以0为起始索引的连续位置上 另外,还可以将数组定义成一组“索引 - 值”: 123456array_var[0]=&quot;test1&quot;array_var[1]=&quot;test2&quot;array_var[2]=&quot;te">
+<meta property="og:description" content="数组和关联数组Bash从4.0版本之后才开始支持关联数组。(1) 定义数组的方法有很多种。可以在单行中使用一列值来定义一个数组:  array_var=(1 2 3 4 5 6) #这些值将会存储在以0为起始索引的连续位置上  另外,还可以将数组定义成一组“索引 - 值”: array_var[0]=&amp;quot;test1&amp;quot; array_var[1]=&amp;quot;test2&amp;quot;">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2017-09-29T13:28:16.527Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="shell知识遗漏1">
-<meta name="twitter:description" content="数组和关联数组Bash从4.0版本之后才开始支持关联数组。(1) 定义数组的方法有很多种。可以在单行中使用一列值来定义一个数组: 123array_var=(1 2 3 4 5 6)#这些值将会存储在以0为起始索引的连续位置上 另外,还可以将数组定义成一组“索引 - 值”: 123456array_var[0]=&quot;test1&quot;array_var[1]=&quot;test2&quot;array_var[2]=&quot;te">
+<meta name="twitter:description" content="数组和关联数组Bash从4.0版本之后才开始支持关联数组。(1) 定义数组的方法有很多种。可以在单行中使用一列值来定义一个数组:  array_var=(1 2 3 4 5 6) #这些值将会存储在以0为起始索引的连续位置上  另外,还可以将数组定义成一组“索引 - 值”: array_var[0]=&amp;quot;test1&amp;quot; array_var[1]=&amp;quot;test2&amp;quot;">
 
 
 
@@ -143,6 +143,8 @@
 
 
   <title> shell知识遗漏1 | DearAmaze-桀骜良 </title>
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -431,40 +433,109 @@
 
       
         <h2 id="数组和关联数组"><a href="#数组和关联数组" class="headerlink" title="数组和关联数组"></a>数组和关联数组</h2><p>Bash从4.0版本之后才开始支持关联数组。<br>(1) 定义数组的方法有很多种。可以在单行中使用一列值来定义一个数组:</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">array_var=(1 2 3 4 5 6)</div><div class="line"><span class="meta">#</span>这些值将会存储在以0为起始索引的连续位置上</div></pre></td></tr></table></figure>
+<pre><code class="shell">
+array_var=(1 2 3 4 5 6)
+#这些值将会存储在以0为起始索引的连续位置上
+</code></pre>
 <p>另外,还可以将数组定义成一组“索引 - 值”:</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">array_var[0]="test1"</div><div class="line">array_var[1]="test2"</div><div class="line">array_var[2]="test3"</div><div class="line">array_var[3]="test4"</div><div class="line">array_var[4]="test5"</div><div class="line">array_var[5]="test6"</div></pre></td></tr></table></figure>
+<pre><code class="shell">array_var[0]=&quot;test1&quot;
+array_var[1]=&quot;test2&quot;
+array_var[2]=&quot;test3&quot;
+array_var[3]=&quot;test4&quot;
+array_var[4]=&quot;test5&quot;
+array_var[5]=&quot;test6&quot;
+</code></pre>
 <p>(2) 打印出特定索引的数组元素内容:</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">echo $&#123;array_var[0]&#125;</div><div class="line">test1</div><div class="line">index=5</div><div class="line">echo $&#123;array_var[$index]&#125;</div><div class="line">test6</div></pre></td></tr></table></figure>
+<pre><code class="shell">echo ${array_var[0]}
+test1
+index=5
+echo ${array_var[$index]}
+test6
+</code></pre>
 <p>(3) 以清单形式打印出数组中的所有值:</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> echo $&#123;array_var[*]&#125;</div><div class="line">test1 test2 test3 test4 test5 test6</div><div class="line">也可以这样使用:</div><div class="line"><span class="meta">$</span> echo $&#123;array_var[@]&#125;</div><div class="line">test1 test2 test3 test4 test5 test6</div></pre></td></tr></table></figure>
+<pre><code class="shell">$ echo ${array_var[*]}
+test1 test2 test3 test4 test5 test6
+也可以这样使用:
+$ echo ${array_var[@]}
+test1 test2 test3 test4 test5 test6
+</code></pre>
 <p>(4) 打印数组长度(即数组中元素的个数):</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> echo $&#123;#array_var[*]&#125;</div><div class="line">6</div></pre></td></tr></table></figure>
+<pre><code class="shell">$ echo ${#array_var[*]}
+6
+</code></pre>
 <a id="more"></a>
-<h2 id="数组plus"><a href="#数组plus" class="headerlink" title="数组plus"></a>数组plus</h2><p>1).定义关联数组<br>在关联数组中,我们可以用任意的文本作为数组索引。首先,需要使用声明语句将一个变量<br>名声明为关联数组。像下面这样:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ declare -A ass_array</div></pre></td></tr></table></figure></p>
-<p>声明之后,可以用两种方法将元素添加到关联数组中。<br>利用内嵌“索引 - 值”列表的方法,提供一个“索引 - 值”列表:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ass_array=([index1]=val1 [index2]=val2)</div></pre></td></tr></table></figure></p>
-<p>使用独立的“索引 - 值”进行赋值:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ ass_array[index1]=val1</div><div class="line">$ ass_array&apos;index2]=val2</div></pre></td></tr></table></figure></p>
-<p>举个例子,试想如何用关联数组为水果制定价格:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ declare -A fruits_value</div><div class="line">$ fruits_value=([apple]=&apos;100dollars&apos; [orange]=&apos;150 dollars&apos;)</div></pre></td></tr></table></figure></p>
-<p>用下面的方法显示数组内容:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ echo &quot;Apple costs $&#123;fruits_value[apple]&#125;&quot;</div><div class="line">Apple costs 100 dollars</div></pre></td></tr></table></figure></p>
-<p>2).列出数组索引<br>每一个数组元素都有一个索引用于查找。普通数组和关联数组具有不同的索引类型。我们可<br>以用下面的方法获取数组的索引列表:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ echo $&#123;!array_var[*]&#125;</div><div class="line">也可以使用:</div><div class="line">$ echo $&#123;!array_var[@]</div></pre></td></tr></table></figure></p>
-<p>以先前提到的 fruits_value 数组为例,运行如下命令:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ echo $&#123;!fruits_value[*]&#125;</div><div class="line">orange apple</div><div class="line">对于普通数组,这个方法同样可行。</div></pre></td></tr></table></figure></p>
-<h2 id="调试脚本"><a href="#调试脚本" class="headerlink" title="调试脚本"></a>调试脚本</h2><h2 id="函数和参数"><a href="#函数和参数" class="headerlink" title="函数和参数"></a>函数和参数</h2><p> <code>$1</code> 是第一个参数。</p>
+<h2 id="数组plus"><a href="#数组plus" class="headerlink" title="数组plus"></a>数组plus</h2><p>1).定义关联数组<br>在关联数组中,我们可以用任意的文本作为数组索引。首先,需要使用声明语句将一个变量<br>名声明为关联数组。像下面这样:</p>
+<pre><code>$ declare -A ass_array
+</code></pre><p>声明之后,可以用两种方法将元素添加到关联数组中。<br>利用内嵌“索引 - 值”列表的方法,提供一个“索引 - 值”列表:</p>
+<pre><code>$ ass_array=([index1]=val1 [index2]=val2)
+</code></pre><p>使用独立的“索引 - 值”进行赋值:</p>
+<pre><code>$ ass_array[index1]=val1
+$ ass_array&#39;index2]=val2
+</code></pre><p>举个例子,试想如何用关联数组为水果制定价格:</p>
+<pre><code>$ declare -A fruits_value
+$ fruits_value=([apple]=&#39;100dollars&#39; [orange]=&#39;150 dollars&#39;)
+</code></pre><p>用下面的方法显示数组内容:</p>
+<pre><code>$ echo &quot;Apple costs ${fruits_value[apple]}&quot;
+Apple costs 100 dollars
+</code></pre><p>2).列出数组索引<br>每一个数组元素都有一个索引用于查找。普通数组和关联数组具有不同的索引类型。我们可<br>以用下面的方法获取数组的索引列表:</p>
+<pre><code>$ echo ${!array_var[*]}
+也可以使用:
+$ echo ${!array_var[@]
+</code></pre><p>以先前提到的 fruits_value 数组为例,运行如下命令:</p>
+<pre><code>$ echo ${!fruits_value[*]}
+orange apple
+对于普通数组,这个方法同样可行。
+</code></pre><h2 id="调试脚本"><a href="#调试脚本" class="headerlink" title="调试脚本"></a>调试脚本</h2><h2 id="函数和参数"><a href="#函数和参数" class="headerlink" title="函数和参数"></a>函数和参数</h2><p> <code>$1</code> 是第一个参数。</p>
 <p> <code>$2</code> 是第二个参数。<br> <code>$n</code> 是第n个参数。</p>
 <p> <code>&quot;$@&quot;</code> 被扩展成 <code>&quot;$1&quot; &quot;$2&quot; &quot;$3&quot;</code> 等。</p>
 <p> <code>&quot;$*&quot;</code> 被扩展成 <code>&quot;$1c$2c$3&quot;</code> ,其中 c 是IFS的第一个字符。</p>
 <p> <code>&quot;$@&quot;</code> 要比 <code>&quot;$*&quot;</code> 用得多。由于 <code>&quot;$*&quot;</code> 将所有的参数当做单个字符串,因此它很少被使用。<br> <code>$?</code>  上一条命令执行的返回值</p>
 <p> <code>$#</code> 参数个数 </p>
-<h2 id="字段分隔符和迭代器"><a href="#字段分隔符和迭代器" class="headerlink" title="字段分隔符和迭代器"></a>字段分隔符和迭代器</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="meta">#</span>!/bin/bash</div><div class="line"><span class="meta">#</span>用途: 演示IFS的用法</div><div class="line">line="root:x:0:0:root:/root:/bin/bash"</div><div class="line">oldIFS=$IFS;</div><div class="line">IFS=":"</div><div class="line">count=0</div><div class="line">for item in $line;</div><div class="line">do</div><div class="line">	[ $count -eq 0 ] &amp;&amp; user=$item;</div><div class="line">	[ $count -eq 6 ] &amp;&amp; shell=$item;</div><div class="line">	let count++</div><div class="line">done;</div><div class="line">IFS=$oldIFS</div><div class="line">echo $user\'s shell is $shell;</div><div class="line"></div><div class="line">输出为:</div><div class="line">root's shell is /bin/bash</div></pre></td></tr></table></figure>
-<h2 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h2><h3 id="for-循环"><a href="#for-循环" class="headerlink" title="for 循环"></a>for 循环</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">for var in list;</div><div class="line">do</div><div class="line">	commands; #使用变量$var</div><div class="line">done</div></pre></td></tr></table></figure>
-<p>list 可以是一个字符串,也可以是一个序列。<br>我们可以轻松地生成不同的序列。<br>echo {1..50} 能够生成一个从1~50的数字列表。 echo {a..z} 或 {A..Z} 或 {a..h} 可以生</p>
-<p>成字母列表。同样,我们可以将这些方法结合起来对数据进行拼接(concatenate)<br>。下面的<br>代码中,变量 i 在每次迭代的过程里都会保存一个字符,范围从 <code>a ~ z :</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">for i in &#123;a..z&#125;; do actions; done;</div></pre></td></tr></table></figure>
-<p>for 循环也可以采用C语言中 for 循环的格式。例如:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">for((i=0;i&lt;10;i++))</div><div class="line">&#123;</div><div class="line">	commands; #使用变量$i</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h3 id="while-循环"><a href="#while-循环" class="headerlink" title="while 循环"></a>while 循环</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">while condition</div><div class="line">do</div><div class="line">	commands;</div><div class="line">done</div></pre></td></tr></table></figure>
-<p>用 true 作为循环条件能够产生无限循环。</p>
-<h3 id="until-循环"><a href="#until-循环" class="headerlink" title="until 循环"></a>until 循环</h3><p>在Bash中还可以使用一个特殊的循环 until 。它会一直执行循环,直到给定的条件为真。<br>例如:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">x=0;</div><div class="line">until [ $x -eq 9 ]; #条件是[$x -eq 9 ]</div><div class="line">do</div><div class="line">	let x++; echo $x;</div><div class="line">done</div></pre></td></tr></table></figure>
+<h2 id="字段分隔符和迭代器"><a href="#字段分隔符和迭代器" class="headerlink" title="字段分隔符和迭代器"></a>字段分隔符和迭代器</h2><pre><code class="shell">
+#!/bin/bash
+#用途: 演示IFS的用法
+line=&quot;root:x:0:0:root:/root:/bin/bash&quot;
+oldIFS=$IFS;
+IFS=&quot;:&quot;
+count=0
+for item in $line;
+do
+    [ $count -eq 0 ] &amp;&amp; user=$item;
+    [ $count -eq 6 ] &amp;&amp; shell=$item;
+    let count++
+done;
+IFS=$oldIFS
+echo $user\&#39;s shell is $shell;
 
+输出为:
+root&#39;s shell is /bin/bash
+</code></pre>
+<h2 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h2><h3 id="for-循环"><a href="#for-循环" class="headerlink" title="for 循环"></a>for 循环</h3><pre><code>for var in list;
+do
+    commands; #使用变量$var
+done
+</code></pre><p>list 可以是一个字符串,也可以是一个序列。<br>我们可以轻松地生成不同的序列。<br>echo {1..50} 能够生成一个从1~50的数字列表。 echo {a..z} 或 {A..Z} 或 {a..h} 可以生</p>
+<p>成字母列表。同样,我们可以将这些方法结合起来对数据进行拼接(concatenate)<br>。下面的<br>代码中,变量 i 在每次迭代的过程里都会保存一个字符,范围从 <code>a ~ z :</code></p>
+<pre><code>
+for i in {a..z}; do actions; done;
+</code></pre><p>for 循环也可以采用C语言中 for 循环的格式。例如:</p>
+<pre><code>for((i=0;i&lt;10;i++))
+{
+    commands; #使用变量$i
+}
+</code></pre><h3 id="while-循环"><a href="#while-循环" class="headerlink" title="while 循环"></a>while 循环</h3><pre><code>while condition
+do
+    commands;
+done
+</code></pre><p>用 true 作为循环条件能够产生无限循环。</p>
+<h3 id="until-循环"><a href="#until-循环" class="headerlink" title="until 循环"></a>until 循环</h3><p>在Bash中还可以使用一个特殊的循环 until 。它会一直执行循环,直到给定的条件为真。<br>例如:</p>
+<pre><code>
+x=0;
+until [ $x -eq 9 ]; #条件是[$x -eq 9 ]
+do
+    let x++; echo $x;
+done
+</code></pre>
       
     </div>
 
@@ -1121,5 +1192,9 @@
 
   
 
+  <script>
+      // highlight
+      hljs.initHighlightingOnLoad();
+  </script>
 </body>
 </html>

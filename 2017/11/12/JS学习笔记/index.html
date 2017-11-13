@@ -147,6 +147,8 @@
 
 
   <title> JS学习笔记1入门 | DearAmaze-桀骜良 </title>
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -434,14 +436,109 @@
       
 
       
-        <p>JS学习笔记1入门篇<br><a id="more"></a><br>document.write();是追加写，不是覆盖写。<br>html是顺序读取的，所以插入到html中的js也是顺序执行的。<br>JS中区分大小写；<br>引用外部js文件<br><code>&lt;script src=&quot;script.js&quot;&gt;&lt;/script&gt;</code><br>定义函数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">	function funcname()&#123;</div><div class="line">		alert(&quot;hello world!&quot;);</div><div class="line">	&#125;</div><div class="line">&lt;/script&gt;</div><div class="line"></div><div class="line">//调用</div><div class="line"></div><div class="line">&lt;form&gt;</div><div class="line">	&lt;input type=&quot;butten&quot; value=&quot;按钮&quot; submit=&quot;funcname()&quot; /&gt;</div><div class="line">&lt;/form&gt;</div></pre></td></tr></table></figure></p>
-<p>常用命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">document.write(&quot;向网页中写入内容&quot;);</div><div class="line">alert(&quot;弹窗&quot;);</div><div class="line">confirm(&quot;确定与否，确定返回真，取消返回假！&quot;);</div><div class="line">prompt(str1, str2);//弹窗，显示str1和文本框，文本框中为str2。确定返回文本框中的值，取消返回null。</div><div class="line"></div><div class="line">window.open(&apos;URL&apos;,&apos;窗口名（新建窗口的位置）&apos;,&apos;参数&apos;)</div><div class="line">URL：可选参数，在窗口中要显示网页的网址或路径。如果省略这个参数，或者它的值是空字符串，那么窗口就不显示任何文档。</div><div class="line">窗口名称：可选参数，被打开窗口的名称。</div><div class="line">    1.该名称由字母、数字和下划线字符组成。</div><div class="line">    2.&quot;_top&quot;、&quot;_blank&quot;、&quot;_self&quot;具有特殊意义的名称。</div><div class="line">       _blank：在新窗口显示目标网页</div><div class="line">       _self：在当前窗口显示目标网页</div><div class="line">       _top：框架网页中在上部窗口中显示目标网页</div><div class="line">    3.相同 name 的窗口只能创建一个，要想创建多个窗口则 name 不能相同。</div><div class="line">   4.name 不能包含有空格。</div><div class="line">参数字符串：可选参数，设置窗口参数，各参数用逗号隔开。</div></pre></td></tr></table></figure></p>
-<p><img src="http://p.dearamaze.com/%E5%B0%8F%E4%B9%A6%E5%8C%A0/1510450850257.jpg" alt="参数"><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">window.close();//关闭窗口</div><div class="line">object=document.getElementById(&quot;id_num&quot;);//返回html对应DOM对象</div><div class="line">Object.innerHTML //用于获取或替换 HTML 元素的内容</div><div class="line">Object.style.property=newstyle;</div><div class="line">基本属性表（property）:</div></pre></td></tr></table></figure></p>
-<p><img src="http://p.dearamaze.com/%E5%B0%8F%E4%B9%A6%E5%8C%A0/1510453299235.jpg" alt="常用属性"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Object.style.display = &quot;value&quot;</div><div class="line">value取值</div></pre></td></tr></table></figure>
-<p><img src="http://p.dearamaze.com/%E5%B0%8F%E4%B9%A6%E5%8C%A0/1510453214953.jpg" alt="value取值"><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var object=document.getElementById(&quot;p1&quot;);</div><div class="line">object.className = &quot;classname&quot;;//控制类名（className 属性）</div></pre></td></tr></table></figure></p>
-<p>实例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE HTML&gt;</div><div class="line">&lt;html&gt;</div><div class="line">&lt;head&gt;</div><div class="line">&lt;meta http-equiv=&quot;txttent-Type&quot; txttent=&quot;text/html; charset=utf-8&quot; /&gt;</div><div class="line">&lt;title&gt;javascript&lt;/title&gt;</div><div class="line">&lt;style type=&quot;text/css&quot;&gt;</div><div class="line">body&#123;font-size:12px;&#125;</div><div class="line">#txt&#123;</div><div class="line">    height:400px;</div><div class="line">    width:600px;</div><div class="line">    border:#333 solid 1px;</div><div class="line">	padding:5px;&#125;</div><div class="line">p&#123;</div><div class="line">	line-height:18px;</div><div class="line">	text-indent:2em;&#125;</div><div class="line">&lt;/style&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line">  &lt;h2 id=&quot;con&quot;&gt;JavaScript课程&lt;/H2&gt;</div><div class="line">  &lt;div id=&quot;txt&quot;&gt; </div><div class="line">     &lt;h5&gt;JavaScript为网页添加动态效果并实现与用户交互的功能。&lt;/h5&gt;</div><div class="line">        &lt;p&gt;1. JavaScript入门篇，让不懂JS的你，快速了解JS。&lt;/p&gt;</div><div class="line">        &lt;p&gt;2. JavaScript进阶篇，让你掌握JS的基础语法、函数、数组、事件、内置对象、BOM浏览器、DOM操作。&lt;/p&gt;</div><div class="line">        &lt;p&gt;3. 学完以上两门基础课后，在深入学习JavaScript的变量作用域、事件、对象、运动、cookie、正则表达式、ajax等课程。&lt;/p&gt;</div><div class="line">  &lt;/div&gt;</div><div class="line">  &lt;form&gt;</div><div class="line">  &lt;!--当点击相应按钮，执行相应操作，为按钮添加相应事件--&gt;</div><div class="line">    &lt;input type=&quot;button&quot; value=&quot;改变颜色&quot; onclick=&quot;set.changeColor()&quot;&gt;  </div><div class="line">    &lt;input type=&quot;button&quot; value=&quot;改变宽高&quot; onclick=&quot;set.changeSize()&quot;&gt;</div><div class="line">    &lt;input type=&quot;button&quot; value=&quot;隐藏内容&quot; onclick=&quot;set.objHide()&quot;&gt;</div><div class="line">    &lt;input type=&quot;button&quot; value=&quot;显示内容&quot; onclick=&quot;set.objShow()&quot;&gt;</div><div class="line">    &lt;input type=&quot;button&quot; value=&quot;取消设置&quot; onclick=&quot;set.offSet()&quot;&gt;</div><div class="line">  &lt;/form&gt;</div><div class="line">  &lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">   var txt=document.getElementById(&quot;txt&quot;);</div><div class="line">   var set=&#123;</div><div class="line">    changeColor:function()&#123;</div><div class="line">        txt.style.color=&quot;red&quot;;</div><div class="line">        txt.style.backgroundColor=&quot;#ccc&quot;;</div><div class="line">    &#125;,</div><div class="line">    changeSize:function()&#123;</div><div class="line">        txt.style.width=&quot;300px&quot;;</div><div class="line">        txt.style.height=&quot;300px&quot;;</div><div class="line">    &#125;,</div><div class="line">    objHide:function()&#123;</div><div class="line">        txt.style.display=&quot;none&quot;;</div><div class="line">    &#125;,</div><div class="line">    objShow:function()&#123;</div><div class="line">        txt.style.display=&quot;block&quot;;</div><div class="line">    &#125;,</div><div class="line">    offSet:function()&#123;</div><div class="line">        var message=confirm(&quot;你确定要重置所有设置么？&quot;);</div><div class="line">        if(message==true)&#123;</div><div class="line">            txt.removeAttribute(&apos;style&apos;);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  &lt;/script&gt;</div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure></p>
+        <p>JS学习笔记1入门篇<br><a id="more"></a><br>document.write();是追加写，不是覆盖写。<br>html是顺序读取的，所以插入到html中的js也是顺序执行的。<br>JS中区分大小写；<br>引用外部js文件<br><code>&lt;script src=&quot;script.js&quot;&gt;&lt;/script&gt;</code><br>定义函数：</p>
+<pre><code>&lt;script type=&quot;text/javascript&quot;&gt;
+    function funcname(){
+        alert(&quot;hello world!&quot;);
+    }
+&lt;/script&gt;
 
+//调用
+
+&lt;form&gt;
+    &lt;input type=&quot;butten&quot; value=&quot;按钮&quot; submit=&quot;funcname()&quot; /&gt;
+&lt;/form&gt;
+</code></pre><p>常用命令：</p>
+<pre><code>document.write(&quot;向网页中写入内容&quot;);
+alert(&quot;弹窗&quot;);
+confirm(&quot;确定与否，确定返回真，取消返回假！&quot;);
+prompt(str1, str2);//弹窗，显示str1和文本框，文本框中为str2。确定返回文本框中的值，取消返回null。
+
+window.open(&#39;URL&#39;,&#39;窗口名（新建窗口的位置）&#39;,&#39;参数&#39;)
+URL：可选参数，在窗口中要显示网页的网址或路径。如果省略这个参数，或者它的值是空字符串，那么窗口就不显示任何文档。
+窗口名称：可选参数，被打开窗口的名称。
+    1.该名称由字母、数字和下划线字符组成。
+    2.&quot;_top&quot;、&quot;_blank&quot;、&quot;_self&quot;具有特殊意义的名称。
+       _blank：在新窗口显示目标网页
+       _self：在当前窗口显示目标网页
+       _top：框架网页中在上部窗口中显示目标网页
+    3.相同 name 的窗口只能创建一个，要想创建多个窗口则 name 不能相同。
+   4.name 不能包含有空格。
+参数字符串：可选参数，设置窗口参数，各参数用逗号隔开。
+</code></pre><p><img src="http://p.dearamaze.com/%E5%B0%8F%E4%B9%A6%E5%8C%A0/1510450850257.jpg" alt="参数"></p>
+<pre><code>window.close();//关闭窗口
+object=document.getElementById(&quot;id_num&quot;);//返回html对应DOM对象
+Object.innerHTML //用于获取或替换 HTML 元素的内容
+Object.style.property=newstyle;
+基本属性表（property）:
+</code></pre><p><img src="http://p.dearamaze.com/%E5%B0%8F%E4%B9%A6%E5%8C%A0/1510453299235.jpg" alt="常用属性"></p>
+<pre><code>Object.style.display = &quot;value&quot;
+value取值
+</code></pre><p><img src="http://p.dearamaze.com/%E5%B0%8F%E4%B9%A6%E5%8C%A0/1510453214953.jpg" alt="value取值"></p>
+<pre><code>var object=document.getElementById(&quot;p1&quot;);
+object.className = &quot;classname&quot;;//控制类名（className 属性）
+</code></pre><p>实例：</p>
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;txttent-Type&quot; txttent=&quot;text/html; charset=utf-8&quot; /&gt;
+&lt;title&gt;javascript&lt;/title&gt;
+&lt;style type=&quot;text/css&quot;&gt;
+body{font-size:12px;}
+#txt{
+    height:400px;
+    width:600px;
+    border:#333 solid 1px;
+    padding:5px;}
+p{
+    line-height:18px;
+    text-indent:2em;}
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h2 id=&quot;con&quot;&gt;JavaScript课程&lt;/H2&gt;
+  &lt;div id=&quot;txt&quot;&gt; 
+     &lt;h5&gt;JavaScript为网页添加动态效果并实现与用户交互的功能。&lt;/h5&gt;
+        &lt;p&gt;1. JavaScript入门篇，让不懂JS的你，快速了解JS。&lt;/p&gt;
+        &lt;p&gt;2. JavaScript进阶篇，让你掌握JS的基础语法、函数、数组、事件、内置对象、BOM浏览器、DOM操作。&lt;/p&gt;
+        &lt;p&gt;3. 学完以上两门基础课后，在深入学习JavaScript的变量作用域、事件、对象、运动、cookie、正则表达式、ajax等课程。&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;form&gt;
+  &lt;!--当点击相应按钮，执行相应操作，为按钮添加相应事件--&gt;
+    &lt;input type=&quot;button&quot; value=&quot;改变颜色&quot; onclick=&quot;set.changeColor()&quot;&gt;  
+    &lt;input type=&quot;button&quot; value=&quot;改变宽高&quot; onclick=&quot;set.changeSize()&quot;&gt;
+    &lt;input type=&quot;button&quot; value=&quot;隐藏内容&quot; onclick=&quot;set.objHide()&quot;&gt;
+    &lt;input type=&quot;button&quot; value=&quot;显示内容&quot; onclick=&quot;set.objShow()&quot;&gt;
+    &lt;input type=&quot;button&quot; value=&quot;取消设置&quot; onclick=&quot;set.offSet()&quot;&gt;
+  &lt;/form&gt;
+  &lt;script type=&quot;text/javascript&quot;&gt;
+   var txt=document.getElementById(&quot;txt&quot;);
+   var set={
+    changeColor:function(){
+        txt.style.color=&quot;red&quot;;
+        txt.style.backgroundColor=&quot;#ccc&quot;;
+    },
+    changeSize:function(){
+        txt.style.width=&quot;300px&quot;;
+        txt.style.height=&quot;300px&quot;;
+    },
+    objHide:function(){
+        txt.style.display=&quot;none&quot;;
+    },
+    objShow:function(){
+        txt.style.display=&quot;block&quot;;
+    },
+    offSet:function(){
+        var message=confirm(&quot;你确定要重置所有设置么？&quot;);
+        if(message==true){
+            txt.removeAttribute(&#39;style&#39;);
+        }
+    }
+  }
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
       
     </div>
 
@@ -504,8 +601,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/11/12/32位和64位系统区别及int字节数/" rel="next" title="32位和64位系统区别及int字节数">
-                <i class="fa fa-chevron-left"></i> 32位和64位系统区别及int字节数
+              <a href="/2017/11/03/毕业设计/" rel="next" title="毕业设计">
+                <i class="fa fa-chevron-left"></i> 毕业设计
               </a>
             
           </div>
@@ -513,6 +610,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/12/32位和64位系统区别及int字节数/" rel="prev" title="32位和64位系统区别及int字节数">
+                32位和64位系统区别及int字节数 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -1067,5 +1168,9 @@
 
   
 
+  <script>
+      // highlight
+      hljs.initHighlightingOnLoad();
+  </script>
 </body>
 </html>

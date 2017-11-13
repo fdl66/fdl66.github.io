@@ -141,6 +141,8 @@
 
 
   <title> DearAmaze-桀骜良 </title>
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -1232,15 +1234,36 @@
       
         
           <h2 id="数组和关联数组"><a href="#数组和关联数组" class="headerlink" title="数组和关联数组"></a>数组和关联数组</h2><p>Bash从4.0版本之后才开始支持关联数组。<br>(1) 定义数组的方法有很多种。可以在单行中使用一列值来定义一个数组:</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">array_var=(1 2 3 4 5 6)</div><div class="line"><span class="meta">#</span>这些值将会存储在以0为起始索引的连续位置上</div></pre></td></tr></table></figure>
+<pre><code class="shell">
+array_var=(1 2 3 4 5 6)
+#这些值将会存储在以0为起始索引的连续位置上
+</code></pre>
 <p>另外,还可以将数组定义成一组“索引 - 值”:</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">array_var[0]="test1"</div><div class="line">array_var[1]="test2"</div><div class="line">array_var[2]="test3"</div><div class="line">array_var[3]="test4"</div><div class="line">array_var[4]="test5"</div><div class="line">array_var[5]="test6"</div></pre></td></tr></table></figure>
+<pre><code class="shell">array_var[0]=&quot;test1&quot;
+array_var[1]=&quot;test2&quot;
+array_var[2]=&quot;test3&quot;
+array_var[3]=&quot;test4&quot;
+array_var[4]=&quot;test5&quot;
+array_var[5]=&quot;test6&quot;
+</code></pre>
 <p>(2) 打印出特定索引的数组元素内容:</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">echo $&#123;array_var[0]&#125;</div><div class="line">test1</div><div class="line">index=5</div><div class="line">echo $&#123;array_var[$index]&#125;</div><div class="line">test6</div></pre></td></tr></table></figure>
+<pre><code class="shell">echo ${array_var[0]}
+test1
+index=5
+echo ${array_var[$index]}
+test6
+</code></pre>
 <p>(3) 以清单形式打印出数组中的所有值:</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> echo $&#123;array_var[*]&#125;</div><div class="line">test1 test2 test3 test4 test5 test6</div><div class="line">也可以这样使用:</div><div class="line"><span class="meta">$</span> echo $&#123;array_var[@]&#125;</div><div class="line">test1 test2 test3 test4 test5 test6</div></pre></td></tr></table></figure>
+<pre><code class="shell">$ echo ${array_var[*]}
+test1 test2 test3 test4 test5 test6
+也可以这样使用:
+$ echo ${array_var[@]}
+test1 test2 test3 test4 test5 test6
+</code></pre>
 <p>(4) 打印数组长度(即数组中元素的个数):</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> echo $&#123;#array_var[*]&#125;</div><div class="line">6</div></pre></td></tr></table></figure>
+<pre><code class="shell">$ echo ${#array_var[*]}
+6
+</code></pre>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/05/16/shell知识遗漏1/#more" rel="contents">
@@ -1560,39 +1583,60 @@
         
           
             <h2 id="字符"><a href="#字符" class="headerlink" title="字符"></a>字符</h2><p>1.特定字符</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&apos;a&apos;</div></pre></td></tr></table></figure>
-<p>2.范围内字符 </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">[]单个字符</div><div class="line">数字字符:[0-9],[259]</div><div class="line">小写字母:[a-z]</div><div class="line">大写字母:[A-Z]</div><div class="line">符号:[,;:]</div><div class="line">取反:[^0-9]</div></pre></td></tr></table></figure>
-<p>3.任意字符</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">.:单个任意字符(注意:[.]和\.  , 这里就只表示点)</div></pre></td></tr></table></figure>
-<h2 id="其他符号"><a href="#其他符号" class="headerlink" title="其他符号"></a>其他符号</h2><p>1.边界字符:头尾字符</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">^: ^root 表示以root开头的行</div><div class="line">$: false$ 表示以false结束的行</div><div class="line"></div><div class="line">空行的表示: ^$</div></pre></td></tr></table></figure>
-<p>2.元字符(代表普通字符或者特殊字符)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">\w: 匹配任何字类字符,包括下划线([A-Za-z0-9_])</div><div class="line">\W: 匹配任何非字类字符([^A-Za-z0-9_])</div><div class="line">\b: 单词的分隔(不只是空格或者制表符)</div><div class="line">dear@dear3442:~/code/sh$ egrep &apos;\b[0-9]+\b&apos; passwd </div><div class="line">root:x:0:0:root:/root:/bin/bash</div><div class="line">daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin</div><div class="line">bin:x:2:2:bin:/bin:/usr/sbin/nologin</div><div class="line">sys:x:3:3:sys:/dev:/usr/sbin/nologin</div><div class="line">sync:x:4:65534:sync:/bin:/bin/sync</div><div class="line">games:x:5:60:games:/usr/games:/usr/sbin/nologin</div><div class="line">man:x:6:12:man:/var/cache/man:/usr/sbin/nologin</div><div class="line">lp:x:7:7:lp:/var/spool/lpd:/usr/sbin/nologin</div></pre></td></tr></table></figure>
-<h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><ol>
+<pre><code>&#39;a&#39;
+</code></pre><p>2.范围内字符 </p>
+<pre><code>[]单个字符
+数字字符:[0-9],[259]
+小写字母:[a-z]
+大写字母:[A-Z]
+符号:[,;:]
+取反:[^0-9]
+</code></pre><p>3.任意字符</p>
+<pre><code>.:单个任意字符(注意:[.]和\.  , 这里就只表示点)
+</code></pre><h2 id="其他符号"><a href="#其他符号" class="headerlink" title="其他符号"></a>其他符号</h2><p>1.边界字符:头尾字符</p>
+<pre><code>^: ^root 表示以root开头的行
+$: false$ 表示以false结束的行
+
+空行的表示: ^$
+</code></pre><p>2.元字符(代表普通字符或者特殊字符)</p>
+<pre><code>
+\w: 匹配任何字类字符,包括下划线([A-Za-z0-9_])
+\W: 匹配任何非字类字符([^A-Za-z0-9_])
+\b: 单词的分隔(不只是空格或者制表符)
+dear@dear3442:~/code/sh$ egrep &#39;\b[0-9]+\b&#39; passwd 
+root:x:0:0:root:/root:/bin/bash
+daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
+bin:x:2:2:bin:/bin:/usr/sbin/nologin
+sys:x:3:3:sys:/dev:/usr/sbin/nologin
+sync:x:4:65534:sync:/bin:/bin/sync
+games:x:5:60:games:/usr/games:/usr/sbin/nologin
+man:x:6:12:man:/var/cache/man:/usr/sbin/nologin
+lp:x:7:7:lp:/var/spool/lpd:/usr/sbin/nologin
+</code></pre><h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><ol>
 <li><code>&#39;asdf&#39;</code> ,<code>&#39;asdf&#39;</code></li>
 <li><code>[0-9][0-9][0-9]</code>,<code>[a-z][a-z][a-z]</code></li>
 <li><p>重复,逻辑</p>
 <p> 重复:</p>
-<pre><code>1. *:零次或者多次 匹配前面的字符或子表达式
-2. \+:一次或者多次 匹配前面的字符或子表达式(注意grep使用的时候,要用 \+ )
-3. \?:零次或者一次 匹配前面的字符或子表达式(注意grep使用的时候,要用 \? )
-4. \{n,m\}: 重复n次到m次
+<pre><code> 1. *:零次或者多次 匹配前面的字符或子表达式
+ 2. \+:一次或者多次 匹配前面的字符或子表达式(注意grep使用的时候,要用 \+ )
+ 3. \?:零次或者一次 匹配前面的字符或子表达式(注意grep使用的时候,要用 \? )
+ 4. \{n,m\}: 重复n次到m次
 </code></pre><p> 分组:</p>
-<pre><code>$ grep &apos;\(se\)*&apos; test.txt #表示匹配se多次
+<pre><code> $ grep &#39;\(se\)*&#39; test.txt #表示匹配se多次
 </code></pre><p> 任意字符串:</p>
-<pre><code>$ grep &apos;.*&apos; test.txt #可能会贪婪匹配
+<pre><code> $ grep &#39;.*&#39; test.txt #可能会贪婪匹配
 </code></pre><p> 逻辑:</p>
-<pre><code>1. 逻辑或: | : &apos;/bin/\(false\|true\)&apos;
+<pre><code> 1. 逻辑或: | : &#39;/bin/\(false\|true\)&#39;
 </code></pre></li>
 </ol>
 <h2 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h2><ol>
 <li>4-10位的QQ号</li>
 </ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">grep '^[0-9]\&#123;4-10\&#125;$' qq.txt</div></pre></td></tr></table></figure>
+<pre><code class="shell">grep &#39;^[0-9]\{4-10\}$&#39; qq.txt
+</code></pre>
 <p>2.匹配密码(有数字,26个字母和下划线组成)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">grep &apos;^\w\+$&apos; qq.txt</div></pre></td></tr></table></figure>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><img src="http://function.dearamaze.com/shell%E6%AD%A3%E5%88%99%E6%80%BB%E7%BB%93.png" alt=""></p>
+<pre><code>grep &#39;^\w\+$&#39; qq.txt
+</code></pre><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><img src="http://function.dearamaze.com/shell%E6%AD%A3%E5%88%99%E6%80%BB%E7%BB%93.png" alt=""></p>
 
           
         
@@ -1725,10 +1769,81 @@
         
           
             <h1 id="threading-模块"><a href="#threading-模块" class="headerlink" title="threading 模块"></a>threading 模块</h1><h2 id="使用threading模块-mtsleepC-py"><a href="#使用threading模块-mtsleepC-py" class="headerlink" title="使用threading模块(mtsleepC.py)"></a>使用threading模块(mtsleepC.py)</h2><p>threading模块的Thread类有一个join()方法,可以让主线程等待所有线程执行完毕</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env python</div><div class="line"># coding=utf-8</div><div class="line"></div><div class="line">import threading</div><div class="line">from time import sleep,ctime</div><div class="line"></div><div class="line">loops=[4,2]</div><div class="line"></div><div class="line">def loop(nloop,nsec):</div><div class="line">    print &apos;start loop:&apos;,nloop,&apos; done at:&apos;,ctime()</div><div class="line">    sleep(nsec)</div><div class="line">    print &apos;loop&apos;,nloop,&apos;done at:&apos;,ctime()</div><div class="line">def main():</div><div class="line">    print &apos;starting at:&apos;,ctime()</div><div class="line">    threads=[]</div><div class="line">    nloops=range(len(loops))</div><div class="line"></div><div class="line">    for i in nloops:</div><div class="line">        t=threading.Thread(target=loop,args=(i,loops[i]))</div><div class="line">        threads.append(t)</div><div class="line"></div><div class="line">    for i in nloops:</div><div class="line">        threads[i].start()</div><div class="line"></div><div class="line">    for i in nloops:</div><div class="line">        threads[i].join()</div><div class="line"></div><div class="line">    print &apos;all DONE at:&apos;,ctime()</div><div class="line"></div><div class="line">if __name__ == &apos;__main__&apos;:</div><div class="line">    main()</div></pre></td></tr></table></figure>
-<h2 id="子类化的Thread-mtsleepE-py"><a href="#子类化的Thread-mtsleepE-py" class="headerlink" title="子类化的Thread(mtsleepE.py)"></a>子类化的Thread(mtsleepE.py)</h2><p>本例对Thread子类化,而不是直接对其实例化,这将使我们在定制线程对象是拥有更多的灵活性,也能够简化线程调用的过程.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env python</div><div class="line"># coding=utf-8</div><div class="line"></div><div class="line">import threading </div><div class="line">from time import sleep ,ctime</div><div class="line"></div><div class="line">loops=(4,2)</div><div class="line"></div><div class="line">class MyThread(threading.Thread):</div><div class="line">    def __init__(self,func,args,name=&apos;&apos;):</div><div class="line">        threading.Thread.__init__(self)</div><div class="line">        self.name = name </div><div class="line">        self.func = func </div><div class="line">        self.args = args </div><div class="line"></div><div class="line">    def run(self):</div><div class="line">        self.func(*self.args)</div><div class="line"></div><div class="line">def loop(nloop,nsec):</div><div class="line">    print &apos;start loop&apos;,nloop,&apos;at:&apos;,ctime()</div><div class="line">    sleep(nsec)</div><div class="line">    print &apos;loop&apos;,nloop,&apos;done at:&apos;,ctime()</div><div class="line"></div><div class="line">def main():</div><div class="line">    print &apos;starting at:&apos;,ctime()</div><div class="line">    threads  = []</div><div class="line">    nloops=range(len(loops))</div><div class="line"></div><div class="line">    for i in nloops:</div><div class="line">        t=MyThread(loop,(i,loops[i]),loop.__name__)</div><div class="line">        threads.append(t)</div><div class="line"></div><div class="line">    for i in nloops:</div><div class="line">        threads[i].start()</div><div class="line"></div><div class="line">    for i in nloops:</div><div class="line">        threads[i].join()</div><div class="line"></div><div class="line">    print &apos;all DONE at:&apos;,ctime()</div><div class="line"></div><div class="line">if __name__ == &apos;__main__&apos;:</div><div class="line">    main()</div></pre></td></tr></table></figure>
+<pre><code>#!/usr/bin/env python
+# coding=utf-8
 
+import threading
+from time import sleep,ctime
+
+loops=[4,2]
+
+def loop(nloop,nsec):
+    print &#39;start loop:&#39;,nloop,&#39; done at:&#39;,ctime()
+    sleep(nsec)
+    print &#39;loop&#39;,nloop,&#39;done at:&#39;,ctime()
+def main():
+    print &#39;starting at:&#39;,ctime()
+    threads=[]
+    nloops=range(len(loops))
+
+    for i in nloops:
+        t=threading.Thread(target=loop,args=(i,loops[i]))
+        threads.append(t)
+
+    for i in nloops:
+        threads[i].start()
+
+    for i in nloops:
+        threads[i].join()
+
+    print &#39;all DONE at:&#39;,ctime()
+
+if __name__ == &#39;__main__&#39;:
+    main()
+</code></pre><h2 id="子类化的Thread-mtsleepE-py"><a href="#子类化的Thread-mtsleepE-py" class="headerlink" title="子类化的Thread(mtsleepE.py)"></a>子类化的Thread(mtsleepE.py)</h2><p>本例对Thread子类化,而不是直接对其实例化,这将使我们在定制线程对象是拥有更多的灵活性,也能够简化线程调用的过程.</p>
+<pre><code>#!/usr/bin/env python
+# coding=utf-8
+
+import threading 
+from time import sleep ,ctime
+
+loops=(4,2)
+
+class MyThread(threading.Thread):
+    def __init__(self,func,args,name=&#39;&#39;):
+        threading.Thread.__init__(self)
+        self.name = name 
+        self.func = func 
+        self.args = args 
+
+    def run(self):
+        self.func(*self.args)
+
+def loop(nloop,nsec):
+    print &#39;start loop&#39;,nloop,&#39;at:&#39;,ctime()
+    sleep(nsec)
+    print &#39;loop&#39;,nloop,&#39;done at:&#39;,ctime()
+
+def main():
+    print &#39;starting at:&#39;,ctime()
+    threads  = []
+    nloops=range(len(loops))
+
+    for i in nloops:
+        t=MyThread(loop,(i,loops[i]),loop.__name__)
+        threads.append(t)
+
+    for i in nloops:
+        threads[i].start()
+
+    for i in nloops:
+        threads[i].join()
+
+    print &#39;all DONE at:&#39;,ctime()
+
+if __name__ == &#39;__main__&#39;:
+    main()
+</code></pre>
           
         
       
@@ -1881,23 +1996,134 @@
       
         
           
-            <h1 id="thread-模块"><a href="#thread-模块" class="headerlink" title="thread 模块"></a>thread 模块</h1><h2 id="使用单线程执行循环"><a href="#使用单线程执行循环" class="headerlink" title="使用单线程执行循环"></a>使用单线程执行循环</h2><h3 id="代码"><a href="#代码" class="headerlink" title="代码:"></a>代码:</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="comment"># coding=utf-8</span></div><div class="line"></div><div class="line"><span class="keyword">from</span> time <span class="keyword">import</span> sleep , ctime </div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">loop0</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">print</span> <span class="string">'start loop 0 at : '</span>, ctime()</div><div class="line">    sleep(<span class="number">4</span>)</div><div class="line">    <span class="keyword">print</span> <span class="string">'loop 0 done ate : '</span>, ctime()</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">loop1</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">print</span> <span class="string">'start loop 1 at : '</span>, ctime()</div><div class="line">    sleep(<span class="number">2</span>)</div><div class="line">    <span class="keyword">print</span> <span class="string">'loop 1 done ate : '</span>, ctime()</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">print</span> <span class="string">"starting at : "</span>,ctime()</div><div class="line">    loop0()</div><div class="line">    loop1()</div><div class="line">    <span class="keyword">print</span> <span class="string">"all DONE at : "</span>,ctime()</div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    main()</div></pre></td></tr></table></figure>
+            <h1 id="thread-模块"><a href="#thread-模块" class="headerlink" title="thread 模块"></a>thread 模块</h1><h2 id="使用单线程执行循环"><a href="#使用单线程执行循环" class="headerlink" title="使用单线程执行循环"></a>使用单线程执行循环</h2><h3 id="代码"><a href="#代码" class="headerlink" title="代码:"></a>代码:</h3><pre><code class="python">
+#!/usr/bin/env python
+# coding=utf-8
+
+from time import sleep , ctime 
+
+def loop0():
+    print &#39;start loop 0 at : &#39;, ctime()
+    sleep(4)
+    print &#39;loop 0 done ate : &#39;, ctime()
+
+def loop1():
+    print &#39;start loop 1 at : &#39;, ctime()
+    sleep(2)
+    print &#39;loop 1 done ate : &#39;, ctime()
+
+def main():
+    print &quot;starting at : &quot;,ctime()
+    loop0()
+    loop1()
+    print &quot;all DONE at : &quot;,ctime()
+
+if __name__ == &#39;__main__&#39;:
+    main()
+</code></pre>
 <h3 id="执行结果"><a href="#执行结果" class="headerlink" title="执行结果:"></a>执行结果:</h3><blockquote>
 <p><code>顺序执行</code></p>
 </blockquote>
 <p><img src="http://function.dearamaze.com/onethr_run.png" alt="运行结果,顺序执行"></p>
-<h2 id="使用thread模块-mtsleepA-py"><a href="#使用thread模块-mtsleepA-py" class="headerlink" title="使用thread模块(mtsleepA.py)"></a>使用thread模块(mtsleepA.py)</h2><h3 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="comment"># coding=utf-8</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> thread </div><div class="line"><span class="keyword">from</span> time <span class="keyword">import</span> sleep , ctime </div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">loop0</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">print</span> <span class="string">'start loop 0 at : '</span>,ctime()</div><div class="line">    sleep(<span class="number">4</span>)</div><div class="line">    <span class="keyword">print</span> <span class="string">'loop 0 done at : '</span>,ctime()</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">loop1</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">print</span> <span class="string">'start loop 1 at :'</span>,ctime()</div><div class="line">    sleep(<span class="number">2</span>)</div><div class="line">    <span class="keyword">print</span> <span class="string">'loop 1 done at :'</span>,ctime()</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">print</span> <span class="string">'starting at :'</span>,ctime()</div><div class="line">    thread.start_new_thread(loop0,())</div><div class="line">    thread.start_new_thread(loop1,())</div><div class="line">    sleep(<span class="number">6</span>)</div><div class="line">    <span class="keyword">print</span> <span class="string">'all done at :'</span>,ctime()</div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    main()</div></pre></td></tr></table></figure>
+<h2 id="使用thread模块-mtsleepA-py"><a href="#使用thread模块-mtsleepA-py" class="headerlink" title="使用thread模块(mtsleepA.py)"></a>使用thread模块(mtsleepA.py)</h2><h3 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h3><pre><code class="python">#!/usr/bin/env python
+# coding=utf-8
+
+import thread 
+from time import sleep , ctime 
+
+def loop0():
+    print &#39;start loop 0 at : &#39;,ctime()
+    sleep(4)
+    print &#39;loop 0 done at : &#39;,ctime()
+
+def loop1():
+    print &#39;start loop 1 at :&#39;,ctime()
+    sleep(2)
+    print &#39;loop 1 done at :&#39;,ctime()
+
+def main():
+    print &#39;starting at :&#39;,ctime()
+    thread.start_new_thread(loop0,())
+    thread.start_new_thread(loop1,())
+    sleep(6)
+    print &#39;all done at :&#39;,ctime()
+
+if __name__ == &#39;__main__&#39;:
+    main()
+</code></pre>
 <h3 id="执行结果-1"><a href="#执行结果-1" class="headerlink" title="执行结果"></a>执行结果</h3><blockquote>
 <p><code>并行执行</code></p>
 </blockquote>
 <p><img src="http://function.dearamaze.com/mtsleepA.png" alt="执行结果,并行执行"></p>
-<h2 id="修改mtsleepA-py-后"><a href="#修改mtsleepA-py-后" class="headerlink" title="修改mtsleepA.py 后"></a>修改mtsleepA.py 后</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="comment"># coding=utf-8</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> thread </div><div class="line"><span class="keyword">from</span> time <span class="keyword">import</span> sleep , ctime </div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">loop0</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">print</span> <span class="string">'start loop 0 at : '</span>,ctime()</div><div class="line">    sleep(<span class="number">4</span>)</div><div class="line">    <span class="keyword">print</span> <span class="string">'loop 0 done at : '</span>,ctime()</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">loop1</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">print</span> <span class="string">'start loop 1 at :'</span>,ctime()</div><div class="line">    sleep(<span class="number">2</span>)</div><div class="line">    <span class="keyword">print</span> <span class="string">'loop 1 done at :'</span>,ctime()</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">print</span> <span class="string">'starting at :'</span>,ctime()</div><div class="line">    thread.start_new_thread(loop0,())</div><div class="line">    thread.start_new_thread(loop1,())</div><div class="line">    <span class="comment">#sleep(6)</span></div><div class="line">    <span class="keyword">print</span> <span class="string">'all done at :'</span>,ctime()</div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    main()</div></pre></td></tr></table></figure>
+<h2 id="修改mtsleepA-py-后"><a href="#修改mtsleepA-py-后" class="headerlink" title="修改mtsleepA.py 后"></a>修改mtsleepA.py 后</h2><pre><code class="python">#!/usr/bin/env python
+# coding=utf-8
+
+import thread 
+from time import sleep , ctime 
+
+def loop0():
+    print &#39;start loop 0 at : &#39;,ctime()
+    sleep(4)
+    print &#39;loop 0 done at : &#39;,ctime()
+
+def loop1():
+    print &#39;start loop 1 at :&#39;,ctime()
+    sleep(2)
+    print &#39;loop 1 done at :&#39;,ctime()
+
+def main():
+    print &#39;starting at :&#39;,ctime()
+    thread.start_new_thread(loop0,())
+    thread.start_new_thread(loop1,())
+    #sleep(6)
+    print &#39;all done at :&#39;,ctime()
+
+if __name__ == &#39;__main__&#39;:
+    main()
+</code></pre>
 <p>注释掉了主线程中的sleep函数,发生了什么,反映了什么?</p>
 <h3 id="执行结果-2"><a href="#执行结果-2" class="headerlink" title="执行结果"></a>执行结果</h3><blockquote>
 <p><code>子线程隶属于父线程,父线程生命周期结束时,子线程也会结束.</code></p>
 </blockquote>
 <p><img src="http://function.dearamaze.com/mtsleepA_run2.png" alt="执行结果,主线程会强制结束子线程"></p>
-<h2 id="使用线程和锁-mtsleepB-py"><a href="#使用线程和锁-mtsleepB-py" class="headerlink" title="使用线程和锁 (mtsleepB.py)"></a>使用线程和锁 (mtsleepB.py)</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="comment"># coding=utf-8</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> thread </div><div class="line"><span class="keyword">from</span> time <span class="keyword">import</span> sleep , ctime </div><div class="line"></div><div class="line">loops = [<span class="number">4</span>,<span class="number">2</span>]</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">loop</span><span class="params">(nloop,nsec,lock)</span>:</span></div><div class="line">    <span class="keyword">print</span> <span class="string">'start loop '</span>,nloop,<span class="string">'at:'</span>,ctime()</div><div class="line">    sleep(nsec)</div><div class="line">    <span class="keyword">print</span> <span class="string">'loop '</span>,nloop ,<span class="string">'done at :'</span>,ctime()</div><div class="line">    lock.release()</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">print</span> <span class="string">'starting at:'</span>,ctime()</div><div class="line">    locks=[]</div><div class="line">    nloops = range(len(loops))</div><div class="line">    </div><div class="line">    <span class="comment">#为线程创建锁</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> nloops:</div><div class="line">        lock = thread.allocate_lock()</div><div class="line">        lock.acquire()</div><div class="line">        locks.append(lock)</div><div class="line">    </div><div class="line">    <span class="comment">#开始执行各个线程</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> nloops:</div><div class="line">        thread.start_new_thread(loop,(i,loops[i],locks[i]))</div><div class="line">    </div><div class="line">    <span class="comment">#主线程等待所有的线程的锁完全释放</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> nloops:</div><div class="line">        <span class="keyword">while</span> locks[i].locked():<span class="keyword">pass</span></div><div class="line"></div><div class="line">    <span class="keyword">print</span> <span class="string">'all DONE at:'</span>,ctime()</div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span> :</div><div class="line">    main()</div></pre></td></tr></table></figure>
+<h2 id="使用线程和锁-mtsleepB-py"><a href="#使用线程和锁-mtsleepB-py" class="headerlink" title="使用线程和锁 (mtsleepB.py)"></a>使用线程和锁 (mtsleepB.py)</h2><pre><code class="python">#!/usr/bin/env python
+# coding=utf-8
+
+import thread 
+from time import sleep , ctime 
+
+loops = [4,2]
+
+def loop(nloop,nsec,lock):
+    print &#39;start loop &#39;,nloop,&#39;at:&#39;,ctime()
+    sleep(nsec)
+    print &#39;loop &#39;,nloop ,&#39;done at :&#39;,ctime()
+    lock.release()
+
+def main():
+    print &#39;starting at:&#39;,ctime()
+    locks=[]
+    nloops = range(len(loops))
+
+    #为线程创建锁
+    for i in nloops:
+        lock = thread.allocate_lock()
+        lock.acquire()
+        locks.append(lock)
+
+    #开始执行各个线程
+    for i in nloops:
+        thread.start_new_thread(loop,(i,loops[i],locks[i]))
+
+    #主线程等待所有的线程的锁完全释放
+    for i in nloops:
+        while locks[i].locked():pass
+
+    print &#39;all DONE at:&#39;,ctime()
+
+if __name__ == &#39;__main__&#39; :
+    main()
+</code></pre>
 <h3 id="执行结果-3"><a href="#执行结果-3" class="headerlink" title="执行结果:"></a>执行结果:</h3><p><img src="http://function.dearamaze.com/mtsleepB.png" alt="线程锁"></p>
 
           
@@ -2470,5 +2696,9 @@
 
   
 
+  <script>
+      // highlight
+      hljs.initHighlightingOnLoad();
+  </script>
 </body>
 </html>
