@@ -105,7 +105,7 @@
 <meta property="og:site_name" content="DearAmaze-桀骜良">
 <meta property="og:description" content="因为OJ有一个查重功能需要完善，所以我今天查阅了百度和google，目前可以用的有standford的moss和Dick grune的sim。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-11-14T16:00:14.652Z">
+<meta property="og:updated_time" content="2017-11-18T18:01:11.855Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OJ查重设计">
 <meta name="twitter:description" content="因为OJ有一个查重功能需要完善，所以我今天查阅了百度和google，目前可以用的有standford的moss和Dick grune的sim。">
@@ -432,7 +432,7 @@
       
 
       
-        <p>因为OJ有一个查重功能需要完善，所以我今天查阅了百度和google，目前可以用的有standford的moss和<a href="https://dickgrune.com/" target="_blank" rel="external">Dick grune</a>的<a href="sim">sim</a>。<br><a id="more"></a></p>
+        <p>因为OJ有一个查重功能需要完善，所以我今天查阅了百度和google，目前可以用的有standford的moss和<a href="https://dickgrune.com/" target="_blank" rel="external">Dick grune</a>的<a href="https://dickgrune.com/Programs/similarity_tester/" target="_blank" rel="external">sim</a>。<br><a id="more"></a></p>
 <h2 id="sim"><a href="#sim" class="headerlink" title="sim"></a>sim</h2><blockquote>
 <p>一个实用的代码查重工具</p>
 </blockquote>
@@ -462,7 +462,7 @@ make install
 -M：在最后显示内存使用情况。
 -a:对比所有，目前还不太清楚。（每个文件都与其他的文件握一次手，【n^2-n】次）
 -e:单独对比每一个。（比较次数同-p，但是比较内容策略，与-a，-p有何不同，还没弄清楚）
-</code></pre><h3 id="后期工作"><a href="#后期工作" class="headerlink" title="后期工作"></a>后期工作</h3><p>基于sim，利用python，封装一个独立的、方便使用的查重工具。</p>
+</code></pre><h3 id="后期工作"><a href="#后期工作" class="headerlink" title="后期工作"></a>后期工作</h3><p>基于sim，利用python，封装一个独立的、方便使用的查重工具。<br>python 取得代码<br>sim<br>python 后台数据库过滤，取得代码，存入文件，文件名为username_time.language,存在一个以该用户名命名的文件夹下。然后执行三种语言的查重。并且输出结果。结果以文本显示。</p>
 <h3 id="window安装"><a href="#window安装" class="headerlink" title="window安装"></a>window安装</h3><p>我没有尝试文档上，说需要MSDOS+MinGW。<br>另外Makefile的编辑，肯定是先删除unix like配置部分，然后修改BINDIR和MAN1DIR。自行发挥，自求多福。</p>
 <h2 id="moss"><a href="#moss" class="headerlink" title="moss"></a>moss</h2><p>还没有看呢，感觉sim就挺好的了。有时间看一下moss。比较一下哪个封装起来更容易。</p>
 
