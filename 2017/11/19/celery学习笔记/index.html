@@ -81,7 +81,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="容器,计划," />
+  <meta name="keywords" content="python,web," />
 
 
 
@@ -97,21 +97,21 @@
 
 
 
-<meta name="description" content="定题 面向容器级别的虚拟化存储研究">
-<meta name="keywords" content="容器,计划">
+<meta name="description" content="简介在程序的运行过程中，我们经常会遇到一些耗时耗资源的操作，为了避免他们阻塞主程序的运行，我们经常会采用多线程或异步任务。比如，在web开发中，    对于新用户的注册，我们通常会给他们发送一封激活邮件，而发送邮件是个IO阻塞式任务，如果直接把它放到应用当中去，就需要等邮件发出去之后才能进行下一步操作，此时用户只能等待再等待，更好的方式是在业务逻辑中触发一个发送邮件的异步任务，而主程序可以继续往下">
+<meta name="keywords" content="python,web">
 <meta property="og:type" content="article">
-<meta property="og:title" content="毕业设计">
-<meta property="og:url" content="https://dearamaze.com/2017/11/03/毕业设计/index.html">
+<meta property="og:title" content="celery学习笔记">
+<meta property="og:url" content="https://dearamaze.com/2017/11/19/celery学习笔记/index.html">
 <meta property="og:site_name" content="DearAmaze-桀骜良">
-<meta property="og:description" content="定题 面向容器级别的虚拟化存储研究">
+<meta property="og:description" content="简介在程序的运行过程中，我们经常会遇到一些耗时耗资源的操作，为了避免他们阻塞主程序的运行，我们经常会采用多线程或异步任务。比如，在web开发中，    对于新用户的注册，我们通常会给他们发送一封激活邮件，而发送邮件是个IO阻塞式任务，如果直接把它放到应用当中去，就需要等邮件发出去之后才能进行下一步操作，此时用户只能等待再等待，更好的方式是在业务逻辑中触发一个发送邮件的异步任务，而主程序可以继续往下">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://mp.weixin.qq.com/s?__biz=MzA4Nzg5Nzc5OA==&mid=205537733&idx=1&sn=454c3ae65e684a8d0058f67bb50b2462&scene=2&from=timeline&isappinstalled=0#rd">
-<meta property="og:image" content="http://p.dearamaze.com/%E5%B0%8F%E4%B9%A6%E5%8C%A0/speedy-arch.png">
-<meta property="og:updated_time" content="2017-11-12T16:00:08.707Z">
+<meta property="og:image" content="http://p.dearamaze.com/%E5%B0%8F%E4%B9%A6%E5%8C%A0/1511082386190.jpg">
+<meta property="og:image" content="http://p.dearamaze.com/%E5%B0%8F%E4%B9%A6%E5%8C%A0/1511101696833.jpg">
+<meta property="og:updated_time" content="2017-11-19T18:01:19.015Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="毕业设计">
-<meta name="twitter:description" content="定题 面向容器级别的虚拟化存储研究">
-<meta name="twitter:image" content="https://mp.weixin.qq.com/s?__biz=MzA4Nzg5Nzc5OA==&mid=205537733&idx=1&sn=454c3ae65e684a8d0058f67bb50b2462&scene=2&from=timeline&isappinstalled=0#rd">
+<meta name="twitter:title" content="celery学习笔记">
+<meta name="twitter:description" content="简介在程序的运行过程中，我们经常会遇到一些耗时耗资源的操作，为了避免他们阻塞主程序的运行，我们经常会采用多线程或异步任务。比如，在web开发中，    对于新用户的注册，我们通常会给他们发送一封激活邮件，而发送邮件是个IO阻塞式任务，如果直接把它放到应用当中去，就需要等邮件发出去之后才能进行下一步操作，此时用户只能等待再等待，更好的方式是在业务逻辑中触发一个发送邮件的异步任务，而主程序可以继续往下">
+<meta name="twitter:image" content="http://p.dearamaze.com/%E5%B0%8F%E4%B9%A6%E5%8C%A0/1511082386190.jpg">
 
 
 
@@ -139,13 +139,13 @@
 
 
 
-  <link rel="canonical" href="https://dearamaze.com/2017/11/03/毕业设计/"/>
+  <link rel="canonical" href="https://dearamaze.com/2017/11/19/celery学习笔记/"/>
 
 
 
 
 
-  <title> 毕业设计 | DearAmaze-桀骜良 </title>
+  <title> celery学习笔记 | DearAmaze-桀骜良 </title>
   <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
   <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
 </head>
@@ -330,7 +330,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://dearamaze.com/2017/11/03/毕业设计/">
+    <link itemprop="mainEntityOfPage" href="https://dearamaze.com/2017/11/19/celery学习笔记/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Dear Amaze">
@@ -351,7 +351,7 @@
             
             
               
-                毕业设计
+                celery学习笔记
               
             
           </h1>
@@ -366,8 +366,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-03T00:00:00+08:00">
-                2017-11-03
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-19T00:00:00+08:00">
+                2017-11-19
               </time>
             
 
@@ -389,8 +389,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/存储/" itemprop="url" rel="index">
-                    <span itemprop="name">存储</span>
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
                   </a>
                 </span>
 
@@ -406,7 +406,7 @@
 
           
           
-             <span id="/2017/11/03/毕业设计/" class="leancloud_visitors" data-flag-title="毕业设计">
+             <span id="/2017/11/19/celery学习笔记/" class="leancloud_visitors" data-flag-title="celery学习笔记">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -435,61 +435,229 @@
       
 
       
-        <h2 id="定题"><a href="#定题" class="headerlink" title="定题"></a>定题</h2><blockquote>
-<p>面向容器级别的虚拟化存储研究</p>
-</blockquote>
-<a id="more"></a>
-<h2 id="案例研究"><a href="#案例研究" class="headerlink" title="案例研究"></a>案例研究</h2><p>speedy，容器镜像高性能存储解决方案。<br><a href="https://github.com/jcloudpub/speedy" target="_blank" rel="external">https://github.com/jcloudpub/speedy</a><br>田琪：我们通过Docker搭建了我们的弹性计算云平台，服务于公司内外各项业务。在搭建整个平台过程中遇到了很多问题，存储是其中一项待解决的问题。Docker官方提供了Docker Registry服务，但是最终的镜像文件落地存储并没有提供，目前支持的第三方存储服务主要是S3、Swift等。</p>
-<p>我们也调研了一些开源分布式存储项目。发现主要存在几个问题：一是架构上倾向于无中心，或者一致性哈希等方式管理存储节点，运维方面我们比较担心可控性问题，另外增减机器都需要涉及文件数据的迁移，不利于线上系统稳定。二是大多开源方案都没有提供高性能的存储引擎，即只提供了数据分布的算法，但数据落地没有提供存储层的优化，这样产生大量文件时就会存在性能问题。三是针对大文件没有特别的优化措施。</p>
-<p>认识到这些问题后，我们决定自己研发分布式存储系统，来解决和优化上述的问题。<br><img src="https://mp.weixin.qq.com/s?__biz=MzA4Nzg5Nzc5OA==&amp;mid=205537733&amp;idx=1&amp;sn=454c3ae65e684a8d0058f67bb50b2462&amp;scene=2&amp;from=timeline&amp;isappinstalled=0#rd" alt="京东开源的Docker镜像存储系统"></p>
-<h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><ol>
-<li>C语言编写的存储引擎高性能，高效率</li>
-<li>高可用，存储实例多副本和无状态前后端代理的镜像服务器</li>
-<li>高可控，弱化中心主节点，上传和下载不会通过中心主节点</li>
-<li>高可扩展性，动态添加存储实例，前后端无状态镜像服务器</li>
-<li>大文件被分成小块，从而可以快速并发的上传和下载这些块</li>
-<li>仪表盘存储监控系统</li>
-<li>仪表盘丰富的操控工具</li>
-<li>支持docker 仓库1.0 API</li>
+        <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>在程序的运行过程中，我们经常会遇到一些耗时耗资源的操作，为了避免他们阻塞主程序的运行，我们经常会采用多线程或异步任务。比如，在web开发中，    对于新用户的注册，我们通常会给他们发送一封激活邮件，而发送邮件是个IO阻塞式任务，如果直接把它放到应用当中去，就需要等邮件发出去之后才能进行下一步操作，此时用户只能等待再等待，更好的方式是在业务逻辑中触发一个发送邮件的异步任务，而主程序可以继续往下执行。<br><a id="more"></a><br><a href="https://github.com/celery/celery" target="_blank" rel="external">Celery</a>是一个强大的<code>分布式任务队列</code>,他可以让任务执行完全脱离主程序，甚至他可以被分配到其他主机上运行。我们通常使用它来实现异步任务（async task）和定时任务（crontab）。它的架构组图如下：</p>
+<p><img src="http://p.dearamaze.com/%E5%B0%8F%E4%B9%A6%E5%8C%A0/1511082386190.jpg" alt="celery 架构图"></p>
+<ul>
+<li>任务模块Task<ul>
+<li>包含异步和定时任务。其中，异步任务通常在业务逻辑中被触发然后发往任务队列中，而定时任务由Celery Beat 进程周期性地将任务发往任务队列。</li>
+</ul>
+</li>
+<li>消息中间件Broker<ul>
+<li>Broker，即任务调度队列，接受任务生产者发来的消息（即任务），将任务存入队列。Celery本身不提供队列服务，官方推荐使用RabbitMQ和Redis等。</li>
+</ul>
+</li>
+<li>任务执行单元Worker<ul>
+<li>Worker是执行任务的处理单元，它实时监控消息队列，获取队列中调度的任务，并执行它。</li>
+</ul>
+</li>
+<li>任务结果存储Backend<pre><code>  - Backend用于存储任务的执行结果，以供查询。同消息中间件一样，存储也可以使用RabbitMQ，Radis，和MongoDB等。
+</code></pre></li>
+</ul>
+<h2 id="异步任务"><a href="#异步任务" class="headerlink" title="异步任务"></a>异步任务</h2><p>使用celery实现异步任务主要包含三个步骤：</p>
+<ol>
+<li>创建一个celery实例</li>
+<li>启动Celery Worker</li>
+<li>应用程序调用异步任务<h3 id="快速入门"><a href="#快速入门" class="headerlink" title="快速入门"></a>快速入门</h3>正确安装celery，redis以及使用redis的celery相关依赖:</li>
 </ol>
-<h3 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h3><p><img src="http://p.dearamaze.com/%E5%B0%8F%E4%B9%A6%E5%8C%A0/speedy-arch.png" alt="enter description here" title="speedy-arch"></p>
-<h3 id="组成部分"><a href="#组成部分" class="headerlink" title="组成部分"></a>组成部分</h3><h4 id="docker-registry-speedy-driver"><a href="#docker-registry-speedy-driver" class="headerlink" title="docker-registry-speedy-driver"></a>docker-registry-speedy-driver</h4><h4 id="imageserver-镜像服务器"><a href="#imageserver-镜像服务器" class="headerlink" title="imageserver 镜像服务器"></a>imageserver 镜像服务器</h4><h4 id="块服务器主节点"><a href="#块服务器主节点" class="headerlink" title="块服务器主节点"></a>块服务器主节点</h4><h4 id="块服务器"><a href="#块服务器" class="headerlink" title="块服务器"></a>块服务器</h4><p>Docker Registry Driver是一个遵照Docker Registry 1.0协议实现的驱动，完成Docker Registry与后端存储系统的对接工作。<br>ChunkServer与ChunkMaster组成了一个通用的对象存储服务，ChunkMaster是中心节点，缓存了所有ChunkServer的信息，ChunkServer本身是最终镜像数据落地的存储节点，多个ChunkServer会构成一个组，拥有唯一的组ID，上传这个组内的所有ChunkServer都成功才算成功，下载可以随机选择其中一个节点下载。<br>ImageServer本身是一个无状态的Proxy服务，它相当于是后面通用对象存储服务的一个接入层，Driver发起的镜像上传/下载操作会直接发给ImageServer, ImageServer里面缓存了ChunkMaster中的存储节点信息，通过这些信息，ImageServer会进行ChunkServer节点的选择操作，找到一组合适的ChunkServer机器完成镜像的上传或下载操作。</p>
-<h4 id="元数据服务器"><a href="#元数据服务器" class="headerlink" title="元数据服务器"></a>元数据服务器</h4><p>他是另外一个分布式的键值存储，尚未开源。你可以利用mysql代替他存储镜像层的元数据信息。</p>
-<h3 id="启动顺序"><a href="#启动顺序" class="headerlink" title="启动顺序"></a>启动顺序</h3><p>1.metaserver<br>2.chunkmaster<br>3.chunkserver<br>4.imageserver<br>5.docker-registry</p>
-<p>After that you can push and pull docker images.</p>
-<h3 id="上传流程："><a href="#上传流程：" class="headerlink" title="上传流程："></a>上传流程：</h3><p>首先我们通过docker push命令发起上传镜像的操作，docker本身会进行多次与后端存储系统的交互，最后一次交互是上传image的layer数据到Docker Registry。</p>
-<blockquote>
-<p>这里我要简单吐个槽，合理的情况是这个结构化数据和非结构化数据分开存储，docker本身用json表示结构化的描述信息，也是上传到后端存储系统的，个人觉得docker的元数据管理方面很混乱。</p>
-</blockquote>
-<p>如果使用默认的本地存储，Docker Registry就直接把数据写到了磁盘上，我们这里通过自己实现的Driver完成与后端对象存储系统的上传工作。</p>
-<p>我们的Driver首先会对源源不断上传过来的字节流进行切割，按照配置的固定大小并发上传到ImageServer中，并在上传的http请求中携带了该分片的索引及位置信息。</p>
-<p>ImageServer在收到该分片上传请求后，根据自己从ChunkMaster中同步过来的chunk信息来动态选择一组ChunkServer，并将分片上传到该组ChunkServer中的所有实例上，都成功才返回成功。并将分片索引位置信息及上传成功返回的文件ID提交给MetaServer保存.</p>
-<p>Driver在收到所有分片的上传成功返回后，再返回给前端Docker，整个上传流程结束。</p>
-<h3 id="下载流程："><a href="#下载流程：" class="headerlink" title="下载流程："></a>下载流程：</h3><p>首先docker通过docker pull请求下载镜像，同样在真正下载数据开始前，docker同Docker Registry以及后端的存储系统间也会产生多次的数据交互，这里省略，最后一步是下载对应的Image Layer数据。</p>
-<p>Docker Registry在收到下载请求后首先通过ImageServer从MetaServer里获取到该文件path对应的分片信息，主要是分片的个数，及每一片的索引，然后将这些分片下载请求并发的发送给ImageServer服务器。</p>
-<p>ImageServer收到分片下载请求后，查询MetaServer获得对应的文件ID，该文件ID中包含有ChunkServer的位置信息，随后请求相应ChunkServer下载数据并返回给Driver。</p>
-<p>Driver收到分片下载的数据后，会根据分片的位置索引进行排序，按文件分片顺序返回给Docker。</p>
-<h2 id="研究内容"><a href="#研究内容" class="headerlink" title="研究内容"></a>研究内容</h2><ol>
-<li>metadata组织形式（他是没有开源的）。</li>
-<li>另外一个就是driver部分，他目前用的是device-mapper，他也提到overlayfs。<br> a. 我们可以在dm上面做文章，加上我们的重删。<br> b. 利用overlayfs，做driver，这个工作量估计有点大。</li>
-</ol>
-<p>1、Docker镜像存储技术探秘</p>
-<p>我们首先思考一个问题，docker本质上都涉及了哪些方面的技术：</p>
-<p>Linux内核系统技术，如：Namespace, Cgroup等；<br>存储技术，如：镜像的存储，镜像的CoW所需的文件系统，如：overlayfs, aufs, dm等；<br>网络技术，如：libnetwork，flannel等开源项目主要来解决容器的网络互通及SDN等问题。<br>我们今天的话题主要集中在存储技术方面，也就是和镜像相关，docker依赖的存储技术方面也是分为两个方面：</p>
-<p>单机内核层存储技术，也就是overlayfs, aufs等主要用于提供镜像的CoW机制，解决的是一台物理资源跑多个容器，多个容器之间共享同一个rootfs，然后各自修改是通过CoW完成的，这样解决存储空间等问题。这个话题我已经公开分享过很多次，不再多说了。<br>另一层面，当我们使用Docker过程中，可能会使用到很多不同的镜像，这些镜像本身也是需要存储的，我们需要一个靠可用的可扩展的分布式存储系统。<br>我们今天就详细讨论这两个方面的技术选型，Docker镜像驱动的选择。默认支持的驱动主要有这几个：</p>
-<p>Docker<br>btrfs<br>aufs<br>overlayfs<br>device mapper<br>vfs<br>个人认为我们的选择主要是在overlayfs与device mapper之间，btrfs因为目前还没有production ready，生产环境用的公司应该很少，aufs因为没有进入主线内核，且代码庞大书写风格又比较混乱，所以也不是很看好，目前只有少数发行版默认支持这个文件系统。</p>
-<p>而vfs则是完全没有解决任何问题，比如一台物理机跑100个容器，则相应的rootfs会独立保存100份，这个完全没法接受，所以最终我们很可能是在overlayfs与device mapper之间进行选择。</p>
-<p>ovelayfs简介：</p>
-<p>overlayfs本身是一个叠加文件系统，用于叠合多个文件系统形成一个新的文件系统，使用方式如下：</p>
-<p>mount -t overlay overlay -olowerdir=/lower, upperdir=/upper, workdir=/work /merged</p>
-<p>简单的说overlayfs通过Linux内核VFS层的灵活性能够将对文件A的修改变成对B的修改，利用这种灵活性来完成文件系统叠加的效果。比如指令：</p>
-<p>/lower：是下层的文件系统，通常是只读的。可以放我们的镜像模板的rootfs 如果我们要对其中某个文件做修改，比如文件A，则overlayfs会将该文件拷贝到/upper目录中修改，也就是实现了文件级别的CoW。<br>/merged ：是最终叠加后形成的文件系统，也就是用户实际使用看到叠加效果后的文件系统。<br>device-mapper简介：</p>
-<p>device-mapper(后面简称dm)本身是一个位于内核通用块层的一个框架，完成内核IO的一些策略定制等功能，比如可以通过dm完成磁盘的软raid功能，比如facebook前些时间开源的flashcache缓存方案也是基于device-mapper的。</p>
-<p>DM是一个框架，提供了通用的一套框架完成IO的重定向及定制等策略，它包含很多具体的策略实现，Docker用到的是其中的thin-provision。thin-provision本质上提供两个功能：</p>
-<p>磁盘空间按需分配，这个特点决定了如果Docker使用dm驱动，则对应的盘大小默认10G，实际是不占任何空间的，直到你真正写入数据，才会占用实际的磁盘空间。<br>基于block块粒度的CoW，如上面overlayfs原理类似，我要修改一个文件，thin-provision会将修改的部分对应的磁盘块单独拷贝出来一份修改，这里粒度是要小于overlayfs的。<br>dm与overlayfs之间的选择：</p>
-<p>从上面原理上分析不难得出一个结论，dm的CoW的粒度是要比overlayfs的小的，也就是说如果用overlayfs做驱动，存在的问题是如果模板rootfs中有个比较大的文件在大多数容器中都可能会动态修改，则这个文件需要整个copyup到上层文件系统，而用dm则只需要CoW修改的那个块。</p>
-<p>从这方面讲dm是占优的，但是dm在使用中存在很多功能限制，因为它本身是一个块设备，所以并不了解上层文件系统的细节，使用中存在种种限制，并且在文件系统缓存这层也没有overlayfs有效。但是overlayfs需要3.18以上kernel才支持。大多数Linux发行版还不支持这么高的内核版本，所以需要单独编译。</p>
-<p>综合考虑，个人认为当前用dm是可以接受的选择，未来可能会切换到overlayfs上。</p>
+<pre><code class="shell?linenums">redis 我用的是容器，直接
+docker pull redis
+docker run -d -p 6379:6379 --name redis redis:latest
+
+pip install celery
+pip install &#39;celery[redis]&#39;
+</code></pre>
+<h4 id="创建Celery实例"><a href="#创建Celery实例" class="headerlink" title="创建Celery实例"></a>创建Celery实例</h4><p>编写tasks.py</p>
+<pre><code class="python"># -*- coding: utf-8 -*-
+
+import time
+from celery import Celery
+
+broker = &#39;redis://127.0.0.1:6379&#39;
+backend = &#39;redis://127.0.0.1:6379/0&#39;
+
+app = Celery(&#39;my_task&#39;, broker=broker, backend=backend)
+
+@app.task
+def add(x, y):
+    time.sleep(5)     # 模拟耗时操作
+    return x + y
+</code></pre>
+<p>上面代码，做了以下几件事情，</p>
+<ul>
+<li>创建了一个Celery实例app，名称为<code>my_task</code>;</li>
+<li>指定消息中间件为redis，URL为 <code>redis://127.0.0.1:6379</code>;</li>
+<li>指定存储用redis，URL为<code>redis://127.0.0.1:6379/0</code>; </li>
+<li>创建了一个celery任务<code>add</code> ，当函数被<code>@app.task</code>装饰后，就成为可被Celery调度的任务。</li>
+</ul>
+<h4 id="启动Celery-Worker"><a href="#启动Celery-Worker" class="headerlink" title="启动Celery Worker"></a>启动Celery Worker</h4><p>在当前目录，使用如下方式启动Celery Worker</p>
+<pre><code>$ celery worker -A tasks --loglevel=info
+</code></pre><p>其中：</p>
+<ul>
+<li>参数 <code>-A</code> 指定了Celery实例的位置，本例是在 <code>tasks.py</code> 中，Celery会自动在该文件中寻找Celery对象实例，当然我们也可以指定，在本例中使用 <code>-A tasks.app</code> ;</li>
+<li>参数 <code>--loglevel</code> 指定了日志的级别，默认为warning，也可以使用 <code>-l info</code> 来表示。</li>
+</ul>
+<p>在生产环境中，我们通常会使用Supervisor来控制Celery Worker 进程。<br>启动成功后，控制台会显示如下输出（最后两行输出是我调用了task后的输出，刚开始时没有）：<br><img src="http://p.dearamaze.com/%E5%B0%8F%E4%B9%A6%E5%8C%A0/1511101696833.jpg" alt="启动celery worker"></p>
+<h4 id="调用任务"><a href="#调用任务" class="headerlink" title="调用任务"></a>调用任务</h4><p> 现在我们可以通过<code>delay()</code>和<code>apply_async()</code> 方法来调用任务。</p>
+<p> 在当前目录打开Python控制台，输入以下代码：</p>
+<pre><code class="python"> (qw_export_post_env) 
+ 日 19 11月 - 22:25  ~/code/py/celery 
+ @dl  python 
+Python 2.7.13+ (default, Jul 19 2017, 18:15:03) 
+[GCC 6.4.0 20170704] on linux2
+Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
+&gt;&gt;&gt; from tasks import add 
+&gt;&gt;&gt; add.delay(2,1)
+&lt;AsyncResult: d8be1e96-37bd-4868-9276-7bceafb99ae7&gt;
+&gt;&gt;&gt; result=add.delay(2,1)
+&gt;&gt;&gt; result.ready() # 使用 ready() 判断任务是否执行完毕
+True
+&gt;&gt;&gt; result.get() # 使用 get() 获取任务结果
+3
+&gt;&gt;&gt; result=add.delay(2,1)
+&gt;&gt;&gt; result.get()
+3
+&gt;&gt;&gt; result=add.delay(2,1)
+&gt;&gt;&gt; result.ready()
+False
+&gt;&gt;&gt; result.ready()
+True
+&gt;&gt;&gt; result.get()
+3
+</code></pre>
+<p>在上面，我们从<code>tasks.py</code> 文件中导入了 <code>add</code> 任务对象，然后使用 <code>delay()</code> 方法将任务发送到消息中间件（Broker） ，Celery Worker进程监控到该任务后，就会进行执行。上面图片上最后两行输出，就是执行该任务的日志。这说明该任务已经被调度并执行成功。</p>
+<p>上面我们是在 Python的环境中调用的任务。事实上，我们通常在应用程序中调用任务。比如我们将下面的程序保存为<code>client.py</code>:</p>
+<pre><code class="python"># -*- coding: utf-8 -*-
+
+from tasks import add
+
+# 异步任务
+add.delay(2, 8)
+
+print &#39;hello world&#39;
+</code></pre>
+<h3 id="使用配置"><a href="#使用配置" class="headerlink" title="使用配置"></a>使用配置</h3><p>分离配置文件任务文件，以及应用程序。<br>在上面的例子中，我们直接把 Broker 和 Backend 的配置写在了程序当中，更好的做法是将配置项统一写入到一个配置文件中，通常我们将该文件命名为 <code>celeryconfig.py</code> 。    Celery 的配置比较多，可以在<a href="http://docs.celeryproject.org/en/latest/userguide/configuration.html" target="_blank" rel="external">官方文档</a>查询每个配置项的含义。</p>
+<p>下面，我们再看一个例子。项目结构如下：</p>
+<pre><code>celery_demo                    # 项目根目录
+    ├── celery_app             # 存放 celery 相关文件
+    │   ├── __init__.py
+    │   ├── celeryconfig.py    # 配置文件
+    │   ├── task1.py           # 任务文件 1
+    │   └── task2.py           # 任务文件 2
+    └── client.py              # 应用程序`
+</code></pre><p><code>__init__.py</code> 代码如下：</p>
+<pre><code># -*- coding: utf-8 -*-
+
+from celery import Celery
+
+app = Celery(&#39;demo&#39;)                                # 创建 Celery 实例
+app.config_from_object(&#39;celery_app.celeryconfig&#39;)   # 通过 Celery 实例加载配置模块
+</code></pre><p><code>celeryconfig.py</code> 代码如下：</p>
+<pre><code>BROKER_URL = &#39;redis://127.0.0.1:6379&#39;               # 指定 Broker
+CELERY_RESULT_BACKEND = &#39;redis://127.0.0.1:6379/0&#39;  # 指定 Backend
+
+CELERY_TIMEZONE=&#39;Asia/Shanghai&#39;                     # 指定时区，默认是 UTC
+# CELERY_TIMEZONE=&#39;UTC&#39;                             
+
+CELERY_IMPORTS = (                                  # 指定导入的任务模块
+    &#39;celery_app.task1&#39;,
+    &#39;celery_app.task2&#39;
+)
+</code></pre><p><code>task1.py</code> 代码如下：</p>
+<pre><code>import time
+from celery_app import app
+
+@app.task
+def add(x, y):
+    time.sleep(2)
+    return x + y
+</code></pre><p><code>task2.py</code> 代码如下：</p>
+<pre><code>import time
+from celery_app import app
+
+@app.task
+def multiply(x, y):
+    time.sleep(2)
+    return x * y
+</code></pre><p><code>client.py</code> 代码如下：</p>
+<pre><code class="python">#!/usr/bin/env python
+# coding=utf-8
+from celery_app import task1
+from celery_app import task2
+import time
+
+result1=task1.add.apply_async(args=[2,8])
+result2=task2.multiply.apply_async(args=[3,8])
+
+print &quot;hello&quot; 
+
+while(not result1.ready() or not result2.ready()):
+    time.sleep(0.5)
+    print result1.ready()
+print result1.get()
+print result2.get()
+</code></pre>
+<p>现在，让我们启动 Celery Worker 进程，在项目的根目录下执行下面命令：</p>
+<pre><code>celery_demo $ celery -A celery_app worker --loglevel=info
+</code></pre><p>接着，运行 <code>$ python client.py</code> ，它会发送两个异步任务到 Broker，在 Worker 的窗口我们可以看到如下输出：</p>
+<pre><code>[2017-11-19 22:50:39,573: INFO/MainProcess] Received task: celery_app.task1.add[b6e8b247-9f94-4b77-8181-2613247df0f6]  
+[2017-11-19 22:50:39,575: INFO/MainProcess] Received task: celery_app.task2.multiply[c578f21b-d8c6-453f-8d2f-f9d1f16a57fd]  
+[2017-11-19 22:50:41,585: INFO/ForkPoolWorker-1] Task celery_app.task1.add[b6e8b247-9f94-4b77-8181-2613247df0f6] succeeded in 2.010242356s: 10
+[2017-11-19 22:50:41,585: INFO/ForkPoolWorker-3] Task celery_app.task2.multiply[c578f21b-d8c6-453f-8d2f-f9d1f16a57fd] succeeded in 2.009279021s: 24
+</code></pre><p>执行输出：</p>
+<pre><code class="python"> @dl  python client.py 
+hello
+False
+False
+False
+False
+10
+24
+</code></pre>
+<h3 id="delay-和-apply-async"><a href="#delay-和-apply-async" class="headerlink" title="delay 和 apply_async"></a>delay 和 apply_async</h3><p>在前面的例子中，我们使用 <code>delay()</code> 或 <code>apply_async()</code> 方法来调用任务。事实上，<code>delay</code> 方法封装了 <code>apply_async</code>，如下：</p>
+<pre><code>def delay(self, *partial_args, **partial_kwargs):
+    &quot;&quot;&quot;Shortcut to :meth:`apply_async` using star arguments.&quot;&quot;&quot;
+    return self.apply_async(partial_args, partial_kwargs)
+</code></pre><p>也就是说，<code>delay</code> 是使用 <code>apply_async</code> 的快捷方式。<code>apply_async</code> 支持更多的参数，它的一般形式如下：</p>
+<pre><code>apply_async(args=(), kwargs={}, route_name=None, **options)
+</code></pre><p><code>apply_async</code> 常用的参数如下：</p>
+<ul>
+<li>countdown：指定多少秒后执行任务<pre><code>task1.apply_async(args=(2, 3), countdown=5)    # 5 秒后执行任务
+</code></pre></li>
+<li>eta (estimated time of arrival)：指定任务被调度的具体时间，参数类型是 datetime<br>```<br>from datetime import datetime, timedelta</li>
+</ul>
+<h1 id="当前-UTC-时间再加-10-秒后执行任务"><a href="#当前-UTC-时间再加-10-秒后执行任务" class="headerlink" title="当前 UTC 时间再加 10 秒后执行任务"></a>当前 UTC 时间再加 10 秒后执行任务</h1><p>task1.multiply.apply_async(args=[3, 7], eta=datetime.utcnow() + timedelta(seconds=10))</p>
+<pre><code>- expires：任务过期时间，参数类型可以是 int，也可以是 datetime
+</code></pre><p>task1.multiply.apply_async(args=[3, 7], expires=10)    # 10 秒后过期</p>
+<pre><code>更多的参数列表可以在[官方文档](http://docs.celeryproject.org/en/latest/reference/celery.app.task.html#celery.app.task.Task.apply_async)中查看。
+
+## 定时任务
+Celery 除了可以执行**异步任务**，也支持执行**周期性任务（Periodic Tasks）**，或者说定时任务。Celery Beat 进程通过读取配置文件的内容，周期性地将定时任务发往任务队列。
+
+让我们看看例子，项目结构如下：
+</code></pre><p>celery_demo                    # 项目根目录<br>    ├── celery_app             # 存放 celery 相关文件<br>        ├── <strong>init</strong>.py<br>        ├── celeryconfig.py    # 配置文件<br>        ├── task1.py           # 任务文件<br>        └── task2.py           # 任务文件</p>
+<pre><code>`__init__.py` 代码如下：
+</code></pre><h1 id="coding-utf-8"><a href="#coding-utf-8" class="headerlink" title="-- coding: utf-8 --"></a>-<em>- coding: utf-8 -</em>-</h1><p>from celery import Celery</p>
+<p>app = Celery(‘demo’)<br>app.config_from_object(‘celery_app.celeryconfig’)<br>celeryconfig.py 代码如下：</p>
+<h1 id="coding-utf-8-1"><a href="#coding-utf-8-1" class="headerlink" title="-- coding: utf-8 --"></a>-<em>- coding: utf-8 -</em>-</h1><p>from datetime import timedelta<br>from celery.schedules import crontab</p>
+<h1 id="Broker-and-Backend"><a href="#Broker-and-Backend" class="headerlink" title="Broker and Backend"></a>Broker and Backend</h1><p>BROKER_URL = ‘redis://127.0.0.1:6379’<br>CELERY_RESULT_BACKEND = ‘redis://127.0.0.1:6379/0’</p>
+<h1 id="Timezone"><a href="#Timezone" class="headerlink" title="Timezone"></a>Timezone</h1><p>CELERY_TIMEZONE=’Asia/Shanghai’    # 指定时区，不指定默认为 ‘UTC’</p>
+<h1 id="CELERY-TIMEZONE-’UTC’"><a href="#CELERY-TIMEZONE-’UTC’" class="headerlink" title="CELERY_TIMEZONE=’UTC’"></a>CELERY_TIMEZONE=’UTC’</h1><h1 id="import"><a href="#import" class="headerlink" title="import"></a>import</h1><p>CELERY_IMPORTS = (<br>    ‘celery_app.task1’,<br>    ‘celery_app.task2’<br>)</p>
+<h1 id="schedules"><a href="#schedules" class="headerlink" title="schedules"></a>schedules</h1><p>CELERYBEAT_SCHEDULE = {<br>    ‘add-every-30-seconds’: {<br>         ‘task’: ‘celery_app.task1.add’,<br>         ‘schedule’: timedelta(seconds=30),       # 每 30 秒执行一次<br>         ‘args’: (5, 8)                           # 任务函数参数<br>    },<br>    ‘multiply-at-some-time’: {<br>        ‘task’: ‘celery_app.task2.multiply’,<br>        ‘schedule’: crontab(hour=9, minute=50),   # 每天早上 9 点 50 分执行一次<br>        ‘args’: (3, 7)                            # 任务函数参数<br>    }<br>}</p>
+<pre><code>`task1.py` 代码如下：
+</code></pre><p>import time<br>from celery_app import app</p>
+<p>@app.task<br>def add(x, y):<br>    time.sleep(2)<br>    return x + y</p>
+<pre><code>`task2.py` 代码如下：
+</code></pre><p>import time<br>from celery_app import app</p>
+<p>@app.task<br>def multiply(x, y):<br>    time.sleep(2)<br>    return x * y</p>
+<pre><code>现在，让我们启动 `Celery Worker` 进程，在项目的根目录下执行下面命令：
+</code></pre><p>celery_demo $ celery -A celery_app worker –loglevel=info</p>
+<pre><code>接着，启动 `Celery Beat` 进程，定时将任务发送到 `Broker`，在项目根目录下执行下面命令：
+</code></pre><p>celery_demo $ celery beat -A celery<em>app<br>celery beat v4.0.1 (latentcall) is starting.<br><strong>    -    … </strong>   -        </em><br>LocalTime -&gt; 2016-12-11 09:48:16<br>Configuration -&gt;<br>    . broker -&gt; redis://127.0.0.1:6379//<br>    . loader -&gt; celery.loaders.app.AppLoader<br>    . scheduler -&gt; celery.beat.PersistentScheduler<br>    . db -&gt; celerybeat-schedule<br>    . logfile -&gt; [stderr]@%WARNING<br>    . maxinterval -&gt; 5.00 minutes (300s)</p>
+<pre><code>之后，在 Worker 窗口我们可以看到，任务 task1 每 30 秒执行一次，而 task2 每天早上 9 点 50 分执行一次。
+
+在上面，我们用两个命令启动了 Worker 进程和 Beat 进程，我们也可以将它们放在一个命令中：
+</code></pre><p>$ celery -B -A celery_app worker –loglevel=info<br>```<br>Celery 周期性任务也有多个配置项，可参考<a href="http://docs.celeryproject.org/en/latest/userguide/periodic-tasks.html" target="_blank" rel="external">官方文档</a>。</p>
+<p><a href="http://geek.csdn.net/news/detail/128791" target="_blank" rel="external">转载自</a></p>
 
       
     </div>
@@ -540,7 +708,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/容器-计划/" rel="tag"># 容器,计划</a>
+            <a href="/tags/python-web/" rel="tag"># python,web</a>
           
         </div>
       
@@ -553,8 +721,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/10/25/python time datetime学习/" rel="next" title="python time datetime学习">
-                <i class="fa fa-chevron-left"></i> python time datetime学习
+              <a href="/2017/11/14/OJ查重设计/" rel="next" title="OJ查重设计">
+                <i class="fa fa-chevron-left"></i> OJ查重设计
               </a>
             
           </div>
@@ -562,10 +730,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/11/12/32位和64位系统区别及int字节数/" rel="prev" title="32位和64位系统区别及int字节数">
-                32位和64位系统区别及int字节数 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -741,7 +905,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#定题"><span class="nav-number">1.</span> <span class="nav-text">定题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#案例研究"><span class="nav-number">2.</span> <span class="nav-text">案例研究</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#特点"><span class="nav-number">2.1.</span> <span class="nav-text">特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#架构"><span class="nav-number">2.2.</span> <span class="nav-text">架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#组成部分"><span class="nav-number">2.3.</span> <span class="nav-text">组成部分</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#docker-registry-speedy-driver"><span class="nav-number">2.3.1.</span> <span class="nav-text">docker-registry-speedy-driver</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#imageserver-镜像服务器"><span class="nav-number">2.3.2.</span> <span class="nav-text">imageserver 镜像服务器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#块服务器主节点"><span class="nav-number">2.3.3.</span> <span class="nav-text">块服务器主节点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#块服务器"><span class="nav-number">2.3.4.</span> <span class="nav-text">块服务器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#元数据服务器"><span class="nav-number">2.3.5.</span> <span class="nav-text">元数据服务器</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动顺序"><span class="nav-number">2.4.</span> <span class="nav-text">启动顺序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#上传流程："><span class="nav-number">2.5.</span> <span class="nav-text">上传流程：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#下载流程："><span class="nav-number">2.6.</span> <span class="nav-text">下载流程：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#研究内容"><span class="nav-number">3.</span> <span class="nav-text">研究内容</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异步任务"><span class="nav-number">2.</span> <span class="nav-text">异步任务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#快速入门"><span class="nav-number">2.1.</span> <span class="nav-text">快速入门</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#创建Celery实例"><span class="nav-number">2.1.1.</span> <span class="nav-text">创建Celery实例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#启动Celery-Worker"><span class="nav-number">2.1.2.</span> <span class="nav-text">启动Celery Worker</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#调用任务"><span class="nav-number">2.1.3.</span> <span class="nav-text">调用任务</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用配置"><span class="nav-number">2.2.</span> <span class="nav-text">使用配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#delay-和-apply-async"><span class="nav-number">2.3.</span> <span class="nav-text">delay 和 apply_async</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#当前-UTC-时间再加-10-秒后执行任务"><span class="nav-number"></span> <span class="nav-text">当前 UTC 时间再加 10 秒后执行任务</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#coding-utf-8"><span class="nav-number"></span> <span class="nav-text">-- coding: utf-8 --</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#coding-utf-8-1"><span class="nav-number"></span> <span class="nav-text">-- coding: utf-8 --</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Broker-and-Backend"><span class="nav-number"></span> <span class="nav-text">Broker and Backend</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Timezone"><span class="nav-number"></span> <span class="nav-text">Timezone</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CELERY-TIMEZONE-’UTC’"><span class="nav-number"></span> <span class="nav-text">CELERY_TIMEZONE=’UTC’</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#import"><span class="nav-number"></span> <span class="nav-text">import</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#schedules"><span class="nav-number"></span> <span class="nav-text">schedules</span></a></div>
             
 
           </div>
