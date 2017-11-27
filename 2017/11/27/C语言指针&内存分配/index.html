@@ -81,7 +81,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="mongodb,数据库," />
+  <meta name="keywords" content="C语言,内存分配," />
 
 
 
@@ -97,18 +97,21 @@
 
 
 
-<meta name="description" content="mongodb简介">
-<meta name="keywords" content="mongodb,数据库">
+<meta name="description" content="指针也是一种数据类型。">
+<meta name="keywords" content="C语言,内存分配">
 <meta property="og:type" content="article">
-<meta property="og:title" content="mongodb 学习笔记">
-<meta property="og:url" content="https://dearamaze.com/2017/10/23/mongodb学习笔记/index.html">
+<meta property="og:title" content="C语言指针&amp;内存分配">
+<meta property="og:url" content="https://dearamaze.com/2017/11/27/C语言指针&内存分配/index.html">
 <meta property="og:site_name" content="DearAmaze-桀骜良">
-<meta property="og:description" content="mongodb简介">
+<meta property="og:description" content="指针也是一种数据类型。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-10-25T10:28:29.759Z">
+<meta property="og:image" content="http://p.dearamaze.com/%E5%B0%8F%E4%B9%A6%E5%8C%A0/1511797169278.jpg">
+<meta property="og:image" content="http://p.dearamaze.com/%E5%B0%8F%E4%B9%A6%E5%8C%A0/1511797204333.jpg">
+<meta property="og:updated_time" content="2017-11-27T18:01:27.951Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="mongodb 学习笔记">
-<meta name="twitter:description" content="mongodb简介">
+<meta name="twitter:title" content="C语言指针&amp;内存分配">
+<meta name="twitter:description" content="指针也是一种数据类型。">
+<meta name="twitter:image" content="http://p.dearamaze.com/%E5%B0%8F%E4%B9%A6%E5%8C%A0/1511797169278.jpg">
 
 
 
@@ -136,13 +139,13 @@
 
 
 
-  <link rel="canonical" href="https://dearamaze.com/2017/10/23/mongodb学习笔记/"/>
+  <link rel="canonical" href="https://dearamaze.com/2017/11/27/C语言指针&内存分配/"/>
 
 
 
 
 
-  <title> mongodb 学习笔记 | DearAmaze-桀骜良 </title>
+  <title> C语言指针&内存分配 | DearAmaze-桀骜良 </title>
   <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
   <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
 </head>
@@ -327,7 +330,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://dearamaze.com/2017/10/23/mongodb学习笔记/">
+    <link itemprop="mainEntityOfPage" href="https://dearamaze.com/2017/11/27/C语言指针&内存分配/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Dear Amaze">
@@ -348,7 +351,7 @@
             
             
               
-                mongodb 学习笔记
+                C语言指针&内存分配
               
             
           </h1>
@@ -363,8 +366,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-23T00:00:00+08:00">
-                2017-10-23
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-27T00:00:00+08:00">
+                2017-11-27
               </time>
             
 
@@ -386,8 +389,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/学习笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">学习笔记</span>
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C</span>
                   </a>
                 </span>
 
@@ -403,7 +406,7 @@
 
           
           
-             <span id="/2017/10/23/mongodb学习笔记/" class="leancloud_visitors" data-flag-title="mongodb 学习笔记">
+             <span id="/2017/11/27/C语言指针&内存分配/" class="leancloud_visitors" data-flag-title="C语言指针&内存分配">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -432,230 +435,89 @@
       
 
       
-        <h2 id="mongodb简介"><a href="#mongodb简介" class="headerlink" title="mongodb简介"></a>mongodb简介</h2><a id="more"></a>
-<h2 id="mongodb安装"><a href="#mongodb安装" class="headerlink" title="mongodb安装"></a>mongodb安装</h2><h2 id="mongodb常用命令"><a href="#mongodb常用命令" class="headerlink" title="mongodb常用命令"></a>mongodb常用命令</h2><h3 id="显示所有数据库"><a href="#显示所有数据库" class="headerlink" title="显示所有数据库"></a>显示所有数据库</h3><p><code>show dbs</code></p>
-<h3 id="显示该数据库下所有集合（表）"><a href="#显示该数据库下所有集合（表）" class="headerlink" title="显示该数据库下所有集合（表）"></a>显示该数据库下所有集合（表）</h3><p><code>show collections</code><br>或者<br><code>show tables</code></p>
-<h3 id="显示集合中所有数据（查询）"><a href="#显示集合中所有数据（查询）" class="headerlink" title="显示集合中所有数据（查询）"></a>显示集合中所有数据（查询）</h3><pre><code># 输出
-&gt; db.col.find()
-{ &quot;_id&quot; : ObjectId(&quot;59edaea04995c58db2af8d2d&quot;), &quot;title&quot; : &quot;MongoDB&quot;, &quot;by&quot; : &quot;NB教程&quot; }
-{ &quot;_id&quot; : ObjectId(&quot;59edafca4995c58db2af8d2e&quot;), &quot;title&quot; : &quot;MongoDB&quot;, &quot;description&quot; : &quot;MongoDB 是一个 Nosql 数据库&quot;, &quot;by&quot; : &quot;NB教程&quot;, &quot;url&quot; : &quot;http://www.runoob.com&quot;, &quot;tags&quot; : [ &quot;mongodb&quot;, &quot;database&quot;, &quot;NoSQL&quot; ], &quot;likes&quot; : 100 }
-
-# 格式化输出
-&gt; db.col.find().pretty()
-{
-    &quot;_id&quot; : ObjectId(&quot;59edaea04995c58db2af8d2d&quot;),
-    &quot;title&quot; : &quot;MongoDB&quot;,
-    &quot;by&quot; : &quot;NB教程&quot;
+        <blockquote>
+<p>指针也是一种数据类型。</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="对数据类型的认识"><a href="#对数据类型的认识" class="headerlink" title="对数据类型的认识"></a>对数据类型的认识</h2><h3 id="常见非指针类型"><a href="#常见非指针类型" class="headerlink" title="常见非指针类型"></a>常见非指针类型</h3><p><code>int型，char型，long型 ...</code><br><code>int a=10</code><br>中心：该内存空间<br>a ：内存空间代号<br>10：内存空间存放的数据<br>&amp;a：a对应的地址编号（该内存空间对应的地址编号）（32位系统编号有32位，64位系统编号有64位）</p>
+<blockquote>
+<p>小插曲，回顾32&amp;64位系统的变量类型的不同之处：</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th></th>
+<th style="text-align:center">32(byte)</th>
+<th>64(byte)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>long</td>
+<td style="text-align:center">4</td>
+<td>8</td>
+</tr>
+<tr>
+<td>int *(指针型变量)</td>
+<td style="text-align:center">4</td>
+<td>8</td>
+</tr>
+</tbody>
+</table>
+<h3 id="指针类型"><a href="#指针类型" class="headerlink" title="指针类型"></a>指针类型</h3><p><code>char * ,int *,long * ,...</code></p>
+<pre><code>int b=10
+int *a=&amp;b
+</code></pre><p>中心：该内存空间（这条表达式是重点：<code>int *a=&amp;b</code>）<br>a: 该内存空间的代号<br>&amp;b：该内存空间中存放的数据（是一个地址编号，本例中是存放b的内存空间的地址编号）<br>&amp;a：a对应的地址编号（该内存空间对应的地址编号）</p>
+<h3 id="函数类型"><a href="#函数类型" class="headerlink" title="函数类型"></a>函数类型</h3><p>函数类型比较特殊：</p>
+<pre><code>int func(){
+    return 0;
 }
-{
-    &quot;_id&quot; : ObjectId(&quot;59edafca4995c58db2af8d2e&quot;),
-    &quot;title&quot; : &quot;MongoDB&quot;,
-    &quot;description&quot; : &quot;MongoDB 是一个 Nosql 数据库&quot;,
-    &quot;by&quot; : &quot;NB教程&quot;,
-    &quot;url&quot; : &quot;http://www.runoob.com&quot;,
-    &quot;tags&quot; : [
-        &quot;mongodb&quot;,
-        &quot;database&quot;,
-        &quot;NoSQL&quot;
-    ],
-    &quot;likes&quot; : 100
-}
-</code></pre><table class="reference"><br>    <thead><br>    <tr><br>    <th>操作</th><br>    <th>格式</th><br>    <th>范例</th><br>    <th>RDBMS中的类似语句</th><br>    </tr><br>    </thead><br>    <tbody><br>    <tr><br>    <td>等于</td><br>    <td><code>{&lt;key&gt;:&lt;value&gt;</code>}</td><br>    <td><code>db.col.find({“by”:”菜鸟教程”}).pretty()</code></td><br>    <td><code>where by = ‘菜鸟教程’</code></td><br>    </tr><br>    <tr><br>    <td>小于</td><br>    <td><code>{&lt;key&gt;:{$lt:&lt;value&gt;}}</code></td><br>    <td><code>db.col.find({“likes”:{$lt:50}}).pretty()</code></td><br>    <td><code>where likes &lt; 50</code></td><br>    </tr><br>    <tr><br>    <td>小于或等于</td><br>    <td><code>{&lt;key&gt;:{$lte:&lt;value&gt;}}</code></td><br>    <td><code>db.col.find({“likes”:{$lte:50}}).pretty()</code></td><br>    <td><code>where likes &lt;= 50</code></td><br>    </tr><br>    <tr><br>    <td>大于</td><br>    <td><code>{&lt;key&gt;:{$gt:&lt;value&gt;}}</code></td><br>    <td><code>db.col.find({“likes”:{$gt:50}}).pretty()</code></td><br>    <td><code>where likes &gt; 50</code></td><br>    </tr><br>    <tr><br>    <td>大于或等于</td><br>    <td><code>{&lt;key&gt;:{$gte:&lt;value&gt;}}</code></td><br>    <td><code>db.col.find({“likes”:{$gte:50}}).pretty()</code></td><br>    <td><code>where likes &gt;= 50</code></td><br>    </tr><br>    <tr><br>    <td>不等于</td><br>    <td><code>{&lt;key&gt;:{$ne:&lt;value&gt;}}</code></td><br>    <td><code>db.col.find({“likes”:{$ne:50}}).pretty()</code></td><br>    <td><code>where likes != 50</code></td><br>    </tr><br>    </tbody><br></table>
+</code></pre><p>在内存中函数存放与代码段地址空间（不可修改），所以对函数取地址<code>&amp;func</code>，得到的是代码段，该函数对应的地址。<br>有一个有趣的现象是，gdb调试时，<code>p func</code>,<code>p *func</code>,<code>p &amp;func</code>,得到的全是func函数对应的代码段地址。</p>
+<pre><code>(gdb) p func
+$1 = {int (int)} 0x6b0 &lt;func&gt;
+(gdb) p *func
+$2 = {int (int)} 0x6b0 &lt;func&gt;
+(gdb) p &amp;func
+$3 = (int (*)(int)) 0x6b0 &lt;func&gt;
+</code></pre><p>也许函数名本本身就是一个特殊的指针变量，指向自己。但是（*func）好像没有意义。如果是自己定义的指针类型，是可以指向对应类型的函数的，这个时候和普通的指针类型是一样的。</p>
+<pre><code class="C">9    int func(int a)
+10    {
+11        int b=10;
+12        printf(&quot;a=%d\nb=%d\n&quot;,a,b);
+13        return a*b;
+14    }
 
-<h4 id="AND-和-OR-联合使用"><a href="#AND-和-OR-联合使用" class="headerlink" title="AND 和 OR 联合使用"></a>AND 和 OR 联合使用</h4><pre><code>以下实例演示了 AND 和 OR 联合使用，类似常规 SQL 语句为： &#39;where likes&gt;50 AND (by = &#39;菜鸟教程&#39; OR title = &#39;MongoDB 教程&#39;)&#39;
 
-&gt;db.col.find({&quot;likes&quot;: {$gt:50}, $or: [{&quot;by&quot;: &quot;菜鸟教程&quot;},{&quot;title&quot;: &quot;MongoDB 教程&quot;}]}).pretty()
-{
-        &quot;_id&quot; : ObjectId(&quot;56063f17ade2f21f36b03133&quot;),
-        &quot;title&quot; : &quot;MongoDB 教程&quot;,
-        &quot;description&quot; : &quot;MongoDB 是一个 Nosql 数据库&quot;,
-        &quot;by&quot; : &quot;菜鸟教程&quot;,
-        &quot;url&quot; : &quot;http://www.runoob.com&quot;,
-        &quot;tags&quot; : [
-                &quot;mongodb&quot;,
-                &quot;database&quot;,
-                &quot;NoSQL&quot;
-        ],
-        &quot;likes&quot; : 100
-}
-</code></pre><h3 id="连接数据库"><a href="#连接数据库" class="headerlink" title="连接数据库"></a>连接数据库</h3><p>使用用户名和密码连接登陆到指定数据库，格式如下：<br><code>mongodb://admin:123456@localhost/test</code></p>
-<h3 id="创建数据库"><a href="#创建数据库" class="headerlink" title="创建数据库"></a>创建数据库</h3><p><code>use dbname</code><br>如果数据库存在，则切换到dbname，如果不存在，则创建。<br>刚创建完成后，使用<code>show dbs</code>命令，看不到dbname，必须向dbname中添加数据后才能显示。</p>
-<h3 id="删除数据库"><a href="#删除数据库" class="headerlink" title="删除数据库"></a>删除数据库</h3><pre><code>&gt; show dbs 
-admin  0.000GB
-fdl    0.000GB
-local  0.000GB
-test   0.000GB
-&gt; use fdl
-switched to db fdl
-&gt; db.dropDatabase()
-2017-10-23T16:54:13.853+0800 I COMMAND  [conn1] dropDatabase fdl starting
-2017-10-23T16:54:13.857+0800 I COMMAND  [conn1] dropDatabase fdl finished
-{ &quot;dropped&quot; : &quot;fdl&quot;, &quot;ok&quot; : 1 }
-&gt; show dbs
-admin  0.000GB
-local  0.000GB
-test   0.000GB
-</code></pre><h3 id="向collection添加数据"><a href="#向collection添加数据" class="headerlink" title="向collection添加数据"></a>向collection添加数据</h3><p><code>db.collectionname.insert({&quot;name&quot;:&quot;fandeliang&quot;})</code></p>
-<pre><code class="shell?linenums">#  插入单条数据
+15    int func1(int b){
+16        return 0;
+17    }
 
-&gt; var document = db.collection.insertOne({&quot;a&quot;: 3})
-&gt; document
-{
-        &quot;acknowledged&quot; : true,
-        &quot;insertedId&quot; : ObjectId(&quot;571a218011a82a1d94c02333&quot;)
-}
+22    int main()
+23    {
+24        int a=12;
+25        int (*pfunc)(int a)=&amp;func;
+26        int b = (*pfunc)(a);
+27        pfunc=&amp;func1;
 
-#  插入多条数据
-&gt; var res = db.collection.insertMany([{&quot;b&quot;: 3}, {&#39;c&#39;: 4}])
-&gt; res
-{
-        &quot;acknowledged&quot; : true,
-        &quot;insertedIds&quot; : [
-                ObjectId(&quot;571a22a911a82a1d94c02337&quot;),
-                ObjectId(&quot;571a22a911a82a1d94c02338&quot;)
-        ]
-}
+
+(gdb) p pfunc 
+$2 = (int (*)(int)) 0x5555555546e4 &lt;func1&gt;
+(gdb) p func
+$3 = {int (int)} 0x5555555546b0 &lt;func&gt;
+(gdb) p func1
+$4 = {int (int)} 0x5555555546e4 &lt;func1&gt;
+(gdb) p main
+$5 = {int ()} 0x5555555546f2 &lt;main&gt;
+(gdb) p &amp;pfunc 
+$6 = (int (**)(int)) 0x7fffffffe168
 </code></pre>
-<h3 id="更新数据"><a href="#更新数据" class="headerlink" title="更新数据"></a>更新数据</h3><p>注意加不加<code>$set:</code>的区别。</p>
-<pre><code>&gt; use test
-switched to db test
-&gt; db.col.insert({
-...     title: &#39;MongoDB 教程&#39;, 
-...     description: &#39;MongoDB 是一个 Nosql 数据库&#39;,
-...     by: &#39;菜鸟教程&#39;,
-...     url: &#39;http://www.runoob.com&#39;,
-...     tags: [&#39;mongodb&#39;, &#39;database&#39;, &#39;NoSQL&#39;],
-...     likes: 100
-... })
-WriteResult({ &quot;nInserted&quot; : 1 })
-&gt; show tables;
-col
-runoob
-&gt; db.col.find()
-{ &quot;_id&quot; : ObjectId(&quot;59edaea04995c58db2af8d2d&quot;), &quot;title&quot; : &quot;MongoDB 教程&quot;, &quot;description&quot; : &quot;MongoDB 是一个 Nosql 数据库&quot;, &quot;by&quot; : &quot;菜鸟教程&quot;, &quot;url&quot; : &quot;http://www.runoob.com&quot;, &quot;tags&quot; : [ &quot;mongodb&quot;, &quot;database&quot;, &quot;NoSQL&quot; ], &quot;likes&quot; : 100 }
-&gt; db.col.update({&quot;title&quot;:&quot;MongoDB 教程&quot;},{&quot;title&quot;:&quot;MongoDB&quot;,&quot;by&quot;:&quot;NB教程&quot;})
-WriteResult({ &quot;nMatched&quot; : 1, &quot;nUpserted&quot; : 0, &quot;nModified&quot; : 1 })
-&gt; db.col.find()
-{ &quot;_id&quot; : ObjectId(&quot;59edaea04995c58db2af8d2d&quot;), &quot;title&quot; : &quot;MongoDB&quot;, &quot;by&quot; : &quot;NB教程&quot; }
-&gt; db.col.find().pretty()
-{
-    &quot;_id&quot; : ObjectId(&quot;59edaea04995c58db2af8d2d&quot;),
-    &quot;title&quot; : &quot;MongoDB&quot;,
-    &quot;by&quot; : &quot;NB教程&quot;
-}
-&gt; db.col.insert({
-...     title: &#39;MongoDB 教程&#39;, 
-...     description: &#39;MongoDB 是一个 Nosql 数据库&#39;,
-...     by: &#39;菜鸟教程&#39;,
-...     url: &#39;http://www.runoob.com&#39;,
-...     tags: [&#39;mongodb&#39;, &#39;database&#39;, &#39;NoSQL&#39;],
-...     likes: 100
-... })
-WriteResult({ &quot;nInserted&quot; : 1 })
-&gt; db.col.update({&quot;title&quot;:&quot;MongoDB 教程&quot;},{$set:{&quot;title&quot;:&quot;MongoDB&quot;,&quot;by&quot;:&quot;NB教程&quot;}})
-WriteResult({ &quot;nMatched&quot; : 1, &quot;nUpserted&quot; : 0, &quot;nModified&quot; : 1 })
-&gt; db.col.find().pretty()
-{
-    &quot;_id&quot; : ObjectId(&quot;59edaea04995c58db2af8d2d&quot;),
-    &quot;title&quot; : &quot;MongoDB&quot;,
-    &quot;by&quot; : &quot;NB教程&quot;
-}
-{
-    &quot;_id&quot; : ObjectId(&quot;59edafca4995c58db2af8d2e&quot;),
-    &quot;title&quot; : &quot;MongoDB&quot;,
-    &quot;description&quot; : &quot;MongoDB 是一个 Nosql 数据库&quot;,
-    &quot;by&quot; : &quot;NB教程&quot;,
-    &quot;url&quot; : &quot;http://www.runoob.com&quot;,
-    &quot;tags&quot; : [
-        &quot;mongodb&quot;,
-        &quot;database&quot;,
-        &quot;NoSQL&quot;
-    ],
-    &quot;likes&quot; : 100
-}
-
-更多实例
-只更新第一条记录：
-db.col.update( { &quot;count&quot; : { $gt : 1 } } , { $set : { &quot;test2&quot; : &quot;OK&quot;} } );
-全部更新：
-db.col.update( { &quot;count&quot; : { $gt : 3 } } , { $set : { &quot;test2&quot; : &quot;OK&quot;} },false,true );
-只添加第一条：
-db.col.update( { &quot;count&quot; : { $gt : 4 } } , { $set : { &quot;test5&quot; : &quot;OK&quot;} },true,false );
-全部添加加进去:
-db.col.update( { &quot;count&quot; : { $gt : 5 } } , { $set : { &quot;test5&quot; : &quot;OK&quot;} },true,true );
-全部更新：
-db.col.update( { &quot;count&quot; : { $gt : 15 } } , { $inc : { &quot;count&quot; : 1} },false,true );
-只更新第一条记录：
-db.col.update( { &quot;count&quot; : { $gt : 10 } } , { $inc : { &quot;count&quot; : 1} },false,false );
-</code></pre><h3 id="删除数据"><a href="#删除数据" class="headerlink" title="删除数据"></a>删除数据</h3><pre><code>&gt; db.col.find().pretty()
-{
-    &quot;_id&quot; : ObjectId(&quot;59edaea04995c58db2af8d2d&quot;),
-    &quot;title&quot; : &quot;MongoDB&quot;,
-    &quot;by&quot; : &quot;NB教程&quot;
-}
-{
-    &quot;_id&quot; : ObjectId(&quot;59edafca4995c58db2af8d2e&quot;),
-    &quot;title&quot; : &quot;MongoDB&quot;,
-    &quot;description&quot; : &quot;MongoDB 是一个 Nosql 数据库&quot;,
-    &quot;by&quot; : &quot;NB教程&quot;,
-    &quot;url&quot; : &quot;http://www.runoob.com&quot;,
-    &quot;tags&quot; : [
-        &quot;mongodb&quot;,
-        &quot;database&quot;,
-        &quot;NoSQL&quot;
-    ],
-    &quot;likes&quot; : 100
-}
-&gt; db.col.remove({&#39;title&#39;:&quot;MongoDB&quot;})
-WriteResult({ &quot;nRemoved&quot; : 2 })
-&gt; db.col.find().pretty()
-&gt; 
-db.collection.remove(
-   &lt;query&gt;,
-   {
-     justOne: &lt;boolean&gt;,
-     writeConcern: &lt;document&gt;
-   }
-)
-参数说明：
-query :（可选）删除的文档的条件。
-justOne : （可选）如果设为 true 或 1，则只删除一个文档。
-writeConcern :（可选）抛出异常的级别。
-
-如果你想删除所有数据，可以使用以下方式（类似常规 SQL 的 truncate 命令）：
-&gt;db.col.remove({})
-&gt;db.col.find()
-&gt;
-</code></pre><h3 id="type-操作符"><a href="#type-操作符" class="headerlink" title="$type 操作符"></a>$type 操作符</h3><blockquote>
-<p>MongoDB 中可以使用的类型如下表所示：<br>类型    数字    备注<br>Double    1<br>String    2<br>Object    3<br>Array    4<br>Binary data    5<br>Undefined    6    已废弃。<br>Object id    7<br>Boolean    8<br>Date    9<br>Null    10<br>Regular Expression    11<br>JavaScript    13<br>Symbol    14<br>JavaScript (with scope)    15<br>32-bit integer    16<br>Timestamp    17<br>64-bit integer    18<br>Min key    255    Query with -1.<br>Max key    127     </p>
-</blockquote>
-<pre><code>如果想获取 &quot;col&quot; 集合中 title 为 String 的数据，你可以使用以下命令：
-
-db.col.find({&quot;title&quot; : {$type : 2}})
-
-输出结果为：
-{ &quot;_id&quot; : ObjectId(&quot;56066542ade2f21f36b0313a&quot;), &quot;title&quot; : &quot;PHP 教程&quot;, &quot;description&quot; : &quot;PHP 是一种创建动态交互性站点的强有力的服务器端脚本语言。&quot;, &quot;by&quot; : &quot;菜鸟教程&quot;, &quot;url&quot; : &quot;http://www.runoob.com&quot;, &quot;tags&quot; : [ &quot;php&quot; ], &quot;likes&quot; : 200 }
-{ &quot;_id&quot; : ObjectId(&quot;56066549ade2f21f36b0313b&quot;), &quot;title&quot; : &quot;Java 教程&quot;, &quot;description&quot; : &quot;Java 是由Sun Microsystems公司于1995年5月推出的高级程序设计语言。&quot;, &quot;by&quot; : &quot;菜鸟教程&quot;, &quot;url&quot; : &quot;http://www.runoob.com&quot;, &quot;tags&quot; : [ &quot;java&quot; ], &quot;likes&quot; : 150 }
-{ &quot;_id&quot; : ObjectId(&quot;5606654fade2f21f36b0313c&quot;), &quot;title&quot; : &quot;MongoDB 教程&quot;, &quot;description&quot; : &quot;MongoDB 是一个 Nosql 数据库&quot;, &quot;by&quot; : &quot;菜鸟教程&quot;, &quot;url&quot; : &quot;http://www.runoob.com&quot;, &quot;tags&quot; : [ &quot;mongodb&quot; ], &quot;likes&quot; : 100 }
-</code></pre><h3 id="Limit-Skip-和sort-方法"><a href="#Limit-Skip-和sort-方法" class="headerlink" title="Limit , Skip 和sort()方法"></a>Limit , Skip 和sort()方法</h3><blockquote>
-<p>如果你需要在MongoDB中读取指定数量的数据记录，可以使用MongoDB的Limit方法，limit()方法接受一个数字参数，该参数指定从MongoDB中读取的记录条数。<br>我们除了可以使用limit()方法来读取指定数量的数据外，还可以使用skip()方法来跳过指定数量的数据，skip方法同样接受一个数字参数作为跳过的记录条数。<br>在MongoDB中使用使用sort()方法对数据进行排序，sort()方法可以通过参数指定排序的字段，并使用 1 和 -1 来指定排序的方式，其中 1 为升序排列，而-1是用于降序排列。<br>当查询时同时使用sort,skip,limit，无论位置先后，最先执行顺序 sort再skip再limit。</p>
-</blockquote>
-<pre><code>想要读取从 10 条记录后 100 条记录，相当于 sql 中limit (10,100)。
-&gt; db.COLLECTION_NAME.find().skip(10).limit(100)
-以上实例在集合中跳过前面 10 条返回 100 条数据。
-skip 和 limit 结合就能实现分页。
-
-db.col.find({},{&quot;title&quot;:1,_id:0}).limit(2)
-补充说明：
-第一个 {} 放 where 条件，为空表示返回集合中所有文档。
-第二个 {} 指定那些列显示和不显示 （0表示不显示 1表示显示)。
-
-&gt;db.col.find({},{&quot;title&quot;:1,_id:0}).sort({&quot;likes&quot;:-1})
-{ &quot;title&quot; : &quot;PHP 教程&quot; }
-{ &quot;title&quot; : &quot;Java 教程&quot; }
-{ &quot;title&quot; : &quot;MongoDB 教程&quot; }
-&gt;
-</code></pre><p>### </p>
+<h3 id="数组类型"><a href="#数组类型" class="headerlink" title="数组类型"></a>数组类型</h3><ol>
+<li>数组在虚拟内存中，是连续存储的。</li>
+<li><code>char *s=&quot;fdl&quot;</code>,这种这是字符串常量定义的一种方式，不能做修改，如同<code>const int a=10</code>，此类常量存在于内存中的数据段。</li>
+</ol>
+<h2 id="内存组织形式"><a href="#内存组织形式" class="headerlink" title="内存组织形式"></a>内存组织形式</h2><p>参考：<a href="http://blog.csdn.net/gatieme/article/details/43567433" target="_blank" rel="external">C程序的内存布局(Memory Layout)</a></p>
+<p><img src="http://p.dearamaze.com/%E5%B0%8F%E4%B9%A6%E5%8C%A0/1511797169278.jpg" alt="C语言目标文件的内存布局"></p>
+<p><img src="http://p.dearamaze.com/%E5%B0%8F%E4%B9%A6%E5%8C%A0/1511797204333.jpg" alt="C语言可执行程序的内存分布"></p>
 
       
     </div>
@@ -706,7 +568,7 @@ db.col.find({},{&quot;title&quot;:1,_id:0}).limit(2)
       
         <div class="post-tags">
           
-            <a href="/tags/mongodb-数据库/" rel="tag"># mongodb,数据库</a>
+            <a href="/tags/C语言-内存分配/" rel="tag"># C语言,内存分配</a>
           
         </div>
       
@@ -719,8 +581,8 @@ db.col.find({},{&quot;title&quot;:1,_id:0}).limit(2)
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/10/19/清网报告模板/" rel="next" title="清网报告模板">
-                <i class="fa fa-chevron-left"></i> 清网报告模板
+              <a href="/2017/11/19/celery学习笔记/" rel="next" title="celery学习笔记">
+                <i class="fa fa-chevron-left"></i> celery学习笔记
               </a>
             
           </div>
@@ -728,10 +590,6 @@ db.col.find({},{&quot;title&quot;:1,_id:0}).limit(2)
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/10/25/python time datetime学习/" rel="prev" title="python time datetime学习">
-                python time datetime学习 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -907,7 +765,7 @@ db.col.find({},{&quot;title&quot;:1,_id:0}).limit(2)
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#mongodb简介"><span class="nav-number">1.</span> <span class="nav-text">mongodb简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mongodb安装"><span class="nav-number">2.</span> <span class="nav-text">mongodb安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mongodb常用命令"><span class="nav-number">3.</span> <span class="nav-text">mongodb常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#显示所有数据库"><span class="nav-number">3.1.</span> <span class="nav-text">显示所有数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#显示该数据库下所有集合（表）"><span class="nav-number">3.2.</span> <span class="nav-text">显示该数据库下所有集合（表）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#显示集合中所有数据（查询）"><span class="nav-number">3.3.</span> <span class="nav-text">显示集合中所有数据（查询）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#AND-和-OR-联合使用"><span class="nav-number">3.3.1.</span> <span class="nav-text">AND 和 OR 联合使用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#连接数据库"><span class="nav-number">3.4.</span> <span class="nav-text">连接数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建数据库"><span class="nav-number">3.5.</span> <span class="nav-text">创建数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除数据库"><span class="nav-number">3.6.</span> <span class="nav-text">删除数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#向collection添加数据"><span class="nav-number">3.7.</span> <span class="nav-text">向collection添加数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更新数据"><span class="nav-number">3.8.</span> <span class="nav-text">更新数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除数据"><span class="nav-number">3.9.</span> <span class="nav-text">删除数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#type-操作符"><span class="nav-number">3.10.</span> <span class="nav-text">$type 操作符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Limit-Skip-和sort-方法"><span class="nav-number">3.11.</span> <span class="nav-text">Limit , Skip 和sort()方法</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#对数据类型的认识"><span class="nav-number">1.</span> <span class="nav-text">对数据类型的认识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#常见非指针类型"><span class="nav-number">1.1.</span> <span class="nav-text">常见非指针类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指针类型"><span class="nav-number">1.2.</span> <span class="nav-text">指针类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数类型"><span class="nav-number">1.3.</span> <span class="nav-text">函数类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组类型"><span class="nav-number">1.4.</span> <span class="nav-text">数组类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存组织形式"><span class="nav-number">2.</span> <span class="nav-text">内存组织形式</span></a></li></ol></div>
             
 
           </div>

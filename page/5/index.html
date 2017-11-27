@@ -327,6 +327,164 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://dearamaze.com/2017/03/15/C-文件操作/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dear Amaze">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DearAmaze-桀骜良">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/03/15/C-文件操作/" itemprop="url">
+                  [原]C++文件操作
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-15T11:22:40+08:00">
+                2017-03-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/03/15/C-文件操作/" class="leancloud_visitors" data-flag-title="[原]C++文件操作">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <pre><code>string  getFileContext(const string&amp;amp; filename)
+{
+    string str;
+    str.clear();
+    char buf[1024];
+    char *p;
+    p = buf;
+    memset(buf, 0, 1024);
+    ifstream in;
+    in.open(filename);
+    while ((*p = in.get()) != EOF)
+    {
+        p++;
+    }
+    cout &amp;lt;&amp;lt; &quot;Buf&quot; &amp;lt;&amp;lt; endl;
+    puts(buf);
+    str += buf;
+    cout &amp;lt;&amp;lt; str &amp;lt;&amp;lt; endl;
+    in.close();
+    return str;
+}
+
+
+            作者：qq_27803491 发表于2017/3/15 11:22:40 [原文链接](http://blog.csdn.net/qq_27803491/article/details/62217799)
+
+
+        阅读：13 评论：0 [查看评论](http://blog.csdn.net/qq_27803491/article/details/62217799#comments)
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://dearamaze.com/2017/02/27/ubuntu16-04-安装shadowsocks-番羽土啬/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1887,201 +2045,6 @@ print(text)
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://dearamaze.com/2016/12/20/python字符串方法基础/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Dear Amaze">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="DearAmaze-桀骜良">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/12/20/python字符串方法基础/" itemprop="url">
-                  [原]python字符串方法基础
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-12-20T12:45:17+08:00">
-                2016-12-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2016/12/20/python字符串方法基础/" class="leancloud_visitors" data-flag-title="[原]python字符串方法基础">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <pre><code>#FIND
-mystr=&#39;xxxSPAMxxx&#39;
-site=mystr.find(&#39;SPAM&#39;)
-print(site)
-
-#replace
-mystr=&#39;xxaaxxaa&#39;
-print(mystr.replace(&#39;aa&#39;,&#39;SPAM&#39;))
-
-#in
-mystr=&quot;xxxspamxxx&quot;
-print(&#39;spam&#39; in mystr)
-
-#strip
-mystr=&#39;\t Ni\n&#39;
-print(mystr)
-print(mystr.strip())
-print(mystr.rstrip())
-print(mystr.lstrip())
-
-#lower
-mystr=&#39;SHRUBBERY&#39;
-print(mystr.lower())
-
-#isalpha
-print(mystr.isalpha())
-
-#isdigit
-print(mystr.isdigit())
-
-#split
-mystr=&#39;aaa,bbb,ccc&#39;
-print(mystr.split(&#39;,&#39;))
-#split 默认分隔符为泛空格符
-mystr=&#39;a b\nc\n d &#39;
-print(mystr.split())
-
-#join
-delim=&#39;ni&#39;
-print(delim.join([&#39;aaa&#39;,&#39;bbb&#39;,&#39;ccc&#39;]))
-print(&#39; &#39;.join([&#39;aaa&#39;,&#39;bbb&#39;,&#39;ccc&#39;]))
-
-#list
-chars=list(&#39;lorreta&#39;)
-print(chars)
-
-chars.append(&#39;!&#39;)
-print(&#39;&#39;.join(chars))
-
-#整形和字符串类型转换
-int(&quot;42&quot;)
-eval(&quot;42&quot;)
-
-str(42)
-repr(42)
-
-print(&quot;%d&quot; %42)
-print(&#39;{:d}&#39;.format(42))
-
-
-            作者：qq_27803491 发表于2016/12/20 12:45:17 [原文链接](http://blog.csdn.net/qq_27803491/article/details/53761679)
-
-
-        阅读：34 评论：0 [查看评论](http://blog.csdn.net/qq_27803491/article/details/53761679#comments)
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2131,7 +2094,7 @@ print(&#39;{:d}&#39;.format(42))
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">59</span>
+                <span class="site-state-item-count">60</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2153,7 +2116,7 @@ print(&#39;{:d}&#39;.format(42))
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-count">39</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
