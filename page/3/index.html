@@ -327,212 +327,6 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://dearamaze.com/2017/04/23/python多线程之threading模块/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Dear Amaze">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="DearAmaze-桀骜良">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/04/23/python多线程之threading模块/" itemprop="url">
-                  python多线程之threading模块
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-23T06:51:40+08:00">
-                2017-04-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/04/23/python多线程之threading模块/" class="leancloud_visitors" data-flag-title="python多线程之threading模块">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="threading-模块"><a href="#threading-模块" class="headerlink" title="threading 模块"></a>threading 模块</h1><h2 id="使用threading模块-mtsleepC-py"><a href="#使用threading模块-mtsleepC-py" class="headerlink" title="使用threading模块(mtsleepC.py)"></a>使用threading模块(mtsleepC.py)</h2><p>threading模块的Thread类有一个join()方法,可以让主线程等待所有线程执行完毕</p>
-<pre><code>#!/usr/bin/env python
-# coding=utf-8
-
-import threading
-from time import sleep,ctime
-
-loops=[4,2]
-
-def loop(nloop,nsec):
-    print &#39;start loop:&#39;,nloop,&#39; done at:&#39;,ctime()
-    sleep(nsec)
-    print &#39;loop&#39;,nloop,&#39;done at:&#39;,ctime()
-def main():
-    print &#39;starting at:&#39;,ctime()
-    threads=[]
-    nloops=range(len(loops))
-
-    for i in nloops:
-        t=threading.Thread(target=loop,args=(i,loops[i]))
-        threads.append(t)
-
-    for i in nloops:
-        threads[i].start()
-
-    for i in nloops:
-        threads[i].join()
-
-    print &#39;all DONE at:&#39;,ctime()
-
-if __name__ == &#39;__main__&#39;:
-    main()
-</code></pre><h2 id="子类化的Thread-mtsleepE-py"><a href="#子类化的Thread-mtsleepE-py" class="headerlink" title="子类化的Thread(mtsleepE.py)"></a>子类化的Thread(mtsleepE.py)</h2><p>本例对Thread子类化,而不是直接对其实例化,这将使我们在定制线程对象是拥有更多的灵活性,也能够简化线程调用的过程.</p>
-<pre><code>#!/usr/bin/env python
-# coding=utf-8
-
-import threading 
-from time import sleep ,ctime
-
-loops=(4,2)
-
-class MyThread(threading.Thread):
-    def __init__(self,func,args,name=&#39;&#39;):
-        threading.Thread.__init__(self)
-        self.name = name 
-        self.func = func 
-        self.args = args 
-
-    def run(self):
-        self.func(*self.args)
-
-def loop(nloop,nsec):
-    print &#39;start loop&#39;,nloop,&#39;at:&#39;,ctime()
-    sleep(nsec)
-    print &#39;loop&#39;,nloop,&#39;done at:&#39;,ctime()
-
-def main():
-    print &#39;starting at:&#39;,ctime()
-    threads  = []
-    nloops=range(len(loops))
-
-    for i in nloops:
-        t=MyThread(loop,(i,loops[i]),loop.__name__)
-        threads.append(t)
-
-    for i in nloops:
-        threads[i].start()
-
-    for i in nloops:
-        threads[i].join()
-
-    print &#39;all DONE at:&#39;,ctime()
-
-if __name__ == &#39;__main__&#39;:
-    main()
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://dearamaze.com/2017/04/22/python多线程/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2410,6 +2204,313 @@ void mempool_free_pages(void *element, void *pool_data)
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://dearamaze.com/2017/04/02/大创构思/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dear Amaze">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DearAmaze-桀骜良">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/04/02/大创构思/" itemprop="url">
+                  大创构思
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-02T16:14:05+08:00">
+                2017-04-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/日记/" itemprop="url" rel="index">
+                    <span itemprop="name">日记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/04/02/大创构思/" class="leancloud_visitors" data-flag-title="大创构思">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="更新点"><a href="#更新点" class="headerlink" title="更新点"></a>更新点</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><ol>
+<li>增加网页IDE,功能</li>
+<li>查重功能</li>
+<li>分步计分</li>
+<li>论坛</li>
+<li>天梯训练模式</li>
+<li>教学统计查看</li>
+<li>当前oj功能完善</li>
+</ol>
+<h2 id="分工"><a href="#分工" class="headerlink" title="分工"></a>分工</h2><ul>
+<li><p>网页IDE <code>徐瑶琨</code></p>
+</li>
+<li><p>论坛 <code>范得良</code></p>
+</li>
+<li><p>天梯训练模式 <code>马琨</code></p>
+</li>
+<li><p>教学统计功能,查重,分步计分,当前OJ功能完善,整合 <code>李闯</code></p>
+</li>
+</ul>
+<h1 id="OnlineJudgeOpenAPI文档"><a href="#OnlineJudgeOpenAPI文档" class="headerlink" title="OnlineJudgeOpenAPI文档"></a>OnlineJudgeOpenAPI文档</h1><p>为了方便与Virtual Judge和第三方论坛等进行集成，开放了获取题目详细信息、提交代码、获取代码运行结果和用户SSO单点登录四个API。</p>
+<p>在使用API之前，请先申请appkey，在个人设置页面可以看到，如果没有申请过，请联系OJ的管理员在后台开通。</p>
+<h2 id="API说明"><a href="#API说明" class="headerlink" title="API说明"></a>API说明</h2><p>所有的返回值都是<code>{&quot;code&quot;: , data: }</code>的形式，只有code为0的时候代表正常返回了，data为数据内容。其余code表示出现错误，data为错误提示。</p>
+<p>所有的POST请求和响应都是json格式的，POST请求的<code>Content-Type</code>确保为<code>application/json</code>。</p>
+<h2 id="获取题目详细信息"><a href="#获取题目详细信息" class="headerlink" title="获取题目详细信息"></a>获取题目详细信息</h2><p><strong>request</strong> <code>GET</code> <code>/api/open/problem/?appkey=&amp;problem_id=</code><br><strong>response</strong></p>
+<pre><code class="js">{
+    &quot;code&quot;: 0,
+    &quot;data&quot;: {
+        // 题目的id
+        &quot;id&quot;: 1,
+        // 样例输入和输出
+        &quot;samples&quot;: [
+            {
+                &quot;input&quot;: &quot;1 1&quot;,
+                &quot;output&quot;: &quot;2&quot;
+            },
+            {
+                &quot;input&quot;: &quot;1 1&quot;,
+                &quot;output&quot;: &quot;2&quot;
+            },
+            {
+                &quot;input&quot;: &quot;1 -1&quot;,
+                &quot;output&quot;: &quot;0&quot;
+            }
+        ],
+        // 标签
+        &quot;tags&quot;: [
+            {
+                &quot;id&quot;: 1,
+                &quot;name&quot;: &quot;简单&quot;
+            }
+        ],
+        // 创建用户
+        &quot;created_by&quot;: {
+            &quot;username&quot;: &quot;root&quot;
+        },
+        // 题目
+        &quot;title&quot;: &quot;A + B Problem&quot;,
+        // 描述 HTML格式
+        &quot;description&quot;: &quot;请计算两个整数的和并输出结果。注意不要有不必要的输出，比如&amp;quot;请输入 a 和 b 的值: &amp;quot;，示例代码见隐藏部分。&quot;,
+        // 输入说明
+        &quot;input_description&quot;: &quot;两个用空格分开的整数.&quot;,
+        // 输出说明
+        &quot;output_description&quot;: &quot;两数之和&quot;,
+        // 提示 没有提示就是空字符串
+        &quot;hint&quot;: &quot;测试题目&quot;,
+        // 创建时间
+        &quot;create_time&quot;: &quot;2015-09-02T13:02:26Z&quot;,
+        // 最后修改时间 如果没有修改过，就是NULL
+        &quot;last_update_time&quot;: &quot;2016-02-02T03:43:34.244046Z&quot;,
+        // 时间限制 单位ms
+        &quot;time_limit&quot;: 1000,
+        // 内存限制 单位M
+        &quot;memory_limit&quot;: 512,
+        // 总共提交次数
+        &quot;total_submit_number&quot;: 1128,
+        // 总共ac次数
+        &quot;total_accepted_number&quot;: 521,
+        // 难度 1-3 简单到难
+        &quot;difficulty&quot;: 1,
+        // 题目来源
+        &quot;source&quot;: &quot;经典题目&quot;
+    }
+}
+</code></pre>
+<h2 id="提交题目"><a href="#提交题目" class="headerlink" title="提交题目"></a>提交题目</h2><p><strong>request</strong> <code>post</code> <code>/api/open/submission/</code></p>
+<pre><code class="js">{
+    // appkey 
+    &quot;appkey&quot;: &quot;example_appkey&quot;, 
+    // 代码 
+    &quot;code&quot;: &quot;example code&quot;,
+    // 语言 1:C 2:C++ 3:Java 
+    &quot;language&quot;: 1,
+    // 题目id 
+    &quot;problem_id&quot;: 1
+}
+</code></pre>
+<p><strong>response</strong><br>提交代码后，服务器立即返回，并异步判题。</p>
+<pre><code class="js">{
+    &quot;code&quot;: 0,
+    &quot;data&quot;: {
+        // 提交id
+        &quot;submission_id&quot;: &quot;4e49416e087f79fd3d0822b1899d601c&quot;
+    }
+}
+</code></pre>
+<p>要注意的是，每个用户都有自己的提交频率限制。开源代码中，默认使用的TokenBucket进行的限制，每个用户默认有50个token，然后每分钟可以创建2个token，但是也是50个token封顶，每提交一道题就消耗一个token。开始的50个token可以保证一定时间的并发需求，如果超过频率限制将返回错误和需要等待的时间。</p>
+<h2 id="获取提交结果"><a href="#获取提交结果" class="headerlink" title="获取提交结果"></a>获取提交结果</h2><p><strong>request</strong> <code>GET</code> <code>/api/open/submission/?appkey=&amp;submission_id=</code></p>
+<p><strong>response</strong></p>
+<pre><code class="js">{
+    &quot;code&quot;: 0,
+    &quot;data&quot;: {
+        &quot;id&quot;: &quot;9d4610ef9ae6b30e588c650891ba6858&quot;,
+        &quot;result&quot;: 0,
+        &quot;create_time&quot;: &quot;2016-02-16T03:54:10Z&quot;,
+        &quot;language&quot;: 1,
+        // info可能是None或者字符串
+        // 在编译错误和系统错误的时候info为错误详情，可能会很长，其余的情况为一个json字符串
+        &quot;info&quot;: &quot;[{\&quot;cpu_time\&quot;: 0, \&quot;exit_status\&quot;: 0, \&quot;signal\&quot;: 0, \&quot;output_md5\&quot;: \&quot;33d6548e48d4318ceb0e3916a79afc84\&quot;, \&quot;flag\&quot;: 0, \&quot;result\&quot;: 0, \&quot;memory\&quot;: 7602176, \&quot;real_time\&quot;: 4}, {\&quot;cpu_time\&quot;: 0, \&quot;exit_status\&quot;: 0, \&quot;signal\&quot;: 0, \&quot;output_md5\&quot;: \&quot;e4da3b7fbbce2345d7772b0674a318d5\&quot;, \&quot;flag\&quot;: 0, \&quot;result\&quot;: 0, \&quot;memory\&quot;: 7602176, \&quot;real_time\&quot;: 2}]&quot;
+    }
+}
+</code></pre>
+<p>result的对应关系</p>
+<pre><code class="js">{
+    &quot;accepted&quot;: 0,
+    &quot;runtime_error&quot;: 1,
+    &quot;time_limit_exceeded&quot;: 2,
+    &quot;memory_limit_exceeded&quot;: 3,
+    &quot;compile_error&quot;: 4,
+    &quot;format_error&quot;: 5,
+    &quot;wrong_answer&quot;: 6,
+    &quot;system_error&quot;: 7,
+    &quot;waiting&quot;: 8
+}
+</code></pre>
+<h2 id="SSO单点登录"><a href="#SSO单点登录" class="headerlink" title="SSO单点登录"></a>SSO单点登录</h2><p><strong>request</strong> <code>GET</code> <code>/account/sso/?callback=</code></p>
+<p>然后用户确认登录之后，会跳转到<code>http://callback_url?token=</code>上，需要获取token参数，然后</p>
+<p><strong>request</strong> <code>POST</code> <code>/account/sso/</code></p>
+<pre><code class="js">{
+    &quot;appkey&quot;: &quot;example_appkey&quot;,
+    &quot;token&quot;: &quot;example_token&quot;
+}
+</code></pre>
+<p><strong>response</strong></p>
+<pre><code class="js">{
+    &quot;code&quot;: 0,
+    &quot;data&quot;: {
+        &quot;username&quot;: &quot;root&quot;,
+        &quot;admin_type&quot;: 2,
+        &quot;id&quot;: 1,
+        &quot;avatar&quot;: &quot;/static/img/avatar/avatar-10.png&quot;
+    }
+}
+</code></pre>
+<p>注意回调的token和appkey并没有关系，这个token只能一次性使用。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
   </section>
 
   
@@ -2459,7 +2560,7 @@ void mempool_free_pages(void *element, void *pool_data)
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">59</span>
+                <span class="site-state-item-count">58</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2470,7 +2571,7 @@ void mempool_free_pages(void *element, void *pool_data)
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-count">21</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -2481,7 +2582,7 @@ void mempool_free_pages(void *element, void *pool_data)
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-count">37</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
