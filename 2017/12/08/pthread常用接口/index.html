@@ -1,0 +1,1339 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next mist" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="pthread,多线程," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="pthread_equal函数判断两个线程ID是否相等int pthread_equal(pthread_t tid1,pthread tid2);  参数： tid1：第一个线程ID tid2：第二个线程ID   返回值：  -相等：返回非0数值 不等：返回 0    pthread_self(void)函数返回本线程自身的线程IDpthread_t pthread_self(void);">
+<meta name="keywords" content="pthread,多线程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="pthread常用接口">
+<meta property="og:url" content="https://dearamaze.com/2017/12/08/pthread常用接口/index.html">
+<meta property="og:site_name" content="DearAmaze-桀骜良">
+<meta property="og:description" content="pthread_equal函数判断两个线程ID是否相等int pthread_equal(pthread_t tid1,pthread tid2);  参数： tid1：第一个线程ID tid2：第二个线程ID   返回值：  -相等：返回非0数值 不等：返回 0    pthread_self(void)函数返回本线程自身的线程IDpthread_t pthread_self(void);">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-12-14T18:01:06.663Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="pthread常用接口">
+<meta name="twitter:description" content="pthread_equal函数判断两个线程ID是否相等int pthread_equal(pthread_t tid1,pthread tid2);  参数： tid1：第一个线程ID tid2：第二个线程ID   返回值：  -相等：返回非0数值 不等：返回 0    pthread_self(void)函数返回本线程自身的线程IDpthread_t pthread_self(void);">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://dearamaze.com/2017/12/08/pthread常用接口/"/>
+
+
+
+
+
+  <title> pthread常用接口 | DearAmaze-桀骜良 </title>
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?05e47eef3e87bfa03fe6dfcdad14b688";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <!--<script type="text/javascript" color="0,191,255" opacity="0.7" zindex="-2" count="150" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>-->
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">DearAmaze-桀骜良</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">test_subtitle</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://dearamaze.com/2017/12/08/pthread常用接口/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dear Amaze">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DearAmaze-桀骜良">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                pthread常用接口
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-08T00:00:00+08:00">
+                2017-12-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/12/08/pthread常用接口/" class="leancloud_visitors" data-flag-title="pthread常用接口">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <a id="more"></a>
+<h2 id="pthread-equal函数"><a href="#pthread-equal函数" class="headerlink" title="pthread_equal函数"></a>pthread_equal函数</h2><p>判断两个线程ID是否相等<br><code>int pthread_equal(pthread_t tid1,pthread tid2);</code></p>
+<ul>
+<li>参数：<ul>
+<li>tid1：第一个线程ID</li>
+<li>tid2：第二个线程ID</li>
+</ul>
+</li>
+<li>返回值：<br>  -相等：返回非0数值<ul>
+<li>不等：返回 0</li>
+</ul>
+</li>
+</ul>
+<h2 id="pthread-self-void-函数"><a href="#pthread-self-void-函数" class="headerlink" title="pthread_self(void)函数"></a>pthread_self(void)函数</h2><p>返回本线程自身的线程ID<br><code>pthread_t pthread_self(void);</code></p>
+<ul>
+<li>返回值：调用线程的线程ID</li>
+</ul>
+<h2 id="pthread-create函数"><a href="#pthread-create函数" class="headerlink" title="pthread_create函数"></a>pthread_create函数</h2><p>创建新线程<br><code>int pthread_create(pthread_t *restrict tidp,</code><br><code>const pthread_attr_t *restrict attr,</code><br><code>void *(*start_rtn)(void*),</code><br><code>void *restrict arg);</code></p>
+<ul>
+<li>参数：<ul>
+<li>tidp：成功创建时，新线程的线程ID存放在tidp指向的内存单元</li>
+<li>attr：用于定制不同的线程属性。如果为NULL，则是默认属性</li>
+<li>start_rtn：线程例程地址。新创建的线程从start_rtn函数的地址处开始运行，该函数的参数为void <em>，返回值为void </em></li>
+<li>arg：作为start_rtn函数的参数</li>
+</ul>
+</li>
+<li>返回值：<ul>
+<li>成功：返回 0</li>
+<li>失败：返回错误编号</li>
+</ul>
+</li>
+</ul>
+<h2 id="pthread-exit函数"><a href="#pthread-exit函数" class="headerlink" title="pthread_exit函数"></a>pthread_exit函数</h2><p>线程主动退出<br>void pthread_exit(void *rval_ptr);<br>    参数：<br>        rval_ptr：一个无类型指针，用于给pthread_join函数传递参数（即线程间消息传递）</p>
+<h2 id="pthread-join函数"><a href="#pthread-join函数" class="headerlink" title="pthread_join函数"></a>pthread_join函数</h2><p>等待指定的线程结束（类似于waitpid）<br><code>int pthread_join(pthread_t tid,void **rval_pptr);</code></p>
+<ul>
+<li>参数：<ul>
+<li>tid：要等待的线程的线程ID</li>
+<li>rval_pptr：一个指针，指向无类型指针（该无类型指针用于线程返回值）</li>
+</ul>
+</li>
+<li>返回值：<ul>
+<li>成功：返回 0</li>
+<li>失败：返回错误编号</li>
+<li>当调用线程调用pthread_join之后，调用线程将会一直阻塞，直到:<ul>
+<li>指定的线程tid调用pthread_exit。此时rval_pptr指向的内存区就包含pthread_exit的rval_ptr的值</li>
+<li>指定的线程tid从启动例程返回。此时rval_pptr指向的内存区就包含返回码</li>
+<li>指定的线程tid被取消。此时rval_pptr指向的内存单元就设置为PTHREAD_CANCELED</li>
+</ul>
+</li>
+<li>如果不关注线程的返回值，则可以将rval_pptr设置为NULL。此时pthread_join函数可以等待指定的线程终止，但是并不获取线程的终止状态。</li>
+<li>可以通过调用pthread_join自动把线程置于分离状态，此时资源可以恢复。如果线程已经处理分离状态，pthread_join调用就会失败，返回EINVAL</li>
+</ul>
+</li>
+</ul>
+<h2 id="pthread-cancel函数"><a href="#pthread-cancel函数" class="headerlink" title="pthread_cancel函数"></a>pthread_cancel函数</h2><p>请求取消同一个进程中的其他某个线程<br><code>int pthread_cancel(pthread_t tid);</code></p>
+<ul>
+<li>参数：<ul>
+<li>tid：期望取消的线程的ID</li>
+</ul>
+</li>
+<li>返回值：<ul>
+<li>成功：返回 0</li>
+<li>失败：返回错误码</li>
+</ul>
+</li>
+<li>默认情况下，pthread_cancel函数会使得由tid标识的线程的行为表现得如同调用了pthread_exit(PTHREAD_CANCELD)函数。但是，tid标识的线程可以选择忽略取消或者控制如何被取消。</li>
+<li>pthread_cancel并不等待线程tid终止，也不保证线程tid终止，它仅仅提出了请求</li>
+</ul>
+<h2 id="pthread-clearnup-push-pthread-cleanup-pop函数"><a href="#pthread-clearnup-push-pthread-cleanup-pop函数" class="headerlink" title="pthread_clearnup_push/pthread_cleanup_pop函数"></a>pthread_clearnup_push/pthread_cleanup_pop函数</h2><p>注册与注销清理处理程序<br>一个线程可以建立多个清理处理程序<br>处理程序记录在栈中。即它们的执行顺序与它们注册时相反</p>
+<p><code>void pthread_cleanup_push(void (*rtn)(void*),void *arg);</code><br><code>void pthread_cleanup_pop(int execute);</code></p>
+<ul>
+<li>对于 pthread_cleanup_push函数：<ul>
+<li>rtn：清理处理程序的指针。rtn函数的参数是void *，返回void</li>
+<li>arg：作为清理处理程序rtn的参数</li>
+</ul>
+</li>
+<li>对于pthread_cleanup_pop函数：<ul>
+<li>execute：如果为0，则线程退出时，清理函数不被调用（哪个清理函数？见后面说明）</li>
+<li>execute：如果非零，则线程退出时，对应的清理函数被调用</li>
+</ul>
+</li>
+</ul>
+<h2 id="pthread-detach函数"><a href="#pthread-detach函数" class="headerlink" title="pthread_detach函数"></a>pthread_detach函数</h2><p>将指定线程设置为分离状态<br><code>int pthread_detach(pthread_t tid);</code></p>
+<ul>
+<li>参数：<ul>
+<li>tid：被分离的线程的ID</li>
+</ul>
+</li>
+<li>返回值：<ul>
+<li>成功：返回 0</li>
+<li>失败：返回错误码</li>
+</ul>
+</li>
+</ul>
+<h2 id="pthread-mutex-t-pthread-mutex-init-pthread-mutex-destroy"><a href="#pthread-mutex-t-pthread-mutex-init-pthread-mutex-destroy" class="headerlink" title="pthread_mutex_t/pthread_mutex_init/pthread_mutex_destroy"></a>pthread_mutex_t/pthread_mutex_init/pthread_mutex_destroy</h2><p>互斥量用pthread_mutex_t数据类型表示</p>
+<ul>
+<li>使用互斥量之前必须初始化。<ul>
+<li>如果是动态分配的互斥量（如通过malloc函数），则必须调用pthread_mutex_init函数进行初始化</li>
+<li>如果是静态分配的互斥量，那么除了调用pthread_mutex_init函数来初始化，也可以将它设置为常量PTHREAD_MUTEX_INITALIZER来初始化</li>
+</ul>
+</li>
+<li>如果是动态分配的互斥量，那么在free释放内存之前必须调用pthread_mutex_destroy函数来销毁互斥量。该函数会释放在动态初始化互斥量时动态分配的资源<pre><code class="C">#include&lt;pthread.h&gt;
+int pthread_mutex_init(pthread_mutex_t *restrict mutex,
+  const pthread_mutexattr_t *restrict attr);
+int pthread_mutex_destroy(pthread_mutex_t *mutex);
+</code></pre>
+</li>
+<li>参数：<ul>
+<li>mutex：待初始化/释放的互斥量的地址</li>
+<li>attr：互斥量的属性。如果为NULL，那么互斥量设置为默认属性</li>
+</ul>
+</li>
+<li>返回值：<ul>
+<li>成功：返回0</li>
+<li>失败： 返回错误编号</li>
+</ul>
+</li>
+</ul>
+<h2 id="pthread-mutex-lock-pthread-mutex-trylock-pthread-mutex-unlock函数"><a href="#pthread-mutex-lock-pthread-mutex-trylock-pthread-mutex-unlock函数" class="headerlink" title="pthread_mutex_lock/pthread_mutex_trylock/pthread_mutex_unlock函数"></a>pthread_mutex_lock/pthread_mutex_trylock/pthread_mutex_unlock函数</h2><p>对互斥量加锁/解锁操作</p>
+<pre><code class="C">#include&lt;pthread.h&gt;
+int pthread_mutex_lock(pthread_mutex_t *mutex);
+int pthread_mutex_trylock(pthread_mutex_t *mutex);
+int pthread_mutex_unlock(pthread_mutex_t *mutex);
+</code></pre>
+<ul>
+<li>参数：<ul>
+<li>mutex：待加锁/解锁的互斥量的地址</li>
+</ul>
+</li>
+<li>返回值：<ul>
+<li>成功：返回0</li>
+<li>失败： 返回错误编号</li>
+</ul>
+</li>
+<li>用法：<ul>
+<li>pthread_mutex_lock用于对互斥量进行加锁。如果互斥量已经上锁，则调用线程将阻塞直到互斥量解锁</li>
+<li>pthread_mutex_unlock用于对互斥量进行解锁</li>
+<li>pthread_mutex_trylock也用于对互斥量进行加锁<ul>
+<li>如果它被调用时，互斥量处于未锁定状态，那么函数将锁住互斥量并返回0</li>
+<li>如果它被调用时，互斥量处于锁定状态，则函数调用失败，立即返回EBUSY而不是阻塞</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="pthread-mutex-timedlock函数"><a href="#pthread-mutex-timedlock函数" class="headerlink" title="pthread_mutex_timedlock函数"></a>pthread_mutex_timedlock函数</h2><p>对互斥量加锁或等待指定时间</p>
+<pre><code class="C">#include&lt;pthread.h&gt;
+#include&lt;time.h&gt;
+int pthread_mutex_timedlock(pthread_mutex_t *restrict mutex,
+    const struct timespec *restrict tsptr);
+</code></pre>
+<ul>
+<li>参数：<ul>
+<li>mutex：待加锁的互斥量的地址</li>
+<li>tsptr(超时时间)：指向一个timespec的指针，该timepsec指定了一个绝对时间（并不是相对时间，比如10秒）</li>
+</ul>
+</li>
+<li>返回值：<ul>
+<li>成功：返回0</li>
+<li>失败： 返回错误编号</li>
+</ul>
+</li>
+<li>pthread_mutex_timedlock被调用时：<ul>
+<li>如果互斥量处于未锁定状态，那么函数将锁住互斥量并返回0</li>
+<li>如果互斥量处于锁定状态，那么函数将阻塞到tsptr指定的时刻。在到达超时时刻时，pthread_mutex_timedlock不再试图对互斥量进行加锁，而是返回错误码ETIMEOUT</li>
+<li>可以使用clock_gettime函数获取timespec结构表示的当前时间。但是目前并不是所有平台都支持这个函数。因此也可以用gettimeofday函数获取timeval结构表示的当前时间，然后将这个时间转换为timespec结构。</li>
+</ul>
+</li>
+</ul>
+<h2 id="pthread-rwlock-t、pthread-rwlock-init、pthread-rwlock-destroy"><a href="#pthread-rwlock-t、pthread-rwlock-init、pthread-rwlock-destroy" class="headerlink" title="pthread_rwlock_t、pthread_rwlock_init、pthread_rwlock_destroy"></a>pthread_rwlock_t、pthread_rwlock_init、pthread_rwlock_destroy</h2><ul>
+<li>当读写锁是写锁定状态时，在该锁被解锁之前，所有试图对这个锁加锁（无论是加读锁还是价写锁）的线程都会被阻塞</li>
+<li><p>当读写锁是读锁定状态时，所有试图对它加读锁的线程都可以获得访问权，但是所有试图对它加写锁的线程都会被阻塞</p>
+</li>
+<li><p>使用读写锁之前必须初始化。</p>
+<ul>
+<li>如果是动态分配的读写锁（如通过malloc函数），则必须调用pthread_rwlock_init函数进行初始化</li>
+<li>如果是静态分配的读写锁，那么除了调用pthread_rwlock_init函数来初始化，也可以将它设置为常量PTHREAD_RWLOCK_INITALIZER来初始化</li>
+</ul>
+</li>
+<li>如果是动态分配的读写锁，那么在free释放内存之前必须调用pthread_rwlock_destroy函数来销毁读写锁。该函数会释放在动态初始化读写锁时动态分配的资源<pre><code class="C">#include&lt;pthread.h&gt;
+int pthread_rwlock_init(pthread_rwlock_t *restrict rwlock,
+  const pthread_rwlockattr_t *restrict attr);
+int pthread_rwlock_destroy(pthread_rwlock_t *rwlock);
+</code></pre>
+</li>
+<li>参数：<ul>
+<li>rwlock：待初始化/销毁的读写锁的地址</li>
+<li>attr：读写锁的属性。如果为NULL，那么读写锁设置为默认属性</li>
+</ul>
+</li>
+<li>返回值：<ul>
+<li>成功：返回0</li>
+<li>失败： 返回错误编号</li>
+</ul>
+</li>
+</ul>
+<h2 id="pthread-rwlock-rdlock-pthread-rwlock-wrlock-pthread-rwlock-unlock函数"><a href="#pthread-rwlock-rdlock-pthread-rwlock-wrlock-pthread-rwlock-unlock函数" class="headerlink" title="pthread_rwlock_rdlock/pthread_rwlock_wrlock/pthread_rwlock_unlock函数"></a>pthread_rwlock_rdlock/pthread_rwlock_wrlock/pthread_rwlock_unlock函数</h2><p>对读写锁加锁/解锁操作</p>
+<pre><code class="C">#include&lt;pthread.h&gt;
+int pthread_rwlock_rdlock(pthread_rwlock_t *rwlock);
+int pthread_rwlock_wrlock(pthread_rwlock_t *rwlock);
+int pthread_rwlock_unlock(pthread_rwlock_t *rwlock);
+</code></pre>
+<ul>
+<li>参数：<ul>
+<li>rwlock：待加锁/解锁的读写锁的地址</li>
+</ul>
+</li>
+<li><p>返回值：</p>
+<ul>
+<li>成功：返回0</li>
+<li>失败： 返回错误编号</li>
+</ul>
+</li>
+<li><p>用法：</p>
+<ul>
+<li>pthread_rwlock_rdlock用于对读写锁加读锁。如果读写锁当前是未加锁的，或者是读锁定的，则加锁成功；如果读写锁当前是写锁定的，则阻塞线程。</li>
+<li>pthread_rwlock_wrlock用于对读写锁加写锁。如果读写锁当前是未加锁的，则加锁成功；如果读写锁当前是读锁定或者写锁定的，则阻塞线程。</li>
+<li>pthread_rwlock_unlock用于对读写锁进行解锁，无论读写锁当前状态是处于读锁定还是写锁定。<blockquote>
+<p>注意：有的实现对读写锁同时加读锁的数量有限制。并不是无限制的加读锁。</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="pthread-rwlock-tryrdlock-pthread-rwlock-trywrlock函数"><a href="#pthread-rwlock-tryrdlock-pthread-rwlock-trywrlock函数" class="headerlink" title="pthread_rwlock_tryrdlock/pthread_rwlock_trywrlock函数"></a>pthread_rwlock_tryrdlock/pthread_rwlock_trywrlock函数</h2><p>对读写锁加锁的条件版本</p>
+<pre><code>#include&lt;pthread.h&gt;
+int pthread_rwlock_tryrdlock(pthread_rwlock_t *rwlock);
+int pthread_rwlock_trywrlock(pthread_rwlock_t *rwlock);
+</code></pre><ul>
+<li>参数：<ul>
+<li>rwlock：待加锁的读写锁的地址</li>
+</ul>
+</li>
+<li>返回值：<ul>
+<li>成功：返回0</li>
+<li>失败： 返回错误编号<blockquote>
+<p>当可以加锁时，这两个函数返回0。否则它们返回错误EBUSY而不是阻塞线程。</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="pthread-rwlock-timedrdlock-pthread-rwlock-timedwrlock函数"><a href="#pthread-rwlock-timedrdlock-pthread-rwlock-timedwrlock函数" class="headerlink" title="pthread_rwlock_timedrdlock/pthread_rwlock_timedwrlock函数"></a>pthread_rwlock_timedrdlock/pthread_rwlock_timedwrlock函数</h2><p>对读写锁加锁的超时版本</p>
+<pre><code>#include&lt;pthread.h&gt;
+#include&lt;time.h&gt;
+int pthread_rwlock_timedrdlock(pthread_rwlock_t *rwlock,
+    const struct timespect*restrict tsptr);
+int pthread_rwlock_timedwrlock(pthread_rwlock_t *rwlock,
+    const struct timespect*restrict tsptr);
+</code></pre><ul>
+<li>参数：<ul>
+<li>rwlock：待加锁的读写锁的地址</li>
+<li>tsptr：指向一个timespec的指针，该timepsec指定了一个绝对时间（并不是相对时间，比如10秒）</li>
+</ul>
+</li>
+<li>返回值：<ul>
+<li>成功：返回0</li>
+<li>失败： 返回错误编号<br>这两个函数被调用时：</li>
+</ul>
+</li>
+<li>如果允许加锁，那么函数将对读写锁加锁并返回0</li>
+<li>如果不允许加锁，那么函数将阻塞到tsptr指定的时刻。在到达超时时刻时，pthread_mutex_timedlock不再试图对读写锁进行加锁，而是返回错误码ETIMEOUT<blockquote>
+<p>可以使用clock_gettime函数获取timespec结构表示的当前时间。但是目前并不是所有平台都支持这个函数。因此也可以用gettimeofday函数获取timeval结构表示的当前时间，然后将这个时间转换为timespec结构。</p>
+</blockquote>
+</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/weixinpay.jpg" alt="Dear Amaze WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt="Dear Amaze Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/pthread-多线程/" rel="tag"># pthread,多线程</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/04/标准IO库/" rel="next" title="标准IO库">
+                <i class="fa fa-chevron-left"></i> 标准IO库
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/13/各大公司git地址/" rel="prev" title="各大公司git地址">
+                各大公司git地址 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar2.jpg"
+               alt="Dear Amaze" />
+          <p class="site-author-name" itemprop="name">Dear Amaze</p>
+           
+              <p class="site-description motion-element" itemprop="description">最穷不过要饭丶不死总会出头</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">63</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">41</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/fdl66" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/qq_27803491" target="_blank" title="CSDN">
+                  
+                    <i class="fa fa-fw fa-desktop"></i>
+                  
+                  CSDN
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/ao-jie-88/answers" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-vimeo"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://hello-fh.com/" title="浩哥" target="_blank">浩哥</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://githubecho.github.io/" title="阿谦" target="_blank">阿谦</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#pthread-equal函数"><span class="nav-number">1.</span> <span class="nav-text">pthread_equal函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pthread-self-void-函数"><span class="nav-number">2.</span> <span class="nav-text">pthread_self(void)函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pthread-create函数"><span class="nav-number">3.</span> <span class="nav-text">pthread_create函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pthread-exit函数"><span class="nav-number">4.</span> <span class="nav-text">pthread_exit函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pthread-join函数"><span class="nav-number">5.</span> <span class="nav-text">pthread_join函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pthread-cancel函数"><span class="nav-number">6.</span> <span class="nav-text">pthread_cancel函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pthread-clearnup-push-pthread-cleanup-pop函数"><span class="nav-number">7.</span> <span class="nav-text">pthread_clearnup_push/pthread_cleanup_pop函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pthread-detach函数"><span class="nav-number">8.</span> <span class="nav-text">pthread_detach函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pthread-mutex-t-pthread-mutex-init-pthread-mutex-destroy"><span class="nav-number">9.</span> <span class="nav-text">pthread_mutex_t/pthread_mutex_init/pthread_mutex_destroy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pthread-mutex-lock-pthread-mutex-trylock-pthread-mutex-unlock函数"><span class="nav-number">10.</span> <span class="nav-text">pthread_mutex_lock/pthread_mutex_trylock/pthread_mutex_unlock函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pthread-mutex-timedlock函数"><span class="nav-number">11.</span> <span class="nav-text">pthread_mutex_timedlock函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pthread-rwlock-t、pthread-rwlock-init、pthread-rwlock-destroy"><span class="nav-number">12.</span> <span class="nav-text">pthread_rwlock_t、pthread_rwlock_init、pthread_rwlock_destroy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pthread-rwlock-rdlock-pthread-rwlock-wrlock-pthread-rwlock-unlock函数"><span class="nav-number">13.</span> <span class="nav-text">pthread_rwlock_rdlock/pthread_rwlock_wrlock/pthread_rwlock_unlock函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pthread-rwlock-tryrdlock-pthread-rwlock-trywrlock函数"><span class="nav-number">14.</span> <span class="nav-text">pthread_rwlock_tryrdlock/pthread_rwlock_trywrlock函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pthread-rwlock-timedrdlock-pthread-rwlock-timedwrlock函数"><span class="nav-number">15.</span> <span class="nav-text">pthread_rwlock_timedrdlock/pthread_rwlock_timedwrlock函数</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Dear Amaze</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("fOpTd1WjHbULIjn8MszImyoU-gzGzoHsz", "BD6q7tNiA5K8GhdTkj9uEy0u");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  <script>
+      // highlight
+      hljs.initHighlightingOnLoad();
+  </script>
+</body>
+</html>
