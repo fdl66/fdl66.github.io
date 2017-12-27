@@ -1,0 +1,1214 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next mist" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="C语言,编译," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="基本概念 库是一种可执行的二进制代码(但不可以独立执行)，可以被操作系统载入内存执行。  由于 windows 和 linux 的平台不同（主要是编译器、汇编器和连接器 的不同），因此二者库的二进制是不兼容的。本文仅限于介绍 linux 下的库。">
+<meta name="keywords" content="C语言,编译">
+<meta property="og:type" content="article">
+<meta property="og:title" content="编译链接常识">
+<meta property="og:url" content="https://dearamaze.com/2017/12/27/编译链接常识/index.html">
+<meta property="og:site_name" content="DearAmaze-桀骜良">
+<meta property="og:description" content="基本概念 库是一种可执行的二进制代码(但不可以独立执行)，可以被操作系统载入内存执行。  由于 windows 和 linux 的平台不同（主要是编译器、汇编器和连接器 的不同），因此二者库的二进制是不兼容的。本文仅限于介绍 linux 下的库。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-12-27T18:01:05.931Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="编译链接常识">
+<meta name="twitter:description" content="基本概念 库是一种可执行的二进制代码(但不可以独立执行)，可以被操作系统载入内存执行。  由于 windows 和 linux 的平台不同（主要是编译器、汇编器和连接器 的不同），因此二者库的二进制是不兼容的。本文仅限于介绍 linux 下的库。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://dearamaze.com/2017/12/27/编译链接常识/"/>
+
+
+
+
+
+  <title> 编译链接常识 | DearAmaze-桀骜良 </title>
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?05e47eef3e87bfa03fe6dfcdad14b688";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <!--<script type="text/javascript" color="0,191,255" opacity="0.7" zindex="-2" count="150" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>-->
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">DearAmaze-桀骜良</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">test_subtitle</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://dearamaze.com/2017/12/27/编译链接常识/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dear Amaze">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DearAmaze-桀骜良">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                编译链接常识
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-27T00:00:00+08:00">
+                2017-12-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C语言/" itemprop="url" rel="index">
+                    <span itemprop="name">C语言</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/12/27/编译链接常识/" class="leancloud_visitors" data-flag-title="编译链接常识">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><blockquote>
+<p>库是一种可执行的二进制代码(但不可以独立执行)，可以被操作系统载入内存执行。</p>
+</blockquote>
+<p>由于 windows 和 linux 的平台不同（主要是编译器、汇编器和连接器 的不同），因此二者库的二进制是不兼容的。<br>本文仅限于介绍 linux 下的库。<br><a id="more"></a></p>
+<h3 id="库的种类"><a href="#库的种类" class="headerlink" title="库的种类"></a>库的种类</h3><p>linux 下的库有两种：<code>静态库</code>和<code>共享库</code>（<code>动态库</code>）。</p>
+<p>   二者的不同点在于<strong>代码被载入的时刻不同</strong>：</p>
+<p><strong>静态库</strong>的代码在编译过程中已经被载入可执行程序，因此生成的可执行程序体积较大。静态用.a为后缀， 例如： libhello.a</p>
+<p><strong>共享库</strong>(<strong>动态库</strong>)的代码是在可执行程序运行时才载入内存的，在编译过程中仅简单的引用，因此生成的可执行程序代码体积较小。动态通常用.so为后缀， 例如：libhello.so</p>
+<p><strong>共享库(动态库)的好处</strong>是: 不同的应用程序如果调用相同的库，那么在内存里只需要有一份该共享库的实例。</p>
+<p>为了在同一系统中使用不同版本的库，可以在库文件名后加上版本号为后缀,例如： libhello.so.1.0,由于程序连接默认以.so为文件后缀名。所以为了使用这些库，通常使用建立符号连接的方式。</p>
+<pre><code class="shell">ln -s libhello.so.1.0 libhello.so.1 
+ln -s libhello.so.1 libhello.so
+</code></pre>
+<h3 id="静态库，动态库文件在linux下是如何生成的"><a href="#静态库，动态库文件在linux下是如何生成的" class="headerlink" title="静态库，动态库文件在linux下是如何生成的"></a>静态库，动态库文件在linux下是如何生成的</h3><p>以下面的代码为例，生成上面用到的hello库：</p>
+<pre><code>/* hello.c */  
+#include &quot;hello.h&quot;  
+void sayhello()  
+{      
+    printf(&quot;hello,world &quot;);  
+}
+</code></pre><p>首先用gcc编绎该文件，在编绎时可以使用任何合法的编绎参数，例如-g加入调试代码等：<br><code>gcc -c hello.c -o hello.o</code></p>
+<p>1、生成静态库 生成静态库使用ar工具，其实ar是archive的意思<br><code>ar cqs libhello.a hello.o</code><br>2、生成动态库 用gcc来完成，由于可能存在多个版本，因此通常指定版本号：<br><code>gcc -shared -o libhello.so.1.0 hello.o</code></p>
+<h3 id="库文件是如何命名的，有没有什么规范"><a href="#库文件是如何命名的，有没有什么规范" class="headerlink" title="库文件是如何命名的，有没有什么规范"></a>库文件是如何命名的，有没有什么规范</h3><p>在 linux 下，库文件一般放在/usr/lib和/lib下，<br><strong>静态库</strong>的名字一般为<code>libxxxx.a</code>，其中 xxxx 是该lib的名称；<br><strong>动态库</strong>的名字一般为<code>libxxxx.so.major.minor</code>，xxxx 是该lib的名称，major是主版本号，minor是副版本号</p>
+<h3 id="可执行程序在执行的时候如何定位共享库-动态库-文件"><a href="#可执行程序在执行的时候如何定位共享库-动态库-文件" class="headerlink" title="可执行程序在执行的时候如何定位共享库(动态库)文件"></a>可执行程序在执行的时候如何定位共享库(动态库)文件</h3><p>当系统加载可执行代码(即库文件)的时候，<strong>能够知道其所依赖的库的名字</strong>，但是<strong>还需要知道绝对路径</strong>，此时就需要<strong>系统动态载入器</strong> (dynamic linker/loader)<br>    对于 elf 格式的可执行程序，是由 <code>ld-linux.so*</code> 来完成的，它先后搜索 elf 文件的 <code>DT_RPATH 段</code> –&gt; 环境变量<code>LD_LIBRARY_PATH</code> —-&gt; <code>/etc/ld.so.cache</code> 文件列表–&gt; <code>/lib/</code>,<code>/usr/lib</code> 目录<strong>找到库文件后将其载入内存</strong><br>    如： <code>export LD_LIBRARY_PATH=’pwd’</code><br>    将当前文件目录添加为共享目录。</p>
+<h3 id="使用ldd工具，查看可执行程序依赖那些动态库或着动态库依赖于那些动态库"><a href="#使用ldd工具，查看可执行程序依赖那些动态库或着动态库依赖于那些动态库" class="headerlink" title="使用ldd工具，查看可执行程序依赖那些动态库或着动态库依赖于那些动态库"></a>使用ldd工具，查看可执行程序依赖那些动态库或着动态库依赖于那些动态库</h3><p><strong>ldd 命令</strong>可以查看<strong>一个可执行程序依赖的<em>共享库</em></strong>，<br>例如 # ldd /bin/lnlibc.so.6<br>    =&gt; /lib/libc.so.6 (0×40021000)/lib/ld-linux.so.2<br>    =&gt; /lib/ld- linux.so.2 (0×40000000)<br>可以看到 <code>ln</code> 命令依赖于 <code>libc</code> 库和 <code>ld-linux</code> 库 </p>
+<h3 id="使用nm工具，查看静态库和动态库中有那些函数名"><a href="#使用nm工具，查看静态库和动态库中有那些函数名" class="headerlink" title="使用nm工具，查看静态库和动态库中有那些函数名"></a>使用nm工具，查看静态库和动态库中有那些函数名</h3><p>（<strong>T类表示函数是当前库中定义的，U类表示函数是被调用的，在其它库中定义的，W类是当前库中定义，被其它库中的函数覆盖</strong>）。：<br>有时候可能需要查看一个库中到底<strong>有哪些函数</strong>，nm工具可以打印出库中的涉及到的所有符号，这里的库<strong>既可以是静态的也可以是动态的</strong>。<br>nm列出的符号有很多， 常见的有三种::</p>
+<p>T类：是在库中定义的函数，用T表示，这是最常见的；</p>
+<p>U类：是在库中被调用，但并没有在库中定义(表明需要其他库支持)，用U表示；</p>
+<p>W类：是所谓的“弱态”符号，它们虽然在库中被定义，但是可能被其他库中的同名符号覆盖，用W表示。</p>
+<p>例如，假设开发者希望知道上文提到的hello库中是否引用了 printf():</p>
+<p>nm libhello.so | grep printf<br>发现printf是U类符号，说明printf被引用，但是并没有在库中定义。</p>
+<p>由此可以推断，要正常使用hello库，必须有其它库支持，使用ldd工具查看hello依赖于哪些库：</p>
+<p>ldd libhello.so</p>
+<p>libc.so.6=&gt;/lib/libc.so.6(0x400la000)  </p>
+<p>/lib/ld-linux.so.2=&gt;/lib/ld-linux.so.2 (0x40000000)</p>
+<p>从上面的结果可以继续查看printf最终在哪里被定义，有兴趣可以go on</p>
+<h3 id="使用ar工具，可以生成静态库，同时可以查看静态库中包含那些-o文件，即有那些源文件构成"><a href="#使用ar工具，可以生成静态库，同时可以查看静态库中包含那些-o文件，即有那些源文件构成" class="headerlink" title="使用ar工具，可以生成静态库，同时可以查看静态库中包含那些.o文件，即有那些源文件构成"></a>使用ar工具，可以生成静态库，同时可以查看静态库中包含那些.o文件，即有那些源文件构成</h3><p>可以使用 <code>ar -t libname.a</code> 来<strong>查看一个静态库由那些.o文件构成</strong>。</p>
+<p>可以使用 <code>ar q libname.a xxx1.o  xxx2.o xxx3.o ... xxxn.o</code> <strong>生成静态库</strong></p>
+<h3 id="如何查看动态库和静态库是32位，还是64位下的库"><a href="#如何查看动态库和静态库是32位，还是64位下的库" class="headerlink" title="如何查看动态库和静态库是32位，还是64位下的库"></a>如何查看动态库和静态库是32位，还是64位下的库</h3><p>如果是<strong>动态库</strong>，可以使用<code>file *.so</code>；<br>如果是<strong>静态库</strong>，可以使用<code>objdump -x *.a</code></p>
+<h2 id="Linux下进行程序设计时，关于库的使用"><a href="#Linux下进行程序设计时，关于库的使用" class="headerlink" title="Linux下进行程序设计时，关于库的使用"></a>Linux下进行程序设计时，关于库的使用</h2><h3 id="gcc-g-命令中关于库的参数"><a href="#gcc-g-命令中关于库的参数" class="headerlink" title="gcc/g++命令中关于库的参数"></a>gcc/g++命令中关于库的参数</h3><pre><code>-shared： 该选项指定生成动态连接库；
+-fPIC：表示编译为位置独立(地址无关)的代码，不用此选项的话，编译后的代码是位置相关的，所以动态载入时，是通过代码拷贝的方式来满足不同进程的需要，而不能达到真正代码段共享的目的。
+-L：指定链接库的路径，-L. 表示要连接的库在当前目录中
+-ltest：指定链接库的名称为test，编译器查找动态连接库时有隐含的命名规则，即在给出的名字前面加上lib，后面加上.so来确定库的名称
+-Wl,-rpath: 记录以来so文件的路径信息。
+LD_LIBRARY_PATH：这个环境变量指示动态连接器可以装载动态库的路径。
+ 当然如果有root权限的话，可以修改/etc/ld.so.conf文件，然后调用 /sbin/ldconfig来达到同样的目的，
+ 不过如果没有root权限，那么只能采用修改LD_LIBRARY_PATH环境变量的方法了。 
+</code></pre><p><strong>调用动态库的时候，有几个问题会经常碰到</strong><br>有时，明明已经将库的头文件所在目录 通过 “-I” include进来了，库所在文件通过 “-L”参数引导，并指定了“-l”的库名，但通过ldd命令察看时，就是死活找不到你指定链接的so文件，这时你要作的就是通过修改 LD_LIBRARY_PATH或者/etc/ld.so.conf文件来指定动态库的目录。通常这样做就可以解决库无法链接的问题了。</p>
+<h3 id="静态库链接时搜索路径的顺序"><a href="#静态库链接时搜索路径的顺序" class="headerlink" title="静态库链接时搜索路径的顺序"></a>静态库链接时搜索路径的顺序</h3><pre><code>1. ld会去找gcc/g++命令中的参数-L；
+2. 再找gcc的环境变量LIBRARY_PATH,它指定程序静态链接库文件搜索路径；
+    1. `export LIBRARY_PATH=$LIBRARY_PATH:data/home/billchen/lib `
+3. 再找默认库目录 /lib  /usr/lib  /usr/local/lib，这是当初compile gcc时写在程序内的。 
+</code></pre><h3 id="动态链接时、执行时搜索路径顺序"><a href="#动态链接时、执行时搜索路径顺序" class="headerlink" title="动态链接时、执行时搜索路径顺序"></a>动态链接时、执行时搜索路径顺序</h3><pre><code>1. 编译目标代码时指定的动态库搜索路径；
+2. 环境变量LD_LIBRARY_PATH指定动态库搜索路径，它指定程序动态链接库文件搜索路径；
+  export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:data/home/billchen/lib 
+3. 配置文件/etc/ld.so.conf中指定的动态库搜索路径；
+4. 默认的动态库搜索路径/lib；
+5. 默认的动态库搜索路径/usr/lib。 
+</code></pre><h3 id="静态库和动态链接库同时存在时，gcc-g-默认链接的是动态库"><a href="#静态库和动态链接库同时存在时，gcc-g-默认链接的是动态库" class="headerlink" title="静态库和动态链接库同时存在时，gcc/g++默认链接的是动态库"></a>静态库和动态链接库同时存在时，gcc/g++默认链接的是动态库</h3><p> 当一个库同时存在静态库和动态库时，比如libmysqlclient.a和libmysqlclient.so同时存在时：<br>在Linux下，动态库和静态库同事存在时，<strong>gcc/g++的链接程序，默认链接的动态库</strong>。</p>
+<p>可以使用下面的方法，给连接器ld传递参数，看是否链接动态库还是静态库。</p>
+<pre><code>-Wl,-Bstatic -llibname        //指定让gcc/g++链接静态库
+使用:
+gcc/g++ test.c -o test -Wl,-Bstatic -llibname -Wl,-Bdynamic -lm -lc 
+
+-Wl,-Bdynamic -llibname       //指定让gcc/g++链接动态库
+使用:
+gcc/g++ test.c -o test -Wl,-Bdynamic -llibname
+</code></pre><p><strong>如果要完全静态加载，使用-static参数，即将所有的库以静态的方式链入可执行程序，这样生成的可执行程序，不再依赖任何库，同事出现的问题是，这样编译出来的程序非常大，占用空间。<br>如果不适用-Wl,-Bdynamic -lm -c会有如下错误</strong>：</p>
+<pre><code>[chenbaihu@build17 lib]$ ls
+libtest.a  libtest.so  t  t.cc  test.cc  test.h  test.o
+[chenbaihu@build17 lib]$ g++ -Wall -g t.cc -o t -L./ -Wl,-Bstatic -ltest -Wl,-Bdynamic -lm -lc
+[chenbaihu@build17 lib]$ g++ -Wall -g t.cc -o t -L./ -Wl,-Bstatic -ltest 
+/usr/bin/ld: cannot find -lm
+collect2: ld 返回 1
+</code></pre><p>参考：<br>     <a href="http://lists.gnu.org/archive/html/help-gnu-utils/2004-03/msg00009.html" target="_blank" rel="external">http://lists.gnu.org/archive/html/help-gnu-utils/2004-03/msg00009.html</a></p>
+<h3 id="有关环境变量"><a href="#有关环境变量" class="headerlink" title="有关环境变量"></a>有关环境变量</h3><p><code>LIBRARY_PATH</code>环境变量：指定程序<strong>静态链接库文件搜索路径</strong><br><code>LD_LIBRARY_PATH</code>环境变量：指定程序<strong>动态链接库文件搜索路径</strong> </p>
+<h3 id="库的依赖问题"><a href="#库的依赖问题" class="headerlink" title="库的依赖问题"></a>库的依赖问题</h3><p>比如我们有一个基础库libbase.a,还有一个依赖libbase.a编译的库，叫做libchild.a；在我们编译程序时，一定要先-lchild再-lbase。 如果使用 -lbase -lchild，在编译时将出现一些函数undefined，而这些函数实际上已经在base中已经定义；</p>
+<p>为什么会有库的依赖问题？</p>
+<pre><code>一、静态库解析符号引用：
+  链接器ld是如何使用静态库来解析引用的。在符号解析阶段，链接器从左至右，依次扫描可重定位目标文件（*.o）和静态库（*.a）。
+在这个过程中，链接器将维持三个集合：
+    集合E：可重定位目标文件(*.o文件)的集合。
+    集合U：未解析(未定义)的符号集，即符号表中UNDEF的符号。
+    集合D： 已定义的符号集。
+初始情况下，E、U、D均为空。
+
+    1、对于每个输入文件f，如果是目标文件(.o)，则将f加入E，并用f中的符号表修改U、D(在文件f中定义实现的符号是D，在f中引用的符号是U)，然后继续下个文件。
+    2、如果f是一个静态库(.a)，那么链接器将尝试匹配U中未解析符号与静态库成员(静态库的成员就是.o文件)定义的符号。如果静态库中某个成员m(某个.o文件)定义了一个符号来解析U中引用，那么将m加入E中，
+    同时使用m的符号表，来更新U、D。对静态库中所有成员目标文件反复进行该过程，直至U和D不再发生变化。此时，静态库f中任何不包含在E中的成员目标文件都将丢弃，链接器将继续下一个文件。
+    3、当所有输入文件完成后，如果U非空，链接器则会报错，否则合并和重定位E中目标文件，构建出可执行文件。
+
+到这里，为什么会有库的依赖问题已经得到解答：
+    因为libchild.a依赖于libbase.a，但是libbase.a在libchild.a的左边，导致libbase.a中的目标文件(*.o)根本就没有被加载到E中，所以解决方法就是交换两者的顺序。当然也可以使用-lbase -lchild -lbase的方法。
+
+参考文章：http://pananq.com/index.php/page/3/
+</code></pre><h3 id="动态库升级问题"><a href="#动态库升级问题" class="headerlink" title="动态库升级问题"></a>动态库升级问题</h3><p>在动态链接库升级时，<br>   <strong>不能使用</strong><code>cp newlib.so oldlib.so</code>，这样有可能会使程序core掉；<br>   <strong>而应该使用:<br>   <code>rm oldlib.so</code> 然后 <code>cp newlib.so oldlib.so</code><br>   或者<br>    <code>mv oldlib.so oldlib.so_bak</code> 然后 <code>cp newlib.so oldlib.so</code></strong></p>
+<p>为什么不能用cp newlib.so oldlib.so ?</p>
+<pre><code>在替换so文件时，如果在不停程序的情况下，直接用 cp new.so old.so 的方式替换程序使用的动态库文件会导致正在运行中的程序崩溃。
+</code></pre><p>解决方法:</p>
+<pre><code>解决的办法是采用“rm＋cp” 或“mv＋cp” 来替代直接“cp” 的操作方法。
+linux系统的动态库有两种使用方法：运行时动态链接库，动态加载库并在程序控制之下使用。
+</code></pre><p>1、为什么在不停程序的情况下，直接用 cp 命令替换程序使用的 so 文件，会使程序崩溃？<br>很多同学在工作中遇到过这样一个问题，在替换 so 文件时，如果在不停程序的情况下，直接用cp new.so old.so的方式替换程序使用的动态库文件会导致正在运行中的程序崩溃，退出。</p>
+<pre><code>这与 cp 命令的实现有关，cp 并不改变目标文件的 inode，cp 的目标文件会继承被覆盖文件的属性而非源文件。实际上它是这样实现的：
+strace cp libnew.so libold.so 2&gt;&amp;1 |grep open.*lib.*.so
+open(&quot;libnew.so&quot;, O_RDONLY|O_LARGEFILE) = 3
+open(&quot;libold.so&quot;, O_WRONLY|O_TRUNC|O_LARGEFILE) = 4
+在 cp 使用“O_WRONLY|O_TRUNC” 打开目标文件时，原 so 文件的镜像被意外的破坏了。这样动态链接器 ld.so 不能访问到 so 文件中的函数入口。从而导致 Segmentation fault，程序崩溃。ld.so 加载 so 文件及“再定位”的机制比较复杂。
+</code></pre><p>2、怎样在不停止程序的情况下替换so文件，并且保证程序不会崩溃？</p>
+<pre><code>答案是采用“rm＋cp” 或“mv＋cp” 来替代直接“cp” 的操作方法。
+在用新的so文件 libnew.so 替换旧的so文件 libold.so 时，如果采用如下方法：
+rm libold.so       //如果内核正在使用libold.so，那么inode节点不会立刻别删除掉。
+cp libnew.so libold.so
+采用这种方法，目标文件 libold.so 的 inode 其实已经改变了，原来的 libold.so 文件虽然不能用&quot;ls&quot;查看到，但其inode并没有被真正删除，直到内核释放对它的引用。
+</code></pre><p>（即: rm libold.so，此时，如果ld.so正在加在libold.so，内核就在引用libold.so的inode节点，rm libold.so的inode并没有被真正删除，当ld.so对libold.so的引用结束，inode才会真正删除。这样程序就不会崩溃，因为它还在使用旧的libold.so，当下次再使用libold.so时，已经被替换，就会使用新的libold.so）</p>
+<pre><code>同理，mv只是改变了文件名，其 inode 不变，新文件使用了新的 inode。这样动态链接器 ld.so 仍然使用原来文件的 inode 访问旧的 so 文件。因而程序依然能正常运行。
+</code></pre><p>(即: mv libold.so <em>*</em>后，如果程序使用动态库，还是使用旧的inode节点，当下次再使用libold.so时，就会使用新的libold.so)</p>
+<pre><code>到这里，为什么直接使用“cp new_exec_file old_exec_file”这样的命令时，系统会禁止这样的操作，并且给出这样的提示“cp: cannot create regular file `old&#39;: Text file busy”。
+
+这时，我们采用的办法仍然是用“rm+cp”或者“mv+cp”来替代直接“cp”，这跟以上提到的so文件的替换有同样的道理。
+</code></pre><p>但是，为什么系统会阻止cp覆盖可执行程序，而不阻止覆盖so文件呢？</p>
+<pre><code>这是因为 Linux 有个 Demand Paging 机制，所谓“Demand Paging”，简单的说，就是系统为了节约物理内存开销，并不会程序运行时就将所有页（page）都加载到内存中，而只有在系统有访问需求时才将其加载。“Demand Paging”要求正在运行中的程序镜像（注意，并非文件本身）不被意外修改，因此内核在启动程序后会锁定这个程序镜像的 inode。
+</code></pre><p>对于 so 文件，它是靠 ld.so 加载的，而ld.so毕竟也是用户态程序，没有权利去锁定inode，也不应与内核的文件系统底层实现耦合。</p>
+<h2 id="来源"><a href="#来源" class="headerlink" title="来源"></a>来源</h2><p>转载自：<a href="http://blog.163.com/xychenbaihu@yeah/blog/static/13222965520101023104745738/" target="_blank" rel="external">http://blog.163.com/xychenbaihu@yeah/blog/static/13222965520101023104745738/</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/weixinpay.jpg" alt="Dear Amaze WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt="Dear Amaze Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/C语言-编译/" rel="tag"># C语言,编译</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/13/各大公司git地址/" rel="next" title="各大公司git地址">
+                <i class="fa fa-chevron-left"></i> 各大公司git地址
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar2.jpg"
+               alt="Dear Amaze" />
+          <p class="site-author-name" itemprop="name">Dear Amaze</p>
+           
+              <p class="site-description motion-element" itemprop="description">最穷不过要饭丶不死总会出头</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">64</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">25</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">42</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/fdl66" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/qq_27803491" target="_blank" title="CSDN">
+                  
+                    <i class="fa fa-fw fa-desktop"></i>
+                  
+                  CSDN
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/ao-jie-88/answers" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-vimeo"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://hello-fh.com/" title="浩哥" target="_blank">浩哥</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://githubecho.github.io/" title="阿谦" target="_blank">阿谦</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本概念"><span class="nav-number">1.</span> <span class="nav-text">基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#库的种类"><span class="nav-number">1.1.</span> <span class="nav-text">库的种类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#静态库，动态库文件在linux下是如何生成的"><span class="nav-number">1.2.</span> <span class="nav-text">静态库，动态库文件在linux下是如何生成的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#库文件是如何命名的，有没有什么规范"><span class="nav-number">1.3.</span> <span class="nav-text">库文件是如何命名的，有没有什么规范</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可执行程序在执行的时候如何定位共享库-动态库-文件"><span class="nav-number">1.4.</span> <span class="nav-text">可执行程序在执行的时候如何定位共享库(动态库)文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用ldd工具，查看可执行程序依赖那些动态库或着动态库依赖于那些动态库"><span class="nav-number">1.5.</span> <span class="nav-text">使用ldd工具，查看可执行程序依赖那些动态库或着动态库依赖于那些动态库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用nm工具，查看静态库和动态库中有那些函数名"><span class="nav-number">1.6.</span> <span class="nav-text">使用nm工具，查看静态库和动态库中有那些函数名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用ar工具，可以生成静态库，同时可以查看静态库中包含那些-o文件，即有那些源文件构成"><span class="nav-number">1.7.</span> <span class="nav-text">使用ar工具，可以生成静态库，同时可以查看静态库中包含那些.o文件，即有那些源文件构成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何查看动态库和静态库是32位，还是64位下的库"><span class="nav-number">1.8.</span> <span class="nav-text">如何查看动态库和静态库是32位，还是64位下的库</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux下进行程序设计时，关于库的使用"><span class="nav-number">2.</span> <span class="nav-text">Linux下进行程序设计时，关于库的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#gcc-g-命令中关于库的参数"><span class="nav-number">2.1.</span> <span class="nav-text">gcc/g++命令中关于库的参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#静态库链接时搜索路径的顺序"><span class="nav-number">2.2.</span> <span class="nav-text">静态库链接时搜索路径的顺序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态链接时、执行时搜索路径顺序"><span class="nav-number">2.3.</span> <span class="nav-text">动态链接时、执行时搜索路径顺序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#静态库和动态链接库同时存在时，gcc-g-默认链接的是动态库"><span class="nav-number">2.4.</span> <span class="nav-text">静态库和动态链接库同时存在时，gcc/g++默认链接的是动态库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#有关环境变量"><span class="nav-number">2.5.</span> <span class="nav-text">有关环境变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#库的依赖问题"><span class="nav-number">2.6.</span> <span class="nav-text">库的依赖问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态库升级问题"><span class="nav-number">2.7.</span> <span class="nav-text">动态库升级问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#来源"><span class="nav-number">3.</span> <span class="nav-text">来源</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Dear Amaze</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("fOpTd1WjHbULIjn8MszImyoU-gzGzoHsz", "BD6q7tNiA5K8GhdTkj9uEy0u");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  <script>
+      // highlight
+      hljs.initHighlightingOnLoad();
+  </script>
+</body>
+</html>

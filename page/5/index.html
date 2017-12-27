@@ -327,6 +327,737 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://dearamaze.com/2017/03/28/TCP和UDP套接字C语言实现/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dear Amaze">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DearAmaze-桀骜良">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/03/28/TCP和UDP套接字C语言实现/" itemprop="url">
+                  TCP和UDP套接字C语言实现
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-28T12:03:47+08:00">
+                2017-03-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/网络/" itemprop="url" rel="index">
+                    <span itemprop="name">网络</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/03/28/TCP和UDP套接字C语言实现/" class="leancloud_visitors" data-flag-title="TCP和UDP套接字C语言实现">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="字符串传输"><a href="#字符串传输" class="headerlink" title="字符串传输"></a>字符串传输</h1><h2 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h2><h3 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h3><pre><code>#include 
+#include 
+#include 
+#include 
+#include 
+#include 
+#include 
+#include 
+#include 
+#include 
+
+#define MYPORT  8887
+#define BUFFER_SIZE 1024
+
+int main()
+{
+    ///定义sockfd
+    int sock_cli = socket(AF_INET,SOCK_STREAM, 0);
+
+    ///定义sockaddr_in
+    struct sockaddr_in servaddr;
+    memset(&amp;servaddr, 0, sizeof(servaddr));
+    servaddr.sin_family = AF_INET;
+    servaddr.sin_port = htons(MYPORT);  ///服务器端口
+    servaddr.sin_addr.s_addr = inet_addr(&quot;127.0.0.1&quot;);  ///服务器ip
+
+    ///连接服务器，成功返回0，错误返回-1
+    if (connect(sock_cli, (struct sockaddr *)&amp;servaddr, sizeof(servaddr)) &lt; 0)
+    {
+        perror(&quot;connect&quot;);
+        exit(1);
+    }
+
+    char sendbuf[BUFFER_SIZE];
+    char recvbuf[BUFFER_SIZE];
+    while (fgets(sendbuf, sizeof(sendbuf), stdin) != NULL)
+    {
+        send(sock_cli, sendbuf, strlen(sendbuf),0); ///发送
+        if(strcmp(sendbuf,&quot;exit\n&quot;)==0)
+            break;
+        recv(sock_cli, recvbuf, sizeof(recvbuf),0); ///接收
+        fputs(recvbuf, stdout);
+
+        memset(sendbuf, 0, sizeof(sendbuf));
+        memset(recvbuf, 0, sizeof(recvbuf));
+    }
+
+    close(sock_cli);
+    return 0;
+}
+</code></pre><h3 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h3><pre><code>#include 
+#include 
+#include 
+#include 
+#include 
+#include 
+#include 
+#include 
+#include 
+#include 
+
+#define MYPORT  8887
+#define QUEUE   20
+#define BUFFER_SIZE 1024
+
+int main()
+{
+    ///定义sockfd
+    int server_sockfd = socket(AF_INET,SOCK_STREAM, 0);
+
+    ///定义sockaddr_in
+    struct sockaddr_in server_sockaddr;
+    server_sockaddr.sin_family = AF_INET;
+    server_sockaddr.sin_port = htons(MYPORT);
+    server_sockaddr.sin_addr.s_addr = htonl(INADDR_ANY);
+
+    ///bind，成功返回0，出错返回-1
+    if(bind(server_sockfd,(struct sockaddr *)&amp;server_sockaddr,sizeof(server_sockaddr))==-1)
+    {
+        perror(&quot;bind&quot;);
+        exit(1);
+    }
+
+    ///listen，成功返回0，出错返回-1
+    if(listen(server_sockfd,QUEUE) == -1)
+    {
+        perror(&quot;listen&quot;);
+        exit(1);
+    }
+
+    ///客户端套接字
+    char buffer[BUFFER_SIZE];
+    struct sockaddr_in client_addr;
+    socklen_t length = sizeof(client_addr);
+
+    ///成功返回非负描述字，出错返回-1
+    int conn = accept(server_sockfd, (struct sockaddr*)&amp;client_addr, &amp;length);
+    if(conn&lt;0)
+    {
+        perror(&quot;connect&quot;);
+        exit(1);
+    }
+
+    while(1)
+    {
+        memset(buffer,0,sizeof(buffer));
+        int len = recv(conn, buffer, sizeof(buffer),0);
+        if(strcmp(buffer,&quot;exit\n&quot;)==0)
+            break;
+        fputs(buffer, stdout);
+        for(int i=0;i&lt;len;i++){
+            if(buffer[i]&gt;=97&amp;&amp;buffer[i]&lt;=122)buffer[i]-=32;
+        }
+        send(conn, buffer, len, 0);
+    }
+    close(conn);
+    close(server_sockfd);
+    return 0;
+}
+</code></pre><h3 id="运行截图"><a href="#运行截图" class="headerlink" title="运行截图"></a>运行截图</h3><p>tcp_client:</p>
+<p><img src="http://function.dearamaze.com/tcp_c.png" alt="client"></p>
+<p>tcp_server:</p>
+<p><img src="http://function.dearamaze.com/tcp_s.png" alt="server"></p>
+<h2 id="UDP"><a href="#UDP" class="headerlink" title="UDP"></a>UDP</h2><h3 id="客户端-1"><a href="#客户端-1" class="headerlink" title="客户端"></a>客户端</h3><pre><code>#include 
+#include 
+#include 
+#include 
+#include 
+
+#define SERVER_PORT 8888
+#define BUFF_LEN 512
+#define SERVER_IP &quot;172.0.5.182&quot;
+
+
+void udp_msg_sender(int fd, struct sockaddr* dst)
+{
+
+    socklen_t len;
+    char sendbuf[BUFF_LEN];
+    char recvbuf[BUFF_LEN];
+    struct sockaddr_in src;
+    while(fgets(sendbuf,sizeof(sendbuf),stdin)!=NULL){
+        len=sizeof(*dst);
+        sendto(fd,sendbuf,BUFF_LEN,0,dst,len);
+        if(strcmp(sendbuf,&quot;exit\n&quot;)==0)break;
+        recvfrom(fd,recvbuf,BUFF_LEN,0,(struct sockaddr*)&amp;src,&amp;len);
+        fputs(recvbuf,stdout);
+
+        memset(sendbuf,0,sizeof(sendbuf));
+        memset(recvbuf,0,sizeof(recvbuf));
+    }
+}
+
+/*
+    client:
+            socket--&gt;sendto--&gt;revcfrom--&gt;close
+*/
+
+int main(int argc, char* argv[])
+{
+    int client_fd;
+    struct sockaddr_in ser_addr;
+
+    client_fd = socket(AF_INET, SOCK_DGRAM, 0);
+    if(client_fd &lt; 0)
+    {
+        printf(&quot;create socket fail!\n&quot;);
+        return -1;
+    }
+
+    memset(&amp;ser_addr, 0, sizeof(ser_addr));
+    ser_addr.sin_family = AF_INET;
+    //ser_addr.sin_addr.s_addr = inet_addr(SERVER_IP);
+    ser_addr.sin_addr.s_addr = htonl(INADDR_ANY);  //注意网络序转换
+    ser_addr.sin_port = htons(SERVER_PORT);  //注意网络序转换
+
+    udp_msg_sender(client_fd, (struct sockaddr*)&amp;ser_addr);
+
+    close(client_fd);
+
+    return 0;
+}
+</code></pre><h3 id="服务端-1"><a href="#服务端-1" class="headerlink" title="服务端"></a>服务端</h3><pre><code>#include 
+#include 
+#include 
+#include 
+#include 
+
+#define SERVER_PORT 8888
+#define BUFF_LEN 1024
+
+void handle_udp_msg(int fd)
+{
+    char buf[BUFF_LEN];  //接收缓冲区，1024字节
+    socklen_t len;
+    int count;
+    struct sockaddr_in clent_addr;  //clent_addr用于记录发送方的地址信息
+    while(1)
+    {
+        memset(buf, 0, BUFF_LEN);
+        len = sizeof(clent_addr);
+        count = recvfrom(fd, buf, BUFF_LEN, 0, (struct sockaddr*)&amp;clent_addr, &amp;len);  //recvfrom是拥塞函数，没有数据就一直拥塞
+        if(count == -1)
+        {
+            printf(&quot;recieve data fail!\n&quot;);
+            return;
+        }
+        if(strcmp(buf,&quot;exit\n&quot;)==0)break;
+        fputs(buf,stdout);
+        for(int i=0;i&lt;count;i++){
+            if(buf[i]&gt;=97&amp;&amp;buf[i]&lt;=122)buf[i]-=32;
+        }
+        sendto(fd, buf, BUFF_LEN, 0, (struct sockaddr*)&amp;clent_addr, len);  //发送信息给client，注意使用了clent_addr结构体指针
+
+    }
+}
+
+
+/*
+    server:
+            socket--&gt;bind--&gt;recvfrom--&gt;sendto--&gt;close
+*/
+
+int main(int argc, char* argv[])
+{
+    int server_fd, ret;
+    struct sockaddr_in ser_addr; 
+
+    server_fd = socket(AF_INET, SOCK_DGRAM, 0); //AF_INET:IPV4;SOCK_DGRAM:UDP
+    if(server_fd &lt; 0)
+    {
+        printf(&quot;create socket fail!\n&quot;);
+        return -1;
+    }
+
+    memset(&amp;ser_addr, 0, sizeof(ser_addr));
+    ser_addr.sin_family = AF_INET;
+    ser_addr.sin_addr.s_addr = htonl(INADDR_ANY); //IP地址，需要进行网络序转换，INADDR_ANY：本地地址
+    ser_addr.sin_port = htons(SERVER_PORT);  //端口号，需要网络序转换
+
+    ret = bind(server_fd, (struct sockaddr*)&amp;ser_addr, sizeof(ser_addr));
+    if(ret &lt; 0)
+    {
+        printf(&quot;socket bind fail!\n&quot;);
+        return -1;
+    }
+
+    handle_udp_msg(server_fd);   //处理接收到的数据
+
+    close(server_fd);
+    return 0;
+}
+</code></pre><h3 id="运行截图-1"><a href="#运行截图-1" class="headerlink" title="运行截图"></a>运行截图</h3><p>udp_client</p>
+<p><img src="http://function.dearamaze.com/udp_c.png" alt="client"></p>
+<p>udp_server<br><img src="http://function.dearamaze.com/udp_s.png" alt="server"></p>
+<h1 id="文件传输"><a href="#文件传输" class="headerlink" title="文件传输"></a>文件传输</h1><h2 id="TCP-1"><a href="#TCP-1" class="headerlink" title="TCP"></a>TCP</h2><h3 id="客户端-2"><a href="#客户端-2" class="headerlink" title="客户端"></a>客户端</h3><pre><code>#include  
+#include  
+#include  
+#include  
+#include  
+#include  
+#include  
+#include  
+#include  
+#include  
+
+#define MAXLINE 1024 
+
+void usage(char *command) 
+{ 
+    printf(&quot;usage :%s ipaddr portnum filename\n&quot;, command); 
+    exit(0); 
+} 
+int main(int argc,char **argv) 
+{ 
+    struct sockaddr_in serv_addr; 
+    char buf[MAXLINE]; 
+    int sock_id; 
+    int read_len; 
+    int send_len; 
+    FILE *fp; 
+    int i_ret; 
+
+    if (argc != 4) { 
+        usage(argv[0]); 
+    } 
+
+    /* open the file to be transported commented by guoqingbo*/ 
+    if ((fp = fopen(argv[3],&quot;r&quot;)) == NULL) { 
+        perror(&quot;Open file failed\n&quot;); 
+        exit(0); 
+    } 
+
+    /* create the socket commented by guoqingbo*/ 
+    if ((sock_id = socket(AF_INET,SOCK_STREAM,0)) &lt; 0) { 
+        perror(&quot;Create socket failed\n&quot;); 
+        exit(0); 
+    } 
+
+    memset(&amp;serv_addr, 0, sizeof(serv_addr)); 
+    serv_addr.sin_family = AF_INET; 
+    serv_addr.sin_port = htons(atoi(argv[2])); 
+    inet_pton(AF_INET, argv[1], &amp;serv_addr.sin_addr); 
+
+    /* connect the server commented by guoqingbo*/ 
+    i_ret = connect(sock_id, (struct sockaddr *)&amp;serv_addr, sizeof(struct sockaddr)); 
+    if (-1 == i_ret) { 
+        printf(&quot;Connect socket failed\n&quot;); 
+       return -1; 
+    } 
+
+    /* transported the file commented by guoqingbo*/ 
+    bzero(buf, MAXLINE); 
+    while ((read_len = fread(buf, sizeof(char), MAXLINE, fp)) &gt;0 ) { 
+        send_len = send(sock_id, buf, read_len, 0); 
+        if ( send_len &lt; 0 ) { 
+            perror(&quot;Send file failed\n&quot;); 
+            exit(0); 
+        } 
+        bzero(buf, MAXLINE); 
+    } 
+
+    fclose(fp); 
+    close(sock_id); 
+    printf(&quot;Send Finish\n&quot;); 
+    return 0; 
+}
+</code></pre><h3 id="服务端-2"><a href="#服务端-2" class="headerlink" title="服务端"></a>服务端</h3><pre><code>#include  
+#include  
+#include  
+#include  
+#include  
+#include  
+#include  
+#include  
+#include  
+
+#define MAXLINE 1024 
+
+void usage(char *command) 
+{ 
+    printf(&quot;usage :%s portnum filename\n&quot;, command); 
+    exit(0); 
+} 
+int main(int argc,char **argv) 
+{ 
+    struct sockaddr_in serv_addr; 
+    struct sockaddr_in clie_addr; 
+    char buf[MAXLINE]; 
+    int sock_id; 
+    int link_id; 
+    int recv_len; 
+    int write_leng; 
+    int clie_addr_len; 
+    FILE *fp; 
+
+    if (argc != 3) { 
+        usage(argv[0]); 
+    } 
+    if ((fp = fopen(argv[2], &quot;w&quot;)) == NULL) { 
+        perror(&quot;Open file failed\n&quot;); 
+        exit(0); 
+    } 
+    if ((sock_id = socket(AF_INET, SOCK_STREAM, 0)) &lt; 0) { 
+        perror(&quot;Create socket failed\n&quot;); 
+        exit(0); 
+    } 
+    /*fill the server sockaddr_in struct commented by guoqingbo*/ 
+    memset(&amp;serv_addr, 0, sizeof(serv_addr)); 
+    serv_addr.sin_family = AF_INET; 
+    serv_addr.sin_port = htons(atoi(argv[1])); 
+    serv_addr.sin_addr.s_addr = htonl(INADDR_ANY); 
+
+    if (bind(sock_id, (struct sockaddr *)&amp;serv_addr, sizeof(serv_addr)) &lt; 0 ) { 
+        perror(&quot;Bind socket failed\n&quot;); 
+        exit(0); 
+    } 
+
+    if (-1 == listen(sock_id, 10)) { 
+        perror(&quot;Listen socket failed\n&quot;); 
+        exit(0); 
+    } 
+    /* server part commented by guoqingbo*/ 
+    while (1) { 
+        clie_addr_len = sizeof(clie_addr); 
+        link_id = accept(sock_id, (struct sockaddr *)&amp;clie_addr, &amp;clie_addr_len); 
+        if (-1 == link_id) { 
+            perror(&quot;Accept socket failed\n&quot;); 
+            exit(0); 
+        } 
+        bzero(buf, MAXLINE); 
+        while (recv_len = recv(link_id, buf, MAXLINE, 0)) { 
+            /* receiver data part commented by guoqingbo*/ 
+            if(recv_len &lt; 0) { 
+                printf(&quot;Recieve Data From Server Failed!\n&quot;); 
+                break; 
+            } 
+            printf(&quot;#&quot;); 
+            write_leng = fwrite(buf, sizeof(char), recv_len, fp); 
+            if (write_leng &lt; recv_len) { 
+                printf(&quot;Write file failed\n&quot;); 
+                break; 
+            } 
+            bzero(buf,MAXLINE); 
+        } 
+        printf(&quot;\nFinish Recieve\n&quot;); 
+        fclose(fp); 
+        close(link_id); 
+    } 
+    close(sock_id); 
+    return 0; 
+}
+</code></pre><h3 id="截图"><a href="#截图" class="headerlink" title="截图"></a>截图</h3><p>tcp_file_client</p>
+<p><img src="http://function.dearamaze.com/tcp_file_client.png" alt="tcp_file_client"></p>
+<p>tcp_file_servier</p>
+<p><img src="http://function.dearamaze.com/tcp_file_server.png" alt="tcp_file_servier"></p>
+<h2 id="UDP-1"><a href="#UDP-1" class="headerlink" title="UDP"></a>UDP</h2><h3 id="客户端-3"><a href="#客户端-3" class="headerlink" title="客户端"></a>客户端</h3><pre><code>#include  
+#include  
+#include  
+#include  
+#include  
+#include  
+#include  
+#include  
+#include  
+#include  
+
+#define FINISH_FLAG &quot;FILE_TRANSPORT_FINISH&quot; 
+#define MAXLINE 1024 
+
+void usage(char *command) 
+{ 
+    printf(&quot;usage :%s ipaddr portnum filename\n&quot;, command); 
+    exit(0); 
+} 
+int main(int argc,char **argv) 
+{ 
+    FILE *fp; 
+    struct sockaddr_in serv_addr; 
+    char buf[MAXLINE]; 
+    int sock_id; 
+    int read_len; 
+    int send_len; 
+    int serv_addr_len; 
+    int i_ret; 
+    int i; 
+
+    if (argc != 4) { 
+        usage(argv[0]); 
+    } 
+    /* open the file to be transported commanted by guoqingbo*/ 
+    if ((fp = fopen(argv[3],&quot;r&quot;)) == NULL) { 
+        perror(&quot;Open file failed\n&quot;); 
+        exit(0); 
+    } 
+    /* create the socket commanted by guoqingbo*/ 
+    if ((sock_id = socket(AF_INET, SOCK_DGRAM, 0)) &lt; 0) { 
+        perror(&quot;Create socket failed&quot;); 
+        exit(0); 
+    } 
+    memset(&amp;serv_addr,0,sizeof(serv_addr)); 
+    serv_addr.sin_family = AF_INET; 
+    serv_addr.sin_port = htons(atoi(argv[2])); 
+    inet_pton(AF_INET, argv[1], &amp;serv_addr.sin_addr); 
+    serv_addr_len = sizeof(serv_addr); 
+    /* connect the server commanted by guoqingbo*/ 
+    i_ret = connect(sock_id, (struct sockaddr *)&amp;serv_addr, sizeof(struct sockaddr)); 
+    if (-1 == i_ret) { 
+        perror(&quot;Connect socket failed!\n&quot;); 
+        exit(0); 
+    } 
+    /* transport the file commented by guoqingbo*/ 
+    bzero(buf, MAXLINE); 
+    while ( (read_len = fread(buf, sizeof(char), MAXLINE, fp)) &gt; 0 ) { 
+        send_len = send(sock_id, buf, read_len, 0); 
+        if ( send_len &lt; 0 ) { 
+            perror(&quot;Send data failed\n&quot;); 
+            exit(0); 
+        } 
+        bzero(buf, MAXLINE); 
+    } 
+    fclose(fp); 
+    /* send the end_flag commented by guoqingbo*/ 
+    bzero(buf, MAXLINE); 
+    strcpy(buf, FINISH_FLAG); 
+    buf[strlen(buf)] = &#39;\0&#39;; 
+    for (i = 1000; i&gt;0; i--) { 
+        send_len = send(sock_id, buf, strlen(buf)+1, 0); 
+        if ( send_len &lt; 0 ) { 
+            printf(&quot;Finish send the end string\n&quot;); 
+            break; 
+        } 
+    } 
+    close(sock_id); 
+    printf(&quot;Send finish\n&quot;); 
+    return 0; 
+}
+</code></pre><h3 id="服务端-3"><a href="#服务端-3" class="headerlink" title="服务端"></a>服务端</h3><pre><code class="C">#include  
+#include  
+#include  
+#include  
+#include  
+#include  
+#include  
+#include  
+#include  
+
+#define FINISH_FLAG &quot;FILE_TRANSPORT_FINISH&quot; 
+#define MAXLINE 1024 
+
+void usage(char *command) 
+{ 
+    printf(&quot;usage :%s portnum filename\n&quot;, command); 
+    exit(0); 
+} 
+int main(int argc,char **argv) 
+{ 
+    struct sockaddr_in serv_addr; 
+    struct sockaddr_in clie_addr; 
+    char buf[MAXLINE]; 
+    int sock_id; 
+    int recv_len; 
+    int clie_addr_len; 
+    FILE *fp; 
+
+    if (argc != 3) { 
+        usage(argv[0]); 
+    } 
+    /* Create the the file commented by guoqingbo*/ 
+    if ((fp = fopen(argv[2], &quot;w&quot;)) == NULL) { 
+        perror(&quot;Creat file failed&quot;); 
+        exit(0); 
+    } 
+    if ((sock_id = socket(AF_INET,SOCK_DGRAM,0)) &lt; 0) { 
+        perror(&quot;Create socket failed\n&quot;); 
+        exit(0); 
+    } 
+    /*fill the server sockaddr_in struct commented by guoqingbo*/ 
+    memset(&amp;serv_addr,0,sizeof(serv_addr)); 
+    serv_addr.sin_family = AF_INET; 
+    serv_addr.sin_port = htons(atoi(argv[1])); 
+    serv_addr.sin_addr.s_addr = htonl(INADDR_ANY); 
+
+    if (bind(sock_id,(struct sockaddr *)&amp;serv_addr,sizeof(serv_addr)) &lt; 0 ) { 
+        perror(&quot;Bind socket faild\n&quot;); 
+        exit(0); 
+    } 
+    /* server part commented by guoqingbo*/ 
+    clie_addr_len = sizeof(clie_addr); 
+    bzero(buf, MAXLINE); 
+    while (recv_len = recvfrom(sock_id, buf, MAXLINE, 0,(struct sockaddr *)&amp;clie_addr, &amp;clie_addr_len)) { 
+        if(recv_len &lt; 0) { 
+            printf(&quot;Recieve data from client failed!\n&quot;); 
+            break; 
+        } 
+        printf(&quot;#&quot;); 
+        if ( strstr(buf, FINISH_FLAG) != NULL ) { 
+            printf(&quot;\nFinish receiver finish_flag\n&quot;); 
+            break; 
+        } 
+        int write_length = fwrite(buf, sizeof(char), recv_len, fp); 
+        if (write_length &lt; recv_len) { 
+            printf(&quot;File write failed\n&quot;); 
+            break; 
+        } 
+        bzero(buf, MAXLINE); 
+    } 
+
+    printf(&quot;Finish recieve\n&quot;); 
+    fclose(fp); 
+    close(sock_id); 
+    return 0; 
+}
+</code></pre>
+<h3 id="截图-1"><a href="#截图-1" class="headerlink" title="截图"></a>截图</h3><p>udp_file_client</p>
+<p><img src="http://function.dearamaze.com/udp_file_client.png" alt="udp_file_client"></p>
+<p>udp_file_server</p>
+<p><img src="http://function.dearamaze.com/udp_file_server.png" alt="udp_file_client"></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://dearamaze.com/2017/03/27/linux块设备的详解/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2002,176 +2733,6 @@ int main()
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://dearamaze.com/2016/12/29/googleSRE运维——减少琐事/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Dear Amaze">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="DearAmaze-桀骜良">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/12/29/googleSRE运维——减少琐事/" itemprop="url">
-                  [原]googleSRE运维——减少琐事
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-12-29T17:37:17+08:00">
-                2016-12-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2016/12/29/googleSRE运维——减少琐事/" class="leancloud_visitors" data-flag-title="[原]googleSRE运维——减少琐事">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="琐事的属性"><a href="#琐事的属性" class="headerlink" title="琐事的属性"></a>琐事的属性</h2><ol>
-<li>手动性的</li>
-<li>重复性的</li>
-<li>可以被自动化的</li>
-<li>战术性的（不是太懂，原文是这样的）：琐事是突然出现的、对应式的工作，而非策略驱动和主动安排的。处理紧急警报是琐事。我们可能永远都无法完全消除这种类型的工作，但我们必须继续努力减少它。</li>
-<li>没有持久价值</li>
-<li>与服务同步线性增长</li>
-</ol>
-<h2 id="琐事过多的危害"><a href="#琐事过多的危害" class="headerlink" title="琐事过多的危害"></a>琐事过多的危害</h2><ol>
-<li>职业停滞</li>
-<li>士气低落</li>
-<li>造成误解</li>
-<li>进展缓慢</li>
-<li>开创先例：如果SRE过于愿意承担琐事，研发同事就更倾向于加入更多的琐事，有时候甚至将本来研发团队应承担的运维工作转给SRE来承担。其他团队也会开始指望SRE来接受这样的工作，这显然是不好的。</li>
-<li>促进摩擦产生</li>
-<li>违反承诺</li>
-</ol>
-<h2 id="宗旨"><a href="#宗旨" class="headerlink" title="宗旨"></a>宗旨</h2><pre><code>    通过工程工作（符合长期战略的会对你的服务进行长久性的改善的工作）消除一点点的琐事，就可以持续行地整顿服务。我们可以将更多的力量投入到扩大服务规模的工程工作上去，或者是进行下一代的服务的架构设计，又或者是建立一套跨SRE使用的工具链。
-    多做创新，少干琐事。
-</code></pre><h2 id="对生或中琐事的思考（待续，过一个有条理的生活，因为对我来说，有条理就是自信、充实）"><a href="#对生或中琐事的思考（待续，过一个有条理的生活，因为对我来说，有条理就是自信、充实）" class="headerlink" title="对生或中琐事的思考（待续，过一个有条理的生活，因为对我来说，有条理就是自信、充实）"></a>对生或中琐事的思考（待续，过一个有条理的生活，因为对我来说，有条理就是自信、充实）</h2><h3 id="生活中的琐事"><a href="#生活中的琐事" class="headerlink" title="生活中的琐事"></a>生活中的琐事</h3><ol>
-<li>刷空间</li>
-<li>刷朋友圈</li>
-</ol>
-<h3 id="生活中的不可避免的事情"><a href="#生活中的不可避免的事情" class="headerlink" title="生活中的不可避免的事情"></a>生活中的不可避免的事情</h3><ol>
-<li>日常洗漱</li>
-<li>睡觉</li>
-<li>吃饭</li>
-<li>学习</li>
-<li>工作</li>
-</ol>
-<h3 id="生活中有意义的能够使自己变得优秀的事情"><a href="#生活中有意义的能够使自己变得优秀的事情" class="headerlink" title="生活中有意义的能够使自己变得优秀的事情"></a>生活中有意义的能够使自己变得优秀的事情</h3><ol>
-<li>看书</li>
-<li>跑步</li>
-<li>看一些有意义的电影</li>
-<li><p>拍照发现生活中细小的美</p>
-<pre><code>        作者：qq_27803491 发表于2016/12/29 17:37:17 [原文链接](http://blog.csdn.net/qq_27803491/article/details/53930796)
-</code></pre></li>
-</ol>
-<pre><code>        阅读：68 评论：0 [查看评论](http://blog.csdn.net/qq_27803491/article/details/53930796#comments)
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2221,7 +2782,7 @@ int main()
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">63</span>
+                <span class="site-state-item-count">64</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2232,7 +2793,7 @@ int main()
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-count">25</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -2243,7 +2804,7 @@ int main()
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">41</span>
+                <span class="site-state-item-count">42</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

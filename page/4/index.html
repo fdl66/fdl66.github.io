@@ -327,6 +327,269 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://dearamaze.com/2017/04/07/内核内存池-mempool/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dear Amaze">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DearAmaze-桀骜良">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/04/07/内核内存池-mempool/" itemprop="url">
+                  内核内存池-mempool
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-07T10:15:25+08:00">
+                2017-04-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux系统知识/" itemprop="url" rel="index">
+                    <span itemprop="name">linux系统知识</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/04/07/内核内存池-mempool/" class="leancloud_visitors" data-flag-title="内核内存池-mempool">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p><code>内存池(Memery Pool)</code>技术是在真正使用内存之前，先申请分配一定数量的、大小相等(一般情况下)的内存块留作备用。当有新的内存需求时，就从内存池中分出一部分内存块，若内存块不够再继续申请新的内存。这样做的一个显著优点是尽量避免了内存碎片，使得内存分配效率得到提升。 </p>
+</blockquote>
+<p>不仅在用户态应用程序中被广泛使用，同时在Linux内核也被广泛使用，在内核中有不少地方内存分配不允许失败。作为一个在这些情况下确保分配的方式，内核开发者创建了一个已知为内存池(或者是 “mempool” )的抽象，内核中内存池真实地只是相当于后备缓存，它尽力一直保持一个空闲内存列表给紧急时使用，而在通常情况下有内存需求时还是从公共的内存中直接分配，这样的做法虽然有点霸占内存的嫌疑，但是可以从根本上保证关键应用在内存紧张时申请内存仍然能够成功。</p>
+<p>下面看下内核内存池的源码，内核内存池的源码在中，实现上非常简洁，描述内存池的结构mempool_t在头文件中定义，结构描述如下：</p>
+<pre><code class="C">typedef struct mempool_s {
+    spinlock_t lock; /*保护内存池的自旋锁*/
+    int min_nr; /*内存池中最少可分配的元素数目*/
+    int curr_nr; /*尚余可分配的元素数目*/
+    void **elements; /*指向元素池的指针*/
+    void *pool_data; /*内存源，即池中元素真实的分配处*/
+    mempool_alloc_t *alloc; /*分配元素的方法*/
+    mempool_free_t *free; /*回收元素的方法*/
+    wait_queue_head_t wait; /*被阻塞的等待队列*/
+} mempool_t;
+</code></pre>
+<p>内存池的创建函数mempool_create的函数原型如下：</p>
+<pre><code class="C">mempool_t *mempool_create(int min_nr, mempool_alloc_t *alloc_fn,
+                mempool_free_t *free_fn, void *pool_data)
+{
+    return mempool_create_node(min_nr,alloc_fn,free_fn, pool_data,-1);
+}
+</code></pre>
+<p>函数原型指定内存池可以容纳元素的个数、申请元素的方法、释放元素的方法，以及一个可选的内存源(通常是一个cache)，内存池对象创建完成后会自动调用alloc方法从pool_data上分配min_nr个元素用来填充内存池。<br>内存池的释放函数mempool_destory函数的原型很简单，应该也能猜到是依次将元素对象从池中移除，再释放给pool_data，最后释放池对象，如下：</p>
+<pre><code class="C">void mempool_destroy(mempool_t *pool)
+{
+    while (pool-&gt;curr_nr) {
+        void *element = remove_element(pool);
+        pool-&gt;free(element, pool-&gt;pool_data);
+    }
+    kfree(pool-&gt;elements);
+    kfree(pool);
+}
+</code></pre>
+<p>值得注意的是内存池分配和回收对象的函数：mempool_alloc和mempool_free。mempool_alloc的作用是从指定的内存池中申请/获取一个对象，函数原型如下：</p>
+<pre><code class="C">void * mempool_alloc(mempool_t *pool, gfp_t gfp_mask){
+......
+    element = pool-&gt;alloc(gfp_temp, pool-&gt;pool_data);
+    if (likely(element != NULL))
+        return element;
+
+    spin_lock_irqsave(&amp;pool-&gt;lock, flags);
+    if (likely(pool-&gt;curr_nr)) {
+        element = remove_element(pool);/*从内存池中提取一个对象*/
+        spin_unlock_irqrestore(&amp;pool-&gt;lock, flags);
+        /* paired with rmb in mempool_free(), read comment there */
+        smp_wmb();
+        return element;
+    }
+......
+}
+</code></pre>
+<p>函数先是从pool_data中申请元素对象，当从pool_data无法成功申请到时，才会从池中提取对象使用，因此可以发现内核内存池mempool其实是一种后备池，在内存紧张的情况下才会真正从池中获取，这样也就能保证在极端情况下申请对象的成功率，单也不一定总是会成功，因为内存池的大小毕竟是有限的，如果内存池中的对象也用完了，那么进程就只能进入睡眠，也就是被加入到pool-&gt;wait的等待队列，等待内存池中有可用的对象时被唤醒，重新尝试从池中申请元素：</p>
+<pre><code class="C">    init_wait(&amp;wait);
+    prepare_to_wait(&amp;pool-&gt;wait, &amp;wait, TASK_UNINTERRUPTIBLE);
+    spin_unlock_irqrestore(&amp;pool-&gt;lock, flags);
+    io_schedule_timeout(5*HZ);
+    finish_wait(&amp;pool-&gt;wait, &amp;wait);
+</code></pre>
+<p>池回收对象的函数mempool_free的原型如下：</p>
+<pre><code class="C">void mempool_free(void *element, mempool_t *pool)
+{
+    if (pool-&gt;curr_nr min_nr) {
+        spin_lock_irqsave(&amp;pool-&gt;lock, flags);
+        if (pool-&gt;curr_nr min_nr) {
+            add_element(pool, element);
+            spin_unlock_irqrestore(&amp;pool-&gt;lock, flags);
+            wake_up(&amp;pool-&gt;wait);
+            return;
+        }
+        spin_unlock_irqrestore(&amp;pool-&gt;lock, flags);
+        }
+    pool-&gt;free(element, pool-&gt;pool_data);
+}
+</code></pre>
+<p>其实原则跟mempool_alloc是对应的，释放对象时先看池中的可用元素是否充足(pool-&gt;curr_nr == pool-&gt;min_nr)，如果不是则将元素对象释放回池中，否则将元素对象还给pool-&gt;pool_data。<br>    此外mempool也提供或者说指定了几对alloc/free函数，及在mempool_create创建池时必须指定的alloc和free函数，分别适用于不同大小或者类型的元素的内存池，具体如下：</p>
+<pre><code class="C">void *mempool_alloc_slab(gfp_t gfp_mask, void *pool_data)
+{
+    struct kmem_cache *mem = pool_data;
+    return kmem_cache_alloc(mem, gfp_mask);
+}
+void mempool_free_slab(void *element, void *pool_data)
+{
+    struct kmem_cache *mem = pool_data;
+    kmem_cache_free(mem, element);
+}
+
+void *mempool_kmalloc(gfp_t gfp_mask, void *pool_data)
+{
+    size_t size = (size_t)pool_data;
+    return kmalloc(size, gfp_mask);
+}
+void mempool_kfree(void *element, void *pool_data)
+{
+    kfree(element);
+}
+
+void *mempool_alloc_pages(gfp_t gfp_mask, void *pool_data)
+{
+    int order = (int)(long)pool_data;
+    return alloc_pages(gfp_mask, order);
+}
+void mempool_free_pages(void *element, void *pool_data)
+{
+    int order = (int)(long)pool_data;
+    __free_pages(element, order);
+}
+</code></pre>
+<p>总体上来讲mempool的实现很简约，但是不简单，而且非常轻便易用，这也是内核奥妙之所在。</p>
+<p><a href="http://blog.chinaunix.net/uid-27714502-id-3335217.html" target="_blank" rel="external">原文地址</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://dearamaze.com/2017/04/06/块设备驱动详解/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2174,737 +2437,6 @@ cat file | tr -s &quot;\r&quot; &quot;\n&quot; &gt; new_file
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://dearamaze.com/2017/03/28/TCP和UDP套接字C语言实现/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Dear Amaze">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="DearAmaze-桀骜良">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/03/28/TCP和UDP套接字C语言实现/" itemprop="url">
-                  TCP和UDP套接字C语言实现
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-28T12:03:47+08:00">
-                2017-03-28
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/网络/" itemprop="url" rel="index">
-                    <span itemprop="name">网络</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/03/28/TCP和UDP套接字C语言实现/" class="leancloud_visitors" data-flag-title="TCP和UDP套接字C语言实现">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="字符串传输"><a href="#字符串传输" class="headerlink" title="字符串传输"></a>字符串传输</h1><h2 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h2><h3 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h3><pre><code>#include 
-#include 
-#include 
-#include 
-#include 
-#include 
-#include 
-#include 
-#include 
-#include 
-
-#define MYPORT  8887
-#define BUFFER_SIZE 1024
-
-int main()
-{
-    ///定义sockfd
-    int sock_cli = socket(AF_INET,SOCK_STREAM, 0);
-
-    ///定义sockaddr_in
-    struct sockaddr_in servaddr;
-    memset(&amp;servaddr, 0, sizeof(servaddr));
-    servaddr.sin_family = AF_INET;
-    servaddr.sin_port = htons(MYPORT);  ///服务器端口
-    servaddr.sin_addr.s_addr = inet_addr(&quot;127.0.0.1&quot;);  ///服务器ip
-
-    ///连接服务器，成功返回0，错误返回-1
-    if (connect(sock_cli, (struct sockaddr *)&amp;servaddr, sizeof(servaddr)) &lt; 0)
-    {
-        perror(&quot;connect&quot;);
-        exit(1);
-    }
-
-    char sendbuf[BUFFER_SIZE];
-    char recvbuf[BUFFER_SIZE];
-    while (fgets(sendbuf, sizeof(sendbuf), stdin) != NULL)
-    {
-        send(sock_cli, sendbuf, strlen(sendbuf),0); ///发送
-        if(strcmp(sendbuf,&quot;exit\n&quot;)==0)
-            break;
-        recv(sock_cli, recvbuf, sizeof(recvbuf),0); ///接收
-        fputs(recvbuf, stdout);
-
-        memset(sendbuf, 0, sizeof(sendbuf));
-        memset(recvbuf, 0, sizeof(recvbuf));
-    }
-
-    close(sock_cli);
-    return 0;
-}
-</code></pre><h3 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h3><pre><code>#include 
-#include 
-#include 
-#include 
-#include 
-#include 
-#include 
-#include 
-#include 
-#include 
-
-#define MYPORT  8887
-#define QUEUE   20
-#define BUFFER_SIZE 1024
-
-int main()
-{
-    ///定义sockfd
-    int server_sockfd = socket(AF_INET,SOCK_STREAM, 0);
-
-    ///定义sockaddr_in
-    struct sockaddr_in server_sockaddr;
-    server_sockaddr.sin_family = AF_INET;
-    server_sockaddr.sin_port = htons(MYPORT);
-    server_sockaddr.sin_addr.s_addr = htonl(INADDR_ANY);
-
-    ///bind，成功返回0，出错返回-1
-    if(bind(server_sockfd,(struct sockaddr *)&amp;server_sockaddr,sizeof(server_sockaddr))==-1)
-    {
-        perror(&quot;bind&quot;);
-        exit(1);
-    }
-
-    ///listen，成功返回0，出错返回-1
-    if(listen(server_sockfd,QUEUE) == -1)
-    {
-        perror(&quot;listen&quot;);
-        exit(1);
-    }
-
-    ///客户端套接字
-    char buffer[BUFFER_SIZE];
-    struct sockaddr_in client_addr;
-    socklen_t length = sizeof(client_addr);
-
-    ///成功返回非负描述字，出错返回-1
-    int conn = accept(server_sockfd, (struct sockaddr*)&amp;client_addr, &amp;length);
-    if(conn&lt;0)
-    {
-        perror(&quot;connect&quot;);
-        exit(1);
-    }
-
-    while(1)
-    {
-        memset(buffer,0,sizeof(buffer));
-        int len = recv(conn, buffer, sizeof(buffer),0);
-        if(strcmp(buffer,&quot;exit\n&quot;)==0)
-            break;
-        fputs(buffer, stdout);
-        for(int i=0;i&lt;len;i++){
-            if(buffer[i]&gt;=97&amp;&amp;buffer[i]&lt;=122)buffer[i]-=32;
-        }
-        send(conn, buffer, len, 0);
-    }
-    close(conn);
-    close(server_sockfd);
-    return 0;
-}
-</code></pre><h3 id="运行截图"><a href="#运行截图" class="headerlink" title="运行截图"></a>运行截图</h3><p>tcp_client:</p>
-<p><img src="http://function.dearamaze.com/tcp_c.png" alt="client"></p>
-<p>tcp_server:</p>
-<p><img src="http://function.dearamaze.com/tcp_s.png" alt="server"></p>
-<h2 id="UDP"><a href="#UDP" class="headerlink" title="UDP"></a>UDP</h2><h3 id="客户端-1"><a href="#客户端-1" class="headerlink" title="客户端"></a>客户端</h3><pre><code>#include 
-#include 
-#include 
-#include 
-#include 
-
-#define SERVER_PORT 8888
-#define BUFF_LEN 512
-#define SERVER_IP &quot;172.0.5.182&quot;
-
-
-void udp_msg_sender(int fd, struct sockaddr* dst)
-{
-
-    socklen_t len;
-    char sendbuf[BUFF_LEN];
-    char recvbuf[BUFF_LEN];
-    struct sockaddr_in src;
-    while(fgets(sendbuf,sizeof(sendbuf),stdin)!=NULL){
-        len=sizeof(*dst);
-        sendto(fd,sendbuf,BUFF_LEN,0,dst,len);
-        if(strcmp(sendbuf,&quot;exit\n&quot;)==0)break;
-        recvfrom(fd,recvbuf,BUFF_LEN,0,(struct sockaddr*)&amp;src,&amp;len);
-        fputs(recvbuf,stdout);
-
-        memset(sendbuf,0,sizeof(sendbuf));
-        memset(recvbuf,0,sizeof(recvbuf));
-    }
-}
-
-/*
-    client:
-            socket--&gt;sendto--&gt;revcfrom--&gt;close
-*/
-
-int main(int argc, char* argv[])
-{
-    int client_fd;
-    struct sockaddr_in ser_addr;
-
-    client_fd = socket(AF_INET, SOCK_DGRAM, 0);
-    if(client_fd &lt; 0)
-    {
-        printf(&quot;create socket fail!\n&quot;);
-        return -1;
-    }
-
-    memset(&amp;ser_addr, 0, sizeof(ser_addr));
-    ser_addr.sin_family = AF_INET;
-    //ser_addr.sin_addr.s_addr = inet_addr(SERVER_IP);
-    ser_addr.sin_addr.s_addr = htonl(INADDR_ANY);  //注意网络序转换
-    ser_addr.sin_port = htons(SERVER_PORT);  //注意网络序转换
-
-    udp_msg_sender(client_fd, (struct sockaddr*)&amp;ser_addr);
-
-    close(client_fd);
-
-    return 0;
-}
-</code></pre><h3 id="服务端-1"><a href="#服务端-1" class="headerlink" title="服务端"></a>服务端</h3><pre><code>#include 
-#include 
-#include 
-#include 
-#include 
-
-#define SERVER_PORT 8888
-#define BUFF_LEN 1024
-
-void handle_udp_msg(int fd)
-{
-    char buf[BUFF_LEN];  //接收缓冲区，1024字节
-    socklen_t len;
-    int count;
-    struct sockaddr_in clent_addr;  //clent_addr用于记录发送方的地址信息
-    while(1)
-    {
-        memset(buf, 0, BUFF_LEN);
-        len = sizeof(clent_addr);
-        count = recvfrom(fd, buf, BUFF_LEN, 0, (struct sockaddr*)&amp;clent_addr, &amp;len);  //recvfrom是拥塞函数，没有数据就一直拥塞
-        if(count == -1)
-        {
-            printf(&quot;recieve data fail!\n&quot;);
-            return;
-        }
-        if(strcmp(buf,&quot;exit\n&quot;)==0)break;
-        fputs(buf,stdout);
-        for(int i=0;i&lt;count;i++){
-            if(buf[i]&gt;=97&amp;&amp;buf[i]&lt;=122)buf[i]-=32;
-        }
-        sendto(fd, buf, BUFF_LEN, 0, (struct sockaddr*)&amp;clent_addr, len);  //发送信息给client，注意使用了clent_addr结构体指针
-
-    }
-}
-
-
-/*
-    server:
-            socket--&gt;bind--&gt;recvfrom--&gt;sendto--&gt;close
-*/
-
-int main(int argc, char* argv[])
-{
-    int server_fd, ret;
-    struct sockaddr_in ser_addr; 
-
-    server_fd = socket(AF_INET, SOCK_DGRAM, 0); //AF_INET:IPV4;SOCK_DGRAM:UDP
-    if(server_fd &lt; 0)
-    {
-        printf(&quot;create socket fail!\n&quot;);
-        return -1;
-    }
-
-    memset(&amp;ser_addr, 0, sizeof(ser_addr));
-    ser_addr.sin_family = AF_INET;
-    ser_addr.sin_addr.s_addr = htonl(INADDR_ANY); //IP地址，需要进行网络序转换，INADDR_ANY：本地地址
-    ser_addr.sin_port = htons(SERVER_PORT);  //端口号，需要网络序转换
-
-    ret = bind(server_fd, (struct sockaddr*)&amp;ser_addr, sizeof(ser_addr));
-    if(ret &lt; 0)
-    {
-        printf(&quot;socket bind fail!\n&quot;);
-        return -1;
-    }
-
-    handle_udp_msg(server_fd);   //处理接收到的数据
-
-    close(server_fd);
-    return 0;
-}
-</code></pre><h3 id="运行截图-1"><a href="#运行截图-1" class="headerlink" title="运行截图"></a>运行截图</h3><p>udp_client</p>
-<p><img src="http://function.dearamaze.com/udp_c.png" alt="client"></p>
-<p>udp_server<br><img src="http://function.dearamaze.com/udp_s.png" alt="server"></p>
-<h1 id="文件传输"><a href="#文件传输" class="headerlink" title="文件传输"></a>文件传输</h1><h2 id="TCP-1"><a href="#TCP-1" class="headerlink" title="TCP"></a>TCP</h2><h3 id="客户端-2"><a href="#客户端-2" class="headerlink" title="客户端"></a>客户端</h3><pre><code>#include  
-#include  
-#include  
-#include  
-#include  
-#include  
-#include  
-#include  
-#include  
-#include  
-
-#define MAXLINE 1024 
-
-void usage(char *command) 
-{ 
-    printf(&quot;usage :%s ipaddr portnum filename\n&quot;, command); 
-    exit(0); 
-} 
-int main(int argc,char **argv) 
-{ 
-    struct sockaddr_in serv_addr; 
-    char buf[MAXLINE]; 
-    int sock_id; 
-    int read_len; 
-    int send_len; 
-    FILE *fp; 
-    int i_ret; 
-
-    if (argc != 4) { 
-        usage(argv[0]); 
-    } 
-
-    /* open the file to be transported commented by guoqingbo*/ 
-    if ((fp = fopen(argv[3],&quot;r&quot;)) == NULL) { 
-        perror(&quot;Open file failed\n&quot;); 
-        exit(0); 
-    } 
-
-    /* create the socket commented by guoqingbo*/ 
-    if ((sock_id = socket(AF_INET,SOCK_STREAM,0)) &lt; 0) { 
-        perror(&quot;Create socket failed\n&quot;); 
-        exit(0); 
-    } 
-
-    memset(&amp;serv_addr, 0, sizeof(serv_addr)); 
-    serv_addr.sin_family = AF_INET; 
-    serv_addr.sin_port = htons(atoi(argv[2])); 
-    inet_pton(AF_INET, argv[1], &amp;serv_addr.sin_addr); 
-
-    /* connect the server commented by guoqingbo*/ 
-    i_ret = connect(sock_id, (struct sockaddr *)&amp;serv_addr, sizeof(struct sockaddr)); 
-    if (-1 == i_ret) { 
-        printf(&quot;Connect socket failed\n&quot;); 
-       return -1; 
-    } 
-
-    /* transported the file commented by guoqingbo*/ 
-    bzero(buf, MAXLINE); 
-    while ((read_len = fread(buf, sizeof(char), MAXLINE, fp)) &gt;0 ) { 
-        send_len = send(sock_id, buf, read_len, 0); 
-        if ( send_len &lt; 0 ) { 
-            perror(&quot;Send file failed\n&quot;); 
-            exit(0); 
-        } 
-        bzero(buf, MAXLINE); 
-    } 
-
-    fclose(fp); 
-    close(sock_id); 
-    printf(&quot;Send Finish\n&quot;); 
-    return 0; 
-}
-</code></pre><h3 id="服务端-2"><a href="#服务端-2" class="headerlink" title="服务端"></a>服务端</h3><pre><code>#include  
-#include  
-#include  
-#include  
-#include  
-#include  
-#include  
-#include  
-#include  
-
-#define MAXLINE 1024 
-
-void usage(char *command) 
-{ 
-    printf(&quot;usage :%s portnum filename\n&quot;, command); 
-    exit(0); 
-} 
-int main(int argc,char **argv) 
-{ 
-    struct sockaddr_in serv_addr; 
-    struct sockaddr_in clie_addr; 
-    char buf[MAXLINE]; 
-    int sock_id; 
-    int link_id; 
-    int recv_len; 
-    int write_leng; 
-    int clie_addr_len; 
-    FILE *fp; 
-
-    if (argc != 3) { 
-        usage(argv[0]); 
-    } 
-    if ((fp = fopen(argv[2], &quot;w&quot;)) == NULL) { 
-        perror(&quot;Open file failed\n&quot;); 
-        exit(0); 
-    } 
-    if ((sock_id = socket(AF_INET, SOCK_STREAM, 0)) &lt; 0) { 
-        perror(&quot;Create socket failed\n&quot;); 
-        exit(0); 
-    } 
-    /*fill the server sockaddr_in struct commented by guoqingbo*/ 
-    memset(&amp;serv_addr, 0, sizeof(serv_addr)); 
-    serv_addr.sin_family = AF_INET; 
-    serv_addr.sin_port = htons(atoi(argv[1])); 
-    serv_addr.sin_addr.s_addr = htonl(INADDR_ANY); 
-
-    if (bind(sock_id, (struct sockaddr *)&amp;serv_addr, sizeof(serv_addr)) &lt; 0 ) { 
-        perror(&quot;Bind socket failed\n&quot;); 
-        exit(0); 
-    } 
-
-    if (-1 == listen(sock_id, 10)) { 
-        perror(&quot;Listen socket failed\n&quot;); 
-        exit(0); 
-    } 
-    /* server part commented by guoqingbo*/ 
-    while (1) { 
-        clie_addr_len = sizeof(clie_addr); 
-        link_id = accept(sock_id, (struct sockaddr *)&amp;clie_addr, &amp;clie_addr_len); 
-        if (-1 == link_id) { 
-            perror(&quot;Accept socket failed\n&quot;); 
-            exit(0); 
-        } 
-        bzero(buf, MAXLINE); 
-        while (recv_len = recv(link_id, buf, MAXLINE, 0)) { 
-            /* receiver data part commented by guoqingbo*/ 
-            if(recv_len &lt; 0) { 
-                printf(&quot;Recieve Data From Server Failed!\n&quot;); 
-                break; 
-            } 
-            printf(&quot;#&quot;); 
-            write_leng = fwrite(buf, sizeof(char), recv_len, fp); 
-            if (write_leng &lt; recv_len) { 
-                printf(&quot;Write file failed\n&quot;); 
-                break; 
-            } 
-            bzero(buf,MAXLINE); 
-        } 
-        printf(&quot;\nFinish Recieve\n&quot;); 
-        fclose(fp); 
-        close(link_id); 
-    } 
-    close(sock_id); 
-    return 0; 
-}
-</code></pre><h3 id="截图"><a href="#截图" class="headerlink" title="截图"></a>截图</h3><p>tcp_file_client</p>
-<p><img src="http://function.dearamaze.com/tcp_file_client.png" alt="tcp_file_client"></p>
-<p>tcp_file_servier</p>
-<p><img src="http://function.dearamaze.com/tcp_file_server.png" alt="tcp_file_servier"></p>
-<h2 id="UDP-1"><a href="#UDP-1" class="headerlink" title="UDP"></a>UDP</h2><h3 id="客户端-3"><a href="#客户端-3" class="headerlink" title="客户端"></a>客户端</h3><pre><code>#include  
-#include  
-#include  
-#include  
-#include  
-#include  
-#include  
-#include  
-#include  
-#include  
-
-#define FINISH_FLAG &quot;FILE_TRANSPORT_FINISH&quot; 
-#define MAXLINE 1024 
-
-void usage(char *command) 
-{ 
-    printf(&quot;usage :%s ipaddr portnum filename\n&quot;, command); 
-    exit(0); 
-} 
-int main(int argc,char **argv) 
-{ 
-    FILE *fp; 
-    struct sockaddr_in serv_addr; 
-    char buf[MAXLINE]; 
-    int sock_id; 
-    int read_len; 
-    int send_len; 
-    int serv_addr_len; 
-    int i_ret; 
-    int i; 
-
-    if (argc != 4) { 
-        usage(argv[0]); 
-    } 
-    /* open the file to be transported commanted by guoqingbo*/ 
-    if ((fp = fopen(argv[3],&quot;r&quot;)) == NULL) { 
-        perror(&quot;Open file failed\n&quot;); 
-        exit(0); 
-    } 
-    /* create the socket commanted by guoqingbo*/ 
-    if ((sock_id = socket(AF_INET, SOCK_DGRAM, 0)) &lt; 0) { 
-        perror(&quot;Create socket failed&quot;); 
-        exit(0); 
-    } 
-    memset(&amp;serv_addr,0,sizeof(serv_addr)); 
-    serv_addr.sin_family = AF_INET; 
-    serv_addr.sin_port = htons(atoi(argv[2])); 
-    inet_pton(AF_INET, argv[1], &amp;serv_addr.sin_addr); 
-    serv_addr_len = sizeof(serv_addr); 
-    /* connect the server commanted by guoqingbo*/ 
-    i_ret = connect(sock_id, (struct sockaddr *)&amp;serv_addr, sizeof(struct sockaddr)); 
-    if (-1 == i_ret) { 
-        perror(&quot;Connect socket failed!\n&quot;); 
-        exit(0); 
-    } 
-    /* transport the file commented by guoqingbo*/ 
-    bzero(buf, MAXLINE); 
-    while ( (read_len = fread(buf, sizeof(char), MAXLINE, fp)) &gt; 0 ) { 
-        send_len = send(sock_id, buf, read_len, 0); 
-        if ( send_len &lt; 0 ) { 
-            perror(&quot;Send data failed\n&quot;); 
-            exit(0); 
-        } 
-        bzero(buf, MAXLINE); 
-    } 
-    fclose(fp); 
-    /* send the end_flag commented by guoqingbo*/ 
-    bzero(buf, MAXLINE); 
-    strcpy(buf, FINISH_FLAG); 
-    buf[strlen(buf)] = &#39;\0&#39;; 
-    for (i = 1000; i&gt;0; i--) { 
-        send_len = send(sock_id, buf, strlen(buf)+1, 0); 
-        if ( send_len &lt; 0 ) { 
-            printf(&quot;Finish send the end string\n&quot;); 
-            break; 
-        } 
-    } 
-    close(sock_id); 
-    printf(&quot;Send finish\n&quot;); 
-    return 0; 
-}
-</code></pre><h3 id="服务端-3"><a href="#服务端-3" class="headerlink" title="服务端"></a>服务端</h3><pre><code class="C">#include  
-#include  
-#include  
-#include  
-#include  
-#include  
-#include  
-#include  
-#include  
-
-#define FINISH_FLAG &quot;FILE_TRANSPORT_FINISH&quot; 
-#define MAXLINE 1024 
-
-void usage(char *command) 
-{ 
-    printf(&quot;usage :%s portnum filename\n&quot;, command); 
-    exit(0); 
-} 
-int main(int argc,char **argv) 
-{ 
-    struct sockaddr_in serv_addr; 
-    struct sockaddr_in clie_addr; 
-    char buf[MAXLINE]; 
-    int sock_id; 
-    int recv_len; 
-    int clie_addr_len; 
-    FILE *fp; 
-
-    if (argc != 3) { 
-        usage(argv[0]); 
-    } 
-    /* Create the the file commented by guoqingbo*/ 
-    if ((fp = fopen(argv[2], &quot;w&quot;)) == NULL) { 
-        perror(&quot;Creat file failed&quot;); 
-        exit(0); 
-    } 
-    if ((sock_id = socket(AF_INET,SOCK_DGRAM,0)) &lt; 0) { 
-        perror(&quot;Create socket failed\n&quot;); 
-        exit(0); 
-    } 
-    /*fill the server sockaddr_in struct commented by guoqingbo*/ 
-    memset(&amp;serv_addr,0,sizeof(serv_addr)); 
-    serv_addr.sin_family = AF_INET; 
-    serv_addr.sin_port = htons(atoi(argv[1])); 
-    serv_addr.sin_addr.s_addr = htonl(INADDR_ANY); 
-
-    if (bind(sock_id,(struct sockaddr *)&amp;serv_addr,sizeof(serv_addr)) &lt; 0 ) { 
-        perror(&quot;Bind socket faild\n&quot;); 
-        exit(0); 
-    } 
-    /* server part commented by guoqingbo*/ 
-    clie_addr_len = sizeof(clie_addr); 
-    bzero(buf, MAXLINE); 
-    while (recv_len = recvfrom(sock_id, buf, MAXLINE, 0,(struct sockaddr *)&amp;clie_addr, &amp;clie_addr_len)) { 
-        if(recv_len &lt; 0) { 
-            printf(&quot;Recieve data from client failed!\n&quot;); 
-            break; 
-        } 
-        printf(&quot;#&quot;); 
-        if ( strstr(buf, FINISH_FLAG) != NULL ) { 
-            printf(&quot;\nFinish receiver finish_flag\n&quot;); 
-            break; 
-        } 
-        int write_length = fwrite(buf, sizeof(char), recv_len, fp); 
-        if (write_length &lt; recv_len) { 
-            printf(&quot;File write failed\n&quot;); 
-            break; 
-        } 
-        bzero(buf, MAXLINE); 
-    } 
-
-    printf(&quot;Finish recieve\n&quot;); 
-    fclose(fp); 
-    close(sock_id); 
-    return 0; 
-}
-</code></pre>
-<h3 id="截图-1"><a href="#截图-1" class="headerlink" title="截图"></a>截图</h3><p>udp_file_client</p>
-<p><img src="http://function.dearamaze.com/udp_file_client.png" alt="udp_file_client"></p>
-<p>udp_file_server</p>
-<p><img src="http://function.dearamaze.com/udp_file_server.png" alt="udp_file_client"></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2954,7 +2486,7 @@ int main(int argc,char **argv)
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">63</span>
+                <span class="site-state-item-count">64</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2965,7 +2497,7 @@ int main(int argc,char **argv)
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-count">25</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -2976,7 +2508,7 @@ int main(int argc,char **argv)
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">41</span>
+                <span class="site-state-item-count">42</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
