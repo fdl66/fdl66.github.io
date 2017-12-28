@@ -2,8 +2,10 @@
 
 
 
+  
 
-<html class="theme-next mist" lang="zh-Hans">
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -117,7 +119,7 @@
     scheme: 'Mist',
     sidebar: {"position":"left","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
     fancybox: true,
-    motion: false,
+    motion: true,
     duoshuo: {
       userId: '0',
       author: '博主'
@@ -317,6 +319,223 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://dearamaze.com/2017/01/05/高斯消元（混合颜料）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dear Amaze">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DearAmaze-桀骜良">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/01/05/高斯消元（混合颜料）/" itemprop="url">
+                  [原]高斯消元（混合颜料）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-01-05T12:33:55+08:00">
+                2017-01-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/01/05/高斯消元（混合颜料）/" class="leancloud_visitors" data-flag-title="[原]高斯消元（混合颜料）">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="题目（网易2017内推编程题（二）的第一题）"><a href="#题目（网易2017内推编程题（二）的第一题）" class="headerlink" title="题目（网易2017内推编程题（二）的第一题）"></a>题目（网易2017内推编程题（二）的第一题）</h2><p>你就是一个画家！你现在想绘制一幅画，但是你现在没有足够颜色的颜料。为了让问题简单，我们用正整数表示不同颜色的颜料。你知道这幅画需要的n种颜色的颜料，你现在可以去商店购买一些颜料，但是商店不能保证能供应所有颜色的颜料，所以你需要自己混合一些颜料。混合两种不一样的颜色A和颜色B颜料可以产生(A XOR B)这种颜色的颜料(新产生的颜料也可以用作继续混合产生新的颜色,XOR表示异或操作)。本着勤俭节约的精神，你想购买更少的颜料就满足要求，所以兼职程序员的你需要编程来计算出最少需要购买几种颜色的颜料？  </p>
+<p>输入描述: </p>
+<p>第一行为绘制这幅画需要的颜色种数n (1 ≤ n ≤ 50) </p>
+<p>第二行为n个数xi(1 ≤ xi ≤ 1,000,000,000)，表示需要的各种颜料.</p>
+<p>输出描述: </p>
+<p>输出最少需要在商店购买的颜料颜色种数，注意可能购买的颜色不一定会使用在画中，只是为了产生新的颜色。</p>
+<p>输入例子: </p>
+<p>3 </p>
+<p>1 7 3</p>
+<p>输出例子: </p>
+<p>3</p>
+<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><pre><code>该题是利用行列式解决异或问题，通过求行列式的秩来求最少需要多少种颜色，没接触过这种题目的同学应该很难将它们联系到一块，不过仔细想想：
+化简行列式的过程与本题求解的过程，这道题，你上来如果暴力的话，复杂度O(n^3),而且可能会涉及到重复的计算。利用行列式化简（高斯消元）的方法，就是利用到了：
+7：0111
+3：0011
+2：0010
+1：0001
+这样的话，7是不可能被异或得出来的，因为他的最高位为1，其他数的最高位为0，而行列式化简，化简成上三角行列式也相同的过程。
+本题中只涉及到二进制的异或化简，所以利用高斯消元法较为简单。
+`
+
+## 代码
+
+`
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#include&amp;lt;vector&amp;gt;
+
+using namespace std;
+int getbit(int x)
+{
+    int cnt=0;
+    while(x){
+        x&amp;gt;&amp;gt;=1;
+        cnt++;
+    }
+    return cnt;
+ } 
+bool cmp(const int&amp;amp; a,const int&amp;amp; b)
+{
+    return a&amp;gt;b;
+}
+int main()
+{
+    int n;
+    while(scanf(&quot;%d&quot;,&amp;amp;n)!=EOF){
+        vector&amp;lt;int&amp;gt; v;
+        int ans=0;
+        for(int i=0;i&amp;lt;n;i++){
+            int a;
+            scanf(&quot;%d&quot;,&amp;amp;a);
+            v.push_back(a);
+        }
+        while(v.size()&amp;gt;=1){
+            sort(v.begin(),v.end(),cmp);
+            if(v[0]==0){
+                ans+=v.size();
+                break;
+            }
+            vector&amp;lt;int&amp;gt;::iterator it=v.begin();
+            int fnb=getbit(v[0]);
+            for(++it;it!=v.end();it++){
+                if(getbit(*it)==fnb){
+                    (*it)=(*it)^v[0];
+                }
+                else break;
+            }
+            v.erase(v.begin());
+        }
+        cout&amp;lt;&amp;lt;n-ans&amp;lt;&amp;lt;endl;
+    }
+    return 0;
+}
+/*
+15
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15
+*/
+</code></pre><h2 id="收获"><a href="#收获" class="headerlink" title="收获"></a>收获</h2><ol>
+<li>熟悉了高斯消元法求解化简行列式，高斯（约当）消元法：就是每次把要消去位上含有最大的元素的行调到最高的地方。</li>
+<li><p>了解了异或运算与行列式化简的联系。</p>
+<pre><code>        作者：qq_27803491 发表于2017/1/5 12:33:55 [原文链接](http://blog.csdn.net/qq_27803491/article/details/54091966)
+</code></pre></li>
+</ol>
+<pre><code>        阅读：31 评论：0 [查看评论](http://blog.csdn.net/qq_27803491/article/details/54091966#comments)
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
     
       
 
@@ -1948,301 +2167,6 @@ int main()
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://dearamaze.com/2016/11/04/细节（水）题codeforce-378C/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Dear Amaze">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="DearAmaze-桀骜良">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/11/04/细节（水）题codeforce-378C/" itemprop="url">
-                  [原]细节（水）题codeforce#378C
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-11-04T01:17:06+08:00">
-                2016-11-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2016/11/04/细节（水）题codeforce-378C/" class="leancloud_visitors" data-flag-title="[原]细节（水）题codeforce#378C">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><h3 id="网址"><a href="#网址" class="headerlink" title="网址"></a>网址</h3><p><a href="http://codeforces.com/contest/733/problem/C" target="_blank" rel="external">http://codeforces.com/contest/733/problem/C</a></p>
-<h3 id="大概题意"><a href="#大概题意" class="headerlink" title="大概题意"></a>大概题意</h3><p>给你N个数，然后再给你经过合并操作后的K个数，求中间合并操作？</p>
-<h2 id="AC代码"><a href="#AC代码" class="headerlink" title="AC代码"></a>AC代码</h2><pre><code>#define _CRT_SECURE_NO_WARNINGS
-#include &amp;lt;iostream&amp;gt;
-#include &amp;lt;cstdio&amp;gt;
-#include &amp;lt;cstring&amp;gt;
-#include &amp;lt;algorithm&amp;gt;
-#include &amp;lt;stack&amp;gt;
-#include &amp;lt;string&amp;gt;
-#include &amp;lt;set&amp;gt;
-#include &amp;lt;cmath&amp;gt;
-#include &amp;lt;map&amp;gt;
-#include &amp;lt;queue&amp;gt;
-#include &amp;lt;sstream&amp;gt;
-#include &amp;lt;vector&amp;gt;
-#include &amp;lt;iomanip&amp;gt;
-#define m0(a) memset(a,0,sizeof(a))
-#define mm(a) memset(a,0x3f,sizeof(a))
-#define m_1(a) memset(a,-1,sizeof(a))
-#define f(i,a,b) for(i = a;i&amp;lt;=b;i++)
-#define fi(i,a,b) for(i = a;i&amp;gt;=b;i--)
-#define lowbit(a) ((a)&amp;amp;(-a))
-#define FFR freopen(&quot;data.in&quot;,&quot;r&quot;,stdin)
-#define FFW freopen(&quot;data.out&quot;,&quot;w&quot;,stdout)
-#define INF 0x3f3f3f3f
-#define DEBUG printf
-typedef long long ll;
-typedef long double ld;
-
-const ld PI = acos(-1.0);
-
-using namespace std;
-#define SIZE 550
-
-int a[SIZE];
-int b[SIZE];
-
-struct Chuan{
-    int c_start;
-    int c_end;
-    int c_max;
-};
-struct Print{
-    int num;
-    char dire;
-};
-vector&amp;lt;Chuan&amp;gt; chuan;
-queue&amp;lt;Print&amp;gt; print;
-int main()
-{
-    int n,k;
-    scanf(&quot;%d&quot;,&amp;amp;n);
-    int i;
-    f(i,1,n){
-        scanf(&quot;%d&quot;,&amp;amp;a[i]);
-    }
-    scanf(&quot;%d&quot;,&amp;amp;k);
-    int site=1;
-    bool flag=0;
-    f(i,1,k){
-        scanf(&quot;%d&quot;,&amp;amp;b[i]);
-        if(flag)continue;
-        ll all=0;
-        Chuan onechuan;
-        onechuan.c_start=site;
-        onechuan.c_max=0;
-        int max_ele=0;
-        while(all&amp;lt;b[i]){
-            if(a[site]&amp;gt;max_ele){
-                max_ele=a[site];
-                onechuan.c_max=site;
-            }
-            else if(a[site]==max_ele){
-                if(site-1&amp;gt;=onechuan.c_start&amp;amp;&amp;amp;a[site]&amp;gt;a[site-1]){
-                    onechuan.c_max=site;
-                }
-                else if(site+1&amp;lt;=n&amp;amp;&amp;amp;all+a[site]+a[site+1]&amp;lt;=b[i]&amp;amp;&amp;amp;a[site]&amp;gt;a[site+1]){
-                    onechuan.c_max=site;
-                }
-            }
-            all+=a[site++];
-        }
-        onechuan.c_end=site-1;
-        if(all!=b[i])flag=1;
-        chuan.push_back(onechuan);
-        //DEBUG(&quot;%d %d %d \n&quot;,onechuan.c_start,onechuan.c_max,onechuan.c_end);
-    }
-    if(flag){
-        printf(&quot;NO\n&quot;);
-        return 0;
-    }
-    if(site!=n+1){
-        printf(&quot;NO\n&quot;);
-        return 0;
-    }
-    i=0;
-    while(!print.empty()){
-        print.pop();
-    }
-    for(vector&amp;lt;Chuan&amp;gt;::iterator it=chuan.begin();it&amp;lt;chuan.end();it++){
-        i++;
-        if(it-&amp;gt;c_start==it-&amp;gt;c_end)continue;
-        int pointer=it-&amp;gt;c_max;
-        if(pointer-1&amp;gt;=it-&amp;gt;c_start&amp;amp;&amp;amp;a[pointer]&amp;gt;a[pointer-1]){
-            while(pointer&amp;gt;it-&amp;gt;c_start){
-                Print oneprint;
-                oneprint.num=i+pointer-it-&amp;gt;c_start;
-                pointer--;
-                oneprint.dire=&#39;L&#39;;
-                print.push(oneprint);
-            }
-            pointer=it-&amp;gt;c_max;
-            while(pointer&amp;lt;it-&amp;gt;c_end){
-                Print oneprint;
-                oneprint.num=i;
-                pointer++;
-                oneprint.dire=&#39;R&#39;;
-                print.push(oneprint);
-            }
-
-        }
-        else if(pointer+1&amp;lt;=it-&amp;gt;c_end&amp;amp;&amp;amp;a[pointer]&amp;gt;a[pointer+1]){
-            while(pointer&amp;lt;it-&amp;gt;c_end){
-                Print oneprint;
-                oneprint.num=i+it-&amp;gt;c_max-it-&amp;gt;c_start;
-                //DEBUG(&quot;hello world!\n&quot;);
-                pointer++;
-                oneprint.dire=&#39;R&#39;;
-                print.push(oneprint);
-            }
-            pointer=it-&amp;gt;c_max;
-            while(pointer&amp;gt;it-&amp;gt;c_start){
-                Print oneprint;
-                oneprint.num=i+pointer-it-&amp;gt;c_start;
-                pointer--;
-                oneprint.dire=&#39;L&#39;;
-                print.push(oneprint);
-            }
-        }
-        else {
-            printf(&quot;NO\n&quot;);
-            while(!print.empty()){
-                print.pop();
-            }
-            return 0;
-        }
-        //DEBUG(&quot;%d %d %d\n&quot;,it-&amp;gt;c_start,it-&amp;gt;c_max,it-&amp;gt;c_end);
-    }
-    puts(&quot;YES&quot;);
-    while(!print.empty()){
-        Print oneprint=print.front();
-        print.pop();
-        printf(&quot;%d %c\n&quot;,oneprint.num,oneprint.dire);
-    }
-    return 0;
-}
-</code></pre><h2 id="经验教训"><a href="#经验教训" class="headerlink" title="经验教训"></a>经验教训</h2><ol>
-<li>你离AC还差N个细节！</li>
-<li>其实还是心不够静，思维跟不上，静下来后，你的智商会变高！</li>
-<li><p>仔细阅读题意，然后注意关掉DEBUG！</p>
-<pre><code>        作者：qq_27803491 发表于2016/11/4 1:17:06 [原文链接](http://blog.csdn.net/qq_27803491/article/details/53029288)
-</code></pre></li>
-</ol>
-<pre><code>        阅读：89 评论：0 [查看评论](http://blog.csdn.net/qq_27803491/article/details/53029288#comments)
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2292,7 +2216,7 @@ int main()
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">64</span>
+                <span class="site-state-item-count">65</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2303,7 +2227,7 @@ int main()
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">25</span>
+                <span class="site-state-item-count">26</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -2314,7 +2238,7 @@ int main()
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">42</span>
+                <span class="site-state-item-count">43</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
