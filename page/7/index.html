@@ -329,6 +329,1012 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://dearamaze.com/2016/12/20/python字符串方法基础/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dear Amaze">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DearAmaze-桀骜良">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/12/20/python字符串方法基础/" itemprop="url">
+                  [原]python字符串方法基础
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-12-20T12:45:17+08:00">
+                2016-12-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2016/12/20/python字符串方法基础/" class="leancloud_visitors" data-flag-title="[原]python字符串方法基础">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <pre><code>#FIND
+mystr=&#39;xxxSPAMxxx&#39;
+site=mystr.find(&#39;SPAM&#39;)
+print(site)
+
+#replace
+mystr=&#39;xxaaxxaa&#39;
+print(mystr.replace(&#39;aa&#39;,&#39;SPAM&#39;))
+
+#in
+mystr=&quot;xxxspamxxx&quot;
+print(&#39;spam&#39; in mystr)
+
+#strip
+mystr=&#39;\t Ni\n&#39;
+print(mystr)
+print(mystr.strip())
+print(mystr.rstrip())
+print(mystr.lstrip())
+
+#lower
+mystr=&#39;SHRUBBERY&#39;
+print(mystr.lower())
+
+#isalpha
+print(mystr.isalpha())
+
+#isdigit
+print(mystr.isdigit())
+
+#split
+mystr=&#39;aaa,bbb,ccc&#39;
+print(mystr.split(&#39;,&#39;))
+#split 默认分隔符为泛空格符
+mystr=&#39;a b\nc\n d &#39;
+print(mystr.split())
+
+#join
+delim=&#39;ni&#39;
+print(delim.join([&#39;aaa&#39;,&#39;bbb&#39;,&#39;ccc&#39;]))
+print(&#39; &#39;.join([&#39;aaa&#39;,&#39;bbb&#39;,&#39;ccc&#39;]))
+
+#list
+chars=list(&#39;lorreta&#39;)
+print(chars)
+
+chars.append(&#39;!&#39;)
+print(&#39;&#39;.join(chars))
+
+#整形和字符串类型转换
+int(&quot;42&quot;)
+eval(&quot;42&quot;)
+
+str(42)
+repr(42)
+
+print(&quot;%d&quot; %42)
+print(&#39;{:d}&#39;.format(42))
+
+
+            作者：qq_27803491 发表于2016/12/20 12:45:17 [原文链接](http://blog.csdn.net/qq_27803491/article/details/53761679)
+
+
+        阅读：34 评论：0 [查看评论](http://blog.csdn.net/qq_27803491/article/details/53761679#comments)
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://dearamaze.com/2016/11/19/Linux文件压缩及归档/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dear Amaze">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DearAmaze-桀骜良">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/11/19/Linux文件压缩及归档/" itemprop="url">
+                  [原]Linux文件压缩及归档
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-11-19T17:17:50+08:00">
+                2016-11-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2016/11/19/Linux文件压缩及归档/" class="leancloud_visitors" data-flag-title="[原]Linux文件压缩及归档">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="压缩-解压缩命令"><a href="#压缩-解压缩命令" class="headerlink" title="压缩  解压缩命令"></a>压缩  解压缩命令</h1><h2 id="压缩格式"><a href="#压缩格式" class="headerlink" title="压缩格式:"></a>压缩格式:</h2><pre><code>gz,bz2,xz,zip,
+压缩算法不同,压缩比也会不同;
+`
+
+## 压缩命令
+
+`*不支持压缩目录*
+`
+
+### 早期:compress:FILENAME.Z
+
+`    umcompress
+`
+
+### gzip: .gz
+
+`    gzip /PATH/TO/SOURCEFILE 压缩完成后会删除原文件
+        -d:解压
+        -#:(1-9)指定压缩比,默认为6;
+
+    gunzip:
+        gunzip /PATH/TO/SOMEFILE.gz :解压完成后会删除原文件
+        zcat /PATH/TO/SOMEFILE.gz 表示在不解压的情况下,查看文本文件的内容
+`
+
+### bzip2: .bz2
+
+`    比gzip有着更强大的压缩比的压缩工具,使用格式类似
+    -d:
+    -#:(1-9)
+    -k:压缩时保留原文件
+
+    bunzip2:解压
+
+    bzcat:同zcat
+`
+
+### xz: .xz
+
+`    压缩比更大,用法同bzip2
+
+    unxz:解压
+    xzdec,解压.xz压缩文件,
+    xzcat:
+`
+
+### zip:(压缩比较小)(归档而且压缩)
+
+`    $:zip FILENAME.zip file1 file2 ... : 压缩,且不删除原文件
+    unzip:
+        unzip FILENAME.zip
+`
+
+## archive:归档,归档本身并不意味着压缩
+
+### tar:(归档工具)
+
+`    -c :创建归档文件
+    -f FILE.tar : 操作的归档文件
+    -x :展开归档
+    --xattrs:归档时保留其扩展属性信息
+    $:tar -cf FILE.tar file1 file2 ... (归档命令)
+    $:tar -xf FILE.tar (展开归档命令)
+    $:tar -tf FILE.tar (不展开文件,查看归档了哪些文件)
+    -zcf:归档并调用gzip压缩
+    -zxf:调用gzip解压并展开压缩文件(解压时,z选项可省略,下面的解压,j,J都可省略)
+
+    -jcf:调用bzip2
+    -jxf:
+
+    -Jcf:调用xz
+    -Jxf:
+`
+
+### cpio:归档工具
+
+## 补充
+
+### read命令
+
+`read:
+    后面加上要输入的变量名
+    -p:打印内容,并输入
+        $:read -p &quot;打印的内容&quot; a b ...
+`
+
+### echo
+
+`echo:
+    -n:不换行
+`
+
+### 压缩文件的小脚本
+
+`#!/bin/bash
+
+read -p &quot;Please input files&#39; name,which you want to compress:&quot; FILENAME
+read -p &quot;Please input Destination:&quot; DEST 
+read -p &quot;Please input the compress type :&quot; TYPE 
+
+case $TYPE in 
+gzip)
+    tar -zcf ${DEST}.tar.gz ${FILENAME} 
+    ;;
+bzip2)
+    tar -jcf ${DEST}.tar.bz2 ${FILENAME}
+    ;;
+xz)
+    tar -Jcf ${DEST}.tar.xz ${FILENAME} 
+    ;;
+*)
+    echo &quot;Unknown TYPE!&quot;
+    exit 9
+    ;;
+esac
+
+
+            作者：qq_27803491 发表于2016/11/19 17:17:50 [原文链接](http://blog.csdn.net/qq_27803491/article/details/53232202)
+
+
+        阅读：132 评论：0 [查看评论](http://blog.csdn.net/qq_27803491/article/details/53232202#comments)
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://dearamaze.com/2016/11/16/2016-11-16周三/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dear Amaze">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DearAmaze-桀骜良">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/11/16/2016-11-16周三/" itemprop="url">
+                  [原]2016.11.16周三
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-11-16T18:08:45+08:00">
+                2016-11-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2016/11/16/2016-11-16周三/" class="leancloud_visitors" data-flag-title="[原]2016.11.16周三">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="计划"><a href="#计划" class="headerlink" title="计划"></a>计划</h2><p><em>距离找工作还有32周,实际学习时间还有26周</em></p>
+<h3 id="六级考试-这次说什么也要过了六级-没时间了-come-on-得良"><a href="#六级考试-这次说什么也要过了六级-没时间了-come-on-得良" class="headerlink" title="六级考试(这次说什么也要过了六级,没时间了,come on!得良)"></a>六级考试(这次说什么也要过了六级,没时间了,come on!得良)</h3><ol>
+<li>每天百词斩完成任务</li>
+<li>闲时听英语听力</li>
+<li>两天背一篇作文,一篇听力</li>
+<li>一天两篇阅读</li>
+</ol>
+<h3 id="工作准备"><a href="#工作准备" class="headerlink" title="工作准备"></a>工作准备</h3><pre><code>07_01_vim编辑器详解.rar
+07_02_bash脚本编程之六 使用脚本选项及组合条件测试.rar
+07_03_Linux文件查找详解.rar
+07_04_特殊权限SUID等详解.rar
+08_01_facl及用户及Linux终端.rar
+08_02_bash脚本编程之七 case语句及脚本选项进阶.rar
+08_03_磁盘及文件系统管理详解之一.rar
+08_04_磁盘及文件系统管理详解之二.rar
+09_01_磁盘及文件系统管理详解之三.rar
+09_02_磁盘及文件系统管理详解之五.rar
+09_03_磁盘及文件系统管理详解之五.rar
+09_04_Linux压缩及归档.rar
+10_01_Raid及mdadm命令之一.rar
+10_02_Raid及mdadm命令之二.rar
+10_03_LVM之一.rar
+10_04_LVM之二.rar
+10_05_脚本编程之八 脚本完成磁盘分区格式化.rar
+11_01_Linux网络配置之一.rar
+11_02_Linux网络配置之二 IP报文.rar
+11_03_Linux网络配置之三 TCP报文.rar
+11_04_Linux网络配置之四 ifconfig及ip命令详解.rar
+12_01_Linux软件管理之一 rpm.rar
+12_02_Linux软件管理之二 rpm.rar
+12_03_Linux软件管理之三 yum.rar
+12_04_Linux软件管理之四 yum.rar
+13_01_bash脚本编程之九 while循环.rar
+13_02_bash脚本编程之十 函数.rar
+13_03_Linux进程管理之一.rar
+13_04_Linux进程管理之二.rar
+14_01_Linux系统启动流程详解之一 运行级别及grub.rar
+14_02_Linux系统启动流程之二 内核及init.rar
+14_03_bash脚本编程之十一(Linux启动流程之三) SysV服务脚本.rar
+14_04_Linux内核编译及系统裁减之一.rar
+15_01_bash脚本编程之十二(Linux系统裁减之二) 系统函数库.rar
+15_02_bash脚本编程之十三(Linux系统裁减之三) 系统函数库.rar
+15_03_Linux系统裁减之四 自定义内核及busybox完成系统定制.rar
+16_01_bash脚本编程之十四 信号捕捉及系统管理之任务计划.rar
+16_02_Linux系统裁减之五.rar
+16_03_Linux日志系统syslog.rar
+16_04_Linux系统裁减之六 为系统添加ssh服务.rar
+</code></pre><h2 id="打卡"><a href="#打卡" class="headerlink" title="打卡"></a>打卡</h2><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>我们离理想中的自己越来越远,很大程度上是因为我们一点点的辜负自己. </p>
+<p> 六级没有考过,任务没有完成,有些东西是靠积累得来的,不要被各种事情扰乱了生活,要在各种事情之间生活的游刃有余.</p>
+<pre><code>            作者：qq_27803491 发表于2016/11/16 18:08:45 [原文链接](http://blog.csdn.net/qq_27803491/article/details/53189469)
+
+
+        阅读：70 评论：0 [查看评论](http://blog.csdn.net/qq_27803491/article/details/53189469#comments)
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://dearamaze.com/2016/11/15/邮件服务器/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dear Amaze">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DearAmaze-桀骜良">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/11/15/邮件服务器/" itemprop="url">
+                  [原]邮件服务器
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-11-15T21:38:12+08:00">
+                2016-11-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2016/11/15/邮件服务器/" class="leancloud_visitors" data-flag-title="[原]邮件服务器">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Mail-Server"><a href="#Mail-Server" class="headerlink" title="Mail Server"></a>Mail Server</h2><ol>
+<li>SMTP(监听tcp25号端口)：发邮件</li>
+<li>ESMTP</li>
+<li>POP3：收邮件</li>
+<li>IMAP4</li>
+<li>UUCP:Unix主机复制文件的协议</li>
+<li>C/S smtpd,smtp</li>
+<li>MUA：邮件用户代理，</li>
+</ol>
+<p>Outlook，Foxmail<br>    Thundbird<br>    evolution<br>    mutt</p>
+<ol>
+<li>MTA:邮件传输代理，smtp服务器，sendmail，uucp，</li>
+</ol>
+<p>qmail,<br>    postfix:模块化设计，安全，与sendmail兼容性好，投递效率<br>    exim：<br>    exchange：（windows，异步消息协作平台）</p>
+<ol>
+<li>MDA</li>
+</ol>
+<p>procmail：<br>    maildrop：</p>
+<ol>
+<li>MRA：邮件取回代理（pop3，IMAP4）</li>
+</ol>
+<p>cyrus-imap<br>    dovecot</p>
+<ol>
+<li><p>SASL：简单认证安全层<br>只是一个框架，需要依靠控件来完成认证<br>cyrus-sasl<br>courier-authlib</p>
+</li>
+<li><p>Webmail:</p>
+</li>
+</ol>
+<p>Openwebmail（perl）<br>    Squirrelmail    （php）<br>    Extmail（Extman）</p>
+<ol>
+<li><p>LDAP:Lightweight dirctory Access protocol:轻量级目录访问协议:读取速度快，写入速度慢（读快mysql一个数量级，写慢mysql一个数量级）</p>
+</li>
+<li><p>mysql：</p>
+</li>
+<li>虚拟用户：仅用于访问某服务的数字表示</li>
+<li>用户：字符串，凭证</li>
+</ol>
+<h2 id="搭建"><a href="#搭建" class="headerlink" title="搭建"></a>搭建</h2><ol>
+<li>Postfix+SASL(courier-authlib)+Mysql</li>
+<li>Dovecot+MySQL</li>
+<li>webmail：Extmail+Extman+httpd</li>
+<li><p>Postfix配置文件：<br>模块化：</p>
+<pre><code>master：/etc/postfix/master.cf
+mail：/etc/postfix/main.cf
+</code></pre><p>postconf：配置postfix<br>-d:显示默认的配置<br>-n:修改了的配置<br>-m:显示支持的查找表类型<br>-A:显示支持的sasl客户端插件类型<br>-e:PARMATER=VALUE :更改某参数配置信息，并保存到main.cf文件中</p>
+<pre><code>        作者：qq_27803491 发表于2016/11/15 21:38:12 [原文链接](http://blog.csdn.net/qq_27803491/article/details/53177971)
+</code></pre></li>
+</ol>
+<pre><code>        阅读：64 评论：0 [查看评论](http://blog.csdn.net/qq_27803491/article/details/53177971#comments)
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://dearamaze.com/2016/11/08/poj3169（差分约束系统）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dear Amaze">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DearAmaze-桀骜良">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/11/08/poj3169（差分约束系统）/" itemprop="url">
+                  [原]poj3169（差分约束系统）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-11-08T12:24:18+08:00">
+                2016-11-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2016/11/08/poj3169（差分约束系统）/" class="leancloud_visitors" data-flag-title="[原]poj3169（差分约束系统）">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><ol>
+<li>网址：<a href="http://poj.org/problem?id=3169" target="_blank" rel="external">http://poj.org/problem?id=3169</a></li>
+<li>大概题意：有N个点，其中有ml个限制条件：点a，点b，的最长距离为d，有md个限制条件，点a,点b，的最短距离为d；点按序号顺序排，求第一个点到最后一个点的最长距离。</li>
+<li>解题思路：差分约束，其实我也不太清楚什么是差分约束，大概就是将各种限制条件，逐个加入，先假设N个点间的距离都为无穷大，然后，按下列顺序，（循环）N（N，ml，md），依次加入限制条件，就可以了，加入第一种限制时，点b的原距离与a点距离加上d，比较，取最小值为b点的最新距离,,min(b(原)，a+d)。加入第二种限制时，已知b求a，min（a（原），b-d）;</li>
+</ol>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><pre><code>#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;string&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;cmath&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+#define INF 0x3f3f3f3f
+using namespace std;
+int d[1010];
+struct MLD{
+    int a,b,d;
+}ML[10010];
+struct MDD{
+    int a,b,d;
+}MD[10010];
+
+int main()
+{
+    memset(d,INF,sizeof(d));
+    memset(ML,0,sizeof(ML));
+    memset(MD,0,sizeof(MD));
+    int n,ml,md;
+    scanf(&quot;%d%d%d&quot;,&amp;amp;n,&amp;amp;ml,&amp;amp;md);
+    d[0]=0;
+    for(int i=0;i&amp;lt;ml;i++){
+        scanf(&quot;%d%d%d&quot;,&amp;amp;ML[i].a,&amp;amp;ML[i].b,&amp;amp;ML[i].d);
+    }
+    for(int i=0;i&amp;lt;md;i++){
+        scanf(&quot;%d%d%d&quot;,&amp;amp;MD[i].a,&amp;amp;MD[i].b,&amp;amp;MD[i].d);
+    }
+    for(int i=0;i&amp;lt;n;i++){
+        for(int j=0;j&amp;lt;n;j++){
+            if(d[j+1]&amp;lt;INF)d[j]=min(d[j],d[j+1]);
+        }
+        for(int j=0;j&amp;lt;ml;j++){
+            if(d[ML[j].a-1]&amp;lt;INF){
+                d[ML[j].b-1]=min(d[ML[j].a-1]+ML[j].d,d[ML[j].b-1]);
+            }
+        }
+        for(int j=0;j&amp;lt;md;j++){
+            if(d[MD[j].b-1]&amp;lt;INF){
+                d[MD[j].a-1]=min(d[MD[j].b-1]-MD[j].d,d[MD[j].a-1]);
+            }
+        }
+    }
+    if(d[0]&amp;lt;0)printf(&quot;-1\n&quot;);
+    else if(d[n-1]==INF)printf(&quot;-2\n&quot;);
+    else {
+        printf(&quot;%d\n&quot;,d[n-1]);
+    }
+
+    return 0;
+}
+
+
+            作者：qq_27803491 发表于2016/11/8 12:24:18 [原文链接](http://blog.csdn.net/qq_27803491/article/details/53080973)
+
+
+        阅读：61 评论：0 [查看评论](http://blog.csdn.net/qq_27803491/article/details/53080973#comments)
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://dearamaze.com/2016/11/04/细节（水）题codeforce-378C/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1429,7 +2435,7 @@ int main()
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">65</span>
+                <span class="site-state-item-count">70</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1440,7 +2446,7 @@ int main()
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">26</span>
+                <span class="site-state-item-count">27</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1451,7 +2457,7 @@ int main()
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">43</span>
+                <span class="site-state-item-count">44</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
