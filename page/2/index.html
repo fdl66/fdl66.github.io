@@ -329,6 +329,1145 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://dearamaze.com/2017/12/04/标准IO库/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dear Amaze">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DearAmaze-桀骜良">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/12/04/标准IO库/" itemprop="url">
+                  标准IO库
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-04T00:00:00+08:00">
+                2017-12-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/apue/" itemprop="url" rel="index">
+                    <span itemprop="name">apue</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/12/04/标准IO库/" class="leancloud_visitors" data-flag-title="标准IO库">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <a id="more"></a>
+<h2 id="流和-FILE对象"><a href="#流和-FILE对象" class="headerlink" title="流和 FILE对象"></a>流和 FILE对象</h2><ol>
+<li><p>标准IO库与文件IO区别：</p>
+<ul>
+<li>标准IO库处理很多细节，如缓冲区分片、以优化的块长度执行IO等。</li>
+<li>文件IO函数都是围绕文件描述符进行。首先打开一个文件，返回一个文件描述符；后续的文件IO操作都使用该文件描述符</li>
+<li>标准IO库是围绕流进行的。当用标准IO库打开或者创建一个文件时，就有一个内建的流与之相关联<blockquote>
+<p>标准IO库的函数很多都是以 <code>f</code>开头，如<code>fopen</code>、<code>fclose</code></p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>对于ASCII字符集，一个字符用一个字节表示；对于国际字符集，一个字符可以用多个字节表示。</p>
+<ul>
+<li>标准IO文件流可用于单字节或者多字节字符集。流的定向决定了所处理的字符是单字节还是多字节的。</li>
+<li>当一个流最初被创建时，它并没有定向。<ul>
+<li>若在未定向的流上使用一个多字节IO函数，则将该流的定向设置为宽定向的（即处理多字节）</li>
+<li>若在未定向的流上使用一个单字节IO函数，则将该流的定向设置为字节定向的（即处理单字节）</li>
+</ul>
+</li>
+<li>只有两个函数可以改变流的定向<ul>
+<li><code>freopen</code>函数清除一个流的定向</li>
+<li><code>fwide</code>函数设置流的定向</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code>fwide</code>函数：设置流的定向</p>
+<pre><code> #include&lt;stdio.h&gt;
+ #include&lt;wchar.h&gt;
+ int fwide(FILE *fp,int mode);
+</code></pre><ul>
+<li>参数：<ul>
+<li><code>fp</code>：<code>FILE</code>文件对象的指针</li>
+<li><code>mode</code>：流的定向模式。<ul>
+<li>如果<code>mode</code>是负数，则函数试图使指定的流为字节定向（并不保证修改成功，因为<code>fwide</code>并不改变已定向流的定向）</li>
+<li>如果<code>mode</code>是正数，则函数试图使指定的流为宽定向的（并不保证修改成功，因为<code>fwide</code>并不改变已定向流的定向）</li>
+<li>如果<code>mode</code>为0，则函数不试图设置流的定向，而直接返回该流定向的值</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>返回值：</p>
+<ul>
+<li>若流是宽定向的，返回正值</li>
+<li>若流是字节定向的，返回负值</li>
+<li>若流是未定向的，返回0<blockquote>
+<p>这里并没有函数失败的情况</p>
+</blockquote>
+</li>
+</ul>
+<p>注意：</p>
+</li>
+<li><code>fwide</code>并不改变已定向流的定向。</li>
+<li>如果<code>fp</code>是无效流，由于<code>fwide</code>从返回值无法得知函数执行成功还是失败。那么我们必须采用这个方法：首先在调用<code>fwide</code>之前清除<code>errno</code>。然后在<code>fwide</code>之后检查<code>errno</code>的值。通过<code>errno</code>来检测<code>fwide</code>执行成功还是失败。</li>
+</ul>
+</li>
+<li><p><code>FILE</code>指针：当使用<code>fopen</code>函数打开一个流时，它返回一个执行<code>FILE</code>对象的指针。该对象通常是一个结构，包含了标准IO库为管理该流所需要的所有信息，包括：</p>
+<ul>
+<li>用于实际IO的文件描述符</li>
+<li>指向用于该流缓冲区的指针</li>
+<li>该流缓冲区的长度</li>
+<li>当前在缓冲区中的字符数</li>
+<li><p>出错标志</p>
+<p>应用程序没必要检验<code>FILE</code>对象，只需要将<code>FILE</code>指针作为参数传递给每个标准IO函数。</p>
+<p><img src="../imgs/std_IO/FILE_IO.JPG" alt="FILE"> </p>
+</li>
+</ul>
+</li>
+<li><p>操作系统对每个进程与定义了3个流，并且这3个流可以自动地被进程使用，他们都是定义在<code>&lt;stdio.h&gt;</code>中：</p>
+<ul>
+<li>标准输入：预定义的文件指针为<code>stdin</code>，它内部的文件描述符就是<code>STDIN_FILENO</code></li>
+<li>标准输出：预定义的文件指针为<code>stdout</code>，它内部的文件描述符就是<code>STDOUT_FILENO</code></li>
+<li>标准错误：预定义的文件指针为<code>stderr</code>，它内部的文件描述符就是<code>STDERR_FILENO</code></li>
+</ul>
+</li>
+<li><p>标准IO库提供缓冲的目的是：尽量减少使用<code>read</code>和<code>write</code>调用的次数。标准IO库对每个IO流自动地进行缓冲管理，从而避免了程序员需要手动管理这一点带来的麻烦。</p>
+<p> 标准IO库提供了三种类型的缓冲：</p>
+<ul>
+<li>全缓冲：此时在标准IO缓冲区被填满后，标准IO库才进行实际的IO操作。</li>
+<li>行缓冲：此时当输入和输出中遇到换行符时，标准IO库执行实际的IO操作。但是注意：<ul>
+<li>只要填满了缓冲区，即使还没有写一个换行符，也立即进行IO操作</li>
+<li>任何时候只要通过标准IO库，从一个不带缓冲的流或者一个行缓冲的流得到输入数据，则会冲洗所有行缓冲输出流。(<font color="red">即要缓冲输入，先冲洗输出缓冲</font>)</li>
+</ul>
+</li>
+<li><p>不带缓冲：标准IO库不对字符进行缓冲存储。此时任何IO都立即执行实际的IO操作。</p>
+<p>另外：</p>
+</li>
+<li>在一个流上执行第一次IO操作时，相关标准的IO函数通常调用 <code>malloc</code>获取使用的缓冲区</li>
+<li>缓冲区可以由标准的IO操作自动地冲洗（如，当填满一个缓冲区时），也可以手动调用<code>fflush</code>函数冲洗一个流。</li>
+</ul>
+</li>
+<li><p>ISO C 要求下来缓冲特征：</p>
+<ul>
+<li>当且仅当标准输入和标准输出并不指向交互式设备时，他们才是全缓冲的</li>
+<li><p>标准错误绝不会是全缓冲的。</p>
+<p>很多操作系统默认使用下列类型的缓冲：</p>
+</li>
+<li>标准错误<code>stderr</code>时不带缓冲的</li>
+<li>标准输入<code>stdin</code>和输出<code>stdout</code>：若是指向终端设备的流，则是行缓冲的；否则是全缓冲的</li>
+</ul>
+</li>
+<li><p><code>setbuf/setvbuf</code>函数：设置流的缓冲类型</p>
+<pre><code> #include&lt;stdio.h&gt;
+ void setbuf(FILE *restrict fp,char *restrict buf);
+ int setvbuf(FILE *restrict fp,char* restrict buf,int mode,size_t size);
+</code></pre><ul>
+<li><p>参数：</p>
+<ul>
+<li><code>fp</code>：被打开的文件对象的指针</li>
+<li><p><code>buf</code>：一个缓冲区的指针。缓冲区长度必须为<code>BUFSIZ</code>常量（该常量定义在<code>&lt;stdio.h&gt;</code>中）。</p>
+<ul>
+<li>如果<code>buf</code>为<code>NULL</code>，则是关闭缓冲</li>
+<li>如果<code>buf</code>非<code>NULL</code>，则通常设定该流为全缓冲的。但若该流与一个设备终端相关，则设为行缓冲的</li>
+</ul>
+<p>对于<code>setvbuf</code>函数：</p>
+</li>
+<li><code>buf</code>：一个缓冲区的指针。缓冲区长度为<code>size</code>。<ul>
+<li>若<code>buf</code>为<code>NULL</code>，且<code>mode</code>为<code>_IONBF</code>：则该流为不带缓冲的。因为此时忽略<code>buf</code>和<code>size</code>参数</li>
+<li>若<code>buf</code>为<code>NULL</code>，且<code>mode</code>不是<code>_IONBF</code>：则标准IO库将自动为该流分片合适长度的缓冲区（即<code>BUFSIZE</code>长度），然后设定该流为指定的<code>mode</code></li>
+</ul>
+</li>
+<li><code>mode</code>：指定缓冲类型。可以为：<ul>
+<li><code>_IOFBF</code>：全缓冲。</li>
+<li><code>_IOLBF</code>：行缓冲</li>
+<li><code>_IONBF</code>：不带缓冲。此时忽略<code>buf</code>和<code>size</code>参数</li>
+</ul>
+</li>
+<li><code>size</code>：缓冲的长度</li>
+</ul>
+</li>
+<li><p>返回值：</p>
+<ul>
+<li>成功： 返回0</li>
+<li>失败： 返回非0(<font color="red">并不是-1</font>)</li>
+</ul>
+<p>注意：</p>
+</li>
+<li>如果在一个函数内分配一个自动变量类型的标准IO缓冲区，则从该函数返回之前，必须关闭流。因此自动变量是栈上分配，函数返回之后自动变量被销毁</li>
+<li>某些操作系统将缓冲区的一部分存放它自己的管理操作信息，因此可以存放在缓冲区中的实际数据字节数将少于<code>size</code></li>
+<li>通常推荐利用操作系统自动选择缓冲区长度并自动分配缓冲区。在这种情况下若关闭此流，则标准IO库会自动释放缓冲区</li>
+</ul>
+</li>
+<li><p><code>fflush</code>函数：手动冲洗一个流</p>
+<pre><code> #include&lt;stdio.h&gt;
+ int fflush(FILE *fp);
+</code></pre><ul>
+<li><p>参数：</p>
+<ul>
+<li><code>fp</code>：被打开的文件对象的指针</li>
+</ul>
+</li>
+<li><p>返回值：</p>
+<ul>
+<li>成功：返回0</li>
+<li>失败：返回<code>EOF</code> (<font color="red">并不是-1</font>)</li>
+</ul>
+<p>该函数会使得该流所有未写的数据都被传送至内核。当<code>fp</code>为<code>NULL</code>时，此函数将导致所有输出流被冲洗。</p>
+<blockquote>
+<ul>
+<li>冲洗是双向的：输出流 —&gt; 内核 —&gt; 磁盘或者终端； 输入流—&gt; 用户缓冲区</li>
+<li>冲洗并不是立即写到磁盘文件中。冲洗只是负责数据传到内核</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="打开关闭流"><a href="#打开关闭流" class="headerlink" title="打开关闭流"></a>打开关闭流</h2><ol>
+<li><p><code>fopen/freopen/fdopen</code>函数：打开标准IO流</p>
+<pre><code> #include&lt;stdio.h&gt;
+ FILE *fopen(const char*restrict pathname,const char*restrict type);
+ FILE *freopen(const char*restrict pathname,const char*restrict type,\
+     FILE *restrict fp);
+ FILE *fdopen(int fd,const char*type);
+</code></pre><ul>
+<li><p>参数：</p>
+<ul>
+<li><p><code>type</code>：指定对该IO流的读写方式：</p>
+<ul>
+<li><code>&quot;r&quot;</code>或者<code>&quot;rb&quot;</code>：为读打开</li>
+<li><code>&quot;w&quot;</code>或者<code>&quot;wb&quot;</code>：写打开。若文件存在则把文件截断为0长；若文件不存在则创建然后写</li>
+<li><code>&quot;a&quot;</code>或者<code>&quot;ab&quot;</code>：追加写打开；若文件存在每次都定位到文件末尾；若文件不存在则创建然后写</li>
+<li><code>&quot;r+&quot;</code>或者<code>&quot;r+b&quot;</code>或者<code>&quot;rb+&quot;</code>：为读和写打开</li>
+<li><code>&quot;w+&quot;</code>或者<code>&quot;w+b&quot;</code>或者<code>&quot;wb+&quot;</code>：若文件存在则文件截断为0然后读写；若文件不存在则创建然后读写</li>
+<li><code>&quot;a+&quot;</code>或者<code>&quot;a+b&quot;</code>或者<code>&quot;ab+&quot;</code>：若文件存在则每次都定位到文件末尾然后读写；若文件不存在则创建然后读写<blockquote>
+<ul>
+<li>其中<code>b</code>用于区分二进制文件和文本文件。但是由于<code>UNIX</code>内核并不区分这两种文件，所以在UNIX环境中指定<code>b</code>并没有什么卵用</li>
+<li>创建文件时，无法指定文件访问权限位。POSIX默认要求为：<code>S_IRUSR|S_IWUSR|S_IRGRP|S_IWGRP|S_IROTH|S_IWOTH</code></li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<p>对于 <code>fopen</code>函数：</p>
+</li>
+<li><code>pathname</code>：待打开文件的路径名<br>对于 <code>freopen</code>函数：</li>
+<li><code>pathname</code>：待打开文件的路径名</li>
+<li><p><code>fp</code>：在指定的流上打开文件。若<code>fp</code>已经打开，则先关闭该流；若<code>fp</code>已经定向，则清除该定向。</p>
+<p>对于 <code>fdopen</code>函数：</p>
+</li>
+<li><code>fd</code>：打开文件的文件描述符</li>
+<li>对于<code>fopen</code>，<code>type</code>意义稍微有点区别。因为该描述符已经被打开，所以<code>fdopen</code>为写而打开并不截断该文件。另外该文件既然被打开并返回一个文件描述符，则它一定存在。因此标准 IO追加写方式也不能创建文件</li>
+</ul>
+</li>
+<li><p>返回值：</p>
+<ul>
+<li>成功： 返回文件指针</li>
+<li>失败： 返回<code>NULL</code></li>
+</ul>
+<p>这几个函数的常见用途：</p>
+</li>
+<li><code>fopen</code>常用于打开一个指定的文件，返回一个文件指针</li>
+<li><code>freopen</code>常用于将一个指定的文件打开为一个预定义的流（标准输入、标准输出或者标准错误）</li>
+<li><p><code>fdopen</code>常用于将文件描述符包装成一个标准IO流。因为某些特殊类型的文件（如管道、<code>socket</code>文件）不能用<code>fopen</code>打开，必须先获取文件描述符，然后对文件描述符调用<code>fdopen</code>。</p>
+<p>注意：当以读和写类型打开一个文件时(<code>type</code>中带<code>+</code>号的类型)，有下列限制：</p>
+</li>
+<li>如果写操作后面没有<code>fflush,fseek,fsetpos,rewind</code>操作之一，则写操作后面不能紧跟读操作</li>
+<li><p>如果读操作后面没有<code>fseek,fsetpos,rewind</code>操作之一，也没有到达文件末尾，则在读操作之后不能紧跟写操作</p>
+<p>注意：按照系统默认，流被打开时是全缓冲的。但是如果流引用的是终端设备，则安装系统默认，流被打开时是行缓冲的。</p>
+</li>
+</ul>
+</li>
+<li><p><code>fclose</code>：关闭一个打开的流</p>
+<pre><code> #include&lt;stdio.h&gt;
+ int fclose(FILE *fp);
+</code></pre><ul>
+<li>参数：<ul>
+<li><code>fp</code>：待关闭的文件指针</li>
+</ul>
+</li>
+<li><p>返回值：</p>
+<ul>
+<li>成功： 返回 0</li>
+<li>失败： 返回 -1</li>
+</ul>
+<p>在该文件被关闭之前：</p>
+</li>
+<li><code>fclose</code>会自动冲洗缓冲中的输出数据</li>
+<li>缓冲区中的输入数据被丢弃</li>
+<li><p>若该缓冲区是标准IO库自动分配的，则释放此缓冲区</p>
+<p>当一个进程正常终止时（直接调用<code>exit</code>函数，或者从<code>main</code>函数返回）：</p>
+</li>
+<li>所有带未写缓存数据的标准IO流都被冲洗</li>
+<li>所有打开的标准IO流都被关闭</li>
+</ul>
+</li>
+<li><p>示例:在 <code>main</code>函数中调用 <code>test_fopen_fwide_setvbuf</code>函数：</p>
+<pre><code>void test_fopen_fwide_setvbuf()
+{
+ M_TRACE(&quot;---------  Begin test_fopen_fwide_setvbuf()  ---------\n&quot;);
+ assert(prepare_file(&quot;test&quot;,NULL,0,S_IRWXU)==0);
+
+ My_fwide(stdin,0); //打印 stdin 的流向
+ My_fwide(stdout,0); //打印 stdout 的流向
+ My_fwide(stderr,0); //打印 stderr 的流向
+ print_FILE(stdin); //打印 stdin 结构
+ print_FILE(stdout); //打印 stdout 结构
+ print_FILE(stderr); //打印 stderr 结构
+
+ FILE *fp=My_fopen(&quot;test&quot;,&quot;r+&quot;);
+ if(NULL!=fp)
+ {
+     My_fwide(fp,0); //打印 fp 的流向
+     My_fwide(fp,-1); //设置 fp 为字节流 然后打印 fp 的流向
+     My_fwide(fp,1); //无法修改已定向的流
+     print_FILE(fp);
+     //**** 设置不同的缓冲 ****//
+     set_full_buf(fp);
+     print_FILE(fp);
+     set_line_buf(fp);
+     print_FILE(fp);
+     set_no_buf(fp);
+     print_FILE(fp);
+
+     fclose(fp); //关闭流
+ }
+ un_prepare_file(&quot;test&quot;);
+ M_TRACE(&quot;---------  End test_fopen_fwide_setvbuf()  ---------\n\n&quot;);
+}
+</code></pre><p> <img src="../imgs/std_IO/FILE_struct.JPG" alt="FILE_struct"></p>
+<p> 可以看到：</p>
+<ul>
+<li>三个标准IO流的文件描述符依次为 0、1、2</li>
+<li>未被使用的流不会分配缓冲，因此<code>stdin</code>、<code>stderr</code>的缓冲区地址是 <code>NULL</code>。刚被创建的流的缓冲区地址也是<code>NULL</code>。</li>
+<li>未被使用的流是为定向的。因此<code>stdin</code>、<code>stderr</code>是未定向的。刚被创建的流的也是未定向的</li>
+<li>对已经定向的流设置流向，并不会改变流的方向。但是也不报告失败。</li>
+<li>未分配缓冲区的流，与非缓冲流不是一个概念。非缓冲流是分配了缓冲区的，它的缓冲区长度为1。而未分配缓冲区的流，其缓冲区是无效待分配的。</li>
+</ul>
+</li>
+</ol>
+<h2 id="读写流"><a href="#读写流" class="headerlink" title="读写流"></a>读写流</h2><ol>
+<li><p>一旦打开了流，可以在3中不同类型的非格式化IO中选择，对流进行读、写操作：</p>
+<ul>
+<li>每次一个字符的IO。一次读、写一个字符。若流是带缓冲的，则标准IO函数处理所有缓冲</li>
+<li>每次一行的IO。一次读、写一行。每一行都以一个换行符终止</li>
+<li>二进制IO。每次IO读、写某种数量的对象。<blockquote>
+<p>格式化IO由<code>printf</code>族函数完成</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p><code>getc/fgetc/getchar</code>函数：一次读一个字符：</p>
+<pre><code> #include&lt;stdio.h&gt;
+ int getc(FILE*fp);
+ int fgetc(FILE*fp);
+ int getchar(void);
+</code></pre><ul>
+<li>参数：<ul>
+<li><code>fp</code>：打开的文件对象指针</li>
+</ul>
+</li>
+<li><p>返回值：</p>
+<ul>
+<li>成功：则返回下一个字符</li>
+<li>到达文件尾端：返回<code>EOF</code></li>
+<li>失败：返回<code>EOF</code></li>
+</ul>
+<p>注意：</p>
+</li>
+<li><code>getchar()</code>等价于<code>getc(stdin)</code>。它从标准输入中读取一个字符</li>
+<li><code>getc</code>和<code>fgetc</code>的区别在于：<code>getc</code>可能通过宏定义来实现，而<code>fgetc</code>不能实现为宏。因此：<ul>
+<li><code>getc</code>的参数不应该是具有副作用的表达式，因为它可能被计算多次</li>
+<li><code>fgetc</code>可以得到其地址，这就允许将<code>fgetc</code>的地址作为参数传递。而<code>getc</code>不行</li>
+<li>调用<code>fgetc</code>所需的时间可能比调用<code>getc</code>长，因为函数调用所需时间通常比调用宏长</li>
+</ul>
+</li>
+<li>这三个函数在返回下一个字符时，将<code>unsigned char</code>类型转换成了<code>int</code>类型。<blockquote>
+<p>因为需要通过返回<code>EOF</code>来标记到达末尾或者出错。而<code>EOF</code>通常是常量 -1 。所以需要返回 <code>int</code></p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p><code>ferror/feof</code>函数：查看是读文件出错，还是到达读文件遇到尾端</p>
+<pre><code> #include&lt;stdio.h&gt;
+ int ferror(FILE *fp);
+ int feof(FILE *fp);
+</code></pre><ul>
+<li>参数：<ul>
+<li><code>fp</code>：打开的文件对象指针</li>
+</ul>
+</li>
+<li><p>返回值：</p>
+<ul>
+<li>若条件为真：则返回非 0</li>
+<li>若条件为假： 则返回 0</li>
+</ul>
+<p>当读流返回<code>EOF</code>时，我们可能不清楚到底是遇到错误，还是读到了文件尾端。此时必须调用<code>ferror</code>或者<code>feof</code>来区别这两种情况。</p>
+</li>
+</ul>
+</li>
+<li><p><code>clearerr</code>函数：清除文件出错标志和文件结束标志</p>
+<pre><code> #include&lt;stdio.h&gt;
+ void clearerr(FILE *fp)
+</code></pre><ul>
+<li><p>参数：</p>
+<ul>
+<li><code>fp</code>：打开的文件对象指针</li>
+</ul>
+<p>在大多数操作系统中，每个流在<code>FILE</code>对象中维护了两个标志：</p>
+</li>
+<li>出错标志</li>
+<li><p>文件结束标志</p>
+<p>调用<code>clearerr</code>函数可以清除这两个标志</p>
+</li>
+</ul>
+</li>
+<li><p><code>ungetc</code>函数：将字符压回流中</p>
+<pre><code> #include&lt;stdio.h&gt;
+ int ungetc(int c,FILE *fp);
+</code></pre><ul>
+<li>参数：<ul>
+<li><code>c</code>：待压入字符转换成的整数值</li>
+<li><code>fp</code>：打开的文件对象指针</li>
+</ul>
+</li>
+<li><p>返回值：</p>
+<ul>
+<li>成功：则返回 <code>c</code></li>
+<li>失败：返回<code>EOF</code></li>
+</ul>
+<p>注意：</p>
+</li>
+<li>若根据某个序列向流中压入一串字符，则再从该流中读取的字符序列是逆序的。即最后压入的字符最先读出</li>
+<li>可以执行任意次数的压入单个字符，但是不支持一次压入多个字符</li>
+<li><p>不能压入 <code>EOF</code>。但是当已经读到文件尾端时，支持压入一个字符，此时<code>ungetc</code>会清除该流的文件结束标志</p>
+<p><code>ungetc</code>通常用于这样的情形：正在读取一个输入流，然后需要根据某个字符串（标记字符串）来对输入进行切分。那么我们就需要先看一看下一个字符，来决定如何处理当前字符。此时需要方便的将刚查看的字符回送。</p>
+<blockquote>
+<p><code>ungetc</code>只是将字符压入流缓冲区中，并没有压入底层的磁盘文件或者操作系统内核中</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p><code>putc/fputc/putchar</code>函数：一次写一个字符</p>
+<pre><code> #include&lt;stdio.h&gt;
+ int putc(int c,FILE*fp);
+ int fputc(int c,FILE*fp);
+ int putchar(int c);
+</code></pre><ul>
+<li>参数：<ul>
+<li><code>c</code>：待写字符转换成的整数值</li>
+<li><code>fp</code>：打开的文件对象指针</li>
+</ul>
+</li>
+<li><p>返回值：</p>
+<ul>
+<li>成功：则返回 <code>c</code></li>
+<li>失败：返回<code>EOF</code></li>
+</ul>
+<p>注意：</p>
+</li>
+<li><code>putchar(c)</code>等价于<code>putc(c,stdout)</code>。它向标准输出中写一个字符</li>
+<li><code>putc</code>和<code>fputc</code>的区别在于：<code>putc</code>可能通过宏定义来实现，而<code>fputc</code>不能实现为宏</li>
+</ul>
+</li>
+<li><p><code>fgets/gets</code>函数：一次读一行字符：</p>
+<pre><code> #include&lt;stdio.h&gt;
+ char *fgets(char *restrict buf,int n, FILE* restrict fp);
+ char *gets(char *buf);
+</code></pre><ul>
+<li><p>参数：</p>
+<ul>
+<li><p><code>buf</code>：存放读取到的字符的缓冲区地址</p>
+<p>对于 <code>fgets</code>函数：</p>
+</li>
+<li><code>n</code>：缓冲区长度</li>
+<li><code>fp</code>：打开的文件对象指针</li>
+</ul>
+</li>
+<li><p>返回值：</p>
+<ul>
+<li>成功：则返回<code>buf</code></li>
+<li>到达文件尾端：返回<code>NULL</code></li>
+<li>失败：返回<code>NULL</code></li>
+</ul>
+<p>注意：</p>
+</li>
+<li>对于<code>fgets</code>函数，必须指定缓冲区的长度<code>n</code>。该函数一直读到下一个换行符为止，但是不超过<code>n-1</code>个字符。<ul>
+<li>无论读到多少个字符，缓冲区一定以<code>null</code>字节结尾</li>
+<li>若某一行包括换行符超过 <code>n-1</code>个字节，则<code>fgets</code>只返回一个不完整的行；下次调用<code>fgets</code>会继续读该行</li>
+</ul>
+</li>
+<li>对于<code>gets</code>函数，从标准输入总读取字符。由于无法指定缓冲区的长度，因此很可能造成缓冲区溢出漏洞。故该函数不推荐使用</li>
+<li>对于发生错误和读到末尾，都是返回<code>NULL</code>    </li>
+</ul>
+</li>
+</ol>
+<ol>
+<li><p><code>fputs/puts</code>函数：一次写一行字符：</p>
+<pre><code> #include&lt;stdio.h&gt;
+ int fputs(const char* restrict str,FILE*restrict fp);
+ int puts(const char*str);
+</code></pre><ul>
+<li>参数：<ul>
+<li><code>str</code>：待写的字符串</li>
+<li><code>fp</code>：打开的文件对象指针</li>
+</ul>
+</li>
+<li><p>返回值：</p>
+<ul>
+<li>成功：则返回非负值</li>
+<li>失败：返回<code>EOF</code></li>
+</ul>
+<p>注意：</p>
+</li>
+<li><code>fputs</code>和<code>puts</code>都是将一个以<code>null</code>字节终止的字符串写到流中，末尾的<code>null</code>字符不写出！。<font color="red">字符串不要求以换行符结尾！</font></li>
+<li><code>puts</code>将字符串写到标准输出，末尾的<code>null</code>字符不写出！<font color="red">但是<code>puts</code>随后又将一个换行符写到标准输出中！</font>。而<code>fputs</code>不会自动添加换行符。<blockquote>
+<p>虽然<code>puts</code>是安全的，但是我们也是要避免使用它，以免要记住它在最后是否添加了一个换行符。</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p><code>fread/fwrite</code>函数：执行二进制读写IO</p>
+<pre><code> #include&lt;stdio.h&gt;
+ size_t fread(void *restrict ptr,size_t size,size_t nobj,FILE *restrict fp);
+ size_t fwrite(const void*restrict ptr,size_t size,size_t nobj,FILE *restrict fp);
+</code></pre><ul>
+<li>参数：<ul>
+<li><code>ptr</code>:存放二进制数据对象的缓冲区地址</li>
+<li><code>size</code>：单个二进制数据对象的字节数（比如一个<code>struct</code>的大小）</li>
+<li><code>nobj</code>：二进制数据对象的数量</li>
+<li><code>fp</code>：打开的文件对象指针</li>
+</ul>
+</li>
+<li><p>返回值：</p>
+<ul>
+<li>成功或失败： 读/写的对象数<ul>
+<li>对于读：如果出错或者到达文件尾端，则此数字可以少于<code>nobj</code>。此时应调用<code>ferror</code>或者<code>feof</code>来判断究竟是那种情况</li>
+<li>对于写：如果返回值少于<code>nobj</code>，则出错</li>
+</ul>
+</li>
+</ul>
+<p>使用二进制IO的基本问题是：它只能用在读取同一个操作系统上已写的数据。如果跨操作系统读写，则很可能工作异常。因为：</p>
+</li>
+<li>同一个<code>struct</code>，可能在不同操作系统或者不同编译系统中，成员的偏移量不同</li>
+<li>存储多字节整数和浮点数的二进制格式在不同的操作系统中可能不同</li>
+</ul>
+</li>
+</ol>
+<ol>
+<li><p>有三种方法定位标准IO流</p>
+<ul>
+<li><p>通过 <code>ftell/fseek</code>函数：</p>
+<pre><code>  #include&lt;stdio.h&gt;
+  long ftell(FILE *fp);
+</code></pre><ul>
+<li>参数：<code>fp</code>：打开的文件对象指针</li>
+<li><p>返回值：</p>
+<ul>
+<li>成功：返回当前文件位置指示</li>
+<li><p>失败：返回 -1L</p>
+<p>若是二进制文件，则文件指示器是从文件开始位置度量的，并以字节为度量单位。<code>ftell</code>就是返回这种字节位置。</p>
+</li>
+</ul>
+<pre><code>#include&lt;stdio.h&gt;
+int fseek(FILE *fp,long offset,int whence);
+</code></pre></li>
+<li>参数：<ul>
+<li><code>fp</code>：打开的文件对象指针</li>
+<li><code>offset</code>：偏移量。其解释依赖于<code>whence</code></li>
+<li><code>whence</code>：偏移量的解释方式：<ul>
+<li><code>SEEK_SET</code>常量：表示从文件的起始位置开始</li>
+<li><code>SEEK_CUR</code>常量：表示从文件的当前位置开始</li>
+<li><code>SEEK_END</code>常量：表示从文件的尾端开始</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>返回值：</p>
+<ul>
+<li>成功：返回 0</li>
+<li><p>失败：返回 -1</p>
+<blockquote>
+<p>原书说，对文本文件和二进制文件，<code>fseek</code>定位有某些限制。但是经过在<code>ubuntu 16.04</code>上测试，可以任意定位。并没有要求说不能定位到文件尾端，以及必须用<code>SEEK_SET</code>等诸多限制。</p>
+</blockquote>
+</li>
+</ul>
+<pre><code>#include&lt;stdio.h&gt;
+void rewind(FILE *fp);
+</code></pre></li>
+<li><p>参数：</p>
+<ul>
+<li><p><code>fp</code>：打开的文件对象指针</p>
+<p><code>rewind</code>函数将一个流设置到文件的起始位置</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>通过 <code>ftello/fseeko</code>函数：除了偏移量类型为<code>off_t</code>而不是<code>long</code>以外，<code>ftello/fseeko</code>与<code>ftell/fseek</code>相同</p>
+<pre><code>  #include&lt;stdio.h&gt;
+  off_t ftello(FILE *fp);
+</code></pre><ul>
+<li>参数：<code>fp</code>：打开的文件对象指针</li>
+<li><p>返回值：</p>
+<ul>
+<li>成功：返回当前文件位置指示</li>
+<li>失败：返回 (off_t)-1</li>
+</ul>
+<pre><code>#include&lt;stdio.h&gt;
+int fseeko(FILE *fp,off_t offset,int whence);
+</code></pre></li>
+<li>参数：<ul>
+<li><code>fp</code>：打开的文件对象指针</li>
+<li><code>offset</code>：偏移量。其解释依赖于<code>whence</code></li>
+<li><code>whence</code>：偏移量的解释方式：<ul>
+<li><code>SEEK_SET</code>常量：表示从文件的起始位置开始</li>
+<li><code>SEEK_CUR</code>常量：表示从文件的当前位置开始</li>
+<li><code>SEEK_END</code>常量：表示从文件的尾端开始</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>返回值：<ul>
+<li>成功：返回 0</li>
+<li>失败：返回 -1</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code>fgetpos/fsetpos</code>函数：由 ISO C 引入</p>
+<pre><code>  #include&lt;stdio.h&gt;
+  int fgetpos(FILE *restrict fp,fpos_t *restrict pos);
+  int fsetpos(FILE * fp,const fpos_t * pos);
+</code></pre><ul>
+<li>参数：<ul>
+<li><code>fp</code>：打开的文件对象指针</li>
+<li><code>pos</code>：存放偏移量的缓冲区</li>
+</ul>
+</li>
+<li>返回值：<ul>
+<li>成功： 返回 0</li>
+<li>失败： 返回非 0</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>示例:在<code>main</code>函数中调用<code>test_get_put_seek</code> 函数：</p>
+<pre><code>void test_get_put_seek()
+{
+M_TRACE(&quot;---------  Begin test_get_put_seek()  ---------\n&quot;);
+assert(prepare_file(&quot;test_char&quot;,NULL,0,S_IRWXU)==0);
+assert(prepare_file(&quot;test_line&quot;,NULL,0,S_IRWXU)==0);
+assert(prepare_file(&quot;test_binary&quot;,NULL,0,S_IRWXU)==0);
+
+FILE *file_char=My_fopen(&quot;test_char&quot;,&quot;r+&quot;);
+FILE *file_line=My_fopen(&quot;test_line&quot;,&quot;r+&quot;);
+FILE *file_binary=My_fopen(&quot;test_binary&quot;,&quot;rb+&quot;);
+
+if((file_char!=NULL) &amp;&amp; (file_line!=NULL) &amp;&amp; (file_binary!=NULL))
+{
+    printf(&quot;***** test read write char*****\n&quot;);
+    _test_read_write_char(file_char);
+    printf(&quot;\n\n***** test read write str*****\n&quot;);
+    _test_read_write_line(file_line);
+    printf(&quot;\n\n***** test read write binary*****\n&quot;);
+    _test_read_write_binary(file_binary);
+}
+
+//*** 关闭文件  ***//
+if(file_char!=NULL) fclose(file_char);
+if(file_line!=NULL) fclose(file_line);
+if(file_binary!=NULL) fclose(file_binary);
+
+un_prepare_file(&quot;test_char&quot;);
+un_prepare_file(&quot;test_line&quot;);
+un_prepare_file(&quot;test_binary&quot;);
+M_TRACE(&quot;---------  End test_get_put_seek()  ---------\n\n&quot;);
+}
+</code></pre><p><img src="../imgs/std_IO/FILE_read_write_seek.JPG" alt="FILE_read_write_seek"></p>
+</li>
+</ol>
+<h2 id="格式化IO"><a href="#格式化IO" class="headerlink" title="格式化IO"></a>格式化IO</h2><ol>
+<li><p>格式化输出函数：</p>
+<pre><code> #include&lt;stdio.h&gt;
+ int printf(const char *restrict format,...);
+ int fprintf(FILE *restrict fp,const char*restrict format,...);
+ int dprintf(int fd,const char *restrict format,...);
+ int sprintf(char *restrict buf,const char*restrict format,...);
+ int snprintf(char *restrict buf,size_t n,const char *restrict format,...);
+</code></pre><ul>
+<li><p>参数：</p>
+<ul>
+<li><p><code>format,...</code>：输出的格式化字符串</p>
+<p>对于<code>fprintf</code>：</p>
+</li>
+<li><p><code>fp</code>：打开的文件对象指针。格式化输出到该文件中</p>
+<p>对于<code>dprintf</code>：</p>
+</li>
+<li><p><code>fd</code>：打开文件的文件描述符。格式化输出到该文件中</p>
+<p>对于<code>sprintf</code>:</p>
+</li>
+<li><p><code>buf</code>：一个缓冲区的指针。格式化输出到该缓冲区中</p>
+<p>对于<code>snprintf</code>:</p>
+</li>
+<li><code>buf</code>：一个缓冲区的指针。格式化输出到该缓冲区中</li>
+<li><code>n</code>：缓冲区的长度。格式化输出到该缓冲区中</li>
+</ul>
+</li>
+<li><p>返回值：</p>
+<ul>
+<li>成功：返回输出字符数（不包含<code>null</code>字节）</li>
+<li>失败：返回负数</li>
+</ul>
+<p><code>printf</code>将格式化输出写到标准输出；<code>fprintf</code>写到指定的流；<code>dprintf</code>写到指定的文件描述符；<code>sprintf</code>写到数组<code>buf</code>中；<code>snprintf</code>也是写到数组<code>buf</code>中，但是在该数组的尾端自动添加一个<code>null</code>字节（该字节不包含在返回值中）。    </p>
+</li>
+<li>通常不推荐使用<code>sprintf</code>，因为它可能引起缓冲区溢出流动</li>
+<li>如果格式化输出一共 s 个字节，那么<code>snprintf</code>的数组缓冲区至少为<code>s+1</code>个字节，否则发生截断</li>
+</ul>
+</li>
+<li><p>格式说明：<code>%[flags][fldwidth][precision][lenmodifier]convtype</code></p>
+<ul>
+<li>标志<code>flags</code>有：<ul>
+<li><code>&#39;</code> : 撇号，将整数按照千位分组字符</li>
+<li><code>-</code> ： 在字段内左对齐输出</li>
+<li><code>+</code>： 总是显示带符号转换的正负号</li>
+<li><code> </code>：空格。如果第一个字符不是正负号，则在其前面加一个空格</li>
+<li><code>#</code>：指定另一种转换形式（如，对于十六进制格式，加 0x 前缀）</li>
+<li><code>0</code>：添加前导0（而非空格） 进行填充</li>
+</ul>
+</li>
+<li><code>fldwidth</code>：说明最小字段宽度。转换后参数字符如果小于宽度，则多余字符位置用空格填充。<ul>
+<li>字段宽度是一个非负十进制数，或者是一个星号 <code>*</code></li>
+</ul>
+</li>
+<li><code>precision</code>：说明整型转换后最少输出数字位数、浮点数转换后小数点后的最少位数、字符串转换后最大字节数。<ul>
+<li>精度是一个点<code>.</code>后跟随一个可选的非负十进制数或者一个星号<code>*</code><blockquote>
+<p>宽度和精度可以为<code>*</code>，此时一个整型参数指定宽度或者精度的值。该整型参数正好位于被转换的参数之前</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><code>lenmodifier</code>：说明参数长度。可以为：<ul>
+<li><code>hh</code>：将相应的参数按照<code>signed char</code>或者<code>unsigned char</code>类型输出</li>
+<li><code>h</code>：将相应的参数按照<code>signed short</code>或者<code>unsigned short</code>类型输出</li>
+<li><code>l</code>：将相应的参数按照<code>signed long</code>或者<code>unsigned long</code>或者宽字符类型输出</li>
+<li><code>ll</code>：将相应的参数按照<code>signed longlong</code>或者<code>unsigned longlong</code>类型输出</li>
+<li><code>j</code>：<code>intmax_t</code>或者<code>uintmax_t</code></li>
+<li><code>z</code>：<code>size_t</code></li>
+<li><code>t</code>：<code>ptrdiff_t</code></li>
+<li><code>L</code>：<code>long double</code></li>
+</ul>
+</li>
+<li><code>convtype</code>：控制如何解释参数<ul>
+<li><code>d</code>或者<code>i</code>：有符号十进制</li>
+<li><code>o</code>：无符号八进制</li>
+<li><code>u</code>：无符号十进制</li>
+<li><code>x</code>或者<code>X</code>：无符号十六进制</li>
+<li><code>f</code>或者<code>F</code>：双精度浮点数</li>
+<li><code>e</code>或者<code>E</code>：指数格式双精度浮点数</li>
+<li><code>g</code>或者<code>G</code>：根据转换后的值解释为<code>f、F、e、E</code></li>
+<li><code>a</code>或者<code>A</code>：十六进制指数格式双精度浮点数</li>
+<li><code>c</code>：字符（若带上长度修饰符<code>l</code>,则为宽字符）</li>
+<li><code>s</code>：字符串（若带上长度修饰符<code>l</code>,则为宽字符）</li>
+<li><code>p</code>：指向<code>void</code>的指针</li>
+<li><code>n</code>：到目前位置，此<code>printf</code>调用输出的字符的数目将被写入到指针所指向的带符号整型中</li>
+<li><code>%</code>：一个<code>%</code>字符</li>
+<li><code>C</code>：宽字符，等效于<code>lc</code></li>
+<li><code>S</code>：宽字符串，等效于<code>ls</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code>printf</code>族的变体：将可变参数<code>(...)</code>替换成了<code>va_list arg</code>:</p>
+<pre><code> #include&lt;stdarg.h&gt;
+ #include&lt;stdio.h&gt;
+ int vprintf(const char *restrict format,va_list arg);
+ int vfprintf(FILE *restrict fp,const char*restrict format,va_list arg);
+ int vdprintf(int fd,const char *restrict format,va_list arg);
+ int vsprintf(char *restrict buf,const char*restrict format,va_list arg);
+ int vsnprintf(char *restrict buf,size_t n,const char *restrict format,va_list arg);
+</code></pre><p> 其参数与返回值与前面的<code>printf</code>族完全相同</p>
+</li>
+</ol>
+<ol>
+<li><p>格式化输入函数：</p>
+<pre><code> #include&lt;stdio.h&gt;
+ int scanf(const char*restrict format,...);
+ int fscanf(FILE *restrict fp,const char *restrict format,...);
+ int sscanf(const char *restrict buf,const char *restrict format,...);
+</code></pre><ul>
+<li><p>参数：</p>
+<ul>
+<li><p><code>format,...</code>：格式化字符串</p>
+<p>对于<code>fscanf</code>：</p>
+</li>
+<li><p><code>fp</code>：打开的文件对象指针。从流中读取输入</p>
+<p>对于<code>sscanf</code>：</p>
+</li>
+<li><code>buf</code>：一个缓冲区指针。从该缓冲区中读取输入</li>
+</ul>
+</li>
+<li><p>返回值：</p>
+<ul>
+<li>成功：返回赋值的输入项数</li>
+<li>提前到达文件尾端：返回<code>EOF</code></li>
+<li>失败：返回<code>EOF</code></li>
+</ul>
+<p><code>scanf</code>族用于分析输入字符串，将字符序列转换成指定类型的变量。在格式之后的各参数中包含了变量的地址，用转换结果对这些变量赋值。</p>
+</li>
+<li>除了转换说明和空白字符以外，格式字符串中的其他字符必须与输入匹配。如有一个字符不匹配，则停止后续处理，不再读输入的其余部分。</li>
+<li>转换说明的格式为：<code>%[*][fldwidth][m][lenmodifier]convtype</code>：<ul>
+<li><code>*</code>：用于抑制转换。按照转换说明的其余部分对输入进行转换，但是转换结果不存放在参数中而是抛弃</li>
+<li><code>fldwidth</code>：说明最大宽度，即最大字符数</li>
+<li><code>lenmodifier</code>：说明要转换结果赋值的参数大小。见前述说明</li>
+<li><code>convtype</code>：类似前述说明。但是稍有区别：输入中的带符号的数值可以赋给无符号类型的变量</li>
+<li><code>m</code>：用于强迫内存分配。当<code>%c,%s</code>时，如果指定了<code>m</code>，则会自动分配内存来容纳转换的字符串。同时该内存的地址会赋给指针类型的变量（即要求对应的参数必须是指针的地址）。同时要求程序员负责释放该缓冲区（通过<code>free</code>函数）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code>scanf</code>族也有一类变体：将可变参数<code>(...)</code>替换成了<code>va_list arg</code>:</p>
+<pre><code> #include&lt;stdarg.h&gt;
+ #include&lt;stdio.h&gt;
+ int vscanf(const char*restrict format,va_list arg);
+ int vfscanf(FILE *restrict fp,const char *restrict format,va_list arg);
+ int vsscanf(const char *restrict buf,const char *restrict format,va_list arg);
+</code></pre></li>
+<li><p>示例： 在 <code>main</code>函数中调用<code>test_printf_scanf</code>函数：</p>
+</li>
+</ol>
+<pre><code>```
+</code></pre><p>void test_printf_scanf()<br>{<br>    M_TRACE(“———  Begin test_printf_scanf()  ———\n”);<br>    printf(“<strong><strong> test printf  <em>*</em></strong></strong>\n”);<br>    _test_printf();<br>    printf(“\n\n<strong><strong> test snprintf  <em>*</em></strong></strong>\n”);<br>    _test_snprintf();<br>    printf(“\n\n<strong><strong> test scanf  <em>*</em></strong></strong>\n”);<br>    _test_scanf();<br>    printf(“\n\n<strong><strong> test sscanf  <em>*</em></strong></strong>\n”);<br>    _test_sscanf();<br>    M_TRACE(“———  End test_printf_scanf()  ———\n\n”);<br>}</p>
+<pre><code>```    
+![print_scan](../imgs/std_IO/print_scan.JPG) 
+</code></pre><h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ol>
+<li><p><code>fileno</code>函数：获取文件对象的文件描述符</p>
+<pre><code> #include&lt;stdio.h&gt;
+ int fileno(FILE *fp);
+</code></pre><ul>
+<li>参数：<ul>
+<li><code>fp</code>：打开的文件对象的指针</li>
+</ul>
+</li>
+<li>返回值： 返回与该流相关联的文件描述符</li>
+</ul>
+</li>
+<li><p><code>tmpnam/tmpfile</code>函数：创建临时文件    </p>
+<pre><code> #include&lt;stdio.h&gt;
+ char *tmpnam(char *ptr);
+ FILE *tmpfile(void);
+</code></pre><ul>
+<li><code>tmpnam</code>参数：<ul>
+<li><code>ptr</code>：指向存放临时文件名的缓冲区的指针<ul>
+<li>若为<code>NULL</code>，则产生的路径名存放在一个静态区中，指向该静态区的指针作为函数值返回<blockquote>
+<p>下次再调用<code>tmpnam</code>时，会重写该静态区</p>
+</blockquote>
+</li>
+<li>如果为非<code>NULL</code>，则认为它指向长度至少为<code>L_tmpnam</code>个字符的数组，产生的路径名存放在该缓冲区中，返回<code>ptr</code>。<code>L_tmpnam</code>常量定义在<code>&lt;stdio.h&gt;</code>头文件中</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>tmpnam</code>返回值：返回指向唯一路径名的指针</li>
+<li><p><code>tmpfile</code>返回值：</p>
+<ul>
+<li>成功：返回文件指针</li>
+<li>失败：返回<code>NULL</code></li>
+</ul>
+<p><code>tmpnam</code>函数产生一个与现有文件名不同的有效路径名字符串。每次调用它时，都产生一个不同路径名。最多调用次数是<code>TMP_MAX</code>次（定义在<code>&lt;stdio.h&gt;</code>中）</p>
+<blockquote>
+<p>它只创建独一无二的文件名，但是并不创建临时文件</p>
+</blockquote>
+<p><code>tmpfile</code>是创建一个临时二进制文件（类型<code>wb+</code>），在关闭该文件或者程序结束时将自动删除这种文件</p>
+<blockquote>
+<p><code>UNIX</code>对二进制文件、文本文件并不进行特殊区分</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p><code>mkdtemp/mkstemp</code>函数：创建临时文件（由SUS 标准给出）</p>
+<pre><code> #include&lt;stdlib.h&gt;
+ char *mkdtemp(char *template);
+ int mkstemp(char *template);
+</code></pre><ul>
+<li>参数：<ul>
+<li><code>template</code>：一个字符串。这个字符是最末6个字符设置为<code>XXXXXX</code>的路径名。函数将这些占位符替代成不同的字符来构建一个唯一的路径名。若成功的话，这两个函数将修改<code>template</code>字符串来反映临时文件的名字<blockquote>
+<p>因为函数会修改<code>template</code>,因此一定不能用常量字符串来赋值！</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><code>mkdtemp</code>返回值：<ul>
+<li>成功：返回指向目录名的指针</li>
+<li>失败：返回<code>NULL</code></li>
+</ul>
+</li>
+<li><p><code>mkstemp</code>返回值：</p>
+<ul>
+<li>成功： 返回文件描述符</li>
+<li>失败： 返回 -1</li>
+</ul>
+<p><code>mkdtemp</code>函数创建了一个目录，该目录有一个唯一的名字；<code>mkstemp</code>函数创建了一个文件，该文件有一个唯一的名字。名字是通过<code>template</code>字符串进程构建的。</p>
+</li>
+<li><code>mkdtemp</code>函数创建的目录具有权限位集： <code>S_IRUSR|S_IWUSR|S_IXUSR</code>。调用进程的文件模式创建屏蔽字可以进一步限制这些权限</li>
+<li><code>mkstemp</code>函数返回的文件描述符以读写方式打开。它创建的文件用访问权限位：<code>S_IRUSR|S_IWUSR</code></li>
+<li><code>mkstemp</code>创建的临时文件并不会自动删除</li>
+</ul>
+</li>
+<li><p>示例：在<code>main</code>函数中调用<code>test_tmpnam_mkdtemp</code>函数：</p>
+<pre><code>void test_tmpnam_mkdtemp()
+{
+ M_TRACE(&quot;---------  Begin test_printf_scanf()  ---------\n&quot;);
+ printf(&quot;******** test tmpnam ********\n&quot;);
+ _test_tmpnam();
+ printf(&quot;\n\n******** test mkdtemp ********\n&quot;);
+ _test_mkdtemp();
+ M_TRACE(&quot;---------  End test_printf_scanf()  ---------\n\n&quot;);
+}
+</code></pre><p> <img src="../imgs/std_IO/make_temp_file.JPG" alt="make_temp_file"> </p>
+</li>
+<li><p>内存流：一种标准IO流，虽然它通过 <code>FILE</code>指针来访问，但是并没有底层的文件 。所有的IO都是通过在缓冲区和主存之间来回传送字节来完成。</p>
+<blockquote>
+<p>虽然它看起来像是文件流，但是更适用于字符串操作</p>
+</blockquote>
+<ul>
+<li><p>创建内存流：</p>
+<pre><code>  #include&lt;stdio.h&gt;
+  FILE *fmemopen(void *restrict buf,size_t size,const char *restrict type);
+</code></pre><ul>
+<li>参数：<ul>
+<li><code>buf</code>：内存流缓冲区的起始地址</li>
+<li><code>size</code>：内存流缓冲区的大小（字节数）<ul>
+<li>若<code>buf</code>为<code>NULL</code>时，则函数负责分配<code>size</code>字节的缓冲区，并在流关闭时自动释放分配的缓冲区</li>
+</ul>
+</li>
+<li><code>type</code>:控制如何使用流（即打开内存流的方式）：<ul>
+<li><code>r</code>或者<code>rb</code>：读打开</li>
+<li><code>w</code>或者<code>wb</code>：写打开</li>
+<li><code>a</code>或者<code>ab</code>：追加打开；为在第一个<code>null</code>字节处写打开</li>
+<li><code>r+</code>或者<code>r+b</code>或<code>rb+</code>：读写打开</li>
+<li><code>w+</code>或者<code>w+b</code>或<code>wb+</code>：把文件截断为0，然后读写打开</li>
+<li><code>a+</code>或者<code>a+b</code>或<code>ab+</code>：追加；为在第一个<code>null</code>字节处读写打开</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>返回值：</p>
+<ul>
+<li>成功：返回流指针</li>
+<li>失败：返回<code>NULL</code></li>
+</ul>
+<p>注意：</p>
+</li>
+<li>无论何时以追<code>a</code>方式打开内存流时，当前文件位置设为缓冲区中第一个<code>null</code>字节处。<ul>
+<li>若缓冲区中不存在<code>null</code>字节，则当前位置设为缓冲结尾的后一个字节</li>
+</ul>
+</li>
+<li>当内存流不是<code>a</code>方式打开时，当前位置设置为缓冲区的开始位置</li>
+<li>如果<code>buf</code>是<code>null</code>，则打开流进行读或者写都没有任何意义。因为此时缓冲区是通过<code>fmemopen</code>分配的，没办法找到缓冲区的地址。</li>
+<li>任何时候需要增加流缓冲区中数据流以及调用<code>fclose、fflush、fseek、fseeko、fsetpos</code>时都会在当前位置写入一个<code>null</code>字节</li>
+</ul>
+</li>
+<li><p>创建内存流的其他两个函数：</p>
+<pre><code>  #include&lt;stdio.h&gt;
+  FILE *open_memstream(char **bufp,size_t *sizep);
+  #include &lt;wchar.h&gt;
+  FILE *open_wmemstream(wchar_t **bufp,size_t *sizep);
+</code></pre><ul>
+<li>参数：<ul>
+<li><code>bufp</code>：指向缓冲区地址的指针（用于返回缓冲区地址）</li>
+<li><code>sizep</code>:指向缓冲区大小的指针（用于返回缓冲区大小）</li>
+</ul>
+</li>
+<li><p>返回值：</p>
+<ul>
+<li>成功：返回流指针</li>
+<li>失败：返回 <code>NULL</code></li>
+</ul>
+<p>这两个函数创建的流：</p>
+</li>
+<li>只能写打开</li>
+<li>缓冲区由函数自动创建</li>
+<li>关闭流后需要程序员释放缓冲区</li>
+<li><p>对流添加字节会增加缓冲区大小</p>
+<p>在缓冲区地址和大小使用上要遵守规则：</p>
+</li>
+<li>缓冲区地址和长度只有在调用<code>fclose</code>或者<code>fflush</code>后才有效</li>
+<li>这些值只有在下一次写入或者调用<code>fclose</code>之前才有效。因为缓冲区可能增长，也可能需要重新分配</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>示例：在<code>main</code>函数中调用<code>test_memstream</code>函数：</p>
+<pre><code>void test_memstream()
+{
+ M_TRACE(&quot;---------  Begin test_memstream()  ---------\n&quot;);
+ char mem_buffer[16];
+ FILE *fp=My_fmemopen(mem_buffer,16,&quot;r+&quot;);
+ if(NULL!=fp)
+ {
+
+     char read_write_buffer[8];
+     My_ftello(fp);   // 查看当前位置
+     //**** 写入 ****//
+     My_fputs(&quot;abcdefg\n&quot;,fp); // 每次7个字符加一个换行符
+     My_fputs(&quot;0123456789&quot;,fp); // 没有换行符
+     My_ftello(fp);   // 查看当前位置
+     fflush(fp);
+     print_char_buffer(mem_buffer,16);
+     //**** 读取 ****//
+     My_fseeko(fp,0,SEEK_SET); //重定位到文件头
+     My_ftello(fp); // 查看当前位置
+     My_fgets(read_write_buffer,8,fp); // 读取 abcdefg
+     My_fgets(read_write_buffer,8,fp); // 读取 \n
+     My_fgets(read_write_buffer,8,fp);// 读取 0123456，文件指针指向 null 字节
+     My_fgets(read_write_buffer,8,fp);// 遇到 EOF，即 null 字节 （最后一个字节为 null 字节，因此有效字节只有15个字节）
+     My_ftello(fp); // 查看当前位置，文件指针指向最后一个字节的下一个字节
+     My_fgets(read_write_buffer,8,fp);// 遇到 EOF，此时读取返回 EOF，并且是 ferror 返回真，且 feof 返回真
+     printf(&quot;feof=%d,ferror=%d\n&quot;,feof(fp),ferror(fp)); //ferror 返回真，且 feof 返回真
+
+     print_char_buffer(mem_buffer,16); // 读取并不会删除 mem_buffer 中的内容
+     fclose(fp);
+ }
+ M_TRACE(&quot;---------  End test_memstream()  ---------\n\n&quot;);
+}
+</code></pre><p> <img src="../imgs/std_IO/mem_FILE_stream.JPG" alt="mem_FILE_stream"> </p>
+</li>
+<li><p>标准IO库的缺点：效率不高。这与它需要复制的数据量有关。当使用每次一行的函数<code>fgets/fputs</code>时，通常需要复制两次数据：</p>
+<ul>
+<li>内核和标准IO缓冲区之间（当调用<code>read/write</code>时）</li>
+<li>标准IO缓冲区和用户程序的缓冲区之间%  </li>
+</ul>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://dearamaze.com/2017/12/04/文件和目录/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2275,164 +3414,6 @@ char d_name[];// 以 null 结尾的文件名字符串
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://dearamaze.com/2017/11/12/JS学习笔记/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Dear Amaze">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="DearAmaze-桀骜良">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/11/12/JS学习笔记/" itemprop="url">
-                  JS学习笔记1入门
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-12T00:00:00+08:00">
-                2017-11-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/前端/" itemprop="url" rel="index">
-                    <span itemprop="name">前端</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/11/12/JS学习笔记/" class="leancloud_visitors" data-flag-title="JS学习笔记1入门">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>JS学习笔记1入门篇<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/11/12/JS学习笔记/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://dearamaze.com/2017/11/12/JS学习笔记2进阶/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2546,6 +3527,164 @@ char d_name[];// 以 null 结尾的文件名字符串
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/11/12/JS学习笔记2进阶/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://dearamaze.com/2017/11/12/JS学习笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dear Amaze">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DearAmaze-桀骜良">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/11/12/JS学习笔记/" itemprop="url">
+                  JS学习笔记1入门
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-12T00:00:00+08:00">
+                2017-11-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/11/12/JS学习笔记/" class="leancloud_visitors" data-flag-title="JS学习笔记1入门">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>JS学习笔记1入门篇<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/11/12/JS学习笔记/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -2751,167 +3890,6 @@ char d_name[];// 以 null 结尾的文件名字符串
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://dearamaze.com/2017/10/25/python数据可视化bokeh/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Dear Amaze">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="DearAmaze-桀骜良">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/10/25/python数据可视化bokeh/" itemprop="url">
-                  数据可视化echarts
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-25T00:00:00+08:00">
-                2017-10-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/10/25/python数据可视化bokeh/" class="leancloud_visitors" data-flag-title="数据可视化echarts">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h2><blockquote>
-<p>展示数据</p>
-</blockquote>
-<p>就是向人家写好的框架里面填充数据。调参侠！</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/10/25/python数据可视化bokeh/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://dearamaze.com/2017/10/25/python time datetime学习/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -3061,7 +4039,7 @@ char d_name[];// 以 null 结尾的文件名字符串
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -3106,7 +4084,7 @@ char d_name[];// 以 null 结尾的文件名字符串
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">70</span>
+                <span class="site-state-item-count">71</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -3117,7 +4095,7 @@ char d_name[];// 以 null 结尾的文件名字符串
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">27</span>
+                <span class="site-state-item-count">28</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -3128,7 +4106,7 @@ char d_name[];// 以 null 结尾的文件名字符串
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">44</span>
+                <span class="site-state-item-count">46</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

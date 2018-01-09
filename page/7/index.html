@@ -329,6 +329,170 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://dearamaze.com/2016/12/20/python3-4-信息门户登录请求/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dear Amaze">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DearAmaze-桀骜良">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/12/20/python3-4-信息门户登录请求/" itemprop="url">
+                  [原]python3.4 信息门户登录请求
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-12-20T22:31:02+08:00">
+                2016-12-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2016/12/20/python3-4-信息门户登录请求/" class="leancloud_visitors" data-flag-title="[原]python3.4 信息门户登录请求">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="python-post请求"><a href="#python-post请求" class="headerlink" title="python  post请求"></a>python  post请求</h2><pre><code>import requests
+url = &#39;http://xx.xxxx.edu.cn/userPasswordValidate.portal&#39;
+user=20160001
+parms={
+    &#39;Login.Token1&#39;: user,
+    &#39;Login.Token2&#39;: &#39;123456&#39;,
+    &#39;captchaField&#39;: &#39;485c&#39;
+}
+
+headers = {
+    &#39;Connection&#39;:&#39;keep-alive&#39;,
+    &#39;Content-Length&#39;: &#39;174&#39;,
+    &#39;Cache-Control&#39;: &#39;max-age=0&#39;,
+    &#39;Origin&#39;: &#39;http://xx.xxxx.edu.cn&#39;,
+    &#39;Upgrade-Insecure-Requests&#39;: &#39;1&#39;,
+    &#39;User-Agent&#39;: &#39;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36&#39;,
+    &#39;Content-Type&#39;: &#39;application/x-www-form-urlencoded&#39;,
+    &#39;Accept&#39;: &#39;text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8&#39;,
+    &#39;Referer&#39;: &#39;http://xx.xxxx.edu.cn/&#39;,
+    &#39;Accept-Encoding&#39;: &#39;gzip, deflate&#39;,
+    &#39;Accept-Language&#39;: &#39;zh-CN,zh;q=0.8&#39;,
+    &#39;Cookie&#39;: &#39;JSESSIONID=0000O1UhImqKAdSpqQwJ6Nz9Tow:17kv91lok&#39;
+}
+
+resp = requests.post(url, data=parms, headers=headers)
+text = resp.text
+print(text)
+
+
+            作者：qq_27803491 发表于2016/12/20 22:31:02 [原文链接](http://blog.csdn.net/qq_27803491/article/details/53770779)
+
+
+        阅读：51 评论：0 [查看评论](http://blog.csdn.net/qq_27803491/article/details/53770779#comments)
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://dearamaze.com/2016/12/20/python字符串方法基础/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2154,243 +2318,11 @@ int main()
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://dearamaze.com/2016/11/01/51nod-1416两点DFS/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Dear Amaze">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="DearAmaze-桀骜良">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/11/01/51nod-1416两点DFS/" itemprop="url">
-                  [原]51nod 1416两点DFS
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-11-01T21:25:29+08:00">
-                2016-11-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2016/11/01/51nod-1416两点DFS/" class="leancloud_visitors" data-flag-title="[原]51nod 1416两点DFS">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="题目网址"><a href="#题目网址" class="headerlink" title="题目网址"></a>题目网址</h2><p><a href="http://www.51nod.com/onlineJudge/questionCode.html#!problemId=1416" target="_blank" rel="external">http://www.51nod.com/onlineJudge/questionCode.html#!problemId=1416</a></p>
-<p>简单的深搜</p>
-<h2 id="直接上代码"><a href="#直接上代码" class="headerlink" title="直接上代码"></a>直接上代码</h2><pre><code>#include&amp;lt;iostream&amp;gt;
-#include&amp;lt;cstring&amp;gt;
-#include&amp;lt;cstdio&amp;gt;
-#include&amp;lt;algorithm&amp;gt;
-
-#define ll long long  
-#define DEBUG print
-using namespace std;
-
-bool hash[51][51];
-char tu[55][55];
-int path[55][55];
-bool dfs(int n,int m,int i,int j,int count,char c)
-{
-//  DEBUG(&quot;%c %d %d\n&quot;,c,i,j);
-    hash[i][j]=0;
-    path[i][j]=count;
-    if(j+1&amp;lt;m&amp;amp;&amp;amp;tu[i][j+1]==c){
-        if(path[i][j+1]&amp;lt;0){
-            if(dfs(n,m,i,j+1,count+1,c))return true;
-        }
-        else {
-            if(path[i][j]-path[i][j+1]&amp;gt;=3)return true;
-        } 
-    }
-    if(i+1&amp;lt;n&amp;amp;&amp;amp;tu[i+1][j]==c){
-        if(path[i+1][j]&amp;lt;0){
-            if(dfs(n,m,i+1,j,count+1,c))return true;
-        }
-        else {
-            if(path[i][j]-path[i+1][j]&amp;gt;=3)return true;
-        } 
-    }
-    if(j-1&amp;gt;=0&amp;amp;&amp;amp;tu[i][j-1]==c){
-        if(path[i][j-1]&amp;lt;0){
-            if(dfs(n,m,i,j-1,count+1,c))return true;
-        }
-        else {
-            if(path[i][j]-path[i][j-1]&amp;gt;=3)return true;
-        } 
-    }
-    if(i-1&amp;gt;=0&amp;amp;&amp;amp;tu[i-1][j]==c){
-        if(path[i-1][j]&amp;lt;0){
-            if(dfs(n,m,i-1,j,count+1,c))return true;
-        }
-        else {
-            if(path[i][j]-path[i-1][j]&amp;gt;=3)return true;
-        } 
-    }
-    return false;
-}
-int main()
-{
-//  memset(hash,1,sizeof(hash));
-
-    memset(tu,0,sizeof(tu));
-//  memset(path,-1,sizeof(path));
-    int n,m;
-    scanf(&quot;%d%d&quot;,&amp;amp;n,&amp;amp;m);
-    getchar();
-    for(int i=0;i&amp;lt;n;i++){
-        for(int j=0;j&amp;lt;m;j++){
-            hash[i][j]=1;
-        }
-    }
-    for(int i=0;i&amp;lt;n;i++){
-        for(int j=0;j&amp;lt;m;j++){
-            path[i][j]=-1;
-        }
-    }
-    for(int i=0;i&amp;lt;n;i++){
-        for(int j=0;j&amp;lt;m;j++){
-            scanf(&quot;%c&quot;,&amp;amp;tu[i][j]);
-        }
-        getchar();
-    }
-    bool ansflag=0;
-    for(int i=0;i&amp;lt;n;i++){
-        for(int j=0;j&amp;lt;m;j++){
-            if(!hash[i][j])continue;
-            else {
-                if(dfs(n,m,i,j,0,tu[i][j])){
-                    ansflag=1;
-                    break;
-                }
-            }
-        }
-        if(ansflag)break;
-    }
-
-    if(ansflag)printf(&quot;Yes\n&quot;);
-    else printf(&quot;No\n&quot;);
- } 
-
-
-            作者：qq_27803491 发表于2016/11/1 21:25:29 [原文链接](http://blog.csdn.net/qq_27803491/article/details/53000918)
-
-
-        阅读：49 评论：0 [查看评论](http://blog.csdn.net/qq_27803491/article/details/53000918#comments)
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span>
+    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2435,7 +2367,7 @@ int main()
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">70</span>
+                <span class="site-state-item-count">71</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2446,7 +2378,7 @@ int main()
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">27</span>
+                <span class="site-state-item-count">28</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -2457,7 +2389,7 @@ int main()
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">44</span>
+                <span class="site-state-item-count">46</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

@@ -1,0 +1,1167 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="内核,模块编程," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="内核简介linux kernel map">
+<meta name="keywords" content="内核,模块编程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux内核编译与开发">
+<meta property="og:url" content="https://dearamaze.com/2017/12/08/Linux内核编译与开发/index.html">
+<meta property="og:site_name" content="DearAmaze-桀骜良">
+<meta property="og:description" content="内核简介linux kernel map">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://p.dearamaze.com/%E5%B0%8F%E4%B9%A6%E5%8C%A0/1024px-Linux_kernel_map.png">
+<meta property="og:image" content="http://p.dearamaze.com/%E5%B0%8F%E4%B9%A6%E5%8C%A0/1515378884143.jpg">
+<meta property="og:image" content="http://p.dearamaze.com/%E5%B0%8F%E4%B9%A6%E5%8C%A0/1515379059055.jpg">
+<meta property="og:updated_time" content="2018-01-08T18:01:06.441Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux内核编译与开发">
+<meta name="twitter:description" content="内核简介linux kernel map">
+<meta name="twitter:image" content="http://p.dearamaze.com/%E5%B0%8F%E4%B9%A6%E5%8C%A0/1024px-Linux_kernel_map.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://dearamaze.com/2017/12/08/Linux内核编译与开发/"/>
+
+
+
+
+
+  <title> Linux内核编译与开发 | DearAmaze-桀骜良 </title>
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?05e47eef3e87bfa03fe6dfcdad14b688";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <!--<script type="text/javascript" color="0,191,255" opacity="0.7" zindex="-2" count="150" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>-->
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">DearAmaze-桀骜良</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">test_subtitle</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://dearamaze.com/2017/12/08/Linux内核编译与开发/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dear Amaze">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DearAmaze-桀骜良">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Linux内核编译与开发
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-08T00:00:00+08:00">
+                2017-12-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/内核/" itemprop="url" rel="index">
+                    <span itemprop="name">内核</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/12/08/Linux内核编译与开发/" class="leancloud_visitors" data-flag-title="Linux内核编译与开发">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="内核简介"><a href="#内核简介" class="headerlink" title="内核简介"></a>内核简介</h2><h3 id="linux-kernel-map"><a href="#linux-kernel-map" class="headerlink" title="linux kernel map"></a>linux kernel map</h3><p><img src="http://p.dearamaze.com/%E5%B0%8F%E4%B9%A6%E5%8C%A0/1024px-Linux_kernel_map.png" alt="Linux_kernel_map" title="1024px-Linux_kernel_map"></p>
+<hr>
+<a id="more"></a>
+<h3 id="Linux系统体系结构"><a href="#Linux系统体系结构" class="headerlink" title="Linux系统体系结构"></a>Linux系统体系结构</h3><p><img src="http://p.dearamaze.com/%E5%B0%8F%E4%B9%A6%E5%8C%A0/1515378884143.jpg" alt="linux 系统体系结构" title="linux 系统体系结构"></p>
+<h3 id="linux-kernel体系结构："><a href="#linux-kernel体系结构：" class="headerlink" title="linux kernel体系结构："></a>linux kernel体系结构：</h3><p>arm有7种工作模式，x86也实现了4个不同级别RING0-RING3,RING0级别最高，这样linux用户代码运行在RING3下，内核运行在RING0,这样系统本身就得到了充分的保护</p>
+<p>用户空间(用户模式)转到内核空间(系统模式)方法：</p>
+<ul>
+<li>系统调用</li>
+<li>硬件中断</li>
+</ul>
+<p><img src="http://p.dearamaze.com/%E5%B0%8F%E4%B9%A6%E5%8C%A0/1515379059055.jpg" alt="linux kernel体系结构" title="linux kernel体系结构"></p>
+<h3 id="虚拟文件系统VFS"><a href="#虚拟文件系统VFS" class="headerlink" title="虚拟文件系统VFS:"></a>虚拟文件系统VFS:</h3><p>VFS(虚拟文件系统)隐藏各种文件系统的具体细节，为文件操作提供统一的接口</p>
+<h2 id="Linux内核源代码"><a href="#Linux内核源代码" class="headerlink" title="Linux内核源代码"></a>Linux内核源代码</h2><p>linux内核下载www.kernel.org</p>
+<h3 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h3><ul>
+<li>arch:根据cpu体系结构不同而分的代码</li>
+<li>block:部分块设备驱动程序</li>
+<li>crypto:加密，压缩，CRC校验算法</li>
+<li>documentation:内核文档</li>
+<li>drivers:设备驱动程序</li>
+<li>fs(虚拟文件系统vfs):文件系统</li>
+<li>include:内核所需的头文件，(与平台无关的头文件在include/linux中)</li>
+<li>lib:库文件代码(与平台相关的)</li>
+<li>mm:实现内存管理，与硬件体系结构无关的(与硬件体系结构相关的在arch中)</li>
+<li>net:网络协议的代码</li>
+<li>samples:一些内核编程的范例</li>
+<li>scripts:配置内核的脚本</li>
+<li>security:SElinux的模块</li>
+<li>sound:音频设备的驱动程序</li>
+<li>usr:cpio命令实现，用于制作根文件系统的命令(文件系统与内核放到一块的命令)</li>
+<li>virt:内核虚拟机<h3 id="linux-DOC-编译生成"><a href="#linux-DOC-编译生成" class="headerlink" title="linux DOC 编译生成"></a>linux DOC 编译生成</h3></li>
+</ul>
+<p>linux源根目录/Documentation/00-INDEX:目录索引<br>linux源根目录/Documentation/HOWTO:指南<br>生成linux内核帮助文档:在linux源根目录(Documentation) 执行make htmldocs</p>
+<p>ubuntu16下需要执行sudo apt-get install xmlto安装插件才可生成doc文档</p>
+<p>后面开发中经常要改的是arch，drivers中的代码</p>
+<h2 id="Linux内核配置与编译"><a href="#Linux内核配置与编译" class="headerlink" title="Linux内核配置与编译"></a>Linux内核配置与编译</h2><h3 id="清理文件-在linux源码根目录"><a href="#清理文件-在linux源码根目录" class="headerlink" title="清理文件(在linux源码根目录)"></a>清理文件(在linux源码根目录)</h3><ul>
+<li>make clean:只清理所有产生的文件</li>
+<li>make mrproper:清理所有产生的文件与config配置文件</li>
+<li>make distclean:清理所有产生的文件与config配置文件，并且编辑过的与补丁文件<h3 id="配置-收集硬件信息如cpu型号，网卡等…"><a href="#配置-收集硬件信息如cpu型号，网卡等…" class="headerlink" title="配置(收集硬件信息如cpu型号，网卡等…)"></a>配置(收集硬件信息如cpu型号，网卡等…)</h3></li>
+<li>make config:基于文本模式的交互配置</li>
+<li>make menuconfig:基于文本模式的菜单模式(推荐使用)</li>
+<li>make oldconfig:使用已有的.config,但会询问新增的配置项</li>
+<li>make xconfig:图形化的配置(需要安装图形化系统)<h3 id="配置方法"><a href="#配置方法" class="headerlink" title="配置方法"></a>配置方法</h3>1)使用make menuconfig操作方法：<br>1&gt;按y:编译&gt;连接&gt;镜像文件<br>2&gt;按m:编译<br>3&gt;按n:什么都不做<br>4&gt;按”空格键”:y,n轮换<br>配置完并保存后会在linux源码根目录下生成一个.config文件<br>注意：在ubuntu11上要执行apt-get install libncurses5-dev来安装支持包</li>
+</ul>
+<p>2)利用已有的配置文件模板(.config)<br>1&gt;linux源码根目录<code>/arch/&lt;cpu架构&gt;/configs/&lt;具体某一的CPU文件&gt;</code>，把里面对应的文件copy并改名为.config至linux源码根目录下<br>2&gt;利用当前运行已有的文件(要用ls <code>/boot/ -a</code>查看)把/boot/config-2.6.18-53.e15拷贝并改名为.config至linux源码根目录下执行以上操作就可以用<code>make menuconfig</code>在拷贝<br><code>.config</code>文件上面修改文件了</p>
+<h3 id="编译内核"><a href="#编译内核" class="headerlink" title="编译内核"></a>编译内核</h3><p>1)make zImage<br>2)make bzImage<br>区别:在X86平台上，zimage只能用于小于512k的内核<br>获取详细编译信息：<code>make zimage V=1</code> 或 <code>make bzimage V=1</code><br>编译好的内核在：<code>arch/&lt;cpu&gt;/boot/</code>目录下<br>注意：在把<code>.config</code>配置文件cp到根目录编译内核前，必须进入<code>make menuconfig</code>并保存退出(否则生不了效)<br>↓</p>
+<h3 id="编译并安装模块"><a href="#编译并安装模块" class="headerlink" title="编译并安装模块"></a>编译并安装模块</h3><p>1)编译内核模块:make modules<br>2)安装内核模块:make modules_install INSTALL_MOD_PATH=/lib/modules<br>更换本机器内核:将编译好的内核模块从内核源码目录copy至/lib/modules下<br>制作init ramdisk():输入执行命令mkinitrd initrd-2.6.39(任意) 2.6.39(可通过查询<code>/lib/modules</code>下的目录得到)<br>注意：<br>mkinitrd命令为redhat里面的,ubuntu的命令为:<code>mkinitramfs -k /lib/modules/</code>模块安装位置 -o initrd-2.6.39(任意) 2.6.39(可通过查询/lib/modules下的目录得到)<br>如果ubuntu里面没有mkinitramfs命令可以用<code>apt-get install initrd-tools</code>进行安装</p>
+<h3 id="安装内核模块"><a href="#安装内核模块" class="headerlink" title="安装内核模块"></a>安装内核模块</h3><p>1)手动<br>1&gt;cp linux根目录<code>/arch/x86/boot/bzImage /boot/mylinux-2.6.39</code><br>2&gt;cp linux根目录<code>/initrd-2.6.39 /boot/initrd-2.6.39</code><br>最后修改<code>/etc/grub.conf</code>或<code>/etc/lilo.conf文件</code></p>
+<p>2)自动<br>1&gt;make install:这个命令会自动完成上面的操作(查看当前内核版本：uname -r)</p>
+<h2 id="linux内核模块开发"><a href="#linux内核模块开发" class="headerlink" title="linux内核模块开发"></a>linux内核模块开发</h2><p>描述：<br>linux内核组件非常庞大，内核ximage并不包含某组件，而是在该组件需要被使用的时候，动态的添加到正在运行的内核中(也可以卸载)，这种机制叫做“内核模块”的机制。内核模块通常通过使用makefile文件对模块进行编译</p>
+<h3 id="模块安装与卸载"><a href="#模块安装与卸载" class="headerlink" title="模块安装与卸载"></a>模块安装与卸载</h3><p>1)加载：insmod hello.ko<br>2)卸载：rmmod hello<br>3)查看：lsmod<br>4)加载(自动寻找模块依赖)：modprobe hello<br>modprobe会根据文件<code>/lib/modules/version/modules.dep</code>来查看要加载的模块，看它是否还依赖于其他模块，如果是,会先找到这些模块，把它们先加载到内核</p>
+<h3 id="模块编写实例参见另一篇博文"><a href="#模块编写实例参见另一篇博文" class="headerlink" title="模块编写实例参见另一篇博文"></a>模块编写实例参见另一篇博文</h3><h3 id="运行带参模块"><a href="#运行带参模块" class="headerlink" title="运行带参模块"></a>运行带参模块</h3><p><code>insmod hello.ko name=yuan age=12</code><br>内核符号导出(/proc/kallsyms记录了内核中所有导出的符号的名字与地址):<br>一个内核模块的运行依赖另一个内核模块的函数实现，必须先运行第一个内核模块，这样就需要进行内核符号导出。</p>
+<h3 id="printk内核打印"><a href="#printk内核打印" class="headerlink" title="printk内核打印"></a>printk内核打印</h3><p>在<code>&lt;linux/kernel.h&gt;</code>中printk有8个优先级，按优先级递减的是：</p>
+<ul>
+<li>KERN_EMERG 0<br>用于紧急的消息，常常是那些崩溃的消息</li>
+<li>KERN_ALERT 1<br>需要立刻行动的消息</li>
+<li>KERN_CRIT 2<br>严重情况</li>
+<li>KERN_ERR 3<br>错误情况</li>
+<li>KERN_WARNING(printk默认级别) 4<br>有问题的警告</li>
+<li>KERN_NOTICE 5<br>正常情况，但是仍然值得注意</li>
+<li>KERN_INFO 6<br>信息消息</li>
+<li>KERN_DEBUG 7<br>用作调试消息</li>
+</ul>
+<p>不管是哪个级别的都会在/var/log/messages里面打印出来(messages可以删除后，运行内核进行测试内核打印情况)控制台打印(优先级配置/proc/sys/kernel/printk)</p>
+<p>6 4 1 7<br>·Console_loglevel<br>·Default_message_loglevel<br>·Minimum_console_level<br>·Default_console_loglevel</p>
+<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><p>错误信息:disagrees about version of symbol struct_module insmod:error inserting …<br>开发内核模块时会出现，内核模块不匹配的情况.是你当前运行的linux内核与编译连接所依赖的<br>内核版本不匹配，解决方法：<br>·使用modprobe –force-modversion强行插入<br>·可使用uname -r进行查看当前运行的内核版本</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://www.cnblogs.com/liyuan3210/p/6528224.html" target="_blank" rel="external">https://www.cnblogs.com/liyuan3210/p/6528224.html</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/weixinpay.jpg" alt="Dear Amaze WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt="Dear Amaze Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/内核-模块编程/" rel="tag"># 内核,模块编程</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/04/标准IO库/" rel="next" title="标准IO库">
+                <i class="fa fa-chevron-left"></i> 标准IO库
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/08/pthread常用接口/" rel="prev" title="pthread常用接口">
+                pthread常用接口 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar2.jpg"
+               alt="Dear Amaze" />
+          <p class="site-author-name" itemprop="name">Dear Amaze</p>
+           
+              <p class="site-description motion-element" itemprop="description">最穷不过要饭丶不死总会出头</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">71</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">28</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">46</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/fdl66" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/qq_27803491" target="_blank" title="CSDN">
+                  
+                    <i class="fa fa-fw fa-desktop"></i>
+                  
+                  CSDN
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/ao-jie-88/answers" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-vimeo"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://hello-fh.com/" title="浩哥" target="_blank">浩哥</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://githubecho.github.io/" title="阿谦" target="_blank">阿谦</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#内核简介"><span class="nav-number">1.</span> <span class="nav-text">内核简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#linux-kernel-map"><span class="nav-number">1.1.</span> <span class="nav-text">linux kernel map</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux系统体系结构"><span class="nav-number">1.2.</span> <span class="nav-text">Linux系统体系结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linux-kernel体系结构："><span class="nav-number">1.3.</span> <span class="nav-text">linux kernel体系结构：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#虚拟文件系统VFS"><span class="nav-number">1.4.</span> <span class="nav-text">虚拟文件系统VFS:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux内核源代码"><span class="nav-number">2.</span> <span class="nav-text">Linux内核源代码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#目录结构"><span class="nav-number">2.1.</span> <span class="nav-text">目录结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linux-DOC-编译生成"><span class="nav-number">2.2.</span> <span class="nav-text">linux DOC 编译生成</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux内核配置与编译"><span class="nav-number">3.</span> <span class="nav-text">Linux内核配置与编译</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#清理文件-在linux源码根目录"><span class="nav-number">3.1.</span> <span class="nav-text">清理文件(在linux源码根目录)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置-收集硬件信息如cpu型号，网卡等…"><span class="nav-number">3.2.</span> <span class="nav-text">配置(收集硬件信息如cpu型号，网卡等…)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置方法"><span class="nav-number">3.3.</span> <span class="nav-text">配置方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编译内核"><span class="nav-number">3.4.</span> <span class="nav-text">编译内核</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编译并安装模块"><span class="nav-number">3.5.</span> <span class="nav-text">编译并安装模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装内核模块"><span class="nav-number">3.6.</span> <span class="nav-text">安装内核模块</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#linux内核模块开发"><span class="nav-number">4.</span> <span class="nav-text">linux内核模块开发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#模块安装与卸载"><span class="nav-number">4.1.</span> <span class="nav-text">模块安装与卸载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模块编写实例参见另一篇博文"><span class="nav-number">4.2.</span> <span class="nav-text">模块编写实例参见另一篇博文</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运行带参模块"><span class="nav-number">4.3.</span> <span class="nav-text">运行带参模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#printk内核打印"><span class="nav-number">4.4.</span> <span class="nav-text">printk内核打印</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注意"><span class="nav-number">4.5.</span> <span class="nav-text">注意</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Dear Amaze</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("fOpTd1WjHbULIjn8MszImyoU-gzGzoHsz", "BD6q7tNiA5K8GhdTkj9uEy0u");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  <script>
+      // highlight
+      hljs.initHighlightingOnLoad();
+  </script>
+</body>
+</html>
